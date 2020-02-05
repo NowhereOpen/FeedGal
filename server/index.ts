@@ -1,6 +1,15 @@
-const express = require('express')
-const consola = require('consola')
-const { Nuxt, Builder } = require('nuxt')
+import express from "express"
+import consola from "consola"
+/**
+ * 2020-02-06 07:09
+ * 
+ * Throws an error when used with `import ... from "nuxt"`, and there is no
+ * `@types/nuxt` module when I try to install it.
+ * 
+ * The `require` method works, however.
+ */
+const { Nuxt, Builder } = require("nuxt")
+
 const app = express()
 
 // Import and Set Nuxt.js options
