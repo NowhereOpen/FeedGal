@@ -1,0 +1,23 @@
+gyst:
+  server:
+    # Defaults to `localhost`
+    #   - Used in generating the callback url for oauth authentication, so use the
+    #     "host" of browser's `document.location.host`
+    ext-host: 
+    protocol: http
+    private-key-path: sslcert/server.key
+    certificate-path: sslcert/server.cert
+    db-name: "gyst"
+    db-test-name: "gyst-test"
+    session-secret: "MySessionSecret"
+  dev:
+    dev-path-enabled : true
+    force-login-as: 
+    allow-force-login: false
+    allow-authenticated-http-request: false
+  cache:
+    is-caching-entries: true
+    using-cached-entries: false
+    cache-old-age:
+      hours: 2
+    update-old-cache: true

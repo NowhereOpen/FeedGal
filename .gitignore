@@ -1,3 +1,11 @@
+# Each server can set different values
+app-settings.yml
+service-credentials.yml
+
+# For running https servers
+sslcert/*
+!sslcert/.gitkeep
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
