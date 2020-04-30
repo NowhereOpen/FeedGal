@@ -1,6 +1,6 @@
 import { setup as setupExpressServer } from "./express-server"
 import { setup as setupNativeServer, HttpsCreds } from "./native-server"
-import { setup as setupNuxt, host, port, nuxt } from "./nuxt"
+import { setup as setupNuxt } from "./nuxt"
 import { setup as setupWSServer } from "./ws-server"
 import { setup as setupSessionMiddleware } from "./middlewares/session"
 
@@ -19,14 +19,14 @@ export async function runServer(server_settings:ServerSettings, root_to_nuxt_con
   const session_secret = server_settings.session_secret
   const https_creds = server_settings.https_creds
 
-  const nuxt_mw = await setupNuxt(root_to_nuxt_config_fp)
+  const { nuxt_middleware, nuxt, port, host } = await setupNuxt(root_to_nuxt_config_fp)
   const session_middleware = setupSessionMiddleware(session_secret)
   const express_server = setupExpressServer(protocol, session_middleware)
 
   const native_server = setupNativeServer(protocol, express_server, https_creds)
   const socket_server = setupWSServer(native_server, session_middleware)
 
-  express_server.use(nuxt_mw)
+  express_server.use(nuxt_middleware)
 
   /**
    * MUST be done after running the nuxt server `runNuxtServer`, else

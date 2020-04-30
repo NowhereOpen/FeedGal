@@ -15,9 +15,13 @@ export let host:any, port:any
 export let nuxt:any
 export let nuxt_config:any
 
+export type NuxtSetupReturn = {
+  host:any, port:any, nuxt:any, nuxt_config:any, nuxt_middleware:RequestHandler
+}
+
 const ROOT = "../../../../"
 
-export async function setup(root_to_nuxt_config_fp:string):Promise<RequestHandler> {
+export async function setup(root_to_nuxt_config_fp:string):Promise<NuxtSetupReturn> {
   // Import and Set Nuxt.js options
   const config = require(path.resolve(ROOT, root_to_nuxt_config_fp))
   config.dev = process.env.NODE_ENV !== 'production'
@@ -40,5 +44,7 @@ export async function setup(root_to_nuxt_config_fp:string):Promise<RequestHandle
   nuxt_middleware = nuxt.render
   nuxt_config = config
 
-  return nuxt_middleware
+  return {
+    host, port, nuxt_middleware, nuxt_config, nuxt
+  }
 }

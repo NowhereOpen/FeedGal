@@ -1,0 +1,1 @@
+export type SocketHandler = (req:any, ack:Function) => any
