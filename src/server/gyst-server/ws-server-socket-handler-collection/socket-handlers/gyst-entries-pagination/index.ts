@@ -1,5 +1,15 @@
-import { SocketHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base"
+import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
+import { getEntriesPagination } from "~/src/server/loader-module-method-collection/get-entries-pagination"
 
-import { loader_collection } from "~/src/server/loader-module-collection"
+export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHandler {
+  handleImpl() {
+    const target_service_id:null|string = this.req.service_id
+    const services_pagination_req_data:any = this.req.pagination_req_data
 
-export let socket_handler:SocketHandler
+    const direction = this.req.direction
+
+    getEntriesPagination(this.user_id!, direction, services_pagination_req_data, async (data) => {
+      this.socket.emit("gyst-entries-with-pagination-response", data)
+    })
+  }
+}
