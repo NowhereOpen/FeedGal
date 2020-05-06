@@ -1,51 +1,37 @@
+import { NonOAuthLoaderModule } from "../../loader-module-base/base"
 import {
-  ContentServiceBase,
-} from "~/src/gyst/server/base-class/service-module/content-service"
-import { ServiceInfo } from "./service-info"
-import { formatEntries } from "./format-entries"
-import { getCredential } from "./get-credential"
-import { GetLoLServiceResponse } from "./get-service-response"
+  NonOAuthGetEntriesInitParam,
+  PaginationDirection,
+  NonOAuthPaginationParam
+} from "../../loader-module-base/types"
 
-export class ContentService extends ContentServiceBase {
-  getServiceInfo() {
-    return new ServiceInfo().getServiceInfo()
+import {  } from "./lib/get-displayed-setting-value"
+import {  } from "./lib/get-entries"
+import { service_info } from "./lib/service-info"
+import {  } from "./lib/validate-setting-value"
+
+export type LeagueOfLegendsCredential = string
+
+export class LeagueOfLegendsLoaderModule extends NonOAuthLoaderModule<LeagueOfLegendsCredential> {
+  constructor(api_key:LeagueOfLegendsCredential) {
+    super(api_key, service_info)
   }
 
-  getCredentials() {
-    return getCredential()
-  }
-
-  async getServiceResponse():Promise<any> {
-    const pagination_req_data = this.getServiceResponseParams()
-    try {
-      const task = new GetLoLServiceResponse(this.credentials, this.setting_value, pagination_req_data)
-      return await task.run()
-    }
-    catch(e) {
-      if("response" in e && e.response.status == 404) {
-        const error = new Error("Summoner doesn't exist.")
-        error.name = "INVALID_SETTING_VALUE"
-        Object.assign(error, {
-          data: {
-            raw_error: e,
-            setting_value: this.setting_value
-          }
-        })
-
-        throw error
-      }
-
-      throw e
-    }
-  }
-
-  formatToGystEntries(service_response:any) {
-    return service_response.map(formatEntries)
-  }
-
-  getPaginationOption(service_response:any) {
+  async getEntriesInit(setting_value:NonOAuthGetEntriesInitParam) {
     return {
-      new: null, old: null
+      entries:[],
+      pagination_options: { new: "", old: "" },
+      service_response: {}
     }
   }
+
+  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:NonOAuthPaginationParam) {
+    return {
+      entries:[],
+      pagination_options: { new: "", old: "" },
+      service_response: {}
+    }
+  }
+
+  async validateSettingValue() { return true }
 }

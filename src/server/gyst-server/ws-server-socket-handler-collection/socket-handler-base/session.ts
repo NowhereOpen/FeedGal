@@ -1,6 +1,6 @@
 import { SocketEventHandler } from "./base"
 
-import * as gystSession from "~/src/server/lib/session"
+import * as gystSession from "~/src/server/gyst-server/common/session"
 
 export abstract class SessionSocketEventHandler extends SocketEventHandler {
   is_logged_in!:boolean

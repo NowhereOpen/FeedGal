@@ -1,6 +1,5 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
-
-import { UserInfo } from "~/src/gyst/server/base-class/credential-module/oauth/base"
+import { UserInfo } from "~/src/server/gyst-server/common/session"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { gyst_user_storage } from "~/src/server/model-collection/models/user"
@@ -25,16 +24,6 @@ export class PostCreateNewAccountRequestHandler extends SessionRequestHandlerBas
   }
 
   async doTasks():Promise<void> {
-    const can_create_account = await validateCanCreateAccount(this.service_id, this.authenticated_user_info)
-
-    if(can_create_account == false) {
-      const err_data = {
-        service_id: this.service_id,
-        user_info: this.authenticated_user_info
-      }
-      return this.sendError(400, "DUPLICATE_LOGIN_METHOD", "A GYST account was already created with this user information.", err_data)
-    }
-
     // Must have "friendly_name"
     this.gyst_user_id = await gyst_user_storage.createNewGystUser(this.signup_form)
 
@@ -46,7 +35,6 @@ export class PostCreateNewAccountRequestHandler extends SessionRequestHandlerBas
     )
   
     await oauth_access_token_storage!.storeTokenData(this.service_id, oauth_connected_user_entry_id, this.token_data)
-    await login_method_storage!.createNewLoginMethod(this.gyst_user_id, "oauth", oauth_connected_user_entry_id)
   
     // gystSession.loginUser(req, user_id)
     
@@ -61,15 +49,4 @@ export class PostCreateNewAccountRequestHandler extends SessionRequestHandlerBas
   async getResponse():Promise<any> {
     return { user_id: this.gyst_user_id }
   }
-}
-
-async function validateCanCreateAccount(service_id:string, user_info:any):Promise<boolean> {
-  const existing_id = await oauth_connected_user_storage.getSignupEntryId(service_id, user_info.user_uid)
-  if(existing_id) {
-    const login_method_exists = await login_method_storage.oauthLoginMethodExists(existing_id)
-
-    return login_method_exists
-  }
-
-  return true
 }

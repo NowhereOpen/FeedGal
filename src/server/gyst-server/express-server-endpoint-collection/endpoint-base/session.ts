@@ -1,4 +1,4 @@
-import * as gystSession from "~/src/server/lib/session"
+import * as gystSession from "~/src/server/gyst-server/common/session"
 
 import { ExpressRequest } from "./base"
 
@@ -36,7 +36,7 @@ export abstract class SessionRequestHandlerBase extends ExpressRequest {
     return gystSession.logout(<any> this.req)
   }
 
-  storeDataForSignup(service_id:string, user_info:UserInfo, token_data:any) {
+  storeDataForSignup(service_id:string, user_info:gystSession.UserInfo, token_data:any) {
     return gystSession.storeDataForSignup(<any> this.req, service_id, user_info, token_data)
   }
 

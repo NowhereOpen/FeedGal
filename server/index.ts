@@ -4,7 +4,6 @@ import { setup as setupGystAppSettingReader } from "~/src/server/gyst-app-settin
 import { setup as setupServiceCredentialReader } from "~/src/server/service-credential-reader"
 import { setup as setupMongoose } from "~/src/server/mongoose"
 import { setup as setupLoaderModuleCollection } from "~/src/server/loader-module-collection"
-import { setup as setupServiceInfoCollection } from "~/src/server/loader-module-collection/service-info-collection"
 import { setup as setupCredModuleCollection } from "~/src/server/cred-module-collection"
 import { setup as setupModelCollection } from "~/src/server/model-collection"
 import { runServer, ServerSettings } from "~/src/server/gyst-server"
@@ -21,7 +20,6 @@ function start() {
   setupMongoose(db_name)
   setupCredModuleCollection()
   setupLoaderModuleCollection()
-  setupServiceInfoCollection()
   setupModelCollection()
 
   const protocol = app_settings.getProtocol()

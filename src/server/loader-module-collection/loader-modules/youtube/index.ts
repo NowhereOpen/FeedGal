@@ -1,45 +1,35 @@
+import { OAuthBaseLoaderModule } from "../../loader-module-base/oauth"
 import {
-  OAuthContentServiceBase,
-} from "~/src/gyst/server/base-class/service-module/content-service"
-import { ServiceInfo } from "./service-info"
-import { formatEntries } from "./format-entries"
-import { getCredential } from "./get-credential"
-import { GetYouTubeServiceResponse } from "./get-service-response"
-import { getPaginationData } from "./pagination-data"
-import { isAxiosError, TokenFail } from "~/src/gyst/server/lib/service-module-helper/refresh-token-if-fail"
+  OAuthGetEntriesInitParam,
+  PaginationDirection,
+  OAuthPaginationParam
+} from "../../loader-module-base/types"
 
-export class ContentService extends OAuthContentServiceBase {
-  getServiceInfo() {
-    return new ServiceInfo().getServiceInfo()
+import {  } from "./lib/get-displayed-setting-value"
+import {  } from "./lib/get-entries"
+import { service_info } from "./lib/service-info"
+import {  } from "./lib/validate-setting-value"
+
+export class YouTubeLoaderModule extends OAuthBaseLoaderModule {
+  constructor() {
+    super(undefined, service_info)
   }
 
-  async getCredentials() {
-    return getCredential(this.oauth_connected_user_entry_id)
-  }
-
-  async getOAuthServiceResponse():Promise<any> {
-    const pagination_req_data = this.getServiceResponseParams()
-
-    const task = new GetYouTubeServiceResponse(this.credentials, this.pagination_value, pagination_req_data)
-    try {
-      return await task.run()
-    }
-    catch(e) {
-      /**
-       * NOT Same as google-calendar.
-       * 
-       * 401 for invalid access token, 400 for invalid refresh token.
-       */
-      if(isAxiosError(e, 401)) throw new TokenFail(e)
-      throw e
+  async getEntriesInit(setting_value:OAuthGetEntriesInitParam) {
+    return {
+      entries:[],
+      pagination_options: { new: "", old: "" },
+      service_response: {}
     }
   }
 
-  formatToGystEntries(service_response:any) {
-    return service_response.map(formatEntries)
+  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:OAuthPaginationParam) {
+    return {
+      entries:[],
+      pagination_options: { new: "", old: "" },
+      service_response: {}
+    }
   }
 
-  getPaginationOption(service_response:any) {
-    return getPaginationData(this.pagination_req_data!.pagination_data.index, this.pagination_req_data!.pagination_data.options)
-  }
+  async validateSettingValue() { return true }
 }

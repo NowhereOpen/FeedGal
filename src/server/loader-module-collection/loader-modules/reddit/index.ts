@@ -1,40 +1,37 @@
+import { OAuthBaseLoaderModule } from "../../loader-module-base/oauth"
 import {
-  OAuthContentServiceBase,
-} from "~/src/gyst/server/base-class/service-module/content-service"
-import { ServiceInfo } from "./service-info"
-import { formatEntries } from "./format-entries"
-import { getCredential } from "./get-credential"
-import { getPaginationData } from "./pagination-data"
-import { GetRedditServiceResponse } from "./get-service-response"
-import { isAxiosError, TokenFail } from "~/src/gyst/server/lib/service-module-helper/refresh-token-if-fail"
+  OAuthGetEntriesInitParam,
+  PaginationDirection,
+  OAuthPaginationParam
+} from "../../loader-module-base/types"
 
-export class ContentService extends OAuthContentServiceBase {
-  getServiceInfo() {
-    return new ServiceInfo().getServiceInfo()
+import {  } from "./lib/get-displayed-setting-value"
+import {  } from "./lib/get-entries"
+import { service_info } from "./lib/service-info"
+import {  } from "./lib/validate-setting-value"
+
+export type RedditStaticCredential = string
+
+export class RedditLoaderModule extends OAuthBaseLoaderModule<RedditStaticCredential> {
+  constructor(user_agent:RedditStaticCredential) {
+    super(user_agent, service_info)
   }
 
-  async getCredentials() {
-    return getCredential(this.oauth_connected_user_entry_id)
-  }
-
-  async getOAuthServiceResponse():Promise<any> {
-    const pagination_req_data = this.getServiceResponseParams()
-    const task = new GetRedditServiceResponse(this.credentials, this.pagination_value, pagination_req_data)
-    try {
-      return await task.run()
-    }
-    catch(e) {
-      // 400 error if refresh token is invalid. 401 when access_token is invalid
-      if(isAxiosError(e, 401)) throw new TokenFail(e)
-      throw e
+  async getEntriesInit(setting_value:OAuthGetEntriesInitParam) {
+    return {
+      entries:[],
+      pagination_options: { new: "", old: "" },
+      service_response: {}
     }
   }
 
-  formatToGystEntries(service_response:any) {
-    return service_response.data.children.map(formatEntries)
+  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:OAuthPaginationParam) {
+    return {
+      entries:[],
+      pagination_options: { new: "", old: "" },
+      service_response: {}
+    }
   }
 
-  getPaginationOption(service_response:any) {
-    return getPaginationData(service_response, this.pagination_index)
-  }
+  async validateSettingValue() { return true }
 }

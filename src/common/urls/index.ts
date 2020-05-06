@@ -14,6 +14,10 @@
  */
 
 export class UrlsGystResource {
+  /**
+   * ================================================
+   * PAGES
+   */
   static mainPage() {
     return "/"
   }
@@ -37,6 +41,15 @@ export class UrlsGystResource {
   static userPage() {
     return "/user"
   }
+
+  static userServiceAccountsPage() {
+    return "/user/accounts"
+  }
+
+  /**
+   * =============================================
+   * SERVER APIS
+   */
 
   static deleteUser() {
     return "/user/delete"

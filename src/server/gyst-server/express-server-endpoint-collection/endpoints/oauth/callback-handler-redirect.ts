@@ -4,11 +4,11 @@ import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-serv
 
 import { UrlsGystResource } from "~/src/common/urls"
 
-import { oauth_collection } from "~/src/server/cred-module-collection"
+import { UserInfo } from "~/src/server/gyst-server/common/session"
+import { cred_module_collection } from "~/src/server/cred-module-collection"
 
-// import { OAuthBaseClass, UserInfo } from "~/src/gyst/server/base-class/credential-module/oauth/base"
-// import { isCallbackUrlValid as isCallbackUrlValid1 } from "~/src/gyst/server/base-class/credential-module/oauth/oauth1-lib"
-// import { isCallbackUrlValid as isCallbackUrlValid2 } from "~/src/gyst/server/base-class/credential-module/oauth/oauth2-lib"
+import { OAuthBaseClass } from "gyst-cred-module-suite"
+import { isOAuth1CallbackUrlValid, isOAuth2CallbackUrlValid } from "gyst-cred-module-suite"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { gyst_user_storage } from "~/src/server/model-collection/models/user"
@@ -51,13 +51,13 @@ export class RedirectHandleOAuthCallbackRequestHandler extends SessionRequestHan
     this.origin = this.req.protocol + '://' + this.req.get('host')
     this.full_url = this.origin + this.req.originalUrl
 
-    this.oauth_mod = oauth_collection[this.service_id]
+    this.oauth_mod = cred_module_collection[this.service_id]
   }
 
   validateUrl() {
     let validator:any = {
-      "oauth1": (url:string) => isCallbackUrlValid1(url),
-      "oauth2": (url:string) => isCallbackUrlValid2(url)
+      "oauth1": (url:string) => isOAuth1CallbackUrlValid(url),
+      "oauth2": (url:string) => isOAuth2CallbackUrlValid(url)
     }
   
     if(! validator[this.oauth_mod.oauth_type](this.full_url)) {
@@ -149,7 +149,7 @@ export class RedirectHandleOAuthCallbackRequestHandler extends SessionRequestHan
 
         await oauth_access_token_storage.storeTokenData(this.service_id, oauth_connected_user_entry_id, this.token_response)
 
-        redirect_url = UrlsGystResource.settingsPage()
+        redirect_url = UrlsGystResource.userServiceAccountsPage()
 
         // // Connect service
         // redirect_url = await new LoggedInOAuthCallbackTask(this.req).getRedirectUrl()
@@ -165,15 +165,13 @@ export class RedirectHandleOAuthCallbackRequestHandler extends SessionRequestHan
         log(`A user with session (${this.req.sessionID}) is logging in with service '${this.service_id}'`)
 
         const oauth_connected_user_entry_id = <string> await oauth_connected_user_storage!.getSignupEntryId(this.service_id, this.user_info.user_uid)
-
-        const gyst_user_id = await login_method_storage!.getGystUserEntryIdWithOAuthEntryId(oauth_connected_user_entry_id)
         
         await oauth_access_token_storage!.storeTokenData(this.service_id, oauth_connected_user_entry_id, this.token_response)
 
-        log(`A user with gyst_user_id ('${gyst_user_id}') is logging in with service '${this.service_id}'`)
-        this.loginUser(gyst_user_id)
+        log(`A user with oauth_connected_user_entry_id ('${oauth_connected_user_entry_id}') is logging in with service '${this.service_id}'`)
+        this.loginUser(oauth_connected_user_entry_id)
         
-        redirect_url = UrlsGystResource.gystPage()
+        redirect_url = UrlsGystResource.mainPage()
       }
       else {
         /**
@@ -202,9 +200,16 @@ export class RedirectHandleOAuthCallbackRequestHandler extends SessionRequestHan
  */
 
 async function isLogin(service_id:string, user_uid:string) {
-  const user_entry_id = await oauth_connected_user_storage!.getSignupEntryId(service_id, user_uid)
-  const is_login = await login_method_storage!.oauthLoginMethodExists(user_entry_id!)
-  return is_login
+  const entry = await oauth_connected_user_storage!.getEntryWithUserUid(service_id, user_uid)
+  if(entry == undefined) return false
+  /**
+   * 2020-05-06 18:22
+   * 
+   * If not a signup entry, the user is signing up a new account with the service account that is
+   * already connected to another gyst account that can be logged in with different service
+   * account.
+   */
+  return entry.get("is_signup")
 }
 
 /**
@@ -225,9 +230,4 @@ function makeCallbackUrl(base_url:string, detail:UserInfo, service_id:string):st
 
   const callback_url = _callback_url.href
   return callback_url
-}
-
-async function getGystUserIdFromOAuthInfo(service_id:string, user_uid:string):Promise<string> {
-  const entry_id = await oauth_connected_user_storage!.getSignupEntryId(service_id, user_uid)
-  return await login_method_storage!.getGystUserEntryIdWithOAuthEntryId(entry_id!)
 }

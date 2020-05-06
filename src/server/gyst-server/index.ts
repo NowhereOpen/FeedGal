@@ -37,5 +37,5 @@ export async function runServer(server_settings:ServerSettings, root_to_nuxt_con
   setupEndpoints(express_server)
   setupSocketHandlers(socket_server)
 
-  native_server.listen(host, port)
+  native_server.listen(port, host)
 }

@@ -1,100 +1,122 @@
-import { ContentServiceBase } from "./loader-module-base"
+import { RefreshTokenIfFailTask } from "gyst-cred-module-suite"
 
-import { service_credentials_reader } from "~/src/server/service-credential-reader"
+import { cred_module_collection } from "../cred-module-collection"
 
-import { ContentService as DarkSkyContentService } from "./loader-modules/dark-sky"
-import { ContentService as GithubContentService } from "./loader-modules/github"
-import { ContentService as GoogleCalendarContentService } from "./loader-modules/google-calendar"
-import { ContentService as GystContentService } from "./loader-modules/gyst"
-import { ContentService as LeagueOfLegendsContentService } from "./loader-modules/league-of-legends"
-import { ContentService as RedditContentService } from "./loader-modules/reddit"
-import { ContentService as TrelloContentService } from "./loader-modules/trello"
-import { ContentService as TwitchContentService } from "./loader-modules/twitch"
-import { ContentService as TwitterContentService } from "./loader-modules/twitter"
-import { ContentService as YouTubeContentService } from "./loader-modules/youtube"
+import { BaseLoaderModule } from "./loader-module-base/base"
+import {
+  PaginationDirection,
+  LoaderModuleOutput,
+  NonOAuthGetEntriesInitParam,
+  OAuthGetEntriesInitParam,
 
-export let loader_collection:{ [service_id:string]: any } = {}
+  NonOAuthPaginationParam,
+  OAuthPaginationParam,
+} from "./loader-module-base/types"
 
-export function setup() {  
-  loader_collection = {
-    "dark-sky": getDarkSky,
-    "github": getGithub,
-    "google-calendar": getGoogleCalendar,
-    // "gyst": new GystContentService("gyst"),
-    "league-of-legends": getLeagueOfLegends,
-    "reddit": getReddit,
-    "trello": getTrello,
-    "twitch": getTwitch,
-    "twitter": getTwitter,
-    "youtube": getYouTube,
+import { NonOAuthLoaderModule } from "./loader-module-base/base"
+import { OAuthBaseLoaderModule } from "./loader-module-base/oauth"
+
+import { loader_collection } from "./collection"
+
+/**
+ * EXPORTED
+ * ====================
+ */
+
+
+export { setup } from "./collection"
+
+export function getDisplayedSettingValue(service_id:string, setting_value:any) {
+  return loader_collection[service_id].getDisplayedSettingValue(setting_value)
+}
+
+export function getServiceInfo(service_id:string) {
+  return loader_collection[service_id].service_info
+}
+
+export type GetEntriesInitParam = NonOAuthGetEntriesInitParam | OAuthGetEntriesInitParam
+
+export async function getEntriesInit(service_id:string, param:GetEntriesInitParam):Promise<LoaderModuleOutput> {  
+  let result:LoaderModuleOutput
+  
+  await __handleAllCases(service_id, async (is_oauth, loader) => {
+    if(is_oauth) {
+      result = await (loader_collection[service_id] as OAuthBaseLoaderModule).getEntriesInit(<OAuthGetEntriesInitParam>param)
+    }
+    else {
+      result = await (loader_collection[service_id] as NonOAuthLoaderModule).getEntriesInit(<NonOAuthGetEntriesInitParam>param)
+    }
+  })
+
+  return result!
+}
+
+export type GetEntriesPaginationParam = NonOAuthPaginationParam | OAuthPaginationParam
+
+export async function getEntriesPagination(
+  service_id:string,
+  direction:PaginationDirection,
+  pagination_updated_index:number,
+  param:GetEntriesPaginationParam
+):Promise<LoaderModuleOutput> {
+  let result:LoaderModuleOutput
+
+  await __handleAllCases(service_id, async (is_oauth, loader) => {
+    if(is_oauth) {
+      result = await (loader_collection[service_id] as OAuthBaseLoaderModule).getEntriesPagination(
+        direction,
+        pagination_updated_index,
+        <OAuthPaginationParam> param
+      )
+    }
+    else {
+      result = await (loader_collection[service_id] as NonOAuthLoaderModule).getEntriesPagination(
+        direction,
+        pagination_updated_index,
+        <NonOAuthPaginationParam>param
+      )
+    }
+  })
+
+  return result!
+}
+
+export type ValidateSettingValueParam = {
+  service_id:string
+  setting_value:any
+  token_data?:any
+}
+
+export async function validateSettingValue(param:ValidateSettingValueParam):Promise<boolean> {
+  const { service_id, setting_value, token_data } = param
+
+  let result:boolean
+
+  await __handleAllCases(service_id, async (is_oauth, loader) => {
+    if(is_oauth) {
+      result = await (loader_collection[service_id] as OAuthBaseLoaderModule).validateSettingValue({ setting_value, token_data })
+    }
+    else {
+      result = await (loader_collection[service_id] as NonOAuthLoaderModule).validateSettingValue({ setting_value })
+    }
+  })
+
+  return result!
+}
+
+async function __handleAllCases(service_id:string, cb:(is_oauth:boolean, loader:any) => Promise<void>):Promise<void> {
+  let loader = loader_collection[service_id]
+  const service_info = loader.service_info
+  
+  if(service_info.is_oauth) {
+    loader = <OAuthBaseLoaderModule>loader
+    const cred_module = cred_module_collection[<string>service_info.oauth_service_id]
+    const task = new RefreshTokenIfFailTask("", cred_module, async () => {
+      await cb(true, loader)
+    })
+    task.useToken()
   }
-}
-
-function getDarkSky() {
-  const instance = new DarkSkyContentService("dark-sky")
-}
-
-function getBitbucket() {
-  const service_id = "bitbucket"
-  const client_id = service_credentials_reader.getClientId(service_id)
-  const client_secret = service_credentials_reader.getClientSecret(service_id)
-  const instance = new Bitbucket(client_id, client_secret)
-}
-
-function getFacebook() {
-  const service_id = "facebook"
-  const client_id = service_credentials_reader.getClientId(service_id)
-  const client_secret = service_credentials_reader.getClientSecret(service_id)
-  const instance = new Facebook(client_id, client_secret, redirect_url)
-}
-
-function getGithub(access_token:string) {
-  new GithubContentService("github")
-  const service_id = "github"
-  const client_id = service_credentials_reader.getClientId(service_id)
-  const client_secret = service_credentials_reader.getClientSecret(service_id)
-  const instance = new Github(client_id, client_secret, redirect_url)
-}
-
-function getGoogleCalendar(access_token:string) {
-  new GoogleCalendarContentService("google-calendar")
-  const service_id = "google"
-  const client_id = service_credentials_reader.getClientId(service_id)
-  const client_secret = service_credentials_reader.getClientSecret(service_id)
-  const instance = new Google(client_id, client_secret, redirect_url)
-}
-
-function getLeagueOfLegends() {
-  const api_key = service_credentials_reader.getApiKey("riot")
-  new LeagueOfLegendsContentService("league-of-legends")
-}
-
-function getReddit(access_token:string) {
-  const user_agent = service_credentials_reader.getExtraProp(service_id, ["user-agent"])
-  new RedditContentService("reddit")
-}
-
-function getTrello(access_token:string) {
-  const consumer_key = service_credentials_reader.getConsumerKey(service_id)
-  new TrelloContentService("trello")
-}
-
-function getTwitch(access_token:string) {
-  new TwitchContentService("twitch")
-}
-
-function getTwitter(token_data:any) {
-  const service_id = "twitter"
-  const consumer_key = service_credentials_reader.getConsumerKey(service_id)
-  const consumer_secret = service_credentials_reader.getConsumerSecret(service_id)
-  const { access_token_key, access_token_secret } = token_data
-  const cred = {
-    consumer_key, consumer_secret,
-    access_token_key, access_token_secret
+  else {
+    cb(false, loader)
   }
-  new TwitterContentService("twitter")
-}
-
-function getYouTube(access_token:string) {
-  new YouTubeContentService("youtube")
 }

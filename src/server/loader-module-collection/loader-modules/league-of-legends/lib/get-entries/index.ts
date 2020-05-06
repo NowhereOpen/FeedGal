@@ -1,0 +1,87 @@
+import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
+import { getSummonerLatestMatchesWithDetails } from "~/src/server/lib/loader-module-helpers/services/riot"
+
+export async function getEntriesInit() {
+
+}
+
+export async function getEntriesPagination() {
+  
+}
+
+export function formatEntries(entry:any):Entry {
+  const {
+    match, match_details, match_history_url, match_details_url,
+    champion, summoner,
+    summoner_match_summary
+  } = entry
+
+  const summoner_name = summoner.name
+
+  const urls = {
+    "fow.kr": {
+      summoner_url: `http://fow.kr/find/${summoner_name}`
+    },
+    "op.gg": {
+      summoner_url: `https://www.op.gg/summoner/userName=${summoner_name}`
+    },
+    "poro.gg": {
+      summoner_url: `https://poro.gg/ko/s/kr/${summoner_name}`
+    },
+  }
+
+  const { game_result, game_map_description } = summoner_match_summary
+
+  const match_title = `[${game_result}] ${game_map_description.name}`
+  const match_content = `${match_details_url}\n` + 
+    `${urls['fow.kr'].summoner_url}\n` + 
+    `${urls['op.gg'].summoner_url}\n` + 
+    `${urls['poro.gg'].summoner_url}`
+
+  return {
+    service_id: "league-of-legends",
+    id: match.id,
+    title: match_title,
+    content: match_content,
+    datetime_info: match.timestamp,
+    contexts: [
+      { name: "LoL" },
+      { name: summoner_name, url: match_history_url },
+      { name: "Match history", url: match_details_url }
+    ],
+    resources: {
+      main: { type: "img", value: champion.urls.profile_art }
+    },
+    json_content: entry,
+    // child_resources: {}
+  }
+}
+
+/**
+ * Needs to be separated into service setting or app setting
+ */
+const TOTAL_RECORDS_PER_DATA = 5
+
+/**
+ * TODO 2019-11-25 00:10 Pagination data is updated even for no or errorneous entries.
+ * I don't want to update the pagination data in this case.
+ */
+export function getPaginationData(pagination_index:number):PaginationOptions {
+  const pagination_data = makePaginationData(pagination_index)
+  return pagination_data
+}
+
+function makePaginationData(pagination_index:number):PaginationOptions {
+  const minBeginIndex = 0
+  const minEndIndex = TOTAL_RECORDS_PER_DATA
+  return {
+    old: {
+      beginIndex: (pagination_index + 1) * TOTAL_RECORDS_PER_DATA,
+      endIndex: (pagination_index + 2) * TOTAL_RECORDS_PER_DATA
+    },
+    new: {
+      beginIndex: Math.max((pagination_index - 1) * TOTAL_RECORDS_PER_DATA, minBeginIndex),
+      endIndex: Math.max((pagination_index) * TOTAL_RECORDS_PER_DATA, minEndIndex)
+    }
+  }
+}

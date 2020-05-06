@@ -1,1 +1,0 @@
-export let validate_setting_value_collection:{ [service_id:string]: any }

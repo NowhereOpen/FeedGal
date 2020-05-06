@@ -19,11 +19,10 @@ export type NuxtSetupReturn = {
   host:any, port:any, nuxt:any, nuxt_config:any, nuxt_middleware:RequestHandler
 }
 
-const ROOT = "../../../../"
-
 export async function setup(root_to_nuxt_config_fp:string):Promise<NuxtSetupReturn> {
   // Import and Set Nuxt.js options
-  const config = require(path.resolve(ROOT, root_to_nuxt_config_fp))
+  const nuxt_config_resolved_path = path.resolve(root_to_nuxt_config_fp)
+  const config = require(nuxt_config_resolved_path)
   config.dev = process.env.NODE_ENV !== 'production'
 
   // Init Nuxt.js
