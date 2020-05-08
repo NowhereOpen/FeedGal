@@ -1,4 +1,4 @@
-import { GystEntryInitResponseSuccess } from "~/src/common/types/responses"
+import { GystEntryInitResponseSuccess } from "~/src/common/types/gyst-entry"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"

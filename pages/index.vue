@@ -1,15 +1,12 @@
 <template lang="pug">
 div
-  TestComp
+  MainPage
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator"
-import TestComp from "~/components/TestComp.vue"
+import MainPage from "~/components/page-index/index.vue"
 
-@Component({
-  components: { TestComp }
-})
-export default class IndexPage extends Vue {
-}
+@Component({ components: { MainPage } })
+export default class Page extends Vue {}
 </script>

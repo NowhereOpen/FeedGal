@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 
-import { GystHttpRequestError, GystHttpRequestErrorName } from "~/src/common/types/request"
+import { GystHttpRequestError, GystHttpRequestErrorName } from "~/src/common/types/gyst-entry"
 
 export abstract class ExpressRequest {
   req!:Request

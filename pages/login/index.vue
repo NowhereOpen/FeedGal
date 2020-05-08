@@ -1,12 +1,14 @@
 <template lang="pug">
-  
+div
+  LoginPage
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator"
+import { Vue, Component } from "nuxt-property-decorator"
+import LoginPage from "~/components/page-login/index.vue"
 
-@Component
-export default class Page extends Vue {
-  
-}
+@Component({
+  components: { LoginPage }
+})
+export default class Page extends Vue {}
 </script>

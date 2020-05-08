@@ -4,9 +4,9 @@ import { validateSetting } from "~/src/collections/gyst-content-service/validate
 
 import {
   SettingValueValidationOAuthBase
-} from "~/src/gyst/server/base-class/service-module/setting-value-validation-base"
-import { ValidationResult } from "~/src/gyst/common/types/gyst-suite"
-import { OAuthUserInfo } from "~/src/gyst/common/types/gyst-suite"
+} from "~/src/server/base-class/service-module/setting-value-validation-base"
+import { ValidationResult } from "~/src/common/types/gyst-suite"
+import { OAuthUserInfo } from "~/src/common/types/gyst-suite"
 
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"

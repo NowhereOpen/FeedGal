@@ -2,12 +2,12 @@ import { setting_value_storage } from "~/src/server/model-collection/models/sett
 
 import {
   SettingValueValidationBase
-} from "~/src/gyst/server/base-class/service-module/setting-value-validation-base"
+} from "~/src/server/base-class/service-module/setting-value-validation-base"
 
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
 import { validateSetting } from "~/src/collections/gyst-content-service/validate-setting-value"
-import { ValidationResult } from "~/src/gyst/common/types/gyst-suite"
+import { ValidationResult } from "~/src/common/types/gyst-suite"
 
 export abstract class SettingValueCreateUpdateBaseRequestHandler extends SessionRequestHandlerBase {
   service_id!:string

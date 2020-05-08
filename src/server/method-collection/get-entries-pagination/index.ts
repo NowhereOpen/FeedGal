@@ -1,4 +1,4 @@
-import { GystEntryPaginationResponseSuccess, ServicePaginationReqParam } from "~/src/common/types/responses"
+import { GystEntryPaginationResponseSuccess, ServicePaginationReqParam } from "~/src/common/types/gyst-entry"
 
 import {
   getEntriesPagination as _getEntriesPagination,

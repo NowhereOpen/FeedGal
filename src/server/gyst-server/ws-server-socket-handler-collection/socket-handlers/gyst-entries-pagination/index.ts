@@ -1,6 +1,6 @@
 import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
 import { getEntriesPagination } from "~/src/server/method-collection/get-entries-pagination"
-import { ServicePaginationReqParam } from "~/src/common/types/responses"
+import { ServicePaginationReqParam } from "~/src/common/types/gyst-entry"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 

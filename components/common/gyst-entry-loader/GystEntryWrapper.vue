@@ -1,0 +1,70 @@
+<template lang="pug">
+div(:style="{ width: '1000px', margin: '0px' }")
+  v-card
+    v-container
+      v-row
+        GystEntry(
+          :style="{ width: '100%' }"
+          :gyst-entry="gystEntryWrapper.gyst_entry"
+        )
+
+      v-row
+        v-col(
+          @click="is_gyst_user = !is_gyst_user"
+          auto
+        )
+          div(v-if="is_gyst_user == true") Gyst User
+          div(v-if="is_gyst_user == false") This user is not a gyst user
+        v-col(auto)
+          div {{ gystEntryWrapper.pagination_index }}
+
+      v-row.footer-container(no-gutters)
+        v-col.mr-2(cols="auto")
+          v-btn like ( 0 )
+        v-col.mr-2(cols="auto")
+          v-btn(@click="is_comment = true") Comment
+        v-col.mr-2(cols="auto")
+          v-btn Dislike ( 0 )
+        v-col(cols="auto")
+          v-btn(@click="onClickToMyPost")
+            v-progress-circular.mr-2(v-if="is_saving_to_my_post" indeterminate)
+            span To My Post
+
+      v-row
+        div(v-if="is_comment")
+          div Write a comment for me
+          v-btn(@click="is_comment = false") X
+
+      v-row
+        CommentLoader(:style="{ width: '100%' }")
+</template>
+
+<script lang="ts">
+import { Prop, Vue, Component } from "nuxt-property-decorator"
+
+import GystEntry from "./GystEntry.vue"
+import CommentLoader from "./CommentLoader.vue"
+
+import * as requestMaker from "~/src/cli/request-maker"
+
+import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
+
+@Component({
+  components: { GystEntry, CommentLoader }
+})
+export default class GystEntryWrapper extends Vue {
+  @Prop() gystEntryWrapper!:GystEntryWrapperType
+  is_comment = false
+  is_gyst_user = true
+
+  is_saving_to_my_post = false
+
+  async onClickToMyPost() {
+    this.is_saving_to_my_post = true
+    await requestMaker.gyst.saveToggleToMyPost(this.gystEntryWrapper.gyst_entry)
+    this.$nextTick(() => {
+      this.is_saving_to_my_post = false
+    })
+  }
+}
+</script>

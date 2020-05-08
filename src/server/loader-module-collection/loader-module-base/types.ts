@@ -21,6 +21,13 @@ export type NonOAuthGetEntriesInitParam = {
  * Used as a part of the response. But the structure of the response should not be
  * considered by `loader-module-collection` module.
  */
+/**
+ * 2020-03-21 15:49
+ * The `direction` is included in the request. And because this is
+ * a common type, when the server is sending this back to the client,
+ * the `direction` is nowhere to be used. The `direction` is only
+ * relevent when making a request.
+ */
 export type PaginationData = {
   index: number
   options: PaginationOptions

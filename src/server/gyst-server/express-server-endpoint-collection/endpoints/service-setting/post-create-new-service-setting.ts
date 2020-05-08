@@ -2,7 +2,7 @@ import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-serv
 
 import { service_setting_storage } from "~/src/models/gyst-suite-service-setting"
 
-import { ServiceInfo } from "~/src/gyst/server/base-class/service-module/service-info"
+import { ServiceInfo } from "~/src/server/base-class/service-module/service-info"
 import { getServiceInfo } from "~/src/collections/gyst-content-service/get-service-info"
 import { getServiceSetting } from "~/src/common-request-handling-tasks/gyst-suite/index.ts"
 

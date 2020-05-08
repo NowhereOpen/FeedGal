@@ -38,4 +38,5 @@ export async function runServer(server_settings:ServerSettings, root_to_nuxt_con
   setupSocketHandlers(socket_server)
 
   native_server.listen(port, host)
+  console.log(`Server listening to port (${port}) on host (${host})`)
 }
