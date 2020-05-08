@@ -1,16 +1,13 @@
 <template lang="pug">
 div
   div
-    div.logged-in-container(v-if="is_logged_in")
+    div.not-logged-in-container(v-if="is_logged_in == false")
+      OAuthLogin(ref="oauth-login")
+
+    div.logged-in-container(v-else)
       div You are already logged in as '#[span.friendly-name {{ user_info.friendly_name }}]'
       v-btn(@click="onLogoutClick") Logout
       div Want to update your user settings? Do it #[a(href="/settings/user") here].
-    div.not-logged-in-container(v-else)
-      LoginForm(@login="onLogin")
-      
-      a(href="/signup") Create account
-
-      OAuthLogin(ref="oauth-login")
     
     div
       v-dialog(
@@ -38,17 +35,16 @@ div
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator"
 
-import LoginForm from "./LoginForm.vue"
 import OAuthLogin from "./oauth-login/OAuthLogin.vue"
 
 import * as requestMaker from "~/src/cli/request-maker"
 
 @Component({
-  components: { LoginForm, OAuthLogin }
+  components: { OAuthLogin }
 })
 export default class LoginPage extends Vue {
   // Injected server side
-  is_logged_in:boolean = <any> null
+  is_logged_in:boolean = false
   user_info:any = null
   oauth_infos:any[] = <any> null
 
@@ -62,12 +58,12 @@ export default class LoginPage extends Vue {
 
   mounted() {
     console.log(`Login page mounted hook. is_logged_in (${this.is_logged_in})`)
-    console.log(this.oauth_infos)
+    console.log(this.$parent)
 
     this.handleMessage()
 
     if(this.is_logged_in == false) {
-      ;(<OAuthLogin> this.$refs["oauth-login"]).loadSupportedOAuthServices(this.oauth_infos)
+      ;(<OAuthLogin> this.$refs["oauth-login"]).loadSupportedOAuthServices(this.$parent.oauth_infos)
     }
   }
 

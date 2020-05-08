@@ -81,12 +81,4 @@ export class UrlsGystResource {
   static oauthCallback(service_id:string) {
     return `/oauth/${service_id}/callback`
   }
-
-  /**
-   * 
-   */
-
-  static oauthAuthentication(oauth_service_id:string) {
-    return `/login/oauth/${oauth_service_id}`
-  }
 }

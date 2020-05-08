@@ -6,7 +6,7 @@ import { setup as setupSessionMiddleware } from "./middlewares/session"
 
 import { setup as setupEndpoints } from "./express-server-endpoint-collection"
 import { setup as setupSocketHandlers } from "./ws-server-socket-handler-collection"
-import { setup as setupServerSideInjections } from "./nuxt-server-side-injection-collection"
+import { setup as setupServerSideInjections } from "./server-side-data-injection-collection/setup"
 
 export type ServerSettings = {
   protocol: "http"|"https"
@@ -26,6 +26,9 @@ export async function runServer(server_settings:ServerSettings, root_to_nuxt_con
   const native_server = setupNativeServer(protocol, express_server, https_creds)
   const socket_server = setupWSServer(native_server, session_middleware)
 
+  setupEndpoints(express_server)
+  setupSocketHandlers(socket_server)
+
   express_server.use(nuxt_middleware)
 
   /**
@@ -33,9 +36,6 @@ export async function runServer(server_settings:ServerSettings, root_to_nuxt_con
    * the route will return as it is instead of `/foo/_bar?` something like this.
    */
   setupServerSideInjections(nuxt)
-
-  setupEndpoints(express_server)
-  setupSocketHandlers(socket_server)
 
   native_server.listen(port, host)
   console.log(`Server listening to port (${port}) on host (${host})`)

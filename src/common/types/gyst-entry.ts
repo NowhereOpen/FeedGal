@@ -1,4 +1,5 @@
 import { PaginationData, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
+export { PaginationData, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
 
 export type GystHttpRequestErrorName =
   "DEV_ERROR" |
