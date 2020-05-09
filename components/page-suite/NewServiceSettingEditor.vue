@@ -12,20 +12,6 @@ div
         :item-text="getServiceInfoName"
       )
 
-      div
-        div(v-if="has_alias == false")
-          v-btn(@click="has_alias = true") Give Alias
-        div(v-else)
-          v-container.pa-0
-            v-row(no-gutters)
-              v-col(auto)
-                v-text-field(
-                  label="Alias"
-                  v-model="alias"
-                )
-              v-col(auto)
-                v-btn(@click="has_alias = false") Cancel
-
       //- div Search for service
 
       div
@@ -82,18 +68,11 @@ import { ServiceSetting } from "~/src/common/types/gyst-suite"
   components: {}
 })
 export default class NewServiceSettingEditor extends Vue {
-  // Use as a property because this will not be updated by this component.
-  @Prop() gystSuiteId!:string
-
   service_infos:ServiceInfo[] = []
 
   selected_service_id:string|null = null
   selected_service:ServiceInfo|null = null
   selected_oauth_account_id:string|null = ""
-
-  // Use null because `undefined` property gets removed
-  alias:string|null = null
-  has_alias:boolean = false
 
   loadServiceInfos(service_infos:ServiceInfo[]) {
     this.service_infos = service_infos
@@ -126,10 +105,8 @@ export default class NewServiceSettingEditor extends Vue {
 
   async onAddNewService() {
     const { data } = await requestMaker.settings.gyst_suites.addNewServiceSetting(
-      this.gystSuiteId,
       <string> this.selected_service_id,
-      <string> this.selected_oauth_account_id,
-      this.has_alias == false ? undefined : <string> this.alias
+      <string> this.selected_oauth_account_id
     )
 
     const service_setting = data.service_setting

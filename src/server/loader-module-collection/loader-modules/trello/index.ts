@@ -7,14 +7,14 @@ import {
 
 import {  } from "./lib/get-displayed-setting-value"
 import {  } from "./lib/get-entries"
-import { service_info } from "./lib/service-info"
+import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
 export type TrelloStaticCredential = string
 
 export class TrelloLoaderModule extends OAuthBaseLoaderModule<TrelloStaticCredential> {
   constructor(consumer_key:TrelloStaticCredential) {
-    super(consumer_key, service_info)
+    super(consumer_key, new ServiceInfo().getServiceInfo())
   }
 
   async getEntriesInit(setting_value:OAuthGetEntriesInitParam) {

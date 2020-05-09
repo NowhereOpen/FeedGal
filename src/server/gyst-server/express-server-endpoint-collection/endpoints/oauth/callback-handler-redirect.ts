@@ -200,16 +200,10 @@ export class RedirectHandleOAuthCallbackRequestHandler extends SessionRequestHan
  */
 
 async function isLogin(service_id:string, user_uid:string) {
-  const entry = await oauth_connected_user_storage!.getEntryWithUserUid(service_id, user_uid)
-  if(entry == undefined) return false
-  /**
-   * 2020-05-06 18:22
-   * 
-   * If not a signup entry, the user is signing up a new account with the service account that is
-   * already connected to another gyst account that can be logged in with different service
-   * account.
-   */
-  return entry.get("is_signup")
+  const entry = await oauth_connected_user_storage!.getSignupEntryId(service_id, user_uid)
+  console.log(`isLogin output:`)
+  console.log(entry)
+  return entry != undefined
 }
 
 /**

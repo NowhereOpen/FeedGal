@@ -7,14 +7,14 @@ import {
 
 import {  } from "./lib/get-displayed-setting-value"
 import {  } from "./lib/get-entries"
-import { service_info } from "./lib/service-info"
+import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
 export type LeagueOfLegendsCredential = string
 
 export class LeagueOfLegendsLoaderModule extends NonOAuthLoaderModule<LeagueOfLegendsCredential> {
   constructor(api_key:LeagueOfLegendsCredential) {
-    super(api_key, service_info)
+    super(api_key, new ServiceInfo().getServiceInfo())
   }
 
   async getEntriesInit(setting_value:NonOAuthGetEntriesInitParam) {

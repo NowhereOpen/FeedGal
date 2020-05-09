@@ -2,7 +2,7 @@ import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-serv
 
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 
-export class RedirectLoginRequestHandler extends SessionRequestHandlerBase {
+export class RedirectConnectNewAccountRequestHandler extends SessionRequestHandlerBase {
   oauth_service_id!:string
   
   storeParams():void {
@@ -10,13 +10,8 @@ export class RedirectLoginRequestHandler extends SessionRequestHandlerBase {
   }
 
   async doTasks():Promise<void> {
-    if(this.is_logged_in) {
-      return this.sendError(
-        400,
-        "MUST_BE_ANON_USER",
-        "You must not be logged in to signup or login with OAuth.",
-        { oauth_service_id: this.oauth_service_id }
-      )
+    if(this.is_logged_in == false) {
+      return this.sendError(400, "MUST_BE_LOGGED_IN", "You cannot connect a new account when not logged in.")
     }
 
     const url = await cred_module_collection[this.oauth_service_id].getAuthUrl()

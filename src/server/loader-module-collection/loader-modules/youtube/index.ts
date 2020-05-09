@@ -7,12 +7,12 @@ import {
 
 import {  } from "./lib/get-displayed-setting-value"
 import {  } from "./lib/get-entries"
-import { service_info } from "./lib/service-info"
+import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
 export class YouTubeLoaderModule extends OAuthBaseLoaderModule {
   constructor() {
-    super(undefined, service_info)
+    super(undefined, new ServiceInfo().getServiceInfo())
   }
 
   async getEntriesInit(setting_value:OAuthGetEntriesInitParam) {

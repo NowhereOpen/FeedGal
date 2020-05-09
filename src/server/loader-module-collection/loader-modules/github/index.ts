@@ -7,12 +7,12 @@ import {
 
 import {  } from "./lib/get-displayed-setting-value"
 import { getEntriesInit, getEntriesPagination } from "./lib/get-entries"
-import { service_info } from "./lib/service-info"
+import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
 export class GithubLoaderModule extends OAuthBaseLoaderModule {
   constructor() {
-    super(undefined, service_info)
+    super(undefined, new ServiceInfo().getServiceInfo())
   }
 
   async getEntriesInit(param:OAuthGetEntriesInitParam) {

@@ -56,7 +56,7 @@ export default class OAuthLoginComponent extends Vue {
    */
   getOAuthRedirectUrl(oauth_info:any) {
     const service_id = oauth_info.service_id
-    return UrlsGystResource.connectNewAccount(service_id)
+    return UrlsGystResource.loginWithOAuth(service_id)
   }
 }
 </script>

@@ -7,7 +7,7 @@ import {
 
 import {  } from "./lib/get-displayed-setting-value"
 import {  } from "./lib/get-entries"
-import { service_info } from "./lib/service-info"
+import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
 export type TwitterStaticCredentialData = {
@@ -16,7 +16,7 @@ export type TwitterStaticCredentialData = {
 
 export class TwitterLoaderModule extends OAuthBaseLoaderModule<TwitterStaticCredentialData> {
   constructor(static_credential_data:TwitterStaticCredentialData) {
-    super(static_credential_data, service_info)
+    super(static_credential_data, new ServiceInfo().getServiceInfo())
   }
 
   async getEntriesInit(setting_value:OAuthGetEntriesInitParam) {

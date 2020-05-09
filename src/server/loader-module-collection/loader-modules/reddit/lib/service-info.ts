@@ -1,7 +1,11 @@
-import { ServiceInfo } from "../../../loader-module-base/types"
+import { ServiceInfoBase } from "../../../loader-module-base/service-info"
 
-export const service_info = <ServiceInfo> {
-  service_id: "reddit",
-  is_oauth: true,
-  name: "Reddit"
+export class ServiceInfo extends ServiceInfoBase {
+  constructor() {
+    super({
+      service_id: "reddit",
+      is_oauth: true,
+      name: "Reddit"
+    })
+  }
 }

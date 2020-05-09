@@ -106,10 +106,10 @@ export default class GystEntryLoader extends Vue {
       
     }
     else {
-      const gyst_wrappers:GystEntryWrapperType[] = response.gyst_entries.map(gyst_entry => {
+      const gyst_wrappers:GystEntryWrapperType[] = response.entries.map(entry => {
         return <GystEntryWrapperType> {
           pagination_index: response.pagination_data.index,
-          gyst_entry
+          entry
         }
       })
       this.loaded_gyst_entry_wrappers = this.loaded_gyst_entry_wrappers.concat(gyst_wrappers)

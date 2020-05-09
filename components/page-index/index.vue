@@ -7,16 +7,6 @@ div
     @load-pagination-gyst-entry="onLoadPaginationGystEntry"
   )
     template(#side-panel)
-      v-select(
-        label="Gyst Suite"
-        v-model="selected_gyst_suite_id"
-        :items="gyst_suites"
-        item-text="gyst_suite_name"
-        item-value="_id"
-        @change="onGystSuiteChange"
-      )
-      v-btn(@click="writePost") Write a post
-      v-btn() Sort
       v-checkbox(
         label="Collapse old entries"
       )
@@ -49,11 +39,9 @@ import * as requestMaker from "~/src/cli/request-maker"
 })
 export default class IndexPage extends Vue {
   // Injected on server side
-  gyst_suites:GystSuite[] = []
   service_settings:ServiceSetting[] = []
 
   selected_gyst_suite:GystSuite = <any> null
-  selected_gyst_suite_id:string = ""
 
   controller:any = {
     is_loading: false,
@@ -65,27 +53,12 @@ export default class IndexPage extends Vue {
   }
 
   async asyncMounted() {
-    this.selectDefaultGystEntry()
-    
     ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).loadLoadStatus(this.service_settings)
     this.$nextTick(() => {
       ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).startLoading()
     })
     
     ;(<GystEntryLoader> this.$refs["gyst-entry-loader"]).loadInitGystEntries()
-  }
-
-  selectDefaultGystEntry() {
-    const default_gyst_entry = this.gyst_suites.find(entry => entry.is_default)
-    
-    if(default_gyst_entry != null) {
-      this.selected_gyst_suite_id = default_gyst_entry._id
-      this.selected_gyst_suite = default_gyst_entry
-    }
-  }
-
-  writePost() {
-    alert("Open post editor")
   }
 
   getLoadingMessage() {
@@ -116,39 +89,7 @@ export default class IndexPage extends Vue {
     this.controller.pagination = null
   }
 
-  async onGystSuiteChange(gyst_suite_id:any) {
-    const { data } = await requestMaker.settings.gyst_suites.getGystSuiteServiceSettings(gyst_suite_id)
-
-    ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).resetLoadStatus()
-    /**
-     * 2020-03-17 23:19
-     * 
-     * First next tick required so that when the changed gyst suite has shared service setting, its
-     * data is reset. Eg, total loaded is 0.
-     */
-    await this.$nextTick()
-    ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).loadLoadStatus(data.service_settings)
-    /**
-     * 2020-03-17 23:20
-     * 
-     * Second next tick required to use `v-progress-circular` properly.
-     */
-    await this.$nextTick()
-    ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).startLoading()
-
-    ;(<GystEntryLoader> this.$refs["gyst-entry-loader"]).clearLoader()
-    ;(<GystEntryLoader> this.$refs["gyst-entry-loader"]).loadInitGystEntries(gyst_suite_id)
-  }
-
   onGystEntriesLoaded(cb:OnGystEntriesPostCb, response:GystEntryResponse) {
-    if(response.gyst_suite_id != this.selected_gyst_suite_id) {
-      console.debug(
-        `Response gyst_suite_id (${response.gyst_suite_id}). Currently selected gyst_suite_id: (${this.selected_gyst_suite_id}) mismatch.`,
-        `Not loading entries in the response.`
-      )
-      return
-    }
-
     this.updateLoadStatus(response)
 
     cb(this.selected_gyst_suite_id, response)

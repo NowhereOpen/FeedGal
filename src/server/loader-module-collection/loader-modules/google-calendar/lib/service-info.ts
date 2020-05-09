@@ -1,9 +1,13 @@
-import { ServiceInfo } from "../../../loader-module-base/types"
+import { ServiceInfoBase } from "../../../loader-module-base/service-info"
 
-export const service_info = <ServiceInfo> {
-  service_id: "google-calendar",
-  is_oauth: true,
-  name: "Google Calendar",
-  oauth_service_id: "google",
-  uses_setting_value: true
+export class ServiceInfo extends ServiceInfoBase {
+  constructor() {
+    super({
+      service_id: "google-calendar",
+      is_oauth: true,
+      name: "Google Calendar",
+      oauth_service_id: "google",
+      uses_setting_value: true
+    })
+  }
 }

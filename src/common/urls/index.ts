@@ -62,6 +62,46 @@ export class UrlsGystResource {
   static connectServicesPage() {
     return "/user/accounts"
   }
+
+  /**
+   * ======================================
+   * service setting and setting value
+   * ======================================
+   */
+
+  static addNewServiceSetting() {
+    return `/settings/service-setting/create`
+  }
+
+  static updateServiceSettingOAuthAccount(service_setting_id:string) {
+    return `/settings/service-setting/${service_setting_id}/update/oauth-account`
+  }
+    
+  static toggleService(service_setting_id:string) {
+    return `/settings/service-setting/${service_setting_id}/toggle-service`
+  }
+
+  static deleteServiceSetting(service_setting_id:string) {
+    return `/settings/service-setting/${service_setting_id}/delete`
+  }
+
+  static addNewSettingValue() {
+    return `/settings/setting-value/create`
+  }
+
+  static updateSettingValue(setting_value_id:string) {
+    return `/settings/setting-value/${setting_value_id}/update`
+  }
+
+  static deleteSettingValue(setting_value_id:string) {
+    return `/settings/setting-value/${setting_value_id}/delete`
+  }
+
+  /**
+   * ======================================
+   * // END service setting and setting value
+   * ======================================
+   */
   
   /**
    * 2020-04-29 11:09
@@ -74,10 +114,21 @@ export class UrlsGystResource {
     return `/user/accounts/${oauth_connected_user_entry_id}/revoke`
   }
 
+  static loginWithOAuth(oauth_service_id:string) {
+    return `/oauth/${oauth_service_id}/login`
+  }
+
   static connectNewAccount(oauth_service_id:string) {
     return `/oauth/${oauth_service_id}/auth`
   }
 
+  /**
+   * 2020-05-09 14:58
+   * 
+   * Used in oauth url parameter and an endpoint.
+   * 
+   * This endpoint is redirected to by the the authenticating service at the end of the authentication.
+   */
   static oauthCallback(service_id:string) {
     return `/oauth/${service_id}/callback`
   }

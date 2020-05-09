@@ -1,8 +1,12 @@
-import { ServiceInfo } from "../../../loader-module-base/types"
+import { ServiceInfoBase } from "../../../loader-module-base/service-info"
 
-export const service_info = <ServiceInfo> {
-  service_id: "github",
-  is_oauth: true,
-  name: "Github",
-  uses_setting_value: true
+export class ServiceInfo extends ServiceInfoBase {
+  constructor() {
+    super({
+      service_id: "github",
+      is_oauth: true,
+      name: "Github",
+      uses_setting_value: true
+    })
+  }
 }

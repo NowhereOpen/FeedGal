@@ -1,9 +1,13 @@
-import { ServiceInfo } from "../../../loader-module-base/types"
+import { ServiceInfoBase } from "../../../loader-module-base/service-info"
 
-export const service_info = <ServiceInfo> {
-  service_id: "dark-sky",
-  is_oauth: false,
-  name: "Dark Sky",
-  oauth_service_id: null,
-  uses_setting_value: true
+export class ServiceInfo extends ServiceInfoBase {
+  constructor() {
+    super({
+      service_id: "dark-sky",
+      is_oauth: false,
+      name: "Dark Sky",
+      oauth_service_id: null,
+      uses_setting_value: true
+    })
+  }
 }

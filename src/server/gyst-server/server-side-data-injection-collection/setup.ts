@@ -8,9 +8,9 @@ import { MatchAllPath, SessionInfoInjection } from "./injections/match-all/injec
 
 import { LoginPageMatchPath, LoginPageInjection } from "./injections/page-login"
 // import { MainPageMatchPath, MainPageInjection } from "./injections/page-main"
-// import { SettingsGystSuitesPageMatchPath, SettingsGystSuitesPageInjection } from "./injections/page-settings-gyst-suites"
+import { SettingsGystSuitesPageMatchPath, SettingsGystSuitesPageInjection } from "./injections/page-suite"
 // import { SettingsUsersPageMatchPath, SettingsUserPageInjection } from "./injections/page-settings-user"
-// import { SettingsConnectNewAccountMatchPath, SettingsConnectNewAccountPageInjection } from "./injections/page-settings-connect-new-account"
+import { SettingsConnectNewAccountMatchPath, SettingsConnectNewAccountPageInjection } from "./injections/page-settings-accounts"
 // import { UsersPageMatchPath, UserPageInjection } from "./injections/page-user"
 
 interface ServerSideDataInjectionClass { new(...args:any[]): ServerSideDataInjection }
@@ -79,9 +79,9 @@ export function setup(nuxt:any) {
  */
 function setupMatchPathFunctions() {
   collection.push([LoginPageMatchPath, LoginPageInjection])
-  // collection.push([SettingsGystSuitesPageMatchPath, SettingsGystSuitesPageInjection])
+  collection.push([SettingsGystSuitesPageMatchPath, SettingsGystSuitesPageInjection])
   // collection.push([SettingsUsersPageMatchPath, SettingsUserPageInjection])
-  // collection.push([SettingsConnectNewAccountMatchPath, SettingsConnectNewAccountPageInjection])
+  collection.push([SettingsConnectNewAccountMatchPath, SettingsConnectNewAccountPageInjection])
   // collection.push([MainPageMatchPath, MainPageInjection])
   // collection.push([UsersPageMatchPath, UserPageInjection])
 }

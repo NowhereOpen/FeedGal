@@ -7,14 +7,14 @@ import {
 
 import {  } from "./lib/get-displayed-setting-value"
 import {  } from "./lib/get-entries"
-import { service_info } from "./lib/service-info"
+import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
 export type RedditStaticCredential = string
 
 export class RedditLoaderModule extends OAuthBaseLoaderModule<RedditStaticCredential> {
   constructor(user_agent:RedditStaticCredential) {
-    super(user_agent, service_info)
+    super(user_agent, new ServiceInfo().getServiceInfo())
   }
 
   async getEntriesInit(setting_value:OAuthGetEntriesInitParam) {
