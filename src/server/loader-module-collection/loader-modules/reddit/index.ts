@@ -2,7 +2,8 @@ import { OAuthBaseLoaderModule } from "../../loader-module-base/oauth"
 import {
   OAuthGetEntriesInitParam,
   PaginationDirection,
-  OAuthPaginationParam
+  OAuthPaginationParam,
+  OAuthValidateSettingValueParam
 } from "../../loader-module-base/types"
 
 import {  } from "./lib/get-displayed-setting-value"
@@ -33,5 +34,5 @@ export class RedditLoaderModule extends OAuthBaseLoaderModule<RedditStaticCreden
     }
   }
 
-  async validateSettingValue() { return true }
+  async validateSettingValue(param:OAuthValidateSettingValueParam) { return true }
 }

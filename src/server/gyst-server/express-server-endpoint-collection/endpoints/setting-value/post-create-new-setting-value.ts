@@ -1,7 +1,7 @@
 import { SettingValueCreateUpdateBaseRequestHandler } from "./setting-value-create-update-base"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 import { SettingValue } from "~/src/common/types/gyst-suite"
-import { getDisplayedSettingValue } from "~/src/collections/gyst-content-service/get-displayed-setting-value"
+import { getDisplayedSettingValue } from "~/src/server/loader-module-collection"
 
 export class PostCreateNewSettingValueRequestHandler extends SettingValueCreateUpdateBaseRequestHandler {
   async updateModel(setting_value:any) {

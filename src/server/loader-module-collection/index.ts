@@ -6,6 +6,8 @@ import { BaseLoaderModule } from "./loader-module-base/base"
 import {
   PaginationDirection,
   LoaderModuleOutput,
+  ValidationResult,
+
   NonOAuthGetEntriesInitParam,
   OAuthGetEntriesInitParam,
 
@@ -87,10 +89,10 @@ export type ValidateSettingValueParam = {
   token_data?:any
 }
 
-export async function validateSettingValue(param:ValidateSettingValueParam):Promise<boolean> {
+export async function validateSettingValue(param:ValidateSettingValueParam):Promise<ValidationResult> {
   const { service_id, setting_value, token_data } = param
 
-  let result:boolean
+  let result:ValidationResult
 
   await __handleAllCases(service_id, async (is_oauth, loader) => {
     if(is_oauth) {

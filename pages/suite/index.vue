@@ -1,17 +1,57 @@
 <template lang="pug">
 div
-  SuitePage
+  div.main-container(:style="{ width: '1000px' }")
+    div.header-container
+      h1 Gyst suites
+
+    v-container.pa-0
+      v-row(no-gutters)
+        v-col(cols="auto")
+          span.title Service Settings ({{ service_settings.length }})
+        v-spacer
+        v-col(cols="auto")
+          v-btn(@click="is_service_setting_editor_open = true") Add New Service
+      
+    div.new-service-setting-editor(v-show="is_service_setting_editor_open")
+      NewServiceSettingEditor(
+        ref="new-service-setting-editor"
+        v-bind="$data"
+        @close="is_service_setting_editor_open = false"
+      )
+
+    div.gyst-suite-container
+      GystSuite(ref="gyst-suite")
+
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator"
-import SuitePage from "~/components/page-suite/index.vue"
 
-@Component({ components: { SuitePage } })
-export default class Page extends Vue {
-  mounted() {
-    console.log(this)
-    console.log(this.service_settings)
+import GystSuite from "~/components/page-suite/gyst-suite/GystSuite.vue"
+import NewServiceSettingEditor from "~/components/page-suite/NewServiceSettingEditor.vue"
+
+import { GystSuite as GystSuiteType, ServiceSetting } from "~/src/common/types/gyst-suite"
+
+import * as requestMaker from "~/src/cli/request-maker"
+
+@Component({
+  components: { GystSuite, NewServiceSettingEditor }
+})
+export default class ServiceSettingPage extends Vue {
+  // For injection only. Use `GystSuite.loadServiceSettings` to load after init loading.
+  service_settings:ServiceSetting[] = []
+
+  // Used in NewServiceSettingEditor
+  service_setting_editor = {
+    service_infos: []
+  }
+
+  is_service_setting_editor_open = false
+
+  mounted() {    
+    ;(<GystSuite>this.$refs["gyst-suite"]).loadServiceSettings(this.service_settings)
+    ;(<GystSuite>this.$refs["gyst-suite"]).loadServiceInfos(this.service_setting_editor.service_infos)
+    ;(<NewServiceSettingEditor>this.$refs["new-service-setting-editor"]).loadServiceInfos(this.service_setting_editor.service_infos)
   }
 }
 </script>

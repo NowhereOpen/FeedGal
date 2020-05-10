@@ -5,8 +5,8 @@ import {
   OAuthValidateSettingValueParam,
 } from "./types"
 
-export abstract class OAuthBaseLoaderModule<T=any> extends BaseLoaderModule<
-  T,
+export abstract class OAuthBaseLoaderModule<StaticCredentialData=any> extends BaseLoaderModule<
+  StaticCredentialData,
   OAuthGetEntriesInitParam,
   OAuthPaginationParam,
   OAuthValidateSettingValueParam

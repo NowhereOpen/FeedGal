@@ -1,12 +1,3 @@
-export type ValidationResult = {
-  is_valid: boolean
-  setting_value:any
-  // When `is_valid == true`
-  res_data?: any
-  // When `is_valid == false`
-  error_message?: string
-}
-
 export type GystSuite = {
   _id:string
   gyst_suite_name:string

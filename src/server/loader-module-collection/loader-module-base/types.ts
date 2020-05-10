@@ -61,6 +61,15 @@ export type ServiceInfo = {
   uses_setting_value:boolean
 }
 
+export type ValidationResult = {
+  is_valid: boolean
+  setting_value:any
+  // When `is_valid == true`
+  res_data?: any
+  // When `is_valid == false`
+  error_message?: string
+}
+
 export type LoaderModuleOutput = {
   entries:any[]
   pagination_options:PaginationOptions

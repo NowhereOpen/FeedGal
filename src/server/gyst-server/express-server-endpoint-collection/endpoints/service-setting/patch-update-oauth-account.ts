@@ -1,11 +1,7 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
-import { validateSetting } from "~/src/collections/gyst-content-service/validate-setting-value"
+import { validateSettingValue } from "~/src/server/loader-module-collection"
 
-import {
-  SettingValueValidationOAuthBase
-} from "~/src/server/base-class/service-module/setting-value-validation-base"
-import { ValidationResult } from "~/src/common/types/gyst-suite"
 import { OAuthUserInfo } from "~/src/common/types/gyst-suite"
 
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
@@ -58,15 +54,9 @@ export class PatchUpdateOAuthAccountRequestHandler extends SessionRequestHandler
     await Promise.all(
       setting_values.map(async entry => {
         const setting_value = entry!.get("value")
-        /**
-         * 2020-03-24 10:23
-         * 
-         * Non-oauth service setting will NEVER need to update its "oauth connected account" entry.
-         */
-        const instance:SettingValueValidationOAuthBase = <SettingValueValidationOAuthBase> validateSetting(service_id, this.service_setting_id, this.user_id!, setting_value)
-        // Force use `this.new_oauth_connected_user_id`
-        instance.new_oauth_connected_user_entry_id = this.new_oauth_connected_user_id
-        const validation_result:ValidationResult = await instance.getResult()
+        const is_valid:boolean = validateSettingValue({
+          service_id, setting_value
+        })
 
         if(validation_result.is_valid == false) {
           invalid_setting_values.push(setting_value)

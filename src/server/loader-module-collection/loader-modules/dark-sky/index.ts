@@ -2,7 +2,8 @@ import { NonOAuthLoaderModule } from "../../loader-module-base/base"
 import {
   NonOAuthGetEntriesInitParam,
   PaginationDirection,
-  NonOAuthPaginationParam
+  NonOAuthPaginationParam,
+  NonOAuthValidateSettingValueParam
 } from "../../loader-module-base/types"
 
 import {  } from "./lib/get-displayed-setting-value"
@@ -32,6 +33,4 @@ export class DarkSkyLoaderModule extends NonOAuthLoaderModule<DarkSkyCredential>
       service_response: {}
     }
   }
-
-  async validateSettingValue() { return true }
 }

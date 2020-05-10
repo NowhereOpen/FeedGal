@@ -4,14 +4,15 @@ import {
   NonOAuthValidateSettingValueParam,
   PaginationDirection,
   ServiceInfo,
-  LoaderModuleOutput
+  LoaderModuleOutput,
+  ValidationResult
 } from "./types"
 
 export abstract class BaseLoaderModule<
   StaticCredentialData,
   GetEntriesInitParamType,
   GetEntriesPaginationParamType,
-  ValidateSettingValueParamType
+  ValidateSettingValueParamType extends NonOAuthValidateSettingValueParam
 > {
   static_credential_data:StaticCredentialData
   service_info:ServiceInfo
@@ -29,7 +30,9 @@ export abstract class BaseLoaderModule<
    * All services must implement the method. The services that don't support setting values currently WILL
    * use setting values, and this is a planned feature.
    */
-  abstract validateSettingValue(param:ValidateSettingValueParamType):Promise<boolean>
+  async validateSettingValue(param:ValidateSettingValueParamType):Promise<ValidationResult> {
+    return { is_valid: true, setting_value: param.setting_value }
+  }
 
   /**
    * 2020-05-04 11:30
@@ -42,4 +45,4 @@ export abstract class BaseLoaderModule<
   getDisplayedSettingValue(setting_value:any):string { return setting_value }
 }
 
-export abstract class NonOAuthLoaderModule<T=any> extends BaseLoaderModule<T, NonOAuthGetEntriesInitParam, NonOAuthPaginationParam, NonOAuthValidateSettingValueParam>{}
+export abstract class NonOAuthLoaderModule<StaticCredentialData=any> extends BaseLoaderModule<StaticCredentialData, NonOAuthGetEntriesInitParam, NonOAuthPaginationParam, NonOAuthValidateSettingValueParam>{}

@@ -2,13 +2,14 @@ import { NonOAuthLoaderModule } from "../../loader-module-base/base"
 import {
   NonOAuthGetEntriesInitParam,
   PaginationDirection,
-  NonOAuthPaginationParam
+  NonOAuthPaginationParam,
+  NonOAuthValidateSettingValueParam
 } from "../../loader-module-base/types"
 
-import {  } from "./lib/get-displayed-setting-value"
+import { getDisplayedSettingValue } from "./lib/get-displayed-setting-value"
 import {  } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
-import {  } from "./lib/validate-setting-value"
+import { LeagueOfLegendsSettingValueValidation } from "./lib/validate-setting-value"
 
 export type LeagueOfLegendsCredential = string
 
@@ -33,5 +34,12 @@ export class LeagueOfLegendsLoaderModule extends NonOAuthLoaderModule<LeagueOfLe
     }
   }
 
-  async validateSettingValue() { return true }
+  async validateSettingValue(param:NonOAuthValidateSettingValueParam) {
+    const task = new LeagueOfLegendsSettingValueValidation(this.static_credential_data, param.setting_value)
+    return await task.getResult()
+  }
+
+  getDisplayedSettingValue(setting_value:any) {
+    return getDisplayedSettingValue(setting_value)
+  }
 }

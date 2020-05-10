@@ -1,12 +1,9 @@
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 
-import {
-  SettingValueValidationBase
-} from "~/src/server/base-class/service-module/setting-value-validation-base"
 
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
-import { validateSetting } from "~/src/collections/gyst-content-service/validate-setting-value"
+import { validateSettingValue } from "~/src/server/loader-module-collection"
 import { ValidationResult } from "~/src/common/types/gyst-suite"
 
 export abstract class SettingValueCreateUpdateBaseRequestHandler extends SessionRequestHandlerBase {
@@ -22,7 +19,7 @@ export abstract class SettingValueCreateUpdateBaseRequestHandler extends Session
 
   async doTasks():Promise<void> {
     // Validate the value first
-    const validation:SettingValueValidationBase = validateSetting(this.service_id, this.service_setting_id, this.user_id!, this.setting_value)
+    const validation:SettingValueValidationBase = validateSettingValue(this.service_id, this.service_setting_id, this.user_id!, this.setting_value)
 
     const validation_result:ValidationResult = await validation.getResult()
     /**
