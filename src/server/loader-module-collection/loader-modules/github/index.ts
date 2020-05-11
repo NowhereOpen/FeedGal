@@ -6,8 +6,10 @@ import {
   OAuthValidateSettingValueParam
 } from "../../loader-module-base/types"
 
+import { getAccessTokenFromTokenResponse } from "~/src/server/lib/loader-module-helpers/services/github"
+
 import {  } from "./lib/get-displayed-setting-value"
-import { getEntriesInit, getEntriesPagination } from "./lib/get-entries"
+import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import { GithubSettingValueValidation } from "./lib/validate-setting-value"
 
@@ -17,23 +19,17 @@ export class GithubLoaderModule extends OAuthBaseLoaderModule {
   }
 
   async getEntriesInit(param:OAuthGetEntriesInitParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
-    }
+    const access_token:string = getAccessTokenFromTokenResponse(param.token_data)
+    return getEntries(access_token, param.setting_value)
   }
 
-  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:OAuthPaginationParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
-    }
+  async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam) {
+    const access_token:string = getAccessTokenFromTokenResponse(param.token_data)
+    return getEntries(access_token, param.setting_value, pagination_value)
   }
 
   async validateSettingValue(param:OAuthValidateSettingValueParam) {
-    const access_token = ""
+    const access_token:string = getAccessTokenFromTokenResponse(param.token_data)
     const task = new GithubSettingValueValidation(access_token, param.setting_value)
     return await task.getResult()
   }

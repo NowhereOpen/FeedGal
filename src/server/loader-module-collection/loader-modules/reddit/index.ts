@@ -7,7 +7,7 @@ import {
 } from "../../loader-module-base/types"
 
 import {  } from "./lib/get-displayed-setting-value"
-import {  } from "./lib/get-entries"
+import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
@@ -18,21 +18,20 @@ export class RedditLoaderModule extends OAuthBaseLoaderModule<RedditStaticCreden
     super(user_agent, new ServiceInfo().getServiceInfo())
   }
 
-  async getEntriesInit(setting_value:OAuthGetEntriesInitParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
-    }
+  async getEntriesInit(param:OAuthGetEntriesInitParam) {
+    const reddit_cred = { access_token: param.token_data.access_token, user_agent: this.static_credential_data }
+    return getEntries(reddit_cred, 0)
   }
 
-  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:OAuthPaginationParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
+  async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam, direction:PaginationDirection) {
+    const reddit_cred = { access_token: param.token_data.access_token, user_agent: this.static_credential_data }
+    let pagination_param
+    if(direction == "old") {
+      pagination_param = { after: pagination_value }
     }
+    else if(direction == "new") {
+      pagination_param = { before: pagination_value }
+    }
+    return getEntries(reddit_cred, param.pagination_data.index, pagination_param)
   }
-
-  async validateSettingValue(param:OAuthValidateSettingValueParam) { return true }
 }

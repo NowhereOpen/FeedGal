@@ -1,14 +1,15 @@
 import moment from "moment"
 
 import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
-import { getAllLatestVideosFromDateRanage } from "~/src/server/lib/loader-module-helpers/services/youtube"
+import { getAllLatestVideosFromDateRanage, DateRange } from "~/src/server/lib/loader-module-helpers/services/youtube"
 
-export async function getEntriesInit() {
+export async function getEntries(access_token:string, pagiantion_index:number, date_range:DateRange):Promise<LoaderModuleOutput> {
+  const result = await getAllLatestVideosFromDateRanage(access_token, date_range)
 
-}
-
-export async function getEntriesPagination() {
-  
+  return {
+    entries: result.map(formatEntries),
+    pagination_options: getPaginationData(pagiantion_index, date_range)
+  }
 }
 
 function formatEntries(video:any):Entry {
@@ -30,7 +31,7 @@ function formatEntries(video:any):Entry {
   }
 }
 
-function getPaginationData(pagination_index:number, prev_pagination_value:any):PaginationOptions {
+function getPaginationData(pagination_index:number, prev_pagination_value?:any):PaginationOptions {
   let date_range
 
   if(pagination_index == 0) {

@@ -5,12 +5,13 @@ import { _getEventsWithinRange } from "~/src/server/lib/loader-module-helpers/se
 
 type DateRange = { from: any, to: any }
 
-export async function getEntriesInit() {
-
-}
-
-export async function getEntriesPagination() {
-  
+export async function getEntries(access_token:string, calendar_id:string, date_range:DateRange):Promise<LoaderModuleOutput> {
+  const entries:any[] = await _getEventsWithinRange(access_token, date_range, calendar_id)
+  return {
+    entries: entries.map(formatEntries),
+    pagination_options: getPaginationData(date_range),
+    service_response: entries
+  }
 }
 
 function formatEntries(entry:any):Entry {

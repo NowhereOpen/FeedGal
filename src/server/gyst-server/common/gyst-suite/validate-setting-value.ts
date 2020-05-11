@@ -17,5 +17,5 @@ export async function validateSettingValue(service_setting_id:string, setting_va
     param.token_data = token_data
   }
 
-  await _validateSettingValue(param)
+  return await _validateSettingValue(param)
 }

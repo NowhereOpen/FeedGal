@@ -1,12 +1,14 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
-import { validateSettingValue } from "~/src/server/loader-module-collection"
+import { getServiceInfo, ValidateSettingValueParam } from "~/src/server/loader-module-collection"
 
 import { OAuthUserInfo } from "~/src/common/types/gyst-suite"
+import { validateSettingValue } from "~/src/server/gyst-server/common/gyst-suite/validate-setting-value"
 
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
+import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
 
 export class PatchUpdateOAuthAccountRequestHandler extends SessionRequestHandlerBase {
   service_setting_id!:string
@@ -54,9 +56,7 @@ export class PatchUpdateOAuthAccountRequestHandler extends SessionRequestHandler
     await Promise.all(
       setting_values.map(async entry => {
         const setting_value = entry!.get("value")
-        const is_valid:boolean = validateSettingValue({
-          service_id, setting_value
-        })
+        const validation_result = await validateSettingValue(this.service_setting_id, setting_value)
 
         if(validation_result.is_valid == false) {
           invalid_setting_values.push(setting_value)

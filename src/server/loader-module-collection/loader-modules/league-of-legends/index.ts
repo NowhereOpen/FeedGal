@@ -7,7 +7,7 @@ import {
 } from "../../loader-module-base/types"
 
 import { getDisplayedSettingValue } from "./lib/get-displayed-setting-value"
-import {  } from "./lib/get-entries"
+import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import { LeagueOfLegendsSettingValueValidation } from "./lib/validate-setting-value"
 
@@ -18,20 +18,12 @@ export class LeagueOfLegendsLoaderModule extends NonOAuthLoaderModule<LeagueOfLe
     super(api_key, new ServiceInfo().getServiceInfo())
   }
 
-  async getEntriesInit(setting_value:NonOAuthGetEntriesInitParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
-    }
+  async getEntriesInit(param:NonOAuthGetEntriesInitParam) {
+    return getEntries(this.static_credential_data, param.setting_value.region, param.setting_value.summoner_name)
   }
 
-  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:NonOAuthPaginationParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
-    }
+  async getEntriesPaginationImpl(pagination_value:any, param:NonOAuthPaginationParam) {
+    return getEntries(this.static_credential_data, param.setting_value.region, param.setting_value.summoner_name, pagination_value)
   }
 
   async validateSettingValue(param:NonOAuthValidateSettingValueParam) {

@@ -3,12 +3,14 @@ import urlJoin from "url-join"
 import { LoaderModuleOutput, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
 import { getLiveFollowedChannelsByUserId } from "~/src/server/lib/loader-module-helpers/services/twitch"
 
-export async function getEntriesInit() {
+export async function getEntries(access_token:string, pagiantion_index:number):Promise<LoaderModuleOutput> {
+  let live_channels = pagiantion_index > 0 ? [] : await getLiveFollowedChannelsByUserId(access_token)
 
-}
-
-export async function getEntriesPagination() {
-  
+  return {
+    entries: live_channels.map(formatEntries),
+    pagination_options: getPaginationOption(),
+    service_response: live_channels
+  }
 }
 
 function formatEntries(entry:any):Entry {
@@ -48,6 +50,6 @@ function formatEntries(entry:any):Entry {
   }
 }
 
-function getPaginationOption(service_response:any) {
+function getPaginationOption() {
   return { new: null, old: null }
 }

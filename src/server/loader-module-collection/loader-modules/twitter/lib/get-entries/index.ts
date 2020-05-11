@@ -1,12 +1,10 @@
 import { LoaderModuleOutput, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
 import { getHomeTimeline } from "~/src/server/lib/loader-module-helpers/services/twitter"
 
-export async function getEntriesInit() {
+export async function getEntries(twitter_cred:any, pagination_param?:any):Promise<LoaderModuleOutput> {
+  let home_timeline_tweets = await getHomeTimeline(twitter_cred, pagination_param)
 
-}
-
-export async function getEntriesPagination() {
-  
+  return home_timeline_tweets
 }
 
 function formatEntries(tweet:any):Entry {

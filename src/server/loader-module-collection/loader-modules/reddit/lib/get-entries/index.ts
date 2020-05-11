@@ -4,12 +4,13 @@ import moment from "moment"
 import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
 import { getBestListing } from "~/src/server/lib/loader-module-helpers/services/reddit"
 
-export async function getEntriesInit() {
-
-}
-
-export async function getEntriesPagination() {
-  
+export async function getEntries(reddit_cred:any, pagination_index:number, pagination_param?:any):Promise<LoaderModuleOutput> {
+  const response = await getBestListing(reddit_cred, pagination_param)
+  return {
+    entries: response.data.children.map(formatEntries),
+    pagination_options: getPaginationData(response, pagination_index),
+    service_response: response
+  }
 }
 
 function formatEntries(_entry:any):Entry {

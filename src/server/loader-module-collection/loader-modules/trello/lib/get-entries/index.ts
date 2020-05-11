@@ -1,15 +1,17 @@
 import { LoaderModuleOutput, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
-import { getMemberAction } from "~/src/server/lib/loader-module-helpers/services/trello"
+import { getMemberAction, TrelloCred } from "~/src/server/lib/loader-module-helpers/services/trello"
 
-export async function getEntriesInit() {
+export async function getEntries(trello_cred:TrelloCred, pagination_param?:any):Promise<LoaderModuleOutput> {
+  const data = await getMemberAction(trello_cred, pagination_param)
 
+  return {
+    entries: data.map(formatEntries),
+    pagination_options: getPaginationOption(data),
+    service_response: data
+  }
 }
 
-export async function getEntriesPagination() {
-  
-}
-
-export function formatEntries(action:any):Entry {
+function formatEntries(action:any):Entry {
   let text:string = action.entities.map((a:any) => a.text).reduce((a:any,b:any) => a + " " + b)
   let data = action.data
   let sortable_datetime = action.date

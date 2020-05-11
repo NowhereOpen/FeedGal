@@ -1,15 +1,18 @@
 import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
 import { getSummonerLatestMatchesWithDetails } from "~/src/server/lib/loader-module-helpers/services/riot"
 
-export async function getEntriesInit() {
+export async function getEntries(api_key:string, region:string, summoner_name:string, pagination_value?:any):Promise<LoaderModuleOutput> {
+  const data = await getSummonerLatestMatchesWithDetails(region, summoner_name, api_key, pagination_value)
+  const match_details_list = data.match_details_list
 
+  return {
+    entries: match_details_list.map(formatEntries),
+    service_response: match_details_list,
+    pagination_options: makePaginationData(pagination_value)
+  }
 }
 
-export async function getEntriesPagination() {
-  
-}
-
-export function formatEntries(entry:any):Entry {
+function formatEntries(entry:any):Entry {
   const {
     match, match_details, match_history_url, match_details_url,
     champion, summoner,
@@ -66,14 +69,17 @@ const TOTAL_RECORDS_PER_DATA = 5
  * TODO 2019-11-25 00:10 Pagination data is updated even for no or errorneous entries.
  * I don't want to update the pagination data in this case.
  */
-export function getPaginationData(pagination_index:number):PaginationOptions {
+function getPaginationData(pagination_index:number):PaginationOptions {
   const pagination_data = makePaginationData(pagination_index)
   return pagination_data
 }
 
-function makePaginationData(pagination_index:number):PaginationOptions {
+function makePaginationData(pagination_index?:number):PaginationOptions {
   const minBeginIndex = 0
   const minEndIndex = TOTAL_RECORDS_PER_DATA
+
+  if(pagination_index == undefined) pagination_index = 0
+  
   return {
     old: {
       beginIndex: (pagination_index + 1) * TOTAL_RECORDS_PER_DATA,

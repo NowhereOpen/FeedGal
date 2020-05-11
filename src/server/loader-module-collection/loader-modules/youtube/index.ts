@@ -1,3 +1,5 @@
+import moment from "moment"
+
 import { OAuthBaseLoaderModule } from "../../loader-module-base/oauth"
 import {
   OAuthGetEntriesInitParam,
@@ -7,7 +9,7 @@ import {
 } from "../../loader-module-base/types"
 
 import {  } from "./lib/get-displayed-setting-value"
-import {  } from "./lib/get-entries"
+import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
@@ -16,21 +18,16 @@ export class YouTubeLoaderModule extends OAuthBaseLoaderModule {
     super(undefined, new ServiceInfo().getServiceInfo())
   }
 
-  async getEntriesInit(setting_value:OAuthGetEntriesInitParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
+  async getEntriesInit(param:OAuthGetEntriesInitParam) {
+    const date_range = {
+      from_moment: moment().subtract(7, "days"),
+      to_moment: moment()
     }
+
+    return getEntries(param.token_data.access_token, 0, date_range)
   }
 
-  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:OAuthPaginationParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
-    }
+  async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam) {
+    return getEntries(param.token_data.access_token, param.pagination_data.index, pagination_value)
   }
-
-  async validateSettingValue(param:OAuthValidateSettingValueParam) { return true }
 }

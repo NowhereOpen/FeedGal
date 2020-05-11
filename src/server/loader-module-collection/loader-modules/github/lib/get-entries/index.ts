@@ -1,12 +1,39 @@
 import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
 import { getCommits } from "~/src/server/lib/loader-module-helpers/services/github"
 
-export async function getEntriesInit() {
-
+export type Param = {
+  user_name:string
+  branch_name:string
+  repo_name:string
 }
 
-export async function getEntriesPagination() {
-  
+export async function getEntries(
+  access_token:string,
+  param:Param,
+  pagination_page?:string|number
+):Promise<LoaderModuleOutput> {
+  const { user_name, branch_name, repo_name } = param
+  const params:any = { sha: branch_name }
+
+  if(pagination_page) {
+    Object.assign(params, { page: pagination_page })
+  }
+
+  let commits:any[] = []
+  commits = await getCommits(user_name, repo_name, access_token, { params })
+  commits = commits.map((commit:any) => {
+    commit.repo_name = repo_name
+    commit.branch_name = branch_name
+    commit.repo_url = `https://github.com/${user_name}/${repo_name}`
+    commit.branch_url = `https://github.com/${user_name}/${repo_name}/tree/${branch_name}`
+    return commit
+  })
+
+  return {
+    entries: commits.map(entry => formatEntries(entry)),
+    pagination_options: getPaginationData(pagination_page),
+    service_response: commits
+  }
 }
 
 function formatEntries(entry:any):Entry {
@@ -50,8 +77,8 @@ function formatEntries(entry:any):Entry {
   }
 }
 
-function getPaginationData(pagination_index:number, pagination_value:any):PaginationOptions {
-  if(pagination_index == 0) {
+function getPaginationData(pagination_page:any|undefined):PaginationOptions {
+  if([undefined, 1].includes(pagination_page)) {
     /**
      * The first page starts at 1.
      * 
@@ -61,8 +88,8 @@ function getPaginationData(pagination_index:number, pagination_value:any):Pagina
   }
   else {
     return {
-      old: pagination_value + 1,
-      new: pagination_value - 1
+      old: pagination_page + 1,
+      new: pagination_page - 1
     }
   }
 }

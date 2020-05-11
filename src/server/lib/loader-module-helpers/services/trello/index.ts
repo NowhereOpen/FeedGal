@@ -1,6 +1,6 @@
 import * as common from "../../common"
 
-type TrelloCred = { access_token:string, consumer_key:string }
+export type TrelloCred = { access_token:string, consumer_key:string }
 
 export async function makeRequest(method:string, url:string, { access_token, consumer_key }:TrelloCred, req_data?:any) {
   const axios_config:any = {

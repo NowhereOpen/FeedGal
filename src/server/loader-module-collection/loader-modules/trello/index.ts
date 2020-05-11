@@ -7,7 +7,7 @@ import {
 } from "../../loader-module-base/types"
 
 import {  } from "./lib/get-displayed-setting-value"
-import {  } from "./lib/get-entries"
+import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
@@ -18,21 +18,20 @@ export class TrelloLoaderModule extends OAuthBaseLoaderModule<TrelloStaticCreden
     super(consumer_key, new ServiceInfo().getServiceInfo())
   }
 
-  async getEntriesInit(setting_value:OAuthGetEntriesInitParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
-    }
+  async getEntriesInit(param:OAuthGetEntriesInitParam) {
+    const trello_cred = { access_token: param.token_data.oauth_token, consumer_key: this.static_credential_data }
+    return getEntries(trello_cred)
   }
 
-  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:OAuthPaginationParam) {
-    return {
-      entries:[],
-      pagination_options: { new: "", old: "" },
-      service_response: {}
+  async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam, direction:PaginationDirection) {
+    const trello_cred = { access_token: param.token_data.oauth_token, consumer_key: this.static_credential_data }
+    let pagination_param
+    if(direction == "old") {
+      pagination_param = { before: pagination_value }
     }
+    else if(direction == "new") {
+      pagination_param = { since: pagination_value }
+    }
+    return getEntries(trello_cred, pagination_param)
   }
-
-  async validateSettingValue(param:OAuthValidateSettingValueParam) { return true }
 }

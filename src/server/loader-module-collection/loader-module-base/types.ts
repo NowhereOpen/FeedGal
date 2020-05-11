@@ -73,7 +73,7 @@ export type ValidationResult = {
 export type LoaderModuleOutput = {
   entries:any[]
   pagination_options:PaginationOptions
-  service_response:any
+  service_response?:any
 }
 
 export type Entry = {

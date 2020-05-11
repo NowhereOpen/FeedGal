@@ -11,7 +11,7 @@ import {
 export abstract class BaseLoaderModule<
   StaticCredentialData,
   GetEntriesInitParamType,
-  GetEntriesPaginationParamType,
+  GetEntriesPaginationParamType extends NonOAuthPaginationParam,
   ValidateSettingValueParamType extends NonOAuthValidateSettingValueParam
 > {
   static_credential_data:StaticCredentialData
@@ -23,7 +23,11 @@ export abstract class BaseLoaderModule<
   }
 
   abstract getEntriesInit(param:GetEntriesInitParamType):Promise<LoaderModuleOutput>
-  abstract getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:GetEntriesPaginationParamType):Promise<LoaderModuleOutput>
+  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:GetEntriesPaginationParamType):Promise<LoaderModuleOutput> {
+    const pagination_value = param.pagination_data.options[direction]
+    return this.getEntriesPaginationImpl(pagination_value, param, direction, pagination_updated_index)
+  }
+  abstract getEntriesPaginationImpl(pagination_value:any, param:GetEntriesPaginationParamType, direction:PaginationDirection, pagination_updated_index:number):Promise<LoaderModuleOutput>
   
   /**
    * 2020-05-04 12:05
