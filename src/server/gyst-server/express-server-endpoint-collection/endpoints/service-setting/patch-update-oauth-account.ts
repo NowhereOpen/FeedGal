@@ -1,24 +1,18 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
-import { getServiceInfo, ValidateSettingValueParam } from "~/src/server/loader-module-collection"
-
 import { OAuthUserInfo } from "~/src/common/types/gyst-suite"
-import { validateSettingValue } from "~/src/server/gyst-server/common/gyst-suite/validate-setting-value"
+import { validateSettingValue } from "~/src/server/method-collection/validate-setting-value"
 
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
-import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
 
 export class PatchUpdateOAuthAccountRequestHandler extends SessionRequestHandlerBase {
   service_setting_id!:string
-  gyst_suite_id!:string
   new_oauth_connected_user_id!:string
 
   storeParams():void|Promise<void> {
     this.service_setting_id = this.req.params.service_setting_id
-
-    this.gyst_suite_id = this.req.body.gyst_suite_id
     this.new_oauth_connected_user_id = this.req.body.new_oauth_connected_user_id
   }
 

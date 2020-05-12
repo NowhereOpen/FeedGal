@@ -31,6 +31,8 @@ export class GithubLoaderModule extends OAuthBaseLoaderModule {
   async validateSettingValue(param:OAuthValidateSettingValueParam) {
     const access_token:string = getAccessTokenFromTokenResponse(param.token_data)
     const task = new GithubSettingValueValidation(access_token, param.setting_value)
-    return await task.getResult()
+    const result = await task.getResult()
+    console.log(`github loader module avlidatSettingValue result: `,result)
+    return result
   }
 }

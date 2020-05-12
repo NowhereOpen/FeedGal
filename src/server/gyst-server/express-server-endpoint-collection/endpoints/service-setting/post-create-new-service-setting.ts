@@ -7,14 +7,13 @@ import { getServiceInfo } from "~/src/server/loader-module-collection"
 import { getServiceSetting } from "~/src/server/gyst-server/common/gyst-suite"
 
 export class PostCreateNewServiceSettingRequestHandler extends SessionRequestHandlerBase {
-  gyst_suite_id!:string
   service_id!:string
   oauth_connected_user_id!:string
   alias:string|undefined
   service_info!:ServiceInfo
 
   storeParams():void|Promise<void> {
-    this.gyst_suite_id = this.req.body.gyst_suite_id
+
     this.service_id = this.req.body.service_id
     this.oauth_connected_user_id = this.req.body.oauth_connected_user_id
     this.alias = this.req.body.alias
@@ -31,7 +30,7 @@ export class PostCreateNewServiceSettingRequestHandler extends SessionRequestHan
       )
     }
 
-    const result = await service_setting_storage.createNewServiceSetting(this.gyst_suite_id, this.service_id, this.oauth_connected_user_id, this.alias)
+    const result = await service_setting_storage.createNewServiceSetting(this.user_id!, this.service_id, this.oauth_connected_user_id, this.alias)
     this.res_data.service_setting = await getServiceSetting(result._id)
   }
 }

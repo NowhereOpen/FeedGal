@@ -1,14 +1,19 @@
 import { GystEntryPaginationResponseSuccess, ServicePaginationReqParam } from "~/src/common/types/gyst-entry"
 
 import {
-  getEntriesPagination as _getEntriesPagination,
   getServiceInfo,
-  GetEntriesPaginationParam
+  getEntriesPaginationNonOAuth,
+  getEntriesPaginationOAuth
 } from "~/src/server/loader-module-collection"
 
-import { PaginationDirection, OAuthPaginationParam, NonOAuthPaginationParam } from "~/src/server/loader-module-collection/loader-module-base/types"
+import {
+  PaginationDirection,
+  LoaderModuleOutput
+} from "~/src/server/loader-module-collection/loader-module-base/types"
 
 import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
+
+import { refreshTokenIfFail } from "../common"
 
 export async function getEntriesPagination(
   direction:"new"|"old",
@@ -51,29 +56,21 @@ async function getEntriesPaginationData(
     pagination_updated_index = pagination_current_index + 1
   }
 
-  const service_info = getServiceInfo(service_id)
-  
-  let param:GetEntriesPaginationParam = {
-    pagination_data: service_pagination_req_param.pagination_data,
-  }
+  const is_oauth = getServiceInfo(service_id).is_oauth
+  const pagination_data = service_pagination_req_param.pagination_data
+  const setting_value = service_pagination_req_param.setting_value
 
-  if(service_info.uses_setting_value) {
-    param.setting_value = service_pagination_req_param.setting_value
-  }
-
-  if(service_info.is_oauth) {
+  let result!:LoaderModuleOutput
+  if(is_oauth) {
     const { oauth_connected_user_entry_id } = service_pagination_req_param
     const token_data = oauth_access_token_storage.getAccessTokenEntry(service_id, oauth_connected_user_entry_id!)
-
-    ;(<OAuthPaginationParam> param).token_data = token_data
+    await refreshTokenIfFail(service_id, token_data, async () => {
+      result = await getEntriesPaginationOAuth(service_id, direction, pagination_updated_index, pagination_data, token_data, setting_value)
+    })
   }
-
-  const result = await _getEntriesPagination(
-    service_id,
-    direction,
-    pagination_updated_index,
-    <GetEntriesPaginationParam> param
-  )
+  else {
+    result = await getEntriesPaginationNonOAuth(service_id, direction, pagination_updated_index, pagination_data, setting_value)
+  }
   
   let response:GystEntryPaginationResponseSuccess = {
     service_setting_id: service_pagination_req_param.service_setting_id,

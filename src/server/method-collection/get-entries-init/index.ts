@@ -5,7 +5,10 @@ import { oauth_access_token_storage } from "~/src/server/model-collection/models
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 
-import { getServiceInfo, getEntriesInit as _getEntriesInit, GetEntriesInitParam } from "~/src/server/loader-module-collection"
+import { getServiceInfo, getEntriesInitNonOAuth, getEntriesInitOAuth } from "~/src/server/loader-module-collection"
+import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader-module-base/types"
+
+import { refreshTokenIfFail } from "../common"
 
 type FlattenedLoaderParam = {
   service_id:string,
@@ -37,7 +40,19 @@ export async function getEntriesInit(
 
 async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<GystEntryInitResponseSuccess> {
   const service_id = param.service_id
-  const result = await _getEntriesInit(service_id, param)
+  const is_oauth = getServiceInfo(service_id).is_oauth
+  const setting_value = param.setting_value
+
+  let result!:LoaderModuleOutput
+  if(is_oauth) {
+    const token_data = param.token_data
+    await refreshTokenIfFail(service_id, token_data, async () => {
+      result = await getEntriesInitOAuth(service_id, token_data, setting_value)
+    })
+  }
+  else {
+    result = await getEntriesInitNonOAuth(service_id, setting_value)
+  }
 
   const response:GystEntryInitResponseSuccess = {
     service_id,
@@ -94,8 +109,7 @@ async function flattenServiceSettings(user_id:string):Promise<FlattenedLoaderPar
       }
 
       if(is_oauth) {
-        const oauth_connected_user_entry = await oauth_connected_user_storage.getEntryWithUserUid(service_id, user_id)
-        const oauth_connected_user_entry_id = oauth_connected_user_entry!._id
+        const oauth_connected_user_entry_id = await service_setting_storage.getOAuthConnectedUserEntryId(service_setting_entry_id)
         const token_entry = oauth_access_token_storage.getAccessTokenEntry(service_id, oauth_connected_user_entry_id)
         flattened_entries.forEach(entry => {
           entry.token_data = token_entry

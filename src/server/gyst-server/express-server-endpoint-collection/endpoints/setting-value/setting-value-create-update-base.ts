@@ -2,7 +2,7 @@ import { setting_value_storage } from "~/src/server/model-collection/models/sett
 
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
-import { validateSettingValue } from "~/src/server/gyst-server/common/gyst-suite/validate-setting-value"
+import { validateSettingValue } from "~/src/server/method-collection/validate-setting-value"
 
 export abstract class SettingValueCreateUpdateBaseRequestHandler extends SessionRequestHandlerBase {
   service_id!:string
