@@ -75,6 +75,7 @@ export default class GystEntryLoader extends Vue {
 
     ;(<Pagination> this.$refs["pagination"]).handlePaginationCb = this.handlePagination
 
+    console.log("gyst entry loader MOUNTED")
     this.setupWSClient()
   }
 
@@ -92,8 +93,9 @@ export default class GystEntryLoader extends Vue {
    * So, the PAGES need to control the `GystEntryLoader` so that the page loads
    * what it needs.
    */
-  loadInitGystEntries(gyst_suite_id?:string) {
-    this.gyst_loader.loadInitEntries(gyst_suite_id)
+  loadInitGystEntries() {
+    console.log("gyst entry loader loadInitGystEntries")
+    this.gyst_loader.loadInitEntries()
   }
 
   clearLoader() {
@@ -113,44 +115,48 @@ export default class GystEntryLoader extends Vue {
         }
       })
       this.loaded_gyst_entry_wrappers = this.loaded_gyst_entry_wrappers.concat(gyst_wrappers)
+      console.log(this.loaded_gyst_entry_wrappers)
     }
   }
 
   setupWSClient() {
     this.gyst_loader = new GystEntryWSClient("gyst-entries")
 
-    /**
-     * 2020-04-05 23:26
-     * 
-     * Can be little confusing. Using this pattern so that I don't have to repeat using
-     * `this.$emit("loaded", (gyst_suite_id) => {...})`. I could repeat using it because it's simpler,
-     * but I want to do it this way.
-     * 
-     * The `response` comes from the `onGystEnries` or `onGystEntriesWithPagination`. The `gyst_suite_id`
-     * is passed from the `loaded` event handler. These to arguments are passed to the `cb`.
-     */
-    const commonHandler = (cb:OnGystEntriesPostCb) => (response:GystEntryResponse) => {
-      this.$emit("loaded", (gyst_suite_id:string) => {
-        cb(gyst_suite_id, response)
-      }, response)
-    }
+    // /**
+    //  * 2020-04-05 23:26
+    //  * 
+    //  * Can be little confusing. Using this pattern so that I don't have to repeat using
+    //  * `this.$emit("loaded", (gyst_suite_id) => {...})`. I could repeat using it because it's simpler,
+    //  * but I want to do it this way.
+    //  * 
+    //  * The `response` comes from the `onGystEnries` or `onGystEntriesWithPagination`. The `gyst_suite_id`
+    //  * is passed from the `loaded` event handler. These to arguments are passed to the `cb`.
+    //  */
+    // const commonHandler = (cb:OnGystEntriesPostCb) => (response:GystEntryResponse) => {
+    //   this.$emit("loaded", (gyst_suite_id:string) => {
+    //     cb(response)
+    //   }, response)
+    // }
 
-    this.gyst_loader.onGystsEntriesPostCb = commonHandler((gyst_suite_id:string, response:GystEntryResponse) => {
+    this.gyst_loader.onGystEntriesPostCb = (response:GystEntryResponse) => {
       if("error" in response && response.error.name == "NO_SERVICE_SETTINGS") {
       
       }
       else {
+        this.$emit("loaded", response)
         this.loadGystEntries(<GystEntryResponseSuccess|GystEntryResponseError> response)
         this.gyst_loader.pagination_data_storage.loadWithInit(response)
       }
-    })
+    }
 
-    this.gyst_loader.onGystEntriesWithPaginationPostCb = commonHandler((gyst_suite_id:string, response:GystEntryResponse) => {
+    this.gyst_loader.onGystEntriesWithPaginationPostCb = (response:GystEntryResponse) => {
+      this.$emit("loaded", response)
       this.loadGystEntries(<GystEntryResponseSuccess|GystEntryResponseError> response)
       this.gyst_loader.pagination_data_storage.loadWithPagination(response)
-    })
+    }
 
     this.gyst_loader.setup()
+    console.log("End of setupWSClient")
   }
 
   async handlePagination() {

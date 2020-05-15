@@ -5,7 +5,7 @@ div(:style="{ width: '1000px', margin: '0px' }")
       v-row
         GystEntry(
           :style="{ width: '100%' }"
-          :gyst-entry="gystEntryWrapper.gyst_entry"
+          :gyst-entry="gystEntryWrapper.entry"
         )
 
       v-row
@@ -18,25 +18,25 @@ div(:style="{ width: '1000px', margin: '0px' }")
         v-col(auto)
           div {{ gystEntryWrapper.pagination_index }}
 
-      v-row.footer-container(no-gutters)
-        v-col.mr-2(cols="auto")
-          v-btn like ( 0 )
-        v-col.mr-2(cols="auto")
-          v-btn(@click="is_comment = true") Comment
-        v-col.mr-2(cols="auto")
-          v-btn Dislike ( 0 )
-        v-col(cols="auto")
-          v-btn(@click="onClickToMyPost")
-            v-progress-circular.mr-2(v-if="is_saving_to_my_post" indeterminate)
-            span To My Post
+      //- v-row.footer-container(no-gutters)
+      //-   v-col.mr-2(cols="auto")
+      //-     v-btn like ( 0 )
+      //-   v-col.mr-2(cols="auto")
+      //-     v-btn(@click="is_comment = true") Comment
+      //-   v-col.mr-2(cols="auto")
+      //-     v-btn Dislike ( 0 )
+      //-   v-col(cols="auto")
+      //-     v-btn(@click="onClickToMyPost")
+      //-       v-progress-circular.mr-2(v-if="is_saving_to_my_post" indeterminate)
+      //-       span To My Post
 
-      v-row
-        div(v-if="is_comment")
-          div Write a comment for me
-          v-btn(@click="is_comment = false") X
+      //- v-row
+      //-   div(v-if="is_comment")
+      //-     div Write a comment for me
+      //-     v-btn(@click="is_comment = false") X
 
-      v-row
-        CommentLoader(:style="{ width: '100%' }")
+      //- v-row
+      //-   CommentLoader(:style="{ width: '100%' }")
 </template>
 
 <script lang="ts">

@@ -89,7 +89,7 @@ export default class IndexPage extends Vue {
     this.controller.pagination = null
   }
 
-  onGystEntriesLoaded(cb:OnGystEntriesPostCb, response:GystEntryResponse) {
+  onGystEntriesLoaded(response:GystEntryResponse) {
     this.updateLoadStatus(response)
   }
 

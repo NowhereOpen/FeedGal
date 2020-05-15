@@ -8,7 +8,7 @@ export type OnServiceInfosResponse = (service_infos:any) => any
 export type OnGystEntriesResponse = (gyst_entries:any) => any
 export type OnGystEntriesWithPpaginationResponse = (gyst_entries:any) => any
 
-export type OnGystEntriesPostCb = (gyst_suite_id:string, response:GystEntryResponse) => void
+export type OnGystEntriesPostCb = (response:GystEntryResponse) => void
 
 type CallBacks = {
   onServiceInfosResponse:OnServiceInfosResponse
@@ -19,7 +19,7 @@ type CallBacks = {
 export class GystEntryWSClient extends WSClient {
   pagination_data_storage:PaginationDataStorage = new PaginationDataStorage()
 
-  onGystsEntriesPostCb:(response:GystEntryResponse) => void = () => {}
+  onGystEntriesPostCb:(response:GystEntryResponse) => void = () => {}
   onGystEntriesWithPaginationPostCb:(response:GystEntryResponse) => void = () => {}
 
   setup() {
@@ -31,15 +31,15 @@ export class GystEntryWSClient extends WSClient {
   }
 
   onGystEntriesResponse(gyst_entries:any) {
-    this.onGystsEntriesPostCb(gyst_entries)
+    this.onGystEntriesPostCb(gyst_entries)
   }
 
   onGystEntriesWithPaginationResponse(gyst_entries:any) {
     this.onGystEntriesWithPaginationPostCb(gyst_entries)
   }
   
-  loadInitEntries(gyst_suite_id?:string) {
-    super.loadInitEntries({ gyst_suite_id })
+  loadInitEntries() {
+    super.loadInitEntries()
   }
 
   getPaginationReqData(direction:PaginationDirection) {
