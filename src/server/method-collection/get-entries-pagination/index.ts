@@ -63,8 +63,7 @@ async function getEntriesPaginationData(
   let result!:LoaderModuleOutput
   if(is_oauth) {
     const { oauth_connected_user_entry_id } = service_pagination_req_param
-    const token_data = oauth_access_token_storage.getAccessTokenEntry(service_id, oauth_connected_user_entry_id!)
-    await refreshTokenIfFail(service_id, token_data, async () => {
+    await refreshTokenIfFail(service_id, oauth_connected_user_entry_id!, async (token_data) => {
       result = await getEntriesPaginationOAuth(service_id, direction, pagination_updated_index, pagination_data, token_data, setting_value)
     })
   }

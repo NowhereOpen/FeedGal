@@ -20,16 +20,9 @@ export async function validateSettingValue(service_setting_id:string, setting_va
   let result!:ValidationResult
 
   if(is_oauth) {
-    try {
-      const token_data = await oauth_access_token_storage.getTokenData(service_id, oauth_connected_user_entry_id)
-      await refreshTokenIfFail(service_id, token_data, async () => {
-        result = await validateSettingValueOAuth(service_id, token_data, setting_value)
-      })
-    }
-    catch(e) {
-      console.log(e)
-      throw e
-    }
+    await refreshTokenIfFail(service_id, oauth_connected_user_entry_id, async (token_data) => {
+      result = await validateSettingValueOAuth(service_id, token_data, setting_value)
+    })
   }
   else {
     result = await validateSettingValueNonOAuth(service_id, setting_value)

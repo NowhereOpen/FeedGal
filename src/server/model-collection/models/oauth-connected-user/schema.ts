@@ -13,6 +13,13 @@ export const schema = {
   is_signup: { type: Boolean, default: false },
   error_with_access_token: { type: Boolean, default: false },
   
-  // 2019-12-03 10:58 Just because
-  user_info_cache: Object
+  /**
+   * 2020-05-14 16:17
+   * 
+   * REQUIRED. Eg, Github requires `username` to make request and storing the
+   * information on DB would be VERY helpful.
+   * 
+   * 2019-12-03 10:58 Just because
+   */
+  user_info: Object
 }

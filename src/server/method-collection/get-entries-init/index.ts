@@ -45,8 +45,8 @@ async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<GystE
 
   let result!:LoaderModuleOutput
   if(is_oauth) {
-    const token_data = param.token_data
-    await refreshTokenIfFail(service_id, token_data, async () => {
+    const oauth_connected_user_entry_id = param.oauth_connected_user_entry_id!
+    await refreshTokenIfFail(service_id, oauth_connected_user_entry_id, async (token_data) => {
       result = await getEntriesInitOAuth(service_id, token_data, setting_value)
     })
   }
@@ -97,7 +97,7 @@ async function flattenServiceSettings(user_id:string):Promise<FlattenedLoaderPar
           flattened_entries.push({
             service_id,
             service_setting_id: service_setting_entry_id,
-            setting_value: setting_value_entry.setting_value
+            setting_value: setting_value_entry.value
           })
         })
       }

@@ -1,18 +1,18 @@
 import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
 import { getCommits } from "~/src/server/lib/loader-module-helpers/services/github"
 
-export type Param = {
-  user_name:string
-  branch_name:string
-  repo_name:string
-}
-
 export async function getEntries(
   access_token:string,
-  param:Param,
+  full_name:string,
   pagination_page?:string|number
 ):Promise<LoaderModuleOutput> {
-  const { user_name, branch_name, repo_name } = param
+  /**
+   * 2020-05-15 17:02 
+   * 
+   * Support only master branch for now.
+   */
+  const branch_name = "master"
+  const [user_name, repo_name] = full_name.split("/")
   const params:any = { sha: branch_name }
 
   if(pagination_page) {
