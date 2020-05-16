@@ -15,7 +15,6 @@ type FlattenedLoaderParam = {
   service_setting_id:string,
   setting_value_id?:string,
   setting_value?:any,
-  token_data?:any
   oauth_connected_user_entry_id?:string
 }
 
@@ -110,9 +109,7 @@ async function flattenServiceSettings(user_id:string):Promise<FlattenedLoaderPar
 
       if(is_oauth) {
         const oauth_connected_user_entry_id = await service_setting_storage.getOAuthConnectedUserEntryId(service_setting_entry_id)
-        const token_entry = oauth_access_token_storage.getAccessTokenEntry(service_id, oauth_connected_user_entry_id)
         flattened_entries.forEach(entry => {
-          entry.token_data = token_entry
           entry.oauth_connected_user_entry_id = oauth_connected_user_entry_id
         })
       }
