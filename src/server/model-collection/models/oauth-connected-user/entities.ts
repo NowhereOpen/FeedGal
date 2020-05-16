@@ -24,7 +24,7 @@ export interface IOAuthConnectedUser extends DeleteUser {
   isServiceAlreadyConnected(user_id:UserId, service_id:string):Promise<boolean>
   getAllConnectedAccountsForServiceId(user_id:UserId, service_id:string):Promise<any[]>
   isServiceAccountAlreadyConnected(user_id:UserId, service_id:string, user_uid:string):Promise<boolean>
-  getSignupEntryId(service_id:string, user_uid:string):Promise<string|undefined>
+  getSignupEntry(service_id:string, user_uid:string):Promise<any>
   getEntryWithUserUid(service_id:string, user_uid:string):Promise<any>
   userConnected(service_id:string, user_uid:string):Promise<boolean>
   serviceConnected(service_id:string, user_id:UserId):Promise<boolean>

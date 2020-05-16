@@ -153,11 +153,9 @@ export class OAuthConnectedUserStorage extends MongoStorage implements IOAuthCon
     return await this.model.exists({ service_id, user_id})
   }
 
-  async getSignupEntryId(service_id:string, user_uid:string) {
+  async getSignupEntry(service_id:string, user_uid:string) {
     const result = await this.model.findOne({ service_id, service_user_uid: user_uid, is_signup: true })
-    if(result == null) return undefined
-    const entry_id = String(result!._id)
-    return entry_id
+    return result
   }
 
   async getEntryWithUserUid(service_id:string, user_uid:string) {

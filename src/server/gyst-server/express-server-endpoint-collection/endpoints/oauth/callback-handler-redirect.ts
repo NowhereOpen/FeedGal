@@ -164,12 +164,15 @@ export class RedirectHandleOAuthCallbackRequestHandler extends SessionRequestHan
         // Store stuff
         log(`A user with session (${this.req.sessionID}) is logging in with service '${this.service_id}'`)
 
-        const oauth_connected_user_entry_id = <string> await oauth_connected_user_storage!.getSignupEntryId(this.service_id, this.user_info.user_uid)
+        const oauth_connected_user_entry = await oauth_connected_user_storage!.getSignupEntry(this.service_id, this.user_info.user_uid)
+        const oauth_connected_user_entry_id = oauth_connected_user_entry!._id
         
         await oauth_access_token_storage!.storeTokenData(this.service_id, oauth_connected_user_entry_id, this.token_response)
 
-        log(`A user with oauth_connected_user_entry_id ('${oauth_connected_user_entry_id}') is logging in with service '${this.service_id}'`)
-        this.loginUser(oauth_connected_user_entry_id)
+        const user_id = oauth_connected_user_entry!.get("user_id")
+
+        log(`A user with user_id ('${user_id}') is logging in with service '${this.service_id}'`)
+        this.loginUser(user_id)
         
         redirect_url = UrlsGystResource.mainPage()
       }
@@ -200,7 +203,7 @@ export class RedirectHandleOAuthCallbackRequestHandler extends SessionRequestHan
  */
 
 async function isLogin(service_id:string, user_uid:string) {
-  const entry = await oauth_connected_user_storage!.getSignupEntryId(service_id, user_uid)
+  const entry = await oauth_connected_user_storage!.getSignupEntry(service_id, user_uid)
   console.log(`isLogin output:`)
   console.log(entry)
   return entry != undefined
