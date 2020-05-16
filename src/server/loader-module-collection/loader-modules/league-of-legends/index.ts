@@ -11,11 +11,14 @@ import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import { LeagueOfLegendsSettingValueValidation } from "./lib/validate-setting-value"
 
+import { setup } from "~/src/server/lib/loader-module-helpers/services/riot/lib/data-dragon"
+
 export type LeagueOfLegendsCredential = string
 
 export class LeagueOfLegendsLoaderModule extends NonOAuthLoaderModule<LeagueOfLegendsCredential> {
   constructor(api_key:LeagueOfLegendsCredential) {
     super(api_key, new ServiceInfo().getServiceInfo())
+    setup()
   }
 
   async getEntriesInit(param:NonOAuthGetEntriesInitParam) {
