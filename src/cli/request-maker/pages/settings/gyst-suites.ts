@@ -23,6 +23,10 @@ export async function deleteServiceSetting(service_setting_id:string) {
   return axios.delete(UrlsGystResource.deleteServiceSetting(service_setting_id))
 }
 
+export async function getGoogleCalendars(service_setting_id:string) {
+  return axios.get(UrlsGystResource.getGoogleCalendars(service_setting_id))
+}
+
 /**
  * ============================================
  * SettingValue

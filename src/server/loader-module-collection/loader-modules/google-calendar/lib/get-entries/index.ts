@@ -1,6 +1,6 @@
 import moment from "moment"
 
-import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
+import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
 import { _getEventsWithinRange } from "~/src/server/lib/loader-module-helpers/services/google-calendar"
 
 type DateRange = { from: any, to: any }

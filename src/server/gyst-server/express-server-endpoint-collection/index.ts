@@ -16,6 +16,7 @@ import { DeleteUserRequestHandler } from "./endpoints/user/user-delete"
 import { DeleteServiceSettingRequestHandler } from "./endpoints/service-setting/delete-service-setting"
 import { PatchUpdateOAuthAccountRequestHandler } from "./endpoints/service-setting/patch-update-oauth-account"
 import { PostCreateNewServiceSettingRequestHandler } from "./endpoints/service-setting/post-create-new-service-setting"
+import { GetGoogleCalendarsRequestHandler } from "./endpoints/service-setting/get-google-calendars"
 
 import { DeleteSettingValueRequestHandler } from "./endpoints/setting-value/delete-setting-value"
 import { PatchUpdateSettingValueRequestHandler } from "./endpoints/setting-value/patch-update-setting-value"
@@ -34,6 +35,7 @@ export function setup(app:Application) {
   app.delete(UrlsGystResource.deleteServiceSetting(":service_setting_id"), new DeleteServiceSettingRequestHandler().handler())
   app.patch(UrlsGystResource.updateServiceSettingOAuthAccount(":service_setting_id"), new PatchUpdateOAuthAccountRequestHandler().handler())
   app.post(UrlsGystResource.addNewServiceSetting(), new PostCreateNewServiceSettingRequestHandler().handler())
+  app.get(UrlsGystResource.getGoogleCalendars(":service_setting_id"), new GetGoogleCalendarsRequestHandler().handler())
 
   app.delete(UrlsGystResource.deleteSettingValue(":setting_value_id"), new DeleteSettingValueRequestHandler().handler())
   app.patch(UrlsGystResource.updateSettingValue(":setting_value_id"), new PatchUpdateSettingValueRequestHandler().handler())

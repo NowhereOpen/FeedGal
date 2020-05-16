@@ -97,6 +97,10 @@ export class UrlsGystResource {
     return `/settings/setting-value/${setting_value_id}/delete`
   }
 
+  static getGoogleCalendars(service_setting_id:string) {
+    return `/settings/service-setting/${service_setting_id}/google-calendars`
+  }
+
   /**
    * ======================================
    * // END service setting and setting value

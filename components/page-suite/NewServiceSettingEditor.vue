@@ -34,7 +34,7 @@ div
               )
               div
                 span.mr-2 Connect New Account with
-                v-btn {{ selected_service.oauth.service_name }}
+                v-btn(:href="redirectUrl()") {{ selected_service.oauth.service_name }}
 
     v-card-actions
       div
