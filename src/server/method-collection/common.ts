@@ -55,11 +55,20 @@ class RefreshTokenIfFailTask extends _RefreshTokenIfFailTask {
     return token_data
   }
 
-  async onRefreshToken(refresh_token_response:any) {
+  /**
+   * @param refresh_token_response 2020-05-19 01:33 Axios response. The returned value of cred module refresh token
+   */
+  async onRefreshToken(refresh_token_response:any, token_data:any) {
+    let updated_token_data = refresh_token_response
+    if(["google", "reddit", "twitch"].includes(this.oauth_service_id)) {
+      const { data } = refresh_token_response
+      updated_token_data = Object.assign(token_data, data)
+    }
+    
     await oauth_access_token_storage.refreshAccessToken(
       this.oauth_service_id,
       this.oauth_connected_user_entry_id,
-      refresh_token_response
+      updated_token_data
     )
   }
 }

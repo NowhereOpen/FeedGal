@@ -4,7 +4,20 @@ import { LoaderModuleOutput, Entry } from "~/src/server//loader-module-collectio
 import { getLiveFollowedChannelsByUserId, TwitchCred } from "~/src/server/lib/loader-module-helpers/services/twitch"
 
 export async function getEntries(twitch_cred:TwitchCred, pagiantion_index:number):Promise<LoaderModuleOutput> {
-  let live_channels = pagiantion_index > 0 ? [] : await getLiveFollowedChannelsByUserId(twitch_cred)
+  let live_channels:any[]
+  try {
+    live_channels = pagiantion_index > 0 ? [] : await getLiveFollowedChannelsByUserId(twitch_cred)
+  }
+  catch(e) {
+    /**
+     * 2020-05-19 00:22
+     * 
+     * Throws `Error: cyclic dependency detected` regarding bson and mongodb. I don't know where they
+     * are coming from. The errors are related to invalid access token.
+     */
+    console.log(e)
+    throw e
+  }
 
   return {
     entries: live_channels.map(formatEntries),
