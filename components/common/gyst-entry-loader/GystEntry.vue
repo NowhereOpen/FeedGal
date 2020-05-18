@@ -59,6 +59,9 @@ div
           v-row(no-gutters)
             v-col(cols="auto")
               div {{ gystEntry.datetime_info }}
+            v-spacer
+            v-col(cols="auto")
+              div {{ paginationIndex }}
         
 </template>
 
@@ -69,6 +72,12 @@ import { Prop, Vue, Component } from "nuxt-property-decorator"
 @Component
 export default class GystEntry extends Vue {
   @Prop() gystEntry:any
+  /**
+   * 2020-05-18 14:51
+   * Not a gyst entry property. This is included in the "gyst entry response", and not available to
+   * "gyst entry".
+   */
+  @Prop() paginationIndex!:number
 
   is_collapsed = false
 

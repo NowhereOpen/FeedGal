@@ -6,17 +6,8 @@ div(:style="{ width: '1000px', margin: '0px' }")
         GystEntry(
           :style="{ width: '100%' }"
           :gyst-entry="gystEntryWrapper.entry"
+          :pagination-index="gystEntryWrapper.pagination_index"
         )
-
-      v-row
-        v-col(
-          @click="is_gyst_user = !is_gyst_user"
-          auto
-        )
-          div(v-if="is_gyst_user == true") Gyst User
-          div(v-if="is_gyst_user == false") This user is not a gyst user
-        v-col(auto)
-          div {{ gystEntryWrapper.pagination_index }}
 
       //- v-row.footer-container(no-gutters)
       //-   v-col.mr-2(cols="auto")
@@ -54,17 +45,5 @@ import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-e
 })
 export default class GystEntryWrapper extends Vue {
   @Prop() gystEntryWrapper!:GystEntryWrapperType
-  is_comment = false
-  is_gyst_user = true
-
-  is_saving_to_my_post = false
-
-  async onClickToMyPost() {
-    this.is_saving_to_my_post = true
-    await requestMaker.gyst.saveToggleToMyPost(this.gystEntryWrapper.gyst_entry)
-    this.$nextTick(() => {
-      this.is_saving_to_my_post = false
-    })
-  }
 }
 </script>
