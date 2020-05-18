@@ -79,7 +79,8 @@ function getTrello() {
 }
 
 function getTwitch() {
-  const instance = new TwitchLoaderModule()
+  const client_id = service_credentials_reader.getClientId("twitch")
+  const instance = new TwitchLoaderModule(client_id)
   return instance
 }
 

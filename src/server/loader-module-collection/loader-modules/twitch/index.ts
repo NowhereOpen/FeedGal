@@ -12,15 +12,23 @@ import { ServiceInfo } from "./lib/service-info"
 import {  } from "./lib/validate-setting-value"
 
 export class TwitchLoaderModule extends OAuthBaseLoaderModule {
-  constructor() {
-    super(undefined, new ServiceInfo().getServiceInfo())
+  constructor(client_id:string) {
+    super(client_id, new ServiceInfo().getServiceInfo())
   }
 
   async getEntriesInit(param:OAuthGetEntriesInitParam) {
-    return getEntries(param.token_data.access_token, 0)
+    const cred = {
+      access_token: param.token_data.access_token,
+      client_id: this.static_credential_data
+    }
+    return getEntries(cred, 0)
   }
 
   async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam) {
+    const cred = {
+      access_token: param.token_data.access_token,
+      client_id: this.static_credential_data
+    }
     return getEntries(param.token_data.access_token, param.pagination_data.index)
   }
 }
