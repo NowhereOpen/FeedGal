@@ -30,7 +30,16 @@ export async function getEntriesInit(
   else {
     await Promise.all(
       parameters.map(async entry => {
-        const entry_response = await getEntriesInitWithParam(entry)
+        let entry_response:GystEntryInitResponseSuccess
+        try {
+          entry_response = await getEntriesInitWithParam(entry)
+        }
+        catch(e) {
+          console.error(e)
+          console.error(`An error occurred while loading entry:`)
+          console.error(entry)
+          return
+        }
         return cb(entry_response)
       })
     )

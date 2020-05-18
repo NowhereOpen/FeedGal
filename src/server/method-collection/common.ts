@@ -56,7 +56,7 @@ class RefreshTokenIfFailTask extends _RefreshTokenIfFailTask {
   }
 
   async onRefreshToken(refresh_token_response:any) {
-    oauth_access_token_storage.refreshAccessToken(
+    await oauth_access_token_storage.refreshAccessToken(
       this.oauth_service_id,
       this.oauth_connected_user_entry_id,
       refresh_token_response
