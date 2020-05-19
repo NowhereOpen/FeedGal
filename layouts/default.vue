@@ -18,27 +18,12 @@
       
       v-spacer
 
-      v-btn(
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      )
-        v-icon mdi-menu
+      AuthWidget
         
     v-content
       v-container
         nuxt
 
-    v-navigation-drawer(
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    )
-      v-list
-        v-list-item(@click.native="right = !right")
-          v-list-item-action
-            v-icon(light) mdi-menu
-          v-list-item-title Switch drawer (click me)
     
     v-footer(
       :fixed="fixed"
@@ -52,7 +37,11 @@
 import { Component, Vue } from "nuxt-property-decorator"
 import { Options as VuetifyOption } from "@nuxtjs/vuetify"
 
-@Component
+import AuthWidget from "~/components/layouts/AuthWidget.vue"
+
+@Component({
+  components: { AuthWidget }
+})
 export default class DefaultLayout extends Vue {
   clipped = true
   fixed = false
@@ -74,10 +63,6 @@ export default class DefaultLayout extends Vue {
     this.cur_link = this.links.find(link => {
       return link.href.startsWith(this.$route.path)
     })
-  }
-
-  mounted() {
-
   }
 
   onTitleClick() {
