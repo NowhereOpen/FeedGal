@@ -10,7 +10,7 @@ export async function login(login_form:any) {
 }
 
 export async function logout() {
-  return await axios.get(UrlsGystResource.logout())
+  return await axios.post(UrlsGystResource.logout())
 }
 
 export async function deleteUser() {
