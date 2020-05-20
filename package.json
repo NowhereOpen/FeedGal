@@ -47,7 +47,7 @@
     "yaml": "^1.7.2"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "^0.3.4",
+    "@nuxt/typescript-build": "^1.0.0",
     "@nuxtjs/vuetify": "^1.0.0",
     "@types/cors": "^2.8.6",
     "@types/express-session": "^1.15.15",

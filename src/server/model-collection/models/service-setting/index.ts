@@ -58,7 +58,7 @@ export class ServiceSettingStorage extends MongoStorage implements IServiceSetti
       {
         $bit: {
           // Toggles value using `xor` and `Int32`
-          is_disabled: { xor: new Int32(1) }
+          is_disabled: { xor: <number> new Int32(1) }
         }
       },
       { upsert: true }

@@ -28,12 +28,18 @@ export async function setup(root_to_nuxt_config_fp:string):Promise<NuxtSetupRetu
   // Init Nuxt.js
   nuxt = new Nuxt(config)
 
+  /**
+   * 2020-05-20 12:14
+   * `await nuxt.ready()` used to be in `else` statement after `if(config.dev)` but this was
+   * updated in the recent nuxt app template created with `npx create-nuxt-app`. Without
+   * this the nuxt app wasn't able to recognize ts files in `/store`. It works now with this
+   * one line code change.
+   */
+  await nuxt.ready()
   // Build only in dev mode
   if (config.dev) {
     const builder = new Builder(nuxt)
     await builder.build()
-  } else {
-    await nuxt.ready()
   }
 
   const { host: _host, port: _port } = nuxt.options.server

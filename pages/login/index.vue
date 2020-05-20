@@ -58,7 +58,6 @@ export default class LoginPage extends Vue {
 
   mounted() {
     console.log(`Login page mounted hook. is_logged_in (${this.is_logged_in})`)
-    console.log(this.$parent)
 
     this.handleMessage()
 
