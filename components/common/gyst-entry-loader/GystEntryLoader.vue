@@ -75,7 +75,6 @@ export default class GystEntryLoader extends Vue {
 
     ;(<Pagination> this.$refs["pagination"]).handlePaginationCb = this.handlePagination
 
-    console.log("gyst entry loader MOUNTED")
     this.setupWSClient()
   }
 
@@ -94,7 +93,6 @@ export default class GystEntryLoader extends Vue {
    * what it needs.
    */
   loadInitGystEntries() {
-    console.log("gyst entry loader loadInitGystEntries")
     this.gyst_loader.loadInitEntries()
   }
 
@@ -115,7 +113,6 @@ export default class GystEntryLoader extends Vue {
         }
       })
       this.loaded_gyst_entry_wrappers = this.loaded_gyst_entry_wrappers.concat(gyst_wrappers)
-      console.log(this.loaded_gyst_entry_wrappers)
     }
   }
 
@@ -156,7 +153,6 @@ export default class GystEntryLoader extends Vue {
     }
 
     this.gyst_loader.setup()
-    console.log("End of setupWSClient")
   }
 
   async handlePagination() {

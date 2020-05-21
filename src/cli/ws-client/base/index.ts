@@ -29,6 +29,6 @@ export abstract class WSClient {
   abstract getPaginationReqData(direction:PaginationDirection):any
   loadEntriesWithPagination(direction:PaginationDirection) {
     const pagination_req_data = this.getPaginationReqData(direction)
-    this.socket!.emit(`${this.message_prefix}-with-pagination`, { direction, pagination_req_data })
+    this.socket!.emit(`${this.message_prefix}-pagination`, { direction, pagination_req_data })
   }
 }

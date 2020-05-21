@@ -6,8 +6,9 @@ import { oauth_connected_user_storage } from "~/src/server/model-collection/mode
 
 export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHandler {
   async handleImpl() {
-    const target_service_id:null|string = this.req.service_id
     const services_pagination_req_data:ServicePaginationReqParam[] = this.req.pagination_req_data
+
+    console.log("hi")
 
     const direction = this.req.direction
 
@@ -28,6 +29,8 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
         return true
       })
     )
+
+    console.log("ownerships", ownerships)
 
     if(ownerships.every(entry => entry == true) == false) {
       // Something weird happened on the client side.

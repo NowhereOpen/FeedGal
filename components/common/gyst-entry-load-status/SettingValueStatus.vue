@@ -41,7 +41,7 @@ export default class SettingValueStatus extends Loadable {
   }
 
   handleDataResponse(response:GystEntryResponseSuccess) {
-    const new_entries_total = response.gyst_entries.length
+    const new_entries_total = response.entries.length
 
     this.total_loaded += new_entries_total
 

@@ -1,4 +1,10 @@
-import { GystEntryInitResponseSuccess } from "~/src/common/types/gyst-entry"
+import { 
+  GystEntryResponse,
+  GystEntryResponseSuccess,
+  GystEntryResponseError,
+  GystEntryResponseErrorDetails,
+  GystEntryResponseGeneralError,
+} from "~/src/common/types/gyst-entry"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
@@ -20,25 +26,65 @@ type FlattenedLoaderParam = {
 
 export async function getEntriesInit(
   user_id:string,
-  cb:(data:GystEntryInitResponseSuccess) => Promise<void>
+  cb:(data:GystEntryResponse) => Promise<void>
 ) {
   const parameters:FlattenedLoaderParam[] = await flattenServiceSettings(user_id)
 
   if(parameters.length == 0) {
+    const response:GystEntryResponseGeneralError = {
+      error: {
+        name: "NO_SERVICE_SETTINGS",
+        message: "The selected Gyst suite has no service settings. Couldn't load any entries.",
+        data: {}
+      }
+    }
 
+    return cb(response)
   }
   else {
     await Promise.all(
       parameters.map(async entry => {
-        let entry_response:GystEntryInitResponseSuccess
+        let entry_response:GystEntryResponse
         try {
           entry_response = await getEntriesInitWithParam(entry)
         }
         catch(e) {
-          console.error(e)
-          console.error(`An error occurred while loading entry:`)
-          console.error(entry)
-          return
+          const is_known_error = ["OAUTH_CONNECTED_USER_NOT_EXIST", "INVALID_SETTING_VALUE", "ERROR_ON_REFRESH_TOKEN"].includes(e.name)
+          let error_detail:GystEntryResponseErrorDetails
+          if(is_known_error) {
+            /**
+             * 2020-03-21 22:39
+             * `response.error = e` doesn't set `response.error.message`
+             * when `e` is an error created with `new Error("Some message")`
+             * for some reason. So have to assign each property individually.
+             */
+            error_detail = {
+              name: e.name,
+              message: e.message,
+              data: e.data
+            }
+          }
+          else {
+            error_detail = {
+              name: "DEV_FAULT",
+              message: "The developer did something wrong.",
+              data: {
+                error: {
+                  name: e.name,
+                  message: e.message
+                }
+              }
+            }
+          }
+
+          entry_response = <GystEntryResponseError> {
+            service_id: entry.service_id,
+            oauth_connected_user_entry_id: entry.oauth_connected_user_entry_id,
+            setting_value: entry.setting_value,
+            service_setting_id: entry.service_setting_id,
+            setting_value_id: entry.setting_value_id,
+            error: error_detail
+          }
         }
         return cb(entry_response)
       })
@@ -46,7 +92,7 @@ export async function getEntriesInit(
   }
 }
 
-async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<GystEntryInitResponseSuccess> {
+async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<GystEntryResponseSuccess> {
   const service_id = param.service_id
   const is_oauth = getServiceInfo(service_id).is_oauth
   const setting_value = param.setting_value
@@ -62,7 +108,7 @@ async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<GystE
     result = await getEntriesInitNonOAuth(service_id, setting_value)
   }
 
-  const response:GystEntryInitResponseSuccess = {
+  const response:GystEntryResponseSuccess = {
     service_id,
     service_setting_id: param.service_setting_id,
     setting_value_id: param.setting_value_id,
@@ -105,6 +151,7 @@ async function flattenServiceSettings(user_id:string):Promise<FlattenedLoaderPar
           flattened_entries.push({
             service_id,
             service_setting_id: service_setting_entry_id,
+            setting_value_id: setting_value_entry._id,
             setting_value: setting_value_entry.value
           })
         })

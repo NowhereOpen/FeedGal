@@ -72,7 +72,6 @@ export type PaginationReqData = PaginationReqDataError | PaginationReqDataSucces
 export type ServicesPaginationReqData = PaginationReqData[]
 
 export type GystEntryResponseGeneralError = {
-  gyst_suite_id:string,
   error: GystEntryResponseErrorDetails
 }
 
@@ -98,12 +97,6 @@ export type GystEntryPaginationResponseError = GystEntryResponseSearchableKeys &
 }
 
 export type GystEntryPaginationResponse = GystEntryPaginationResponseSuccess | GystEntryPaginationResponseError
-
-export type GystEntryInitResponseSuccess = GystEntryResponseBase & {
-  entries:Entry[]
-  pagination_data:PaginationData
-  service_response?: any
-}
 
 /**
  * 2020-05-05 09:45 

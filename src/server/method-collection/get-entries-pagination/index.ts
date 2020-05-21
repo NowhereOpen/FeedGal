@@ -1,4 +1,9 @@
-import { GystEntryPaginationResponseSuccess, ServicePaginationReqParam } from "~/src/common/types/gyst-entry"
+import {
+  GystEntryPaginationResponse,
+  GystEntryPaginationResponseSuccess,
+  GystEntryPaginationResponseError,
+  ServicePaginationReqParam
+} from "~/src/common/types/gyst-entry"
 
 import {
   getServiceInfo,
@@ -18,11 +23,11 @@ import { refreshTokenIfFail } from "../common"
 export async function getEntriesPagination(
   direction:"new"|"old",
   services_pagination_req_data:ServicePaginationReqParam[],
-  cb:(data:GystEntryPaginationResponseSuccess) => Promise<void>
+  cb:(data:GystEntryPaginationResponse) => Promise<void>
 ) {
   await Promise.all(
     services_pagination_req_data.map(async (service_pagination_req_param:ServicePaginationReqParam) => {
-      let response!:GystEntryPaginationResponseSuccess
+      let response!:GystEntryPaginationResponse
       if("error" in service_pagination_req_param) {
         // response = await handlePaginationErrorData(user_id, direction, pagination_data)
       }

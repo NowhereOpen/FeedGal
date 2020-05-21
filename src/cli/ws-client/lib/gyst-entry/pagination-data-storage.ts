@@ -24,7 +24,7 @@ export class PaginationDataStorage {
     }
     else {
       const data = _.cloneDeep(response)
-      delete data.gyst_entries
+      delete data.entries
       delete data.service_response
 
       this.services_pagination_req_data.push(data)
