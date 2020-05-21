@@ -74,6 +74,10 @@ export default class NewServiceSettingEditor extends Vue {
   selected_service:ServiceInfo|null = null
   selected_oauth_account_id:string|null = ""
 
+  mounted() {
+    this.service_infos = this.$store.state["page-suite"].service_setting_editor.service_infos
+  }
+
   loadServiceInfos(service_infos:ServiceInfo[]) {
     this.service_infos = service_infos
   }

@@ -2,7 +2,7 @@
 div
   div.title Load status
   div(
-    v-for="service_setting of service_settings"
+    v-for="service_setting of load_status"
   )
     ServiceSettingStatus(
       ref="service-setting-status"
@@ -11,7 +11,7 @@ div
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
+import { Vue, Component, State } from "nuxt-property-decorator"
 
 import ServiceSettingStatus from "./ServiceSettingStatus.vue"
 
@@ -32,15 +32,7 @@ import { Loadable } from "~/src/cli/gyst-entry-load-status/base"
   }
 })
 export default class GystEntryLoadStatus extends Loadable {
-  service_settings:ServiceSetting[] = []
-
-  resetLoadStatus() {
-    this.service_settings.splice(0)
-  }
-
-  loadLoadStatus(service_settings:ServiceSetting[]) {
-    this.service_settings = service_settings
-  }
+  @State(state => state['page-main'].load_status) load_status!:ServiceSetting[]
 
   startLoading() {
     this.getServiceSettingStatusComponents().forEach(comp => {
@@ -52,6 +44,9 @@ export default class GystEntryLoadStatus extends Loadable {
     const service_setting = this.getServiceSettingStatusComponents().find(
       comp => comp.data._id == response.service_setting_id
     )
+
+    console.log("callServiceSettingUpdateStatus")
+    console.log(service_setting)
 
     /**
      * 2020-03-24 07:43

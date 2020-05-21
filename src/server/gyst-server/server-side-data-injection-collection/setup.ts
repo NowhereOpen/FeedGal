@@ -2,27 +2,17 @@ import * as _ from "lodash"
 import Vue from "vue"
 import VueRouter from "vue-router"
 
-import { MatchPathFunc, ServerSideDataInjection } from "./base"
+import * as gystSession from "~/src/server/gyst-server/common/session"
 
-import { MatchAllPath, SessionInfoInjection } from "./injections/match-all/inject-session-info"
-
-import { LoginPageMatchPath, LoginPageInjection } from "./injections/page-login"
-// import { MainPageMatchPath, MainPageInjection } from "./injections/page-main"
-import { SettingsGystSuitesPageMatchPath, SettingsGystSuitesPageInjection } from "./injections/page-suite"
-// import { SettingsUsersPageMatchPath, SettingsUserPageInjection } from "./injections/page-settings-user"
-import { SettingsConnectNewAccountMatchPath, SettingsConnectNewAccountPageInjection } from "./injections/page-settings-accounts"
-// import { UsersPageMatchPath, UserPageInjection } from "./injections/page-user"
-
-interface ServerSideDataInjectionClass { new(...args:any[]): ServerSideDataInjection }
-
-const collection:[MatchPathFunc, ServerSideDataInjectionClass][] = []
+import { inject as injectPageLogin } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-login/index-vuex"
+import { inject as injectPageMain } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-main/index-vuex"
+import { inject as injectPageSettingsAccounts } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-settings-accounts/index-vuex"
+import { inject as injectPageSuite } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-suite/index-vuex"
 
 /**
  * Refer to http://localhost:3030/t/getting-a-matched-path-with-nuxt/2271
  */
 export function setup(nuxt:any) {
-  setupMatchPathFunctions()
-
   const router_copy = _.cloneDeep(nuxt.options.router)
   router_copy.routes.forEach((route:any) => {
     route.component = new Vue()
@@ -42,7 +32,7 @@ export function setup(nuxt:any) {
    * for structure of renderContext
    */
   nuxt.hook('vue-renderer:ssr:context', async function(renderContext:any) {
-    const url = renderContext.url
+    const { req, url }:{ req:any, url:any } = renderContext
     const result = vue_router.resolve(url)
     const matched = result.route.matched
 
@@ -62,47 +52,40 @@ export function setup(nuxt:any) {
      */
     const matched_path = matched[0].path
 
-    await injectData(matched_path, renderContext)
+    await injectData(matched_path, req, renderContext.nuxt.state)
   })
 }
 
 /**
- * 2020-03-07 20:44
+ * 2020-05-21 16:39 
  * 
- * Should MatchPath function be included as a part of DataInjection class?
+ * Data injection is done by directly modifying the Vuex state. This is possible by passing
+ * `stateFactory: false` to vuex-module-decorators `@Module` decorator, and will have the
+ * same effect as having `const state = { ... }` instead of `const state = () => ({ ... })`.
  * 
- * The data injection doesn't use any of the url information when injecting data.
- * Even if they do, it can be retrieved from the frontend by simply calling `document.location`.
- * 
- * So, I'm not taking this appproach any further than this. Not including "match path" into the
- * DataInjection classes for now.
+ * Nuxt Vuex `nuxtServerInit` action doesn't work properly and will cause the client side to
+ * throw syntax error because it attempts to read the server side code on the client side.
  */
-function setupMatchPathFunctions() {
-  collection.push([LoginPageMatchPath, LoginPageInjection])
-  collection.push([SettingsGystSuitesPageMatchPath, SettingsGystSuitesPageInjection])
-  // collection.push([SettingsUsersPageMatchPath, SettingsUserPageInjection])
-  collection.push([SettingsConnectNewAccountMatchPath, SettingsConnectNewAccountPageInjection])
-  // collection.push([MainPageMatchPath, MainPageInjection])
-  // collection.push([UsersPageMatchPath, UserPageInjection])
-}
+async function injectData(matched_path:string, req:any, state:any) {
+  const is_logged_in = gystSession.isLoggedin(<any> req)
+  let user_id:string|undefined
+  if(is_logged_in) {
+    user_id = gystSession.getLoggedInUserId(<any> req)
+  }
 
-async function injectData(matched_path:string, renderContext:any) {
-  let not_matched = true
+  console.log(state)
 
-  await Promise.all(
-    collection.map(async ([match_path_function, DataInjection]) => {
-      const is_match = match_path_function(matched_path)
-      if(is_match) {
-        console.log(`[server-side-data-injection] Match exists for matched path '${matched_path}': ${DataInjection.name}`)
-        not_matched = false
-        const inst = new DataInjection(renderContext)
-        await inst.injectData()
-      }
-    })
-  )
-
-  if(not_matched) {
-    console.log(`[server-side-data-injection] No injection module exists for matched_path ${matched_path}`)
-    return
+  // Page handler
+  if(matched_path == "" && is_logged_in) {
+    await injectPageMain(state["page-main"], user_id!)
+  }
+  else if(matched_path == "/login") {
+    await injectPageLogin(state["page-login"], is_logged_in, user_id)
+  }
+  else if(matched_path == "/suite" && is_logged_in) {
+    await injectPageSuite(state["page-suite"], user_id!)
+  }
+  else if(matched_path == "/settings/accounts" && is_logged_in) {
+    await injectPageSettingsAccounts(state["page-settings-accounts"], user_id!)
   }
 }

@@ -38,9 +38,6 @@ import * as requestMaker from "~/src/cli/request-maker"
   components: { GystEntryLoader, GystEntryLoadStatus }
 })
 export default class IndexPage extends Vue {
-  // Injected on server side
-  service_settings:ServiceSetting[] = []
-
   selected_gyst_suite:GystSuite = <any> null
 
   controller:any = {
@@ -53,11 +50,7 @@ export default class IndexPage extends Vue {
   }
 
   async asyncMounted() {
-    ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).loadLoadStatus(this.service_settings)
-    this.$nextTick(() => {
-      ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).startLoading()
-    })
-    
+    ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).startLoading()    
     ;(<GystEntryLoader> this.$refs["gyst-entry-loader"]).loadInitGystEntries()
   }
 

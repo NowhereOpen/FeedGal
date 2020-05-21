@@ -17,13 +17,12 @@ div
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator"
+import { Component, Vue, State } from "nuxt-property-decorator"
 import { UrlsGystResource } from "~/src/common/urls"
 
 @Component
 export default class ConnectNewAccountPage extends Vue {
-  // Injected server side
-  oauth_infos:any[] = []
+  @State(state => state['page-settings-accounts'].oauth_infos) oauth_infos!:any[]
 
   mounted() {
     this.oauth_infos = this.oauth_infos.map(oauth_info => {

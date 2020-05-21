@@ -38,20 +38,6 @@ import * as requestMaker from "~/src/cli/request-maker"
   components: { GystSuite, NewServiceSettingEditor }
 })
 export default class ServiceSettingPage extends Vue {
-  // For injection only. Use `GystSuite.loadServiceSettings` to load after init loading.
-  service_settings:ServiceSetting[] = []
-
-  // Used in NewServiceSettingEditor
-  service_setting_editor = {
-    service_infos: []
-  }
-
   is_service_setting_editor_open = false
-
-  mounted() {    
-    ;(<GystSuite>this.$refs["gyst-suite"]).loadServiceSettings(this.service_settings)
-    ;(<GystSuite>this.$refs["gyst-suite"]).loadServiceInfos(this.service_setting_editor.service_infos)
-    ;(<NewServiceSettingEditor>this.$refs["new-service-setting-editor"]).loadServiceInfos(this.service_setting_editor.service_infos)
-  }
 }
 </script>

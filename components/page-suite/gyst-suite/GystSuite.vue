@@ -44,10 +44,10 @@ import * as requestMaker from "~/src/cli/request-maker"
 })
 export default class GystSuite extends Vue {
   service_settings:any[] = []
-  service_infos:ServiceInfo[] = []
 
   mounted() {
     this.setupServiceSettingEventBus() 
+    this.service_settings = this.$store.state["page-suite"].service_settings
   }
 
   /**
@@ -69,10 +69,6 @@ export default class GystSuite extends Vue {
 
   loadServiceSettings(service_settings:ServiceSettingType[]) {
     this.service_settings = service_settings
-  }
-
-  loadServiceInfos(service_infos:ServiceInfo[]) {
-    this.service_infos = service_infos
   }
 
   async onRemoveServiceSetting(service_setting_id:string) {

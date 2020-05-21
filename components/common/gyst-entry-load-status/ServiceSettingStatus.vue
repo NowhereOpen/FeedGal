@@ -77,7 +77,7 @@ export default class ServiceSettingStatus extends Loadable {
   }
 
   handleDataResponse(response:GystEntryResponseSuccess) {
-    const new_entries_total = response.gyst_entries.length
+    const new_entries_total = response.entries.length
 
     if(this.data.uses_setting_value) {
       this.callSettingValueUpdateStatus(response)

@@ -33,7 +33,7 @@ div
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
+import { Vue, Component, State } from "nuxt-property-decorator"
 
 import OAuthLogin from "~/components/page-login/oauth-login/OAuthLogin.vue"
 
@@ -43,10 +43,9 @@ import * as requestMaker from "~/src/cli/request-maker"
   components: { OAuthLogin }
 })
 export default class LoginPage extends Vue {
-  // Injected server side
-  is_logged_in:boolean = false
-  user_info:any = null
-  oauth_infos:any[] = <any> null
+  @State(state => state.session.is_logged_in) is_logged_in!:boolean
+  @State(state => state['page-login'].user_info) user_info!:any
+  @State(state => state['page-login'].oauth_infos) oauth_infos!:any[]
 
   // Display message
   messages = {
