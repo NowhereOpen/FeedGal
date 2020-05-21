@@ -45,9 +45,6 @@ export default class GystEntryLoadStatus extends Loadable {
       comp => comp.data._id == response.service_setting_id
     )
 
-    console.log("callServiceSettingUpdateStatus")
-    console.log(service_setting)
-
     /**
      * 2020-03-24 07:43
      * 

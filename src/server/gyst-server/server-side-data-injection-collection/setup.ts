@@ -4,10 +4,10 @@ import VueRouter from "vue-router"
 
 import * as gystSession from "~/src/server/gyst-server/common/session"
 
-import { inject as injectPageLogin } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-login/index-vuex"
-import { inject as injectPageMain } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-main/index-vuex"
-import { inject as injectPageSettingsAccounts } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-settings-accounts/index-vuex"
-import { inject as injectPageSuite } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-suite/index-vuex"
+import { inject as injectPageLogin } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-login"
+import { inject as injectPageMain } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-main"
+import { inject as injectPageSettingsAccounts } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-settings-accounts"
+import { inject as injectPageSuite } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-suite"
 
 /**
  * Refer to http://localhost:3030/t/getting-a-matched-path-with-nuxt/2271
@@ -72,8 +72,6 @@ async function injectData(matched_path:string, req:any, state:any) {
   if(is_logged_in) {
     user_id = gystSession.getLoggedInUserId(<any> req)
   }
-
-  console.log(state)
 
   // Page handler
   if(matched_path == "" && is_logged_in) {
