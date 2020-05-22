@@ -7,9 +7,6 @@ div
     @load-pagination-gyst-entry="onLoadPaginationGystEntry"
   )
     template(#side-panel)
-      v-checkbox(
-        label="Collapse old entries"
-      )
       div.mt-2
         GystEntryLoadStatus(
           ref="gyst-entry-load-status"
