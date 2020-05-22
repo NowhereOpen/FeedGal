@@ -24,11 +24,11 @@ export class TwitchLoaderModule extends OAuthBaseLoaderModule {
     return getEntries(cred, 0)
   }
 
-  async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam) {
+  async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam, direction:PaginationDirection, pagination_updated_index:number) {
     const cred = {
       access_token: param.token_data.access_token,
       client_id: this.static_credential_data
     }
-    return getEntries(param.token_data.access_token, param.pagination_data.index)
+    return getEntries(cred, pagination_updated_index)
   }
 }

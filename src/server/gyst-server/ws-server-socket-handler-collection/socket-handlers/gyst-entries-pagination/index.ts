@@ -30,8 +30,6 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
       })
     )
 
-    console.log("ownerships", ownerships)
-
     if(ownerships.every(entry => entry == true) == false) {
       // Something weird happened on the client side.
     }

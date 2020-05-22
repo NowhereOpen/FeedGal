@@ -42,11 +42,12 @@ import * as _ from "lodash"
 import * as requestMaker from "~/src/cli/request-maker"
 import {
   GystEntryResponseGeneralError,
-  GystEntryResponseSuccess,
-  GystEntryResponseError,
   ServicesPaginationReqData,
   PaginationData,
   GystEntryResponse,
+  GystEntryResponseSuccess,
+  GystEntryPaginationResponse,
+  GystEntryPaginationResponseSuccess,
   PaginationReqData
 } from "~/src/common/types/gyst-entry"
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
@@ -101,7 +102,7 @@ export default class GystEntryLoader extends Vue {
     this.pagination_data.splice(0)
   }
 
-  loadGystEntries(response:GystEntryResponseSuccess|GystEntryResponseError) {
+  loadGystEntries(response:GystEntryResponseSuccess|GystEntryPaginationResponseSuccess) {
     if("error" in response) {
       
     }
@@ -141,14 +142,14 @@ export default class GystEntryLoader extends Vue {
       }
       else {
         this.$emit("loaded", response)
-        this.loadGystEntries(<GystEntryResponseSuccess|GystEntryResponseError> response)
+        this.loadGystEntries(<GystEntryResponseSuccess> response)
         this.gyst_loader.pagination_data_storage.loadWithInit(response)
       }
     }
 
-    this.gyst_loader.onGystEntriesWithPaginationPostCb = (response:GystEntryResponse) => {
+    this.gyst_loader.onGystEntriesWithPaginationPostCb = (response:GystEntryPaginationResponse) => {
       this.$emit("loaded", response)
-      this.loadGystEntries(<GystEntryResponseSuccess|GystEntryResponseError> response)
+      this.loadGystEntries(<GystEntryPaginationResponseSuccess> response)
       this.gyst_loader.pagination_data_storage.loadWithPagination(response)
     }
 

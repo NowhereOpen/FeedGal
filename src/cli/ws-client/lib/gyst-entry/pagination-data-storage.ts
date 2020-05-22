@@ -5,6 +5,7 @@ import {
   GystEntryResponseSuccess,
   GystEntryResponseError,
   GystEntryResponse,
+  GystEntryPaginationResponse,
   PaginationReqData,
   PaginationReqDataSuccess,
   PaginationReqDataError,
@@ -31,7 +32,7 @@ export class PaginationDataStorage {
     }
   }
 
-  public loadWithPagination(response:GystEntryResponse) {
+  public loadWithPagination(response:GystEntryPaginationResponse) {
     if("error" in response) {
 
     }
@@ -43,6 +44,7 @@ export class PaginationDataStorage {
         )
       })
 
+      // Update a value of an object
       const target_req_data = this.services_pagination_req_data[target_index]
 
       if("error" in target_req_data) {

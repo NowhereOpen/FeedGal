@@ -63,7 +63,12 @@ export abstract class BaseLoaderModule<
     const pagination_value = param.pagination_data.options[direction]
     return this.getEntriesPaginationImpl(pagination_value, param, direction, pagination_updated_index)
   }
-  abstract getEntriesPaginationImpl(pagination_value:any, param:GetEntriesPaginationParamType, direction:PaginationDirection, pagination_updated_index:number):Promise<LoaderModuleOutput>
+  abstract getEntriesPaginationImpl(
+    pagination_value:any,
+    param:GetEntriesPaginationParamType,
+    direction:PaginationDirection,
+    pagination_updated_index:number
+  ):Promise<LoaderModuleOutput>
   
   /**
    * 2020-05-04 12:05

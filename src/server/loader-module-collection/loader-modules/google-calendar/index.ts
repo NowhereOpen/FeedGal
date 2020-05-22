@@ -28,7 +28,11 @@ export class GoogleCalendarLoaderModule extends OAuthBaseLoaderModule {
 
   async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam) {
     const access_token = param.token_data["access_token"]
-    return getEntries(access_token, param.setting_value, pagination_value)
+    const date_range = {
+      from: moment(pagination_value.from),
+      to: moment(pagination_value.to)
+    }
+    return getEntries(access_token, param.setting_value, date_range)
   }
 
   async validateSettingValue(param:OAuthValidateSettingValueParam) {
