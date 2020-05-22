@@ -21,7 +21,6 @@ import * as requestMaker from "~/src/cli/request-maker"
 
 @Component
 export default class AuthWidget extends Vue {
-  @Prop() isAnon!:boolean
   @State(state => state.session.is_logged_in) is_logged_in!:boolean
 
   async onLogoutClick() {

@@ -73,6 +73,9 @@ async function injectData(matched_path:string, req:any, state:any) {
     user_id = gystSession.getLoggedInUserId(<any> req)
   }
 
+  // Common handler
+  injectAllPage(state["session"], is_logged_in, user_id)
+
   // Page handler
   if(matched_path == "" && is_logged_in) {
     await injectPageMain(state["page-main"], user_id!)
@@ -86,4 +89,9 @@ async function injectData(matched_path:string, req:any, state:any) {
   else if(matched_path == "/settings/accounts" && is_logged_in) {
     await injectPageSettingsAccounts(state["page-settings-accounts"], user_id!)
   }
+}
+
+function injectAllPage(state:any, is_logged_in:boolean, user_id:undefined|string) {
+  state.is_logged_in = is_logged_in
+  state.user_id = user_id
 }
