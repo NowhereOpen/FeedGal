@@ -155,7 +155,6 @@ export default class ServiceSettingComp extends Vue {
     this.$emit("update-oauth-account", async (gyst_suite_id:string) => {
       try {
         const { data } = await requestMaker.settings.gyst_suites.updateServiceSettingOAuthAccount(
-          gyst_suite_id,
           this.serviceSetting._id,
           this.editor.oauth_connected_user_entry_id
         )

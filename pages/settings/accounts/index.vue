@@ -22,10 +22,11 @@ import { UrlsGystResource } from "~/src/common/urls"
 
 @Component
 export default class ConnectNewAccountPage extends Vue {
-  @State(state => state['page-settings-accounts'].oauth_infos) oauth_infos!:any[]
+  oauth_infos:any[] = []
 
   mounted() {
-    this.oauth_infos = this.oauth_infos.map(oauth_info => {
+    const _oauth_infos = this.$store.state['page-settings-accounts'].oauth_infos
+    this.oauth_infos = _oauth_infos.map((oauth_info:any) => {
       const icon_value = oauth_info.service_id
       return Object.assign(oauth_info, {
         btn_class: "btn-" + icon_value,

@@ -67,20 +67,14 @@ export default class GystSuite extends Vue {
     Object.assign(this.$root, { service_setting_event_bus })
   }
 
-  loadServiceSettings(service_settings:ServiceSettingType[]) {
-    this.service_settings = service_settings
-  }
-
   async onRemoveServiceSetting(service_setting_id:string) {
     const { data } = await requestMaker.settings.gyst_suites.deleteServiceSetting(service_setting_id)
 
-    const index = this.service_settings.findIndex(entry => entry._id == service_setting_id)
-    this.service_settings.splice(index, 1)
+    this.$store.commit("page-suite/removeServiceSetting", service_setting_id)
   }
 
   onNewServiceSetting(service_setting:ServiceSetting) {
-    this.service_settings.push(service_setting)
-    this.service_settings.sort((a,b) => a.service_name.localeCompare(b.service_name))
+    this.$store.commit("page-suite/addNewServiceSetting", service_setting)
   }
 }
 </script>

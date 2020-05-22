@@ -57,7 +57,8 @@ div
 </template>
 
 <script lang="ts">
-import { Prop, Vue, Component } from "nuxt-property-decorator"
+import { Prop, Vue, Component, State } from "nuxt-property-decorator"
+import * as _ from "lodash"
 
 import * as requestMaker from "~/src/cli/request-maker"
 import { UrlsGystResource } from "~/src/common/urls"
@@ -68,19 +69,12 @@ import { ServiceSetting } from "~/src/common/types/gyst-suite"
   components: {}
 })
 export default class NewServiceSettingEditor extends Vue {
-  service_infos:ServiceInfo[] = []
+  @State(state => state['page-suite'].service_infos) service_infos!:ServiceInfo[]
+  @State(state => state["page-suite"].service_settings) service_settings!:ServiceSetting[]
 
   selected_service_id:string|null = null
   selected_service:ServiceInfo|null = null
   selected_oauth_account_id:string|null = ""
-
-  mounted() {
-    this.service_infos = this.$store.state["page-suite"].service_setting_editor.service_infos
-  }
-
-  loadServiceInfos(service_infos:ServiceInfo[]) {
-    this.service_infos = service_infos
-  }
 
   onChooseService() {
     this.selected_service = <ServiceInfo> this.service_infos.find(service => service.service_id == this.selected_service_id)
@@ -159,12 +153,12 @@ export default class NewServiceSettingEditor extends Vue {
   }
 
   sameServiceIdExists() {
-    const service_settings = <ServiceSetting[]> <any>this.$attrs.service_settings
+    const service_settings = this.service_settings
     return service_settings.some(entry => entry.service_id == this.selected_service_id)
   }
 
   oauthAccountExists() {
-    const service_settings = <ServiceSetting[]> <any>this.$attrs.service_settings
+    const service_settings = this.service_settings
 
     const exists = service_settings.some(entry => {
       if(entry.is_oauth && entry.oauth_info!.is_connected) {

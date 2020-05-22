@@ -7,7 +7,7 @@ div
     v-container.pa-0
       v-row(no-gutters)
         v-col(cols="auto")
-          span.title Service Settings ({{ service_settings.length }})
+          span.title Service Settings ({{ getServiceSettingsLength() }})
         v-spacer
         v-col(cols="auto")
           v-btn(@click="is_service_setting_editor_open = true") Add New Service
@@ -39,5 +39,9 @@ import * as requestMaker from "~/src/cli/request-maker"
 })
 export default class ServiceSettingPage extends Vue {
   is_service_setting_editor_open = false
+
+  getServiceSettingsLength() {
+    return this.$store.state["page-suite"].service_settings.length
+  }
 }
 </script>
