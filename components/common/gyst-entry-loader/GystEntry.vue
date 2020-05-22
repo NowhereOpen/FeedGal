@@ -58,7 +58,7 @@ div
           
           v-row(no-gutters)
             v-col(cols="auto")
-              div {{ gystEntry.datetime_info }}
+              div {{ getDatetime(gystEntry.datetime_info) }}
             v-spacer
             v-col(cols="auto")
               div {{ paginationIndex }}
@@ -66,8 +66,10 @@ div
 </template>
 
 <script lang="ts">
-import * as _ from "lodash"
 import { Prop, Vue, Component } from "nuxt-property-decorator"
+import * as _ from "lodash"
+import moment from "moment"
+import humanizeDuration from "humanize-duration"
 
 @Component
 export default class GystEntry extends Vue {
@@ -97,6 +99,28 @@ export default class GystEntry extends Vue {
     const value = _.get(this.gystEntry, "resources.thumbnail_url", undefined)
     const exists = value != undefined
     return exists
+  }
+
+  getDatetime(datetime_value:any) {
+    const now = moment()
+    const dt_moment = moment(datetime_value)
+    const year = dt_moment.get("year")
+    const datetime = dt_moment.format("MMM DD, HH:mm")
+    let dt_string = ""
+    if(year != now.get("year")) {
+      dt_string += year + " "
+    }
+
+    dt_string += datetime
+
+    const from_now_ms = moment().diff(moment(datetime_value))
+    const duration = humanizeDuration(Math.abs(from_now_ms), {
+      delimiter: " ", round: true, largest: 2,
+      units: ['y', 'mo', 'd', 'h', 'm']
+    })
+    const from_now = from_now_ms > 0 ? `${duration} ago` : `in ${duration}`
+
+    return `${dt_string} (${from_now})`
   }
 }
 </script>
