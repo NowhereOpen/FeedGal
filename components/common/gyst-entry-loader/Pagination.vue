@@ -15,7 +15,7 @@ div
     )
       span Scroll to the bottom to load more entries or click
       v-btn.ml-2.manual-pagination-button(
-        @click="handlePagination"
+        @click="$emit('load-more')"
       ) Load more
 </template>
 
@@ -28,27 +28,7 @@ export default class PaginationComp extends Vue {
 
   mounted() {
     this.setPaginationOnScroll()
-    this.handlePaginationCb = async () => {
-      // throw Error("handlePaginationCb not implemented")
-      console.error("handlePaginationCb not implemented")
-
-      setTimeout(() => {
-        /**
-         * 2020-02-10 07:54
-         * 
-         * Defining this directly to `handlePaginationCb` has weird behavior where
-         * assigning a value `is_waiting_pagination` directly doesn't work but using
-         * `setIsWaitingPagination` works.
-         * 
-         * Defining `handlePaginationCb` in `mounted` works with direct assignment
-         * of value.
-         */
-        this.is_waiting_pagination = false
-      }, 1500)
-    }
   }
-
-  handlePaginationCb:() => Promise<void> = async () => {}
 
   setPaginationOnScroll() {
     window.addEventListener('scroll', () => {
@@ -58,38 +38,9 @@ export default class PaginationComp extends Vue {
        * SO post: https://stackoverflow.com/questions/9439725
        */
       if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-        this.handlePagination()
+        this.$emit("bottom")
       }
     });
-  }
-
-  async handlePagination() {
-    const container = <HTMLElement> this.$refs["pagination-container"]
-    
-    if(! this.is_waiting_pagination) {
-      this.is_waiting_pagination = true
-
-      // this.$nextTick(async () => {
-      //   window.scrollTo(0, document.body.scrollHeight)
-      // })
-
-      await this.handlePaginationCb()
-    }
-    else {
-      // This part of the logic used in test
-
-      const container = <HTMLElement> this.$refs["pagination-container"]
-
-      if(container.classList.contains("debounced")) {
-        return
-      }
-      else {
-        container.classList.add("debounced")
-        setTimeout(() => {
-          container.classList.remove("debounced")
-        }, 1000)
-      }
-    }
   }
 
   /**

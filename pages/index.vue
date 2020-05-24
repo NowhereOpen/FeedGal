@@ -88,7 +88,7 @@ export default class IndexPage extends Vue {
     
     const is_all_loaded = (<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).isAllLoaded()
     if(is_all_loaded) {
-      ;(<Pagination> (<GystEntryLoader> this.$refs["gyst-entry-loader"]).$refs["pagination"]).setIsWaitingPagination(false)
+      ;(<GystEntryLoader> this.$refs["gyst-entry-loader"]).setWaitingAllPagination(false)
     }
   }
 

@@ -19,8 +19,8 @@ type CallBacks = {
 export class GystEntryWSClient extends WSClient {
   pagination_data_storage:PaginationDataStorage = new PaginationDataStorage()
 
-  onGystEntriesPostCb:(response:GystEntryResponse) => void = () => {}
-  onGystEntriesWithPaginationPostCb:(response:GystEntryResponse) => void = () => {}
+  onGystInitEntriesPostCb:(response:GystEntryResponse) => void = () => {}
+  onGystPaginationEntriesPostCb:(response:GystEntryResponse) => void = () => {}
 
   setup() {
     super.setup()
@@ -31,11 +31,11 @@ export class GystEntryWSClient extends WSClient {
   }
 
   onGystEntriesResponse(gyst_entries:any) {
-    this.onGystEntriesPostCb(gyst_entries)
+    this.onGystInitEntriesPostCb(gyst_entries)
   }
 
   onGystEntriesWithPaginationResponse(gyst_entries:any) {
-    this.onGystEntriesWithPaginationPostCb(gyst_entries)
+    this.onGystPaginationEntriesPostCb(gyst_entries)
   }
   
   loadInitEntries() {
