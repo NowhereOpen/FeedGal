@@ -47,7 +47,7 @@ export default class IndexPage extends Vue {
   }
 
   async asyncMounted() {
-    ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).startLoading()    
+    ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).startLoading()
     ;(<GystEntryLoader> this.$refs["gyst-entry-loader"]).loadInitGystEntries()
   }
 
