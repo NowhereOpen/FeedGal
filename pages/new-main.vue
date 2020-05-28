@@ -20,7 +20,16 @@ div
         :gyst-entry-wrapper="gyst_entry_wrapper"
       )
 
-  div.pagination-container(:style="{ height: '250px'}" ref="pagination-container")
+  div.pagination-container(:style="{ height: '350px'}" ref="pagination-container")
+    div Oldest loaded: {{ oldest_loaded_datetime }}
+    div.old-entries-container(
+      v-show="oldEntriesExist()"
+    )
+      div Some entries are too old compared to the loaded entries. Click "Load old entries" to load these entries
+      v-btn(
+        @click="onClickLoadOldEntries"
+      ) Load old entries {{ getOldEntries().length }}
+
     div.pagination-waiting-container(
       v-show="is_waiting_request"
     )
@@ -35,12 +44,12 @@ div
     )
       span Scroll to the bottom to load more entries or click
       v-btn.ml-2.manual-pagination-button(
-        @click="$emit('load-more')"
+        @click="onClickLoadMore"
       ) Load more
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, getModule, State } from "nuxt-property-decorator"
+import { Vue, Component, Prop, getModule, State, Getter } from "nuxt-property-decorator"
 import io from "socket.io-client"
 
 import GystEntryWrapper from "~/components/common/gyst-entry-loader/GystEntryWrapper.vue"
@@ -67,6 +76,9 @@ import {
 export default class IndexPage extends Vue {
   @State(state => state["session"].is_logged_in) is_logged_in!:boolean
   @State(state => state["loader"].loaded_entries) loaded_entries!:any[]
+  @State(state => state["loader"].oldest_loaded_datetime) oldest_loaded_datetime!:any[]
+  @Getter("loader/oldEntriesExist") oldEntriesExist!:any
+  @Getter("loader/getOldEntries") getOldEntries!:any
   loader:Loader = <any> null
 
   socket:SocketIOClient.Socket = <any> null
@@ -124,14 +136,14 @@ export default class IndexPage extends Vue {
     /**
      * Not waiting, so trigger stuff that requires waiting.
      */
-    if(this.is_waiting_request == false && this.loader.isPreloadedEmpty) {
+    if(this.is_waiting_request == false && this.loader.onlyOldEntriesExist()) {
       this.is_waiting_request = true
       const DIRECTION = "old"
       const pagination_req_data = this.loader.getPaginationReqData(DIRECTION)
       this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
     }
     else {
-      this.loader.loadFromPreloadedStorage()
+      this.loadEntries()
     }
   }
 
@@ -139,12 +151,36 @@ export default class IndexPage extends Vue {
     this.is_waiting_request = false;
   }
 
+  onClickLoadMore() {
+    this.loadEntries()
+  }
+
+  onClickLoadOldEntries() {
+
+  }
+
+  isAtBottom() {
+    return (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight
+  }
+
   updateIsWaitingRequest(response:GystEntryResponse|GystEntryPaginationResponse) {
     ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).updateStatus(response)
     const is_all_loaded = (<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).isAllLoaded()
-    console.log(this.is_waiting_request, is_all_loaded)
     if(is_all_loaded) {
       this.is_waiting_request = false
+    }
+  }
+
+  loadEntries() {
+    this.loader.loadFromPreloadedStorage()
+  }
+
+  loadEntriesFromResponse(response:GystEntryPaginationResponseSuccess|GystEntryResponseSuccess, condition:boolean) {
+    this.loader.concatToPreloadedStorage(<GystEntryResponseSuccess> response)
+    this.updateIsWaitingRequest(response)
+
+    if(condition || this.isAtBottom()) {
+      this.loadEntries()
     }
   }
 
@@ -153,16 +189,8 @@ export default class IndexPage extends Vue {
     
     }
     else {
-      this.loader.concatToPreloadedStorage(<GystEntryResponseSuccess> response)
-      this.loader.loadWithInit(response)
-      this.updateIsWaitingRequest(response)
-
-      if(this.loader.isLoadedEmpty == false) {
-        return
-      }
-      else {
-        this.loader.loadFromPreloadedStorage()
-      }
+      this.loader.updatePaginationReqDataWithInit(response)
+      this.loadEntriesFromResponse(<GystEntryResponseSuccess> response, this.loader.isLoadedEmpty)
     }
   }
 
@@ -171,13 +199,8 @@ export default class IndexPage extends Vue {
 
     }
     else {
-      this.loader.concatToPreloadedStorage(<GystEntryResponseSuccess> response)
-      this.loader.loadWithPagination(response)
-      this.updateIsWaitingRequest(response)
-
-      if(this.loader.isPreloadedEmpty) {
-        this.loader.loadFromPreloadedStorage()
-      }
+      this.loader.updatePaginationReqDataWithPagination(response)
+      this.loadEntriesFromResponse(<GystEntryPaginationResponseSuccess> response, this.loader.isLoadedEmpty)
     }
   }
 }

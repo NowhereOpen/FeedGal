@@ -25,6 +25,9 @@ export type GystEntryResponseSearchableKeys = {
   // `gyst_suite_id` is null for default gyst entries
   // gyst_suite_id:string|null
   // `service_setting_id:null` for made up gyst entries like "default gyst" entries.
+  
+  // Without `service_id`, it's hard and confusing to debug, but it's not mandatory for functioning properly
+  service_id?:string
   service_setting_id?:string
   setting_value_id?:string
 }

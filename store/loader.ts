@@ -1,5 +1,6 @@
 import { Module, VuexModule, Mutation } from "vuex-module-decorators"
 import moment from "moment"
+import { DurationInputObject } from "moment"
 import * as _ from "lodash"
 
 import {
@@ -17,18 +18,36 @@ import {
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
 import { PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
 
+const MAX_DURATION_DIFF:DurationInputObject = { days: 2 }
+
+function getAllowedDatetimeMoment(datetime:null|moment.Moment) {
+  const datetime_moment:moment.Moment = datetime != null ? datetime.clone() : moment()
+  const allowed_datetime:moment.Moment = datetime_moment.subtract(moment.duration(MAX_DURATION_DIFF))
+  return allowed_datetime
+}
+
+function gystEntriesFromResponse(response:any) {
+  if("error" in response) return [];
+
+  const entries = (<GystEntryResponseSuccess>response).entries
+  const wrapper_entries = entries.map(entry => (<GystEntryWrapperType> {
+    pagination_index: response.pagination_data.index,
+    entry
+  }))
+
+  return wrapper_entries
+}
+
 @Module({
   name: "loader",
   namespaced: true,
-  stateFactory: false
+  stateFactory: true
 })
 export default class Store extends VuexModule {
-  loaded_entries:any[] = []
-  preloaded_entries:any[] = []
-  old_entries:any[] = []
+  loaded_entries:GystEntryWrapperType[] = []
+  preloaded_entries:GystEntryWrapperType[] = []
 
-  earliest_old_datetime = null
-  oldest_loaded_datetime = null
+  oldest_loaded_datetime:moment.Moment|null = null
   
   // Pagination storage
   services_pagination_req_data:ServicesPaginationReqData = []
@@ -45,13 +64,74 @@ export default class Store extends VuexModule {
 
   @Mutation
   loadFromPreloadedStorage() {
-    const entries = this.preloaded_entries.splice(0, 10)
+    const entries:GystEntryWrapperType[] = []
+    const allowed_datetime = getAllowedDatetimeMoment(this.oldest_loaded_datetime)
+
+    for(let a=0; a < this.preloaded_entries.length; a++) {
+      const entry = this.preloaded_entries[a]
+      const moment_datetime_info = moment(entry.entry.datetime_info)
+
+      /**
+       * 2020-05-28 15:41
+       * 
+       * Need to update `oldest_loaded_datetime` in `loadFromPreloadedStorage` because there can be
+       * entries that weren't loaded in the previous or init entries because it was too old, but the
+       * currently date range is okay for these entries to be loaded, AND the datetime of this entry
+       * is the `oldest_loaded_datetime`.
+       */
+      if(moment_datetime_info.isSameOrAfter(allowed_datetime)) {
+        entries.push(entry)
+        this.preloaded_entries.splice(a, 1)
+        a--
+      }
+
+      if(entries.length >= 10) {
+        break
+      }
+    }
+
     this.loaded_entries = this.loaded_entries.concat(entries)
+  }
+
+  /**
+   * 2020-05-26 16:37
+   * 
+   * Loads 'old entries'. This method is not automatically triggered when the
+   * main page hits the bottom of the page.
+   */
+  @Mutation
+  forceLoadFromPreloadedStorage() {
+
   }
 
   @Mutation
   concatToPreloadedStorage(response:any) {
     const entries = gystEntriesFromResponse(response)
+
+    /**
+     * 2020-05-27 16:11
+     * 
+     * Update the `oldest_loaded_datetime`. Let's say there is a datetime range A, B, C
+     * where A and C are too old, so the oldest entry in A and latest entry in C are
+     * `MAX_DURATION_DIFF` apart, the `oldest_loaded_datetime` will then be the datetime
+     * of the oldest entry in A.
+     * 
+     * If service Foo returns entries with datetime range A and C, then A will be loaded
+     * from preloaded storage and C will be considered "too old". If service Bar returns
+     * entries with datetime range B LATER, then the entries from Foo of datetime range
+     * C will be loaded from preloaded data properly.
+     * 
+     * So, the `oldest_loaded_datetime` can be updated everytime response is retrieved.
+     */
+    entries.forEach(entry => {
+      const allowed_datetime_head:moment.Moment = getAllowedDatetimeMoment(this.oldest_loaded_datetime)
+      const oldest_loaded_datetime:moment.Moment = this.oldest_loaded_datetime || moment()
+      const moment_datetime_info = moment(entry.entry.datetime_info)
+      if(moment_datetime_info.isSameOrAfter(allowed_datetime_head) && moment_datetime_info.isBefore(oldest_loaded_datetime)) {
+        this.oldest_loaded_datetime = moment_datetime_info
+      }
+    })
+
     this.preloaded_entries = this.preloaded_entries.concat(entries)
     
     // Sort entries in chronological order
@@ -70,22 +150,55 @@ export default class Store extends VuexModule {
      * Filter out services whose service id is 'too old'.
      */
     return (direction:PaginationDirection) => {
-      return this.services_pagination_req_data.filter(entry => {
-        return "error" in entry == false
+      const allowed_datetime:moment.Moment = getAllowedDatetimeMoment(this.oldest_loaded_datetime)
+      const service_old_entries:{ [service_id:string]:number } = {}
+
+      /**
+       * 2020-05-28 16:55 
+       * 
+       * Need to consider "old entries count threshold". For example, Google Calendar returns an event that's 'all day' and
+       * is very long with datetime that of the start date of the event. This event will be considered 'old' by GYST. Without
+       * the "old entries count threshold", google calendar entries will not be loaded when pagiantion request occurs.
+       */
+      const OLD_ENTRIES_COUNT_THRESHOLD = 5
+
+      this.preloaded_entries.forEach(entry => {
+        const moment_datetime_info = moment(entry.entry.datetime_info)
+        const service_id = entry.entry.service_id
+
+        if(moment_datetime_info.isBefore(allowed_datetime)) {
+          service_old_entries[service_id] = (service_old_entries[service_id] || 0) + 1
+        }
       })
+
+      const pagination_req_data = this.services_pagination_req_data.filter(entry => {
+        const service_id = entry.service_id
+        const has_old_entries = service_id in service_old_entries
+        return "error" in entry == false && has_old_entries ? service_old_entries[service_id] < OLD_ENTRIES_COUNT_THRESHOLD : true
+      })
+
+      return pagination_req_data
     }
+  }
+
+  get oldEntriesExist() {
+    return () => this.preloaded_entries.some(entry => moment(entry.entry.datetime_info).isBefore(getAllowedDatetimeMoment(this.oldest_loaded_datetime)))
+  }
+
+  get getOldEntries() {
+    return () => this.preloaded_entries.filter(entry => moment(entry.entry.datetime_info).isBefore(getAllowedDatetimeMoment(this.oldest_loaded_datetime)))
   }
 
   get isLoadedEmpty() {
     return this.loaded_entries.length == 0
   }
 
-  get isPreloadedEmpty() {
-    return this.preloaded_entries.length == 0
+  get onlyOldEntriesExist() {
+    return () => this.preloaded_entries.every(entry => moment(entry.entry.datetime_info).isBefore(getAllowedDatetimeMoment(this.oldest_loaded_datetime)))
   }
 
   @Mutation
-  loadWithInit(response:GystEntryResponse) {
+  updatePaginationReqDataWithInit(response:GystEntryResponse) {
     if("error" in response) {
       const _response = <GystEntryResponseError> response
       this.services_pagination_req_data.push(_response)
@@ -100,7 +213,7 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  loadWithPagination(response:GystEntryPaginationResponse) {
+  updatePaginationReqDataWithPagination(response:GystEntryPaginationResponse) {
     if("error" in response) {
 
     }
@@ -122,16 +235,4 @@ export default class Store extends VuexModule {
       ;(<PaginationReqDataSuccess> target_req_data).pagination_data = response.pagination_data
     }
   }
-}
-
-function gystEntriesFromResponse(response:any) {
-  if("error" in response) return [];
-
-  const entries = (<GystEntryResponseSuccess>response).entries
-  const wrapper_entries = entries.map(entry => (<GystEntryWrapperType> {
-    pagination_index: response.pagination_data.index,
-    entry
-  }))
-
-  return wrapper_entries
 }

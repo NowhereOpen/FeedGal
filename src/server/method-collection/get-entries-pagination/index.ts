@@ -27,12 +27,41 @@ export async function getEntriesPagination(
 ) {
   await Promise.all(
     services_pagination_req_data.map(async (service_pagination_req_param:ServicePaginationReqParam) => {
+      const service_id = service_pagination_req_param.service_id
       let response!:GystEntryPaginationResponse
       if("error" in service_pagination_req_param) {
-        // response = await handlePaginationErrorData(user_id, direction, pagination_data)
+        /**
+         * 2020-05-28 17:38
+         * 
+         * Error was thrown while loading init entries.
+         * 
+         * Can't just 'ignore' when sending `service_pagination_req_data` on the client side because
+         * we could make init request again. Or ignore and notify the user to refresh the page or
+         * manually request for init entries after making changes.
+         */
+        response = <GystEntryPaginationResponseError> {
+          service_id,
+          error: {
+            data: {},
+            message: "Error was thrown while loading init entries.",
+            name: "DEV_FAULT"
+          }
+        }
       }
       else {
-        response = await getEntriesPaginationData(direction, service_pagination_req_param)
+        try {
+          response = await getEntriesPaginationData(direction, service_pagination_req_param)
+        }
+        catch(e) {
+          response = <GystEntryPaginationResponseError> {
+            service_id,
+            error: {
+              data: e,
+              message: "Something went wrong",
+              name: "DEV_FAULT"
+            }
+          }
+        }
       }
       
       cb(response)
@@ -77,6 +106,7 @@ async function getEntriesPaginationData(
   }
   
   let response:GystEntryPaginationResponseSuccess = {
+    service_id: service_id,
     service_setting_id: service_pagination_req_param.service_setting_id,
     setting_value_id: service_pagination_req_param.setting_value_id,
     
