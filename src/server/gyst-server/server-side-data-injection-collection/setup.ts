@@ -77,7 +77,7 @@ async function injectData(matched_path:string, req:any, state:any) {
   injectAllPage(state["session"], is_logged_in, user_id)
 
   // Page handler
-  if(["", "/new-main"].some(path => matched_path.startsWith(path)) && is_logged_in) {
+  if([""].some(path => matched_path.startsWith(path)) && is_logged_in) {
     await injectPageMain(state["page-main"], user_id!)
   }
   else if(matched_path == "/login") {
