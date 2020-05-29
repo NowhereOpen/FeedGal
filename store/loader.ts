@@ -19,6 +19,8 @@ import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-e
 import { PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
 
 const MAX_DURATION_DIFF:DurationInputObject = { days: 2 }
+const LOAD_ENTRIES_NUM = 10
+const LOAD_OLD_ENTRIES_NUM = 10
 
 function getAllowedDatetimeMoment(datetime:null|moment.Moment) {
   const datetime_moment:moment.Moment = datetime != null ? datetime.clone() : moment()
@@ -85,7 +87,7 @@ export default class Store extends VuexModule {
         a--
       }
 
-      if(entries.length >= 10) {
+      if(entries.length >= LOAD_ENTRIES_NUM) {
         break
       }
     }
@@ -101,7 +103,25 @@ export default class Store extends VuexModule {
    */
   @Mutation
   forceLoadFromPreloadedStorage() {
+    const entries:GystEntryWrapperType[] = []
+    const allowed_datetime = getAllowedDatetimeMoment(this.oldest_loaded_datetime)
 
+    for(let a=0; a < this.preloaded_entries.length; a++) {
+      const entry = this.preloaded_entries[a]
+      const moment_datetime_info = moment(entry.entry.datetime_info)
+
+      if(moment_datetime_info.isBefore(allowed_datetime)) {
+        entries.push(entry)
+        this.preloaded_entries.splice(a, 1)
+        a--
+      }
+
+      if(entries.length >= LOAD_OLD_ENTRIES_NUM) {
+        break
+      }
+    }
+
+    this.loaded_entries = this.loaded_entries.concat(entries)
   }
 
   @Mutation

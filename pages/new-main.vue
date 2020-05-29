@@ -156,7 +156,7 @@ export default class IndexPage extends Vue {
   }
 
   onClickLoadOldEntries() {
-
+    this.loader.forceLoadFromPreloadedStorage()
   }
 
   isAtBottom() {
