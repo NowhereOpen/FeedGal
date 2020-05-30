@@ -46,7 +46,7 @@ export default class GystSuite extends Vue {
   service_settings:any[] = []
 
   mounted() {
-    this.setupServiceSettingEventBus() 
+    this.setupServiceSettingEventBus()
     this.service_settings = this.$store.state["page-suite"].service_settings
   }
 
