@@ -18,6 +18,23 @@ import {
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
 import { PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
 
+/**
+ * 2020-05-31 07:38
+ * 
+ * Needs to be a storage. I did this with event emitting and event bus while keeping the
+ * 'states' as a component field/variable. Working with events weren't fun.
+ * 
+ * I had to do it because there is 'load controller' and/or 'load state' that shows
+ * whether entries for certain service is waiting for the response or not. That's why I
+ * need either the Vuex or the event emitting.
+ * 
+ * What I don't like about Vuex is that even with `vuex-module-decorator`, I can't
+ * define a method that can be used 'conveniently' within a mutation or something.
+ * 
+ * These should be defined in the component that uses those methods. For example,  there
+ * are methods that load controller doesn't need but loader component does.
+ */
+
 const MAX_DURATION_DIFF:DurationInputObject = { days: 2 }
 const LOAD_ENTRIES_NUM = 10
 const LOAD_OLD_ENTRIES_NUM = 10
@@ -125,7 +142,7 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  concatToPreloadedStorage(response:any) {
+  concatToPreloadedStorage(response:GystEntryResponseSuccess | GystEntryPaginationResponseSuccess) {
     const entries = gystEntriesFromResponse(response)
 
     /**
@@ -147,6 +164,7 @@ export default class Store extends VuexModule {
       const allowed_datetime_head:moment.Moment = getAllowedDatetimeMoment(this.oldest_loaded_datetime)
       const oldest_loaded_datetime:moment.Moment = this.oldest_loaded_datetime || moment()
       const moment_datetime_info = moment(entry.entry.datetime_info)
+
       if(moment_datetime_info.isSameOrAfter(allowed_datetime_head) && moment_datetime_info.isBefore(oldest_loaded_datetime)) {
         this.oldest_loaded_datetime = moment_datetime_info
       }
@@ -225,6 +243,7 @@ export default class Store extends VuexModule {
     }
     else {
       const data = _.cloneDeep(response)
+
       delete data.entries
       delete data.service_response
 
