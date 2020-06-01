@@ -89,12 +89,12 @@ export type GystEntryResponseError = LoadEntryParamDetail & {
 
 export type GystEntryResponse = GystEntryResponseGeneralError | GystEntryResponseSuccess | GystEntryResponseError
 
-export type GystEntryPaginationResponseSuccess = LoadEntryParam & {
+export type GystEntryPaginationResponseSuccess = LoadEntryParamDetail & {
   entries:Entry[]
   pagination_data:PaginationData
   service_response?: any
 }
-export type GystEntryPaginationResponseError = LoadEntryParam & {
+export type GystEntryPaginationResponseError = LoadEntryParamDetail & {
   error: GystEntryResponseErrorDetails
 }
 

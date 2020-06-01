@@ -95,8 +95,8 @@ async function getEntriesPaginationData(
   const setting_value = service_pagination_req_param.setting_value
 
   let result!:LoaderModuleOutput
+  const { oauth_connected_user_entry_id } = service_pagination_req_param
   if(is_oauth) {
-    const { oauth_connected_user_entry_id } = service_pagination_req_param
     await refreshTokenIfFail(service_id, oauth_connected_user_entry_id!, async (token_data) => {
       result = await getEntriesPaginationOAuth(service_id, direction, pagination_updated_index, pagination_data, token_data, setting_value)
     })
@@ -106,9 +106,11 @@ async function getEntriesPaginationData(
   }
   
   let response:GystEntryPaginationResponseSuccess = {
-    service_id: service_id,
     service_setting_id: service_pagination_req_param.service_setting_id,
     setting_value_id: service_pagination_req_param.setting_value_id,
+    setting_value,
+    service_id,
+    oauth_connected_user_entry_id,
     
     entries: result.entries,
     service_response: result.service_response,
