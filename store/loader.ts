@@ -5,7 +5,7 @@ import * as _ from "lodash"
 
 import {
   GystEntryResponseGeneralError,
-  ServicesPaginationReqData,
+  ArrPaginationReqData,
   PaginationData,
   GystEntryResponse,
   GystEntryResponseSuccess,
@@ -69,7 +69,7 @@ export default class Store extends VuexModule {
   oldest_loaded_datetime:moment.Moment|null = null
   
   // Pagination storage
-  services_pagination_req_data:ServicesPaginationReqData = []
+  services_pagination_req_data:ArrPaginationReqData = []
 
   /**
    * 2020-05-25 18:39

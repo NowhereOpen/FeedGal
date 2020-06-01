@@ -21,18 +21,17 @@ export type GystHttpRequestError = {
   }
 }
 
-export type GystEntryResponseSearchableKeys = {
+export type LoadEntryParam = {
   // `gyst_suite_id` is null for default gyst entries
   // gyst_suite_id:string|null
   // `service_setting_id:null` for made up gyst entries like "default gyst" entries.
   
-  // Without `service_id`, it's hard and confusing to debug, but it's not mandatory for functioning properly
-  service_id?:string
+  // 2020-06-01 14:38 I forgot why service_setting_id can be optional (`?`)
   service_setting_id?:string
   setting_value_id?:string
 }
 
-export type GystEntryResponseBase = GystEntryResponseSearchableKeys & {
+export type LoadEntryParamDetail = LoadEntryParam & {
   service_id:string
   
   /**
@@ -60,10 +59,10 @@ export type GystEntryResponseErrorDetails = {
   data: any
 }
 
-export type PaginationReqDataError = GystEntryResponseBase & {
+export type PaginationReqDataError = LoadEntryParamDetail & {
   error: GystEntryResponseErrorDetails
 }
-export type PaginationReqDataSuccess = GystEntryResponseBase & {
+export type PaginationReqDataSuccess = LoadEntryParamDetail & {
   pagination_data: PaginationData
 }
 /**
@@ -72,30 +71,30 @@ export type PaginationReqDataSuccess = GystEntryResponseBase & {
  */
 export type PaginationReqData = PaginationReqDataError | PaginationReqDataSuccess
 
-export type ServicesPaginationReqData = PaginationReqData[]
+export type ArrPaginationReqData = PaginationReqData[]
 
 export type GystEntryResponseGeneralError = {
   error: GystEntryResponseErrorDetails
 }
 
-export type GystEntryResponseSuccess = GystEntryResponseBase & {
+export type GystEntryResponseSuccess = LoadEntryParamDetail & {
   entries:Entry[]
   pagination_data:PaginationData
   service_response?: any
 }
 
-export type GystEntryResponseError = GystEntryResponseBase & {
+export type GystEntryResponseError = LoadEntryParamDetail & {
   error: GystEntryResponseErrorDetails
 }
 
 export type GystEntryResponse = GystEntryResponseGeneralError | GystEntryResponseSuccess | GystEntryResponseError
 
-export type GystEntryPaginationResponseSuccess = GystEntryResponseSearchableKeys & {
+export type GystEntryPaginationResponseSuccess = LoadEntryParam & {
   entries:Entry[]
   pagination_data:PaginationData
   service_response?: any
 }
-export type GystEntryPaginationResponseError = GystEntryResponseSearchableKeys & {
+export type GystEntryPaginationResponseError = LoadEntryParam & {
   error: GystEntryResponseErrorDetails
 }
 
@@ -107,6 +106,6 @@ export type GystEntryPaginationResponse = GystEntryPaginationResponseSuccess | G
  * Same structure as `GystEntryPaginationResponseSuccess` but without the two big data
  * which are the entries and service response
  */
-export type ServicePaginationReqParam = GystEntryResponseBase & {
+export type ServicePaginationReqParam = LoadEntryParamDetail & {
   pagination_data:PaginationData
 }

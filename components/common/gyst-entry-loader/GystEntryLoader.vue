@@ -47,7 +47,7 @@ import moment from "moment"
 import * as requestMaker from "~/src/cli/request-maker"
 import {
   GystEntryResponseGeneralError,
-  ServicesPaginationReqData,
+  ArrPaginationReqData,
   PaginationData,
   GystEntryResponse,
   GystEntryResponseSuccess,
@@ -80,7 +80,7 @@ export default class GystEntryLoader extends Vue {
 
   gyst_loader:GystEntryWSClient = <any> null
 
-  pagination_data:ServicesPaginationReqData = []
+  pagination_data:ArrPaginationReqData = []
 
   waiting_all_pagination = false
 

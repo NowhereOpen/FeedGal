@@ -61,7 +61,7 @@ import * as requestMaker from "~/src/cli/request-maker"
 
 import {
   GystEntryResponseGeneralError,
-  ServicesPaginationReqData,
+  ArrPaginationReqData,
   PaginationData,
   GystEntryResponse,
   GystEntryResponseSuccess,

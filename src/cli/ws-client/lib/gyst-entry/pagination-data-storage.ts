@@ -1,7 +1,7 @@
 import * as _ from "lodash"
 
 import {
-  ServicesPaginationReqData,
+  ArrPaginationReqData,
   GystEntryResponseSuccess,
   GystEntryResponseError,
   GystEntryResponse,
@@ -12,7 +12,7 @@ import {
 } from "~/src/common/types/gyst-entry"
 
 export class PaginationDataStorage {
-  services_pagination_req_data:ServicesPaginationReqData
+  services_pagination_req_data:ArrPaginationReqData
   
   constructor() {
     this.services_pagination_req_data = []
