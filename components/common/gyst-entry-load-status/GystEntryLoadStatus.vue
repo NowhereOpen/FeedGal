@@ -11,7 +11,7 @@ div
 </template>
 
 <script lang="ts">
-import { Vue, Component, State } from "nuxt-property-decorator"
+import { Vue, Component, State, Getter } from "nuxt-property-decorator"
 
 import ServiceSettingStatus from "./ServiceSettingStatus.vue"
 
@@ -23,7 +23,7 @@ import {
   GystEntryPaginationResponse,
   PaginationData
 } from "~/src/common/types/gyst-entry"
-import { ServiceSetting } from "~/src/common/types/gyst-suite"
+import { LoadStatusByServiceSetting, LoadStatus } from "~/src/common/types/loader"
 import { Loadable } from "~/src/cli/gyst-entry-load-status/base"
 
 @Component({
@@ -32,7 +32,9 @@ import { Loadable } from "~/src/cli/gyst-entry-load-status/base"
   }
 })
 export default class GystEntryLoadStatus extends Loadable {
-  @State(state => state['page-main'].load_status) load_status!:ServiceSetting[]
+  // @State(state => state['loader'].load_status) load_status!:LoadStatus
+  // @Getter("loader/load_status_by_service_setting") load_status_by_service_setting!:LoadStatusByServiceSetting
+  @Getter("loader/load_status_by_service_setting") load_status!:LoadStatusByServiceSetting
 
   startLoading() {
     this.getServiceSettingStatusComponents().forEach(comp => {

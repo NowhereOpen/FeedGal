@@ -2,8 +2,8 @@
 div
   div
     div
-      span {{ data.service_name }} ({{ total_loaded }})
-      v-progress-circular.ml-2(v-if="is_loading" indeterminate size="20")
+      span {{ data.service_name }} ({{ data.total }})
+      v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")
 
     div.ml-2
       div(v-if="error != null")

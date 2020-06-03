@@ -58,6 +58,7 @@ import GystEntryLoadStatus from "~/components/common/gyst-entry-load-status/Gyst
 import Loader from "~/store/loader.ts"
 
 import * as requestMaker from "~/src/cli/request-maker"
+import { isGeneralError } from "~/src/cli/gyst-entry-response"
 
 import {
   GystEntryResponseGeneralError,
@@ -67,7 +68,8 @@ import {
   GystEntryResponseSuccess,
   GystEntryPaginationResponse,
   GystEntryPaginationResponseSuccess,
-  PaginationReqData
+  PaginationReqData,
+  LoadEntryParam
 } from "~/src/common/types/gyst-entry"
 
 @Component({
@@ -133,18 +135,10 @@ export default class IndexPage extends Vue {
   }
 
   async onScrolledToBottom() {
-    /**
-     * Not waiting, so trigger stuff that requires waiting.
-     */
-    if(this.is_waiting_request == false && this.loader.onlyOldEntriesExist()) {
-      this.is_waiting_request = true
-      const DIRECTION = "old"
-      const pagination_req_data = this.loader.getPaginationReqData(DIRECTION)
-      this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
-    }
-    else {
-      this.loadEntries()
-    }
+    this.loadEntries()
+    this.loader.load_status.forEach(status => {
+      this.loadMore(status)
+    })
   }
 
   async onCancelPaginationClick() {
@@ -164,8 +158,9 @@ export default class IndexPage extends Vue {
   }
 
   updateIsWaitingRequest(response:GystEntryResponse|GystEntryPaginationResponse) {
-    ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).updateStatus(response)
-    const is_all_loaded = (<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).isAllLoaded()
+    this.loader.updateStatus(response)
+    // ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).updateStatus(response)
+    const is_all_loaded = this.loader.isAllLoaded()
     if(is_all_loaded) {
       this.is_waiting_request = false
     }
@@ -176,11 +171,34 @@ export default class IndexPage extends Vue {
   }
 
   loadEntriesFromResponse(response:GystEntryPaginationResponseSuccess|GystEntryResponseSuccess, condition:boolean) {
-    this.loader.concatToPreloadedStorage(<GystEntryResponseSuccess> response)
     this.updateIsWaitingRequest(response)
 
-    if(condition || this.isAtBottom()) {
-      this.loadEntries()
+    if("error" in response == false) {
+      this.loader.concatToPreloadedStorage(<GystEntryResponseSuccess> response)
+      if(condition || this.isAtBottom()) {
+        this.loadEntries()
+      }
+    }
+
+    this.loadMore(response)
+  }
+
+  loadMore(param:LoadEntryParam) {
+    /**
+     * If entries loaded with `response.load_entry_param_detail` doesn't exist in `preloaded_entries`, load more
+     * automatically unless it returned error, or an empty response (end of pagination) from the last request.
+     */
+    const is_enough_loaded = this.loader.isEnoughPreloaded(param)
+    const can_load_more = this.loader.canLoadMore(param)
+
+    if(is_enough_loaded == false && can_load_more) {
+      const DIRECTION = "old"
+      const pagination_req_data = this.loader.getPaginationReqDataForLoadEntryParam(param)
+      this.loader.updateIsLoading({ param, value: true })
+
+      setTimeout(() => {
+        this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
+      }, 1000)
     }
   }
 
@@ -195,13 +213,8 @@ export default class IndexPage extends Vue {
   }
 
   async onGystPaginationEntries(response:GystEntryPaginationResponse) {
-    if("error" in response) {
-
-    }
-    else {
-      this.loader.updatePaginationReqDataWithPagination(response)
-      this.loadEntriesFromResponse(<GystEntryPaginationResponseSuccess> response, this.loader.isLoadedEmpty)
-    }
+    this.loader.updatePaginationReqDataWithPagination(response)
+    this.loadEntriesFromResponse(<GystEntryPaginationResponseSuccess> response, this.loader.isLoadedEmpty)
   }
 }
 </script>

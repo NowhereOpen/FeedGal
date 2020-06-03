@@ -47,7 +47,7 @@ export type LoadEntryParamDetail = LoadEntryParam & {
     * `null` when the service doesn't use oauth
     */
   oauth_connected_user_entry_id: string|undefined
-  setting_value:any
+  setting_value?:any
 }
 
 export type GystEntryError = "NO_SETTING_VALUES" | "NO_SERVICE_SETTINGS" | "DEV_FAULT" |
@@ -87,7 +87,7 @@ export type GystEntryResponseError = LoadEntryParamDetail & {
   error: GystEntryResponseErrorDetails
 }
 
-export type GystEntryResponse = GystEntryResponseGeneralError | GystEntryResponseSuccess | GystEntryResponseError
+export type GystEntryResponse = GystEntryResponseSuccess | GystEntryResponseError
 
 export type GystEntryPaginationResponseSuccess = LoadEntryParamDetail & {
   entries:Entry[]

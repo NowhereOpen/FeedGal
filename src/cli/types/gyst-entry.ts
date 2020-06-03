@@ -6,9 +6,10 @@
  * This data structure is constructed on client side.
  */
 
-import { Entry } from "~/src/common/types/gyst-entry"
+import { Entry, LoadEntryParamDetail } from "~/src/common/types/gyst-entry"
 
 export type GystEntryWrapper = {
   pagination_index:number
   entry:Entry
+  load_entry_param_detail:LoadEntryParamDetail
 }

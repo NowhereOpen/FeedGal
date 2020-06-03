@@ -8,8 +8,8 @@ div
       span(v-else)
         span.warning {{ error.message }}
     span(v-else)
-      span ({{ total_loaded }})
-      v-progress-circular.ml-2(v-if="is_loading" indeterminate size="20")  
+      span ({{ data.total }})
+      v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")  
 </template>
 
 <script lang="ts">
@@ -28,9 +28,13 @@ import { Loadable } from "~/src/cli/gyst-entry-load-status/base"
 
 @Component
 export default class SettingValueStatus extends Loadable {
-  @Prop() data!:SettingValue
+  @Prop() data!:any
 
-  error:GystEntryResponseErrorDetails|null = null
+  // error:GystEntryResponseErrorDetails|null = null
+
+  get error() {
+    return this.data.error
+  }
   
   startLoading() {
     if(this.is_error || this.data.is_invalid) {
@@ -52,7 +56,7 @@ export default class SettingValueStatus extends Loadable {
   handleErrorResponse(response:GystEntryResponseError) {
     this.is_loading = false
     if(response.error.name == "INVALID_SETTING_VALUE") {
-      this.error = response.error
+      // this.error = response.error
     }
   }
 

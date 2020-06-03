@@ -5,7 +5,7 @@ import VueRouter from "vue-router"
 import * as gystSession from "~/src/server/gyst-server/common/session"
 
 import { inject as injectPageLogin } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-login"
-import { inject as injectPageMain } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-main"
+import { inject as injectLoader } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/loader"
 import { inject as injectPageSettingsAccounts } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-settings-accounts"
 import { inject as injectPageSuite } from "~/src/server/gyst-server/server-side-data-injection-collection/injections/page-suite"
 
@@ -78,7 +78,7 @@ async function injectData(matched_path:string, req:any, state:any) {
 
   // Page handler
   if(matched_path == "" && is_logged_in) {
-    await injectPageMain(state["page-main"], user_id!)
+    await injectLoader(state["loader"], user_id!)
   }
   else if(matched_path == "/login") {
     await injectPageLogin(state["page-login"], is_logged_in, user_id)

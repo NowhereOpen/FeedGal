@@ -8,8 +8,6 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
   async handleImpl() {
     const services_pagination_req_data:ServicePaginationReqParam[] = this.req.pagination_req_data
 
-    console.log("hi")
-
     const direction = this.req.direction
 
     /**

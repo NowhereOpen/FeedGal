@@ -4,6 +4,12 @@ import { DurationInputObject } from "moment"
 import * as _ from "lodash"
 
 import {
+  LoadStatus,
+  LoadStatusByServiceSetting,
+  LoadStatusServiceSetting,
+  LoadStatusSettingValue
+} from "~/src/common/types/loader"
+import {
   GystEntryResponseGeneralError,
   ArrPaginationReqData,
   PaginationData,
@@ -13,7 +19,8 @@ import {
   GystEntryPaginationResponse,
   PaginationReqDataSuccess,
   GystEntryPaginationResponseSuccess,
-  PaginationReqData
+  PaginationReqData,
+  LoadEntryParam
 } from "~/src/common/types/gyst-entry"
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
 import { PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
@@ -45,16 +52,32 @@ function getAllowedDatetimeMoment(datetime:null|moment.Moment) {
   return allowed_datetime
 }
 
-function gystEntriesFromResponse(response:any) {
+function gystEntriesFromResponse(response:GystEntryResponseSuccess | GystEntryPaginationResponseSuccess) {
   if("error" in response) return [];
 
   const entries = (<GystEntryResponseSuccess>response).entries
   const wrapper_entries = entries.map(entry => (<GystEntryWrapperType> {
     pagination_index: response.pagination_data.index,
-    entry
+    entry,
+    load_entry_param_detail: {
+      service_setting_id: response.service_setting_id,
+      setting_value_id: response.setting_value_id,
+
+      oauth_connected_user_entry_id: response.oauth_connected_user_entry_id,
+      service_id: response.service_id,
+      setting_value: response.setting_value,
+    }
   }))
 
   return wrapper_entries
+}
+
+function getParam(load_entry_param:LoadEntryParam, load_status:LoadStatus) {
+  const service_setting_id = load_entry_param.service_setting_id
+  const setting_value_id = load_entry_param.setting_value_id
+
+  const param = load_status.find(param => param.service_setting_id == service_setting_id && param.setting_value_id == setting_value_id)!
+  return param
 }
 
 @Module({
@@ -65,6 +88,13 @@ function gystEntriesFromResponse(response:any) {
 export default class Store extends VuexModule {
   loaded_entries:GystEntryWrapperType[] = []
   preloaded_entries:GystEntryWrapperType[] = []
+
+  /**
+   * 2020-05-25 18:23
+   * 
+   * Refer to Server side data injection
+   */
+  load_status:LoadStatus = []
 
   oldest_loaded_datetime:moment.Moment|null = null
   
@@ -219,6 +249,65 @@ export default class Store extends VuexModule {
     }
   }
 
+  get load_status_by_service_setting():LoadStatusByServiceSetting {
+    const load_status:LoadStatusByServiceSetting = []
+    this.load_status.forEach(param => {
+      let service_setting = load_status.find(entry => entry.service_setting_id == param.service_setting_id)
+
+      if(service_setting == null) {
+        const _service_setting:LoadStatusServiceSetting = {
+          service_id: param.service_id,
+          service_name: param.service_name,
+          service_setting_id: param.service_setting_id!,
+          is_disabled: param.is_disabled,
+          is_loading: param.is_loading,
+          // Will be added later
+          total: 0,
+          error: param.error,
+        }
+
+        service_setting = _service_setting
+      }
+      
+      if(param.setting_value_id) {
+        const setting_value:LoadStatusSettingValue = {
+          setting_value_id: param.setting_value_id,
+          value: param.setting_value,
+          displayed_as: param.displayed_as,
+          is_invalid: param.is_invalid,
+          is_loading: param.is_loading,
+          total: param.total,
+          error: param.error,
+        }
+
+        if(service_setting.setting_values == null) {
+          service_setting.setting_values = [setting_value]
+        }
+        else {
+          service_setting.setting_values!.push(setting_value)
+        }
+      }
+
+      service_setting.total += param.total
+
+      load_status.push(service_setting)
+    })
+
+    return load_status
+  }
+
+  get isAllLoaded() {
+    return () => this.load_status.every(status => status.is_loading == false)
+  }
+
+  get getPaginationReqDataForLoadEntryParam() {
+    return (load_entry_param:LoadEntryParam) => {
+      const fields:Array<keyof LoadEntryParam> = ["service_setting_id", "setting_value_id"]
+      const pagination_req_data = this.services_pagination_req_data.find(req_data => fields.every(field => req_data[field] == load_entry_param[field]))
+      return [pagination_req_data]
+    }
+  }
+
   get oldEntriesExist() {
     return () => this.preloaded_entries.some(entry => moment(entry.entry.datetime_info).isBefore(getAllowedDatetimeMoment(this.oldest_loaded_datetime)))
   }
@@ -233,6 +322,56 @@ export default class Store extends VuexModule {
 
   get onlyOldEntriesExist() {
     return () => this.preloaded_entries.every(entry => moment(entry.entry.datetime_info).isBefore(getAllowedDatetimeMoment(this.oldest_loaded_datetime)))
+  }
+
+  get isEnoughPreloaded() {
+    const MIN_PRELOADED_COUNT = 10
+    return (load_entry_param:LoadEntryParam) => {
+      let count = 0
+
+      return this.preloaded_entries.some(entry => {
+        const detail = entry.load_entry_param_detail
+        if(detail.service_setting_id == load_entry_param.service_setting_id && detail.setting_value_id == load_entry_param.setting_value_id) {
+          count++
+        }
+
+        return count >= MIN_PRELOADED_COUNT
+      })
+    }
+  }
+
+  /**
+   * Check if last entry returned empty response or error. If yes, return false
+   * if not, return true. There are different types of errors and flags that this
+   * function can handle.
+   */
+  get canLoadMore() {
+    return (load_entry_param:LoadEntryParam) => {
+      const param = getParam(load_entry_param, this.load_status)
+      return param.last_loaded_entries_total != null && param.last_loaded_entries_total > 0
+    }
+  }
+
+  @Mutation
+  updateIsLoading(payload:{ param:LoadEntryParam, value:boolean }) {
+    const { value, param } = payload
+    const param_instance = getParam(param, this.load_status)
+    param_instance.is_loading = value
+  }
+
+  @Mutation
+  updateStatus(response:GystEntryResponse|GystEntryPaginationResponse) {
+    const param = getParam(response, this.load_status)!
+    if("error" in response) {
+      param.error = response.error
+    }
+    else {
+      const total_entries = response.entries.length
+      param.last_loaded_entries_total = total_entries
+      param.total += total_entries
+    }
+
+    param.is_loading = false
   }
 
   @Mutation
