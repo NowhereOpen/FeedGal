@@ -1,6 +1,6 @@
 import { Module, VuexModule, Mutation } from "vuex-module-decorators"
 import { ServiceInfo } from "~/src/common/types/service-info"
-import { ServiceSetting } from "~/src/common/types/gyst-suite"
+import { ServiceSetting, SettingValue } from "~/src/common/types/gyst-suite"
 
 @Module({
   namespaced: true,
@@ -33,5 +33,31 @@ export default class Store extends VuexModule {
   addNewServiceSetting(service_setting:ServiceSetting) {
     this.service_settings.push(service_setting)
     this.service_settings.sort((a,b) => a.service_name.localeCompare(b.service_name))
+  }
+
+  @Mutation
+  setIsDisabled({ service_setting, disabled }:{ service_setting:ServiceSetting, disabled:boolean }) {
+    const target = this.service_settings.find(entry => service_setting == entry)!
+    target!.is_disabled = disabled
+  }
+
+  @Mutation
+  addNewSettingValue({ entry, service_setting }:{ entry:SettingValue, service_setting:ServiceSetting }) {
+    const target = this.service_settings.find(entry => service_setting == entry)!
+    target.setting_values.push(entry)
+  }
+
+  @Mutation
+  updateSettingValue({ setting_value_id, service_setting, entry }:{ setting_value_id:string, service_setting:ServiceSetting, entry:SettingValue}) {
+    const target = this.service_settings.find(entry => service_setting == entry)!
+    const index = target.setting_values.findIndex((entry:any) => entry._id == setting_value_id)
+    target.setting_values.splice(index, 1, entry)
+  }
+
+  @Mutation
+  deleteSettingValue({ setting_value_id, service_setting}:{ setting_value_id:string, service_setting:ServiceSetting }) {
+    const target = this.service_settings.find(entry => service_setting == entry)!
+    const index = target.setting_values.findIndex((entry:any) => entry._id == setting_value_id)
+    target.setting_values.splice(index, 1)
   }
 }

@@ -267,6 +267,7 @@ export default class Store extends VuexModule {
         }
 
         service_setting = _service_setting
+        load_status.push(service_setting)
       }
       
       if(param.setting_value_id) {
@@ -289,8 +290,6 @@ export default class Store extends VuexModule {
       }
 
       service_setting.total += param.total
-
-      load_status.push(service_setting)
     })
 
     return load_status

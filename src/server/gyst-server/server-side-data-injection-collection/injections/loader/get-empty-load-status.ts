@@ -16,7 +16,13 @@ export async function getEmptyLoadStatus(user_id:string) {
   await Promise.all(
     service_settings.map(async _service_setting => {
       const service_setting = _service_setting.toJSON()
-      const service_setting_id = service_setting._id
+      /**
+       * 2020-06-05 00:54
+       * This fixes `service_setting_id` becoming a weird Object type on the client side
+       * after editing the gyst suite. This happened to "League of Legends" entry when I
+       * added more than one setting values.
+       */
+      const service_setting_id = String(service_setting._id)
       const service_id = service_setting.service_id
       const service_info = getServiceInfo(service_id)
       const service_name = service_info.name

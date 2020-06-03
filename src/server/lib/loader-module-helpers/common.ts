@@ -18,6 +18,9 @@ export type ReqData = { params?:JsonObj, data?:JsonObj }
  * @param req_data 
  */
 export async function makeRequest(method:string, url:string, default_axios_config:any, req_data?:ReqData):Promise<AxiosResponse> {
+  if(url.includes("lol")) {
+    console.log(method, url, default_axios_config, req_data)
+  }
   /**
    * set request data into `default_axios_config`
    */

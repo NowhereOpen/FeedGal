@@ -16,7 +16,7 @@ export class LolRequest {
     this.api_key = api_key
   }
 
-  async makeRequest(method:string, url:string, req_data?:any) {
+  async makeRequest(method:string, url:string, req_data?:common.ReqData) {
     const api_url = getRiotApiUrl(this.region)
     const axios_config:any = {
       baseURL: api_url,

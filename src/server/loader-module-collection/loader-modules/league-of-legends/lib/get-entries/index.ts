@@ -74,20 +74,32 @@ function getPaginationData(pagination_index:number):PaginationOptions {
   return pagination_data
 }
 
-function makePaginationData(pagination_index?:number):PaginationOptions {
+function makePaginationData(pagination_value?:any):PaginationOptions {
   const minBeginIndex = 0
   const minEndIndex = TOTAL_RECORDS_PER_DATA
 
-  if(pagination_index == undefined) pagination_index = 0
-  
-  return {
-    old: {
-      beginIndex: (pagination_index + 1) * TOTAL_RECORDS_PER_DATA,
-      endIndex: (pagination_index + 2) * TOTAL_RECORDS_PER_DATA
-    },
-    new: {
-      beginIndex: Math.max((pagination_index - 1) * TOTAL_RECORDS_PER_DATA, minBeginIndex),
-      endIndex: Math.max((pagination_index) * TOTAL_RECORDS_PER_DATA, minEndIndex)
+  if(pagination_value == undefined) {
+    return {
+      old: {
+        beginIndex: TOTAL_RECORDS_PER_DATA,
+        endIndex: TOTAL_RECORDS_PER_DATA * 2
+      },
+      new: {
+        beginIndex: 0,
+        endIndex: TOTAL_RECORDS_PER_DATA
+      }
+    }
+  }
+  else {
+    return {
+      old: {
+        beginIndex: pagination_value.endIndex,
+        endIndex: pagination_value.endIndex + TOTAL_RECORDS_PER_DATA
+      },
+      new: {
+        beginIndex: pagination_value.beginIndex - TOTAL_RECORDS_PER_DATA,
+        endIndex: pagination_value.beginIndex
+      }
     }
   }
 }

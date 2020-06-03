@@ -92,7 +92,7 @@ div.service-setting
 <script lang="ts">
 import * as _ from "lodash"
 import { AxiosError } from "axios"
-import { Component, Vue, Prop } from "nuxt-property-decorator"
+import { Component, Vue, Prop, Mutation } from "nuxt-property-decorator"
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import * as requestMaker from "~/src/cli/request-maker"
@@ -122,6 +122,11 @@ export default class ServiceSettingComp extends Vue {
 
   // Used by "sub component" like `LeagueOfLegendsServiceSetting`
   @Prop() editorDefaultValue:any
+
+  @Mutation("page-suite/setIsDisabled") setIsDisabled!:Function
+  @Mutation("page-suite/addNewSettingValue") addNewSettingValue!:Function
+  @Mutation("page-suite/updateSettingValue") updateSettingValue!:Function
+  @Mutation("page-suite/deleteSettingValue") deleteSettingValue!:Function
 
   open_update_account = false
   confirm_remove = false
@@ -238,11 +243,10 @@ export default class ServiceSettingComp extends Vue {
     const entry:SettingValue = res_data.setting_value
 
     if(is_new) {
-      this.serviceSetting.setting_values.push(entry)
+      this.addNewSettingValue({ entry, service_setting: this.serviceSetting })
     }
     else {
-      const index = this.serviceSetting.setting_values.findIndex(entry => entry._id == setting_value_id)
-      this.serviceSetting.setting_values.splice(index, 1, entry)
+      this.updateSettingValue({ entry, service_setting: this.serviceSetting })
     }
 
     ;(<SettingValueEditor> this.$refs["editor"]).resetEditor()
@@ -256,15 +260,14 @@ export default class ServiceSettingComp extends Vue {
     
     const { data } = await requestMaker.settings.gyst_suites.toggleService(service_setting_id)
     const disabled = data.result[service_id].updated_value
-    
-    this.serviceSetting.is_disabled = disabled
+    this.setIsDisabled({ service_setting: this.serviceSetting, disabled })
+
     ;(<ToggleServiceCheckbox>this.$refs["toggle-service-checkbox"]).setIsWaiting(false)
   }
 
   async onDeleteSettingValue(setting_value_id:string) {
     const { data } = await requestMaker.settings.gyst_suites.deleteSettingValue(setting_value_id)
-    const index = this.serviceSetting.setting_values.findIndex((entry:any) => entry._id == setting_value_id)
-    this.serviceSetting.setting_values.splice(index, 1)
+    this.deleteSettingValue({ service_setting: this.serviceSetting, setting_value_id })
   }
 
   onUpdateSettingValue(setting_value:any) {
