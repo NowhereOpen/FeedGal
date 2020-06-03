@@ -195,10 +195,7 @@ export default class IndexPage extends Vue {
       const DIRECTION = "old"
       const pagination_req_data = this.loader.getPaginationReqDataForLoadEntryParam(param)
       this.loader.updateIsLoading({ param, value: true })
-
-      setTimeout(() => {
-        this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
-      }, 1000)
+      this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
     }
   }
 

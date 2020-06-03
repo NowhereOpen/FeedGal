@@ -26,7 +26,7 @@ type FlattenedLoaderParam = {
 
 export async function getEntriesInit(
   user_id:string,
-  cb:(data:GystEntryResponse) => Promise<void>
+  cb:(data:GystEntryResponse|GystEntryResponseGeneralError) => Promise<void>
 ) {
   const parameters:FlattenedLoaderParam[] = await flattenServiceSettings(user_id)
 
