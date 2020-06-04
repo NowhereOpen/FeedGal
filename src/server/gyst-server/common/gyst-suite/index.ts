@@ -66,7 +66,7 @@ export async function getServiceSetting(service_setting_id:string) {
     setting_values,
     is_oauth: service_info.is_oauth,
     uses_setting_value: service_info.uses_setting_value,
-    is_disabled: false
+    is_disabled: entry.is_disabled
   }
 
   if(service_setting.is_oauth) {

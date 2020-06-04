@@ -259,7 +259,7 @@ export default class ServiceSettingComp extends Vue {
     ;(<ToggleServiceCheckbox>this.$refs["toggle-service-checkbox"]).setIsWaiting(true)
     
     const { data } = await requestMaker.settings.gyst_suites.toggleService(service_setting_id)
-    const disabled = data.result[service_id].updated_value
+    const disabled = data.result
     this.setIsDisabled({ service_setting: this.serviceSetting, disabled })
 
     ;(<ToggleServiceCheckbox>this.$refs["toggle-service-checkbox"]).setIsWaiting(false)
