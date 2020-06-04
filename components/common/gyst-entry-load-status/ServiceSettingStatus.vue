@@ -2,28 +2,38 @@
 div
   div
     div
-      span {{ data.service_name }} ({{ data.total }})
-      v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")
+      span {{ data.service_name }}
+      span
+        span(v-if="data.is_disabled == false")
+          span ({{ data.total }})
+          v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")
+        span(v-else)
+          v-tooltip(right)
+            template(v-slot:activator="{ on }")
+              v-icon(color="yellow" v-on="on") info
+            div The service setting is disabled
 
-    div.ml-2
-      div(v-if="error != null")
-        div(v-if="error.name == 'NO_SETTING_VALUES'")
-          div.warning No setting values
-        div(v-else-if="error.name == 'ERROR_ON_REFRESH_TOKEN'")
-          div.error Please connect the service again.
-        div(v-else-if="error.name == 'DEV_FAULT'")
-          div.error {{ error.message }}
-        div(v-else-if="error.name == 'OAUTH_CONNECTED_USER_NOT_EXIST'")
-          div.error Connected account has been deleted. Please update the service setting.
-      div(v-for="setting_value of data.setting_values")
-        SettingValueStatus(
-          :data="setting_value"
-          ref="setting-value-status"
-        )
+    div(v-if="data.is_disabled == false")
+      div.ml-2
+        div(v-if="error != null")
+          div(v-if="error.name == 'NO_SETTING_VALUES'")
+            div.warning No setting values
+          div(v-else-if="error.name == 'ERROR_ON_REFRESH_TOKEN'")
+            div.error Please connect the service again.
+          div(v-else-if="error.name == 'DEV_FAULT'")
+            div.error {{ error.message }}
+          div(v-else-if="error.name == 'OAUTH_CONNECTED_USER_NOT_EXIST'")
+            div.error Connected account has been deleted. Please update the service setting.
+        div(v-for="setting_value of data.setting_values")
+          SettingValueStatus(
+            :data="setting_value"
+            ref="setting-value-status"
+          )
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "nuxt-property-decorator"
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import SettingValueStatus from "./SettingValueStatus.vue"
 
