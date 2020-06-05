@@ -1,9 +1,8 @@
 <template lang="pug">
 div
-  span {{ data.service_name }}
+  span {{ data.service_name }} ({{ data.total }})
   span
     span(v-if="data.is_disabled == false")
-      span ({{ data.total }})
       v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")
       span(v-if="error != null")
         v-tooltip(right)

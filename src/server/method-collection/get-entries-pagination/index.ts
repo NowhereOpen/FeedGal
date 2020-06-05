@@ -27,7 +27,7 @@ export async function getEntriesPagination(
 ) {
   await Promise.all(
     services_pagination_req_data.map(async (service_pagination_req_param:ServicePaginationReqParam) => {
-      const service_id = service_pagination_req_param.service_id
+      const { service_id, service_setting_id, setting_value_id, setting_value } = service_pagination_req_param
       let response!:GystEntryPaginationResponse
       if("error" in service_pagination_req_param) {
         /**
@@ -40,7 +40,7 @@ export async function getEntriesPagination(
          * manually request for init entries after making changes.
          */
         response = <GystEntryPaginationResponseError> {
-          service_id,
+          service_id, service_setting_id, setting_value_id, setting_value,
           error: {
             data: {},
             message: "Error was thrown while loading init entries.",
@@ -54,7 +54,7 @@ export async function getEntriesPagination(
         }
         catch(e) {
           response = <GystEntryPaginationResponseError> {
-            service_id,
+            service_id, service_setting_id, setting_value_id, setting_value,
             error: {
               data: e,
               message: "Something went wrong",

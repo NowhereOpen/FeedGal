@@ -21,15 +21,6 @@ div
       )
 
   div.pagination-container(:style="{ height: '350px'}" ref="pagination-container")
-    div Oldest loaded: {{ oldest_loaded_datetime }}
-    div.old-entries-container(
-      v-show="oldEntriesExist()"
-    )
-      div Some entries are too old compared to the loaded entries. Click "Load old entries" to load these entries
-      v-btn(
-        @click="onClickLoadOldEntries"
-      ) Load old entries {{ getOldEntries().length }}
-
     div.pagination-waiting-container(
       v-show="is_waiting_request"
     )
@@ -78,9 +69,6 @@ import {
 export default class IndexPage extends Vue {
   @State(state => state["session"].is_logged_in) is_logged_in!:boolean
   @State(state => state["loader"].loaded_entries) loaded_entries!:any[]
-  @State(state => state["loader"].oldest_loaded_datetime) oldest_loaded_datetime!:any[]
-  @Getter("loader/oldEntriesExist") oldEntriesExist!:any
-  @Getter("loader/getOldEntries") getOldEntries!:any
   loader:Loader = <any> null
 
   socket:SocketIOClient.Socket = <any> null
@@ -135,10 +123,7 @@ export default class IndexPage extends Vue {
   }
 
   async onScrolledToBottom() {
-    this.loadEntries()
-    this.loader.load_status.forEach(status => {
-      this.loadMore(status)
-    })
+    this.loadMore()
   }
 
   async onCancelPaginationClick() {
@@ -146,11 +131,14 @@ export default class IndexPage extends Vue {
   }
 
   onClickLoadMore() {
-    this.loadEntries()
+    this.loadMore()
   }
 
-  onClickLoadOldEntries() {
-    this.loader.forceLoadFromPreloadedStorage()
+  loadMore() {
+    this.loadEntries()
+    this.loader.load_status.forEach(status => {
+      this.loadMoreIfPossible(status)
+    })
   }
 
   isAtBottom() {
@@ -180,10 +168,10 @@ export default class IndexPage extends Vue {
       }
     }
 
-    this.loadMore(response)
+    this.loadMoreIfPossible(response)
   }
 
-  loadMore(param:LoadEntryParam) {
+  loadMoreIfPossible(param:LoadEntryParam) {
     /**
      * If entries loaded with `response.load_entry_param_detail` doesn't exist in `preloaded_entries`, load more
      * automatically unless it returned error, or an empty response (end of pagination) from the last request.

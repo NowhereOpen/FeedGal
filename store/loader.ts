@@ -114,25 +114,11 @@ export default class Store extends VuexModule {
   @Mutation
   loadFromPreloadedStorage() {
     const entries:GystEntryWrapperType[] = []
-    const allowed_datetime = getAllowedDatetimeMoment(this.oldest_loaded_datetime)
 
     for(let a=0; a < this.preloaded_entries.length; a++) {
       const entry = this.preloaded_entries[a]
-      const moment_datetime_info = moment(entry.entry.datetime_info)
-
-      /**
-       * 2020-05-28 15:41
-       * 
-       * Need to update `oldest_loaded_datetime` in `loadFromPreloadedStorage` because there can be
-       * entries that weren't loaded in the previous or init entries because it was too old, but the
-       * currently date range is okay for these entries to be loaded, AND the datetime of this entry
-       * is the `oldest_loaded_datetime`.
-       */
-      if(moment_datetime_info.isSameOrAfter(allowed_datetime)) {
-        entries.push(entry)
-        this.preloaded_entries.splice(a, 1)
-        a--
-      }
+      entries.push(entry)
+      this.preloaded_entries.splice(a, 1)
 
       if(entries.length >= LOAD_ENTRIES_NUM) {
         break
@@ -296,7 +282,7 @@ export default class Store extends VuexModule {
   }
 
   get isAllLoaded() {
-    return () => this.load_status.every(status => status.is_loading == false)
+    return () => this.load_status.every(status => status.is_loading == false || status.is_invalid || status.is_disabled)
   }
 
   get getPaginationReqDataForLoadEntryParam() {
@@ -347,7 +333,7 @@ export default class Store extends VuexModule {
   get canLoadMore() {
     return (load_entry_param:LoadEntryParam) => {
       const param = getParam(load_entry_param, this.load_status)
-      return param.last_loaded_entries_total != null && param.last_loaded_entries_total > 0
+      return param.last_loaded_entries_total != null && param.last_loaded_entries_total > 0 && param.error == null
     }
   }
 

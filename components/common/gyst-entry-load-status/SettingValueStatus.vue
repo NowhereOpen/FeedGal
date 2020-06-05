@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  span {{ data.displayed_as }}
+  span {{ data.displayed_as }} ({{ data.total }})
   span.ml-1
     span(v-if="error != null")
       v-tooltip(right)
@@ -11,7 +11,6 @@ div
         span(v-else)
           span {{ error.message }}
     span(v-else)
-      span ({{ data.total }})
       v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")  
 </template>
 
