@@ -3,10 +3,13 @@ div
   span {{ data.displayed_as }}
   span.ml-1
     span(v-if="error != null")
-      span(v-if="error.name == 'DEV_FAULT'")
-        span.error {{ error.message }}
-      span(v-else)
-        span.warning {{ error.message }}
+      v-tooltip(right)
+        template(v-slot:activator="{ on }")
+          v-icon(v-on="on" color="red") info
+        span(v-if="error.name == 'DEV_FAULT'")
+          span {{ error.message }}
+        span(v-else)
+          span {{ error.message }}
     span(v-else)
       span ({{ data.total }})
       v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")  

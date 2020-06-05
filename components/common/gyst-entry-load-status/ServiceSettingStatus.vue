@@ -1,34 +1,36 @@
 <template lang="pug">
 div
-  div
-    div
-      span {{ data.service_name }}
-      span
-        span(v-if="data.is_disabled == false")
-          span ({{ data.total }})
-          v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")
-        span(v-else)
-          v-tooltip(right)
-            template(v-slot:activator="{ on }")
-              v-icon(color="yellow" v-on="on") info
-            div The service setting is disabled
+  span {{ data.service_name }}
+  span
+    span(v-if="data.is_disabled == false")
+      span ({{ data.total }})
+      v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")
+      span(v-if="error != null")
+        v-tooltip(right)
+          template(v-slot:activator="{ on }")
+            v-icon(color="yellow" v-on="on") info
+          span(v-if="error.name == 'NO_SETTING_VALUES'")
+            span.warning No setting values
+          span(v-else-if="error.name == 'ERROR_ON_REFRESH_TOKEN'")
+            span.error Please connect the service again.
+          span(v-else-if="error.name == 'DEV_FAULT'")
+            span.error {{ error.message }}
+          span(v-else-if="error.name == 'OAUTH_CONNECTED_USER_NOT_EXIST'")
+            span.error Connected account has been deleted. Please update the service setting.
 
-    div(v-if="data.is_disabled == false")
-      div.ml-2
-        div(v-if="error != null")
-          div(v-if="error.name == 'NO_SETTING_VALUES'")
-            div.warning No setting values
-          div(v-else-if="error.name == 'ERROR_ON_REFRESH_TOKEN'")
-            div.error Please connect the service again.
-          div(v-else-if="error.name == 'DEV_FAULT'")
-            div.error {{ error.message }}
-          div(v-else-if="error.name == 'OAUTH_CONNECTED_USER_NOT_EXIST'")
-            div.error Connected account has been deleted. Please update the service setting.
-        div(v-for="setting_value of data.setting_values")
-          SettingValueStatus(
-            :data="setting_value"
-            ref="setting-value-status"
-          )
+    span(v-else)
+      v-tooltip(right)
+        template(v-slot:activator="{ on }")
+          v-icon(color="yellow" v-on="on") info
+        div The service setting is disabled
+
+    div.ml-2(
+      v-if="data.is_disabled == false"
+      v-for="setting_value of data.setting_values")
+      SettingValueStatus(
+        :data="setting_value"
+        ref="setting-value-status"
+      )
 </template>
 
 <script lang="ts">
