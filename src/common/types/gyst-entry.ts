@@ -50,7 +50,7 @@ export type LoadEntryParamDetail = LoadEntryParam & {
   setting_value?:any
 }
 
-export type GystEntryError = "NO_SETTING_VALUES" | "NO_SERVICE_SETTINGS" | "DEV_FAULT" |
+export type GystEntryError = "NO_SETTING_VALUES" | "NO_SERVICE_SETTINGS" | "DEV_FAULT" | "DEV_FAULT_MSG" |
   "INVALID_SETTING_VALUE" | "ERROR_ON_REFRESH_TOKEN" | "OAUTH_CONNECTED_USER_NOT_EXIST"
 
 export type GystEntryResponseErrorDetails = {
@@ -77,10 +77,19 @@ export type GystEntryResponseGeneralError = {
   error: GystEntryResponseErrorDetails
 }
 
+export type GystEntryWarningTypes = "RATE_LIMIT"
+
+export type GystEntryWarning = {
+  name?: GystEntryWarningTypes
+  message: string
+  data: any
+}
+
 export type GystEntryResponseSuccess = LoadEntryParamDetail & {
   entries:Entry[]
   pagination_data:PaginationData
   service_response?: any
+  warning?: GystEntryWarning
 }
 
 export type GystEntryResponseError = LoadEntryParamDetail & {
@@ -93,6 +102,7 @@ export type GystEntryPaginationResponseSuccess = LoadEntryParamDetail & {
   entries:Entry[]
   pagination_data:PaginationData
   service_response?: any
+  warning?: GystEntryWarning
 }
 export type GystEntryPaginationResponseError = LoadEntryParamDetail & {
   error: GystEntryResponseErrorDetails
@@ -108,4 +118,8 @@ export type GystEntryPaginationResponse = GystEntryPaginationResponseSuccess | G
  */
 export type ServicePaginationReqParam = LoadEntryParamDetail & {
   pagination_data:PaginationData
+  warning?: {
+    name: GystEntryWarningTypes,
+    data: any
+  }
 }
