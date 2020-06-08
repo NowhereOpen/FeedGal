@@ -42,7 +42,6 @@ import {
   GystEntryResponse,
   GystEntryResponseSuccess,
   GystEntryResponseError,
-  GystEntryPaginationResponse,
   GystEntryResponseErrorDetails,
   PaginationData
 } from "~/src/common/types/gyst-entry"

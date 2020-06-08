@@ -4,12 +4,13 @@ import {
   GystEntryResponseError,
   GystEntryResponseErrorDetails,
   GystEntryResponseGeneralError,
-  GystEntryError
+  GystEntryError,
+  GystEntryWarning
 } from "~/src/common/types/gyst-entry"
 import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
 import { FlattenedLoaderParam, flattenServiceSettings, getEntriesInitWithParam } from "~/src/server/method-collection/get-entries-init"
 import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader-module-base/types"
-import { commonErrorDetailGenerator } from "~/src/server/method-collection/common"
+import { commonErrorDetailGenerator, handleError } from "~/src/server/method-collection/common"
 
 export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
   respond(data:any) {
@@ -31,24 +32,11 @@ export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
     }
 
     await Promise.all(
-      parameters.map(async entry => {
-        const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = entry
+      parameters.map(async param => {
+        const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
     
         try {
-          const entry_response = await getEntriesInitWithParam(entry)
-          const { entries, pagination_options: options, service_response } = entry_response
-
-          const response:GystEntryResponseSuccess = {
-            service_id,
-            service_setting_id: service_setting_id,
-            setting_value_id: setting_value_id,
-            oauth_connected_user_entry_id: oauth_connected_user_entry_id,
-            setting_value: setting_value,
-            entries,
-            pagination_data: { index: 0, options },
-            service_response
-          }
-        
+          const response:GystEntryResponseSuccess = await getEntriesInitWithParam(param)        
           return this.respond(response)
         }
         catch(e) {

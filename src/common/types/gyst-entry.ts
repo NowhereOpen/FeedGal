@@ -71,13 +71,11 @@ export type PaginationReqDataSuccess = LoadEntryParamDetail & {
  */
 export type PaginationReqData = PaginationReqDataError | PaginationReqDataSuccess
 
-export type ArrPaginationReqData = PaginationReqData[]
-
 export type GystEntryResponseGeneralError = {
   error: GystEntryResponseErrorDetails
 }
 
-export type GystEntryWarningTypes = "RATE_LIMIT"
+export type GystEntryWarningTypes = "RATE_LIMIT" | "ZERO_RETURNED" | "DISABLED"
 
 export type GystEntryWarning = {
   name?: GystEntryWarningTypes
@@ -98,28 +96,13 @@ export type GystEntryResponseError = LoadEntryParamDetail & {
 
 export type GystEntryResponse = GystEntryResponseSuccess | GystEntryResponseError
 
-export type GystEntryPaginationResponseSuccess = LoadEntryParamDetail & {
-  entries:Entry[]
-  pagination_data:PaginationData
-  service_response?: any
-  warning?: GystEntryWarning
-}
-export type GystEntryPaginationResponseError = LoadEntryParamDetail & {
-  error: GystEntryResponseErrorDetails
-}
-
-export type GystEntryPaginationResponse = GystEntryPaginationResponseSuccess | GystEntryPaginationResponseError
-
 /**
  * 2020-05-05 09:45 
  * 
- * Same structure as `GystEntryPaginationResponseSuccess` but without the two big data
+ * Same structure as `GystEntryResponseSuccess` but without the two big data
  * which are the entries and service response
  */
 export type ServicePaginationReqParam = LoadEntryParamDetail & {
   pagination_data:PaginationData
-  warning?: {
-    name: GystEntryWarningTypes,
-    data: any
-  }
+  warning?: Omit<GystEntryWarning, "message">
 }

@@ -1,21 +1,29 @@
-import { LoadEntryParamDetail } from "./gyst-entry"
+import { 
+  LoadEntryParamDetail,
+  GystEntryResponseErrorDetails,
+  PaginationData,
+  GystEntryWarning
+} from "./gyst-entry"
 
-type ClientSideField = {
+export type ClientSideField = {
   /**
    * `Default: true`
    */
   is_loading: boolean
   total: number
 
-  error?: any
-  flag?: any
+  pagination_data?: PaginationData
+  error?: GystEntryResponseErrorDetails
+  warning?: GystEntryWarning
 }
 
-export type LoadEntryParamInstance = LoadEntryParamDetail & ClientSideField & {
-  // Set on the client side
-  pagination_index: number|null
-  last_loaded_entries_total: number|null
+import {
+  ServiceSetting,
+  SettingValue
+} from "~/src/common/types/gyst-suite"
 
+export type LoadStatusSettingValue = SettingValue & ClientSideField
+export type LoadStatusServiceSetting = Omit<ServiceSetting, "setting_values"> & ClientSideField & {
   // Service Setting
   service_name:string
   is_disabled:boolean
@@ -23,22 +31,9 @@ export type LoadEntryParamInstance = LoadEntryParamDetail & ClientSideField & {
   // Setting Value
   displayed_as?:string
   is_invalid?:boolean
+
+  // Overrides
+  setting_values: LoadStatusSettingValue[]
 }
 
-export type LoadStatus = LoadEntryParamInstance[]
-
-export type LoadStatusSettingValue = ClientSideField & {
-  setting_value_id:string
-  value:any
-  displayed_as?:string
-  is_invalid?:boolean
-}
-export type LoadStatusServiceSetting = ClientSideField & {
-  service_id:string
-  service_name:string
-  service_setting_id:string
-  is_disabled:boolean
-
-  setting_values?: LoadStatusSettingValue[]
-}
-export type LoadStatusByServiceSetting = LoadStatusServiceSetting[]
+export type LoadStatus = LoadStatusServiceSetting[]

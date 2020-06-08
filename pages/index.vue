@@ -53,12 +53,9 @@ import { isGeneralError } from "~/src/cli/gyst-entry-response"
 
 import {
   GystEntryResponseGeneralError,
-  ArrPaginationReqData,
   PaginationData,
   GystEntryResponse,
   GystEntryResponseSuccess,
-  GystEntryPaginationResponse,
-  GystEntryPaginationResponseSuccess,
   PaginationReqData,
   LoadEntryParam
 } from "~/src/common/types/gyst-entry"
@@ -93,7 +90,7 @@ export default class IndexPage extends Vue {
     this.setupClientSocket()
 
     if(this.is_logged_in) {
-      ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).startLoading()
+      this.loader.startLoading()
       this.is_waiting_request = true
       this.socket.emit(`gyst-entries-init`)
     }
@@ -136,8 +133,17 @@ export default class IndexPage extends Vue {
 
   loadMore() {
     this.loadEntries()
-    this.loader.load_status.forEach(status => {
-      this.loadMoreIfPossible(status)
+    this.loader.load_status.forEach(service_setting => {
+      const service_setting_id = service_setting._id
+      if(service_setting.uses_setting_value) {
+        service_setting.setting_values.forEach(setting_value => {
+          const setting_value_id = setting_value._id
+          this.loadMoreIfPossible({ service_setting_id, setting_value_id })
+        })
+      }
+      else {
+        this.loadMoreIfPossible({ service_setting_id })
+      }
     })
   }
 
@@ -145,7 +151,7 @@ export default class IndexPage extends Vue {
     return (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight
   }
 
-  updateIsWaitingRequest(response:GystEntryResponse|GystEntryPaginationResponse) {
+  updateIsWaitingRequest(response:GystEntryResponse) {
     this.loader.updateStatus(response)
     // ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).updateStatus(response)
     const is_all_loaded = this.loader.isAllLoaded()
@@ -158,7 +164,7 @@ export default class IndexPage extends Vue {
     this.loader.loadFromPreloadedStorage()
   }
 
-  loadEntriesFromResponse(response:GystEntryPaginationResponseSuccess|GystEntryResponseSuccess, condition:boolean) {
+  loadEntriesFromResponse(response:GystEntryResponseSuccess, condition:boolean) {
     this.updateIsWaitingRequest(response)
 
     if("error" in response == false) {
@@ -189,17 +195,17 @@ export default class IndexPage extends Vue {
 
   async onGystInitEntries(response:GystEntryResponse) {
     if("error" in response && response.error.name == "NO_SERVICE_SETTINGS") {
-    
+      this.loader.updatePaginationReqData(response)
     }
     else {
-      this.loader.updatePaginationReqDataWithInit(response)
+      this.loader.updatePaginationReqData(response)
       this.loadEntriesFromResponse(<GystEntryResponseSuccess> response, this.loader.isLoadedEmpty)
     }
   }
 
-  async onGystPaginationEntries(response:GystEntryPaginationResponse) {
-    this.loader.updatePaginationReqDataWithPagination(response)
-    this.loadEntriesFromResponse(<GystEntryPaginationResponseSuccess> response, this.loader.isLoadedEmpty)
+  async onGystPaginationEntries(response:GystEntryResponse) {
+    this.loader.updatePaginationReqData(response)
+    this.loadEntriesFromResponse(<GystEntryResponseSuccess> response, this.loader.isLoadedEmpty)
   }
 }
 </script>

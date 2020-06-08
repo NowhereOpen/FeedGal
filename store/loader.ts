@@ -5,23 +5,20 @@ import * as _ from "lodash"
 
 import {
   LoadStatus,
-  LoadStatusByServiceSetting,
-  LoadStatusServiceSetting,
-  LoadStatusSettingValue
+  ClientSideField
 } from "~/src/common/types/loader"
 import {
   GystEntryResponseGeneralError,
-  ArrPaginationReqData,
   PaginationData,
   GystEntryResponse,
   GystEntryResponseSuccess,
   GystEntryResponseError,
-  GystEntryPaginationResponse,
   PaginationReqDataSuccess,
-  GystEntryPaginationResponseSuccess,
   PaginationReqData,
+  ServicePaginationReqParam,
   LoadEntryParam
 } from "~/src/common/types/gyst-entry"
+import { ServiceInfo } from "~/src/common/types/service-info"
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
 import { PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
 
@@ -52,7 +49,7 @@ function getAllowedDatetimeMoment(datetime:null|moment.Moment) {
   return allowed_datetime
 }
 
-function gystEntriesFromResponse(response:GystEntryResponseSuccess | GystEntryPaginationResponseSuccess) {
+function gystEntriesFromResponse(response:GystEntryResponseSuccess | GystEntryResponseSuccess) {
   if("error" in response) return [];
 
   const entries = (<GystEntryResponseSuccess>response).entries
@@ -72,12 +69,15 @@ function gystEntriesFromResponse(response:GystEntryResponseSuccess | GystEntryPa
   return wrapper_entries
 }
 
-function getParam(load_entry_param:LoadEntryParam, load_status:LoadStatus) {
-  const service_setting_id = load_entry_param.service_setting_id
-  const setting_value_id = load_entry_param.setting_value_id
+function getParam(load_entry_param:LoadEntryParam, load_status:LoadStatus):ClientSideField {
+  const { service_setting_id, setting_value_id } = load_entry_param
 
-  const param = load_status.find(param => param.service_setting_id == service_setting_id && param.setting_value_id == setting_value_id)!
-  return param
+  const service_setting = load_status.find(entry => entry._id == service_setting_id)!
+
+  if(service_setting.uses_setting_value == false) return service_setting
+
+  const setting_value = service_setting.setting_values.find(entry => entry._id == setting_value_id)!
+  return setting_value
 }
 
 @Module({
@@ -95,11 +95,9 @@ export default class Store extends VuexModule {
    * Refer to Server side data injection
    */
   load_status:LoadStatus = []
+  service_infos:ServiceInfo[] = []
 
   oldest_loaded_datetime:moment.Moment|null = null
-  
-  // Pagination storage
-  services_pagination_req_data:ArrPaginationReqData = []
 
   /**
    * 2020-05-25 18:39
@@ -158,7 +156,7 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  concatToPreloadedStorage(response:GystEntryResponseSuccess | GystEntryPaginationResponseSuccess) {
+  concatToPreloadedStorage(response:GystEntryResponseSuccess) {
     const entries = gystEntriesFromResponse(response)
 
     /**
@@ -225,60 +223,16 @@ export default class Store extends VuexModule {
         }
       })
 
-      const pagination_req_data = this.services_pagination_req_data.filter(entry => {
-        const service_id = entry.service_id
-        const has_old_entries = service_id in service_old_entries
-        return "error" in entry == false && has_old_entries ? service_old_entries[service_id] < OLD_ENTRIES_COUNT_THRESHOLD : true
-      })
+      const pagination_req_data = this.load_status
+        .filter(entry => {
+          const service_id = entry.service_id
+          const has_old_entries = service_id in service_old_entries
+          return "error" in entry == false && has_old_entries ? service_old_entries[service_id] < OLD_ENTRIES_COUNT_THRESHOLD : true
+        })
+        .map(entry => entry.pagination_data)
 
       return pagination_req_data
     }
-  }
-
-  get load_status_by_service_setting():LoadStatusByServiceSetting {
-    const load_status:LoadStatusByServiceSetting = []
-    this.load_status.forEach(param => {
-      let service_setting = load_status.find(entry => entry.service_setting_id == param.service_setting_id)
-
-      if(service_setting == null) {
-        const _service_setting:LoadStatusServiceSetting = {
-          service_id: param.service_id,
-          service_name: param.service_name,
-          service_setting_id: param.service_setting_id!,
-          is_disabled: param.is_disabled,
-          is_loading: param.is_loading,
-          // Will be added later
-          total: 0,
-          error: param.error,
-        }
-
-        service_setting = _service_setting
-        load_status.push(service_setting)
-      }
-      
-      if(param.setting_value_id) {
-        const setting_value:LoadStatusSettingValue = {
-          setting_value_id: param.setting_value_id,
-          value: param.setting_value,
-          displayed_as: param.displayed_as,
-          is_invalid: param.is_invalid,
-          is_loading: param.is_loading,
-          total: param.total,
-          error: param.error,
-        }
-
-        if(service_setting.setting_values == null) {
-          service_setting.setting_values = [setting_value]
-        }
-        else {
-          service_setting.setting_values!.push(setting_value)
-        }
-      }
-
-      service_setting.total += param.total
-    })
-
-    return load_status
   }
 
   get isAllLoaded() {
@@ -286,9 +240,21 @@ export default class Store extends VuexModule {
   }
 
   get getPaginationReqDataForLoadEntryParam() {
-    return (load_entry_param:LoadEntryParam) => {
-      const fields:Array<keyof LoadEntryParam> = ["service_setting_id", "setting_value_id"]
-      const pagination_req_data = this.services_pagination_req_data.find(req_data => fields.every(field => req_data[field] == load_entry_param[field]))
+    return (load_entry_param:LoadEntryParam):ServicePaginationReqParam[] => {
+      const { service_setting_id, setting_value_id } = load_entry_param
+      const service_setting = this.load_status.find(entry => entry._id == service_setting_id)!
+      const setting_value = service_setting.setting_values.find(entry => entry._id == setting_value_id)
+
+      const pagination_req_data:ServicePaginationReqParam = {
+        oauth_connected_user_entry_id: service_setting.oauth_info?.oauth_id,
+        pagination_data: (service_setting.pagination_data || setting_value?.pagination_data)!,
+        service_id: service_setting.service_id,
+        service_setting_id,
+        setting_value_id,
+        setting_value: setting_value?.value,
+        warning: service_setting.warning || setting_value?.warning
+      }
+
       return [pagination_req_data]
     }
   }
@@ -333,8 +299,25 @@ export default class Store extends VuexModule {
   get canLoadMore() {
     return (load_entry_param:LoadEntryParam) => {
       const param = getParam(load_entry_param, this.load_status)
-      return param.last_loaded_entries_total != null && param.last_loaded_entries_total > 0 && param.error == null
+      const error_exists = "error" in param
+      const rate_limit_warning = "warning" in param && param.warning!.name == "RATE_LIMIT"
+      return error_exists == false || rate_limit_warning
     }
+  }
+
+
+  @Mutation
+  startLoading() {
+    this.load_status.forEach(service_setting => {
+      if(service_setting.uses_setting_value) {
+        service_setting.setting_values.forEach(setting_value => {
+          setting_value.is_loading = true
+        })
+      }
+      else {
+        service_setting.is_loading = true
+      }
+    })
   }
 
   @Mutation
@@ -345,14 +328,13 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  updateStatus(response:GystEntryResponse|GystEntryPaginationResponse) {
+  updateStatus(response:GystEntryResponse) {
     const param = getParam(response, this.load_status)!
     if("error" in response) {
       param.error = response.error
     }
     else {
       const total_entries = response.entries.length
-      param.last_loaded_entries_total = total_entries
       param.total += total_entries
     }
 
@@ -360,42 +342,21 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  updatePaginationReqDataWithInit(response:GystEntryResponse) {
+  updatePaginationReqData(response:GystEntryResponse) {
+    const param = getParam(response, this.load_status)
     if("error" in response) {
       const _response = <GystEntryResponseError> response
-      this.services_pagination_req_data.push(_response)
+      param.error = _response.error
     }
     else {
-      const data = _.cloneDeep(response)
-
-      delete data.entries
-      delete data.service_response
-
-      this.services_pagination_req_data.push(data)
-    }
-  }
-
-  @Mutation
-  updatePaginationReqDataWithPagination(response:GystEntryPaginationResponse) {
-    if("error" in response) {
-
-    }
-    else {
-      const target_index = this.services_pagination_req_data.findIndex(entry => {
-        return (
-          entry.service_setting_id == response.service_setting_id &&
-          entry.setting_value_id == response.setting_value_id
-        )
-      })
-
-      // Update a value of an object
-      const target_req_data = this.services_pagination_req_data[target_index]
-
-      if("error" in target_req_data) {
-        delete target_req_data.error
+      if("warning" in response) {
+        param.warning = response.warning
       }
-
-      ;(<PaginationReqDataSuccess> target_req_data).pagination_data = response.pagination_data
+      else {
+        param.pagination_data = response.pagination_data
+        delete param.warning
+        delete param.error
+      }
     }
   }
 }

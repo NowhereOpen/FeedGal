@@ -1,92 +1,75 @@
 <template lang="pug">
 div
   div.title Load status
-  div(
-    v-for="service_setting of load_status"
-  )
-    ServiceSettingStatus(
-      ref="service-setting-status"
-      :data="service_setting"
+  div(v-for="service_setting of load_status")
+    LoadStatusEntry(
+      :text="service_setting.service_name"
+      :total="getServiceSettingTotal(service_setting)"
+      :is_loading="getServiceSettingIsLoading(service_setting)"
+      :is_warning="'warning' in service_setting"
+      :warning_text="getWarningText(service_setting)"
+      :is_error="'error' in service_setting"
+      :error_text="getErrorText(service_setting)"
     )
+    div.ml-2(v-if="service_setting.uses_setting_value")
+      div(v-for="setting_value of getSettingValues(service_setting)")
+        LoadStatusEntry(
+          :text="setting_value.displayed_as"
+          :total="setting_value.total"
+          :is_loading="setting_value.is_loading"
+          :is_warning="'warning' in setting_value"
+          :warning_text="getWarningText(setting_value)"
+          :is_error="'error' in setting_value"
+          :error_text="getErrorText(setting_value)"
+        )
 </template>
 
 <script lang="ts">
 import { Vue, Component, State, Getter } from "nuxt-property-decorator"
 
-import ServiceSettingStatus from "./ServiceSettingStatus.vue"
+import LoadStatusEntry from "./LoadStatusEntry.vue"
 
-import {
-  GystEntryResponse,
-  GystEntryResponseSuccess,
-  GystEntryResponseError,
-  GystEntryResponseGeneralError,
-  GystEntryPaginationResponse,
-  PaginationData
-} from "~/src/common/types/gyst-entry"
-import { LoadStatusByServiceSetting, LoadStatus } from "~/src/common/types/loader"
-import { Loadable } from "~/src/cli/gyst-entry-load-status/base"
+import { LoadStatus, LoadStatusServiceSetting, LoadStatusSettingValue, ClientSideField } from "~/src/common/types/loader"
 
 @Component({
   components: {
-    ServiceSettingStatus
+    LoadStatusEntry
   }
 })
-export default class GystEntryLoadStatus extends Loadable {
-  // @State(state => state['loader'].load_status) load_status!:LoadStatus
-  // @Getter("loader/load_status_by_service_setting") load_status_by_service_setting!:LoadStatusByServiceSetting
-  @Getter("loader/load_status_by_service_setting") load_status!:LoadStatusByServiceSetting
+export default class GystEntryLoadStatus extends Vue {
+  @State(state => state['loader'].load_status) load_status!:LoadStatus
 
-  startLoading() {
-    this.getServiceSettingStatusComponents().forEach(comp => {
-      comp.startLoading()
-    })
+  getServiceSettingTotal(service_setting:LoadStatusServiceSetting) {
+    return service_setting.uses_setting_value ?
+      service_setting.setting_values.reduce((acc, setting_value) => acc += setting_value.total, 0) :
+      service_setting.total
   }
 
-  callServiceSettingUpdateStatus(response:GystEntryResponseSuccess|GystEntryResponseError) {
-    const service_setting = this.getServiceSettingStatusComponents().find(
-      comp => comp.data._id == response.service_setting_id
-    )
-
-    /**
-     * 2020-03-24 07:43
-     * 
-     * We call `find` on `getServiceSettingStatusComponents`, which is guaranteed to be an array.
-     * But `find` can return undefined. And that is the case for default gyst entry.
-     * 
-     * Unless default entries get their own load status.
-     */
-    if(service_setting == undefined) {
-      return
+  getServiceSettingIsLoading(service_setting:LoadStatusServiceSetting) {
+    if(service_setting.is_disabled) {
+      return false
     }
 
-    service_setting!.updateStatus(response)
+    return service_setting.uses_setting_value ?
+      service_setting.setting_values.every((setting_value) => setting_value.is_loading || setting_value.is_invalid) :
+      service_setting.is_loading
   }
 
-  handleDataResponse(response:GystEntryResponseSuccess) {
-    this.callServiceSettingUpdateStatus(response)
-  }
-
-  handleErrorResponse(response:GystEntryResponseError) {
-    this.callServiceSettingUpdateStatus(response)
-  }
-
-  handleGeneralErrorResponse(response:GystEntryResponseGeneralError) {
-    alert(response.error.message)
-  }
-
-  isAllLoaded() {
-    const result = this.getServiceSettingStatusComponents().every(service_setting => service_setting.is_loading == false)
-    return result
-  }
-
-  getServiceSettingStatusComponents() {
-    let components = (<ServiceSettingStatus[]> this.$refs["service-setting-status"])
-
-    if(components == undefined) {
-      components = []
+  getSettingValues(service_setting:LoadStatusServiceSetting) {
+    if("warning" in service_setting && service_setting.warning!.name == "DISABLED") {
+      return []
     }
+    else {
+      return service_setting.setting_values
+    }
+  }
 
-    return components
+  getWarningText(entry:ClientSideField) {
+    return "warning" in entry ? entry.warning!.message : ""
+  }
+
+  getErrorText(entry:ClientSideField) {
+    return "error" in entry ? entry.error!.message : ""
   }
 }
 </script>

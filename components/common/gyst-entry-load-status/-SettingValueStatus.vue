@@ -11,7 +11,7 @@ div
         span(v-else)
           span {{ error.message }}
     span(v-else)
-      v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")  
+      v-progress-circular.ml-2(v-if="data.is_loading" indeterminate size="20")
 </template>
 
 <script lang="ts">
@@ -21,7 +21,6 @@ import {
   GystEntryResponse,
   GystEntryResponseSuccess,
   GystEntryResponseError,
-  GystEntryPaginationResponse,
   GystEntryResponseErrorDetails,
   PaginationData
 } from "~/src/common/types/gyst-entry"

@@ -2,8 +2,30 @@ import { getServiceInfo, getEntriesInitNonOAuth, getEntriesInitOAuth } from "~/s
 import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader-module-base/types"
 import { FlattenedLoaderParam } from "./type"
 import { refreshTokenIfFail } from "../common"
+import { GystEntryResponseSuccess } from "~/src/common/types/gyst-entry"
+import { handleError } from "~/src/server/method-collection/common"
 
-export async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<LoaderModuleOutput> {
+export async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<GystEntryResponseSuccess> {
+  const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
+  let response!:GystEntryResponseSuccess
+  let output:LoaderModuleOutput = {
+    entries:[], pagination_options: { new: null, old: null }, service_response: null
+  }
+  const warning = await handleError(param, async () => {
+    output = await _getEntriesInitWithParam(param)
+  })
+
+  response = {
+    entries: output.entries,
+    pagination_data: { index: 0, options: output.pagination_options },
+    service_response: output.service_response,
+    oauth_connected_user_entry_id, service_id, service_setting_id, setting_value, setting_value_id, warning
+  }
+
+  return response
+}
+
+async function _getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<LoaderModuleOutput> {
   const service_id = param.service_id
   const is_oauth = getServiceInfo(service_id).is_oauth
   const setting_value = param.setting_value

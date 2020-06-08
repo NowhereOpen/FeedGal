@@ -74,7 +74,7 @@ async function injectData(matched_path:string, req:any, state:any) {
   }
 
   // Common handler
-  injectAllPage(state["session"], is_logged_in, user_id)
+  injectSession(state["session"], is_logged_in, user_id)
 
   // Page handler
   if(matched_path == "" && is_logged_in) {
@@ -91,7 +91,7 @@ async function injectData(matched_path:string, req:any, state:any) {
   }
 }
 
-function injectAllPage(state:any, is_logged_in:boolean, user_id:undefined|string) {
+function injectSession(state:any, is_logged_in:boolean, user_id:undefined|string) {
   state.is_logged_in = is_logged_in
   state.user_id = user_id
 }

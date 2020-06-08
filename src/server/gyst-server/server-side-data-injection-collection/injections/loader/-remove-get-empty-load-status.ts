@@ -34,10 +34,7 @@ export async function getEmptyLoadStatus(user_id:string) {
         is_disabled: service_setting.is_disabled,
         oauth_connected_user_entry_id: service_setting.oauth_connected_user_entry_id,
         is_loading: true,
-        total: 0,
-
-        last_loaded_entries_total: null,
-        pagination_index: null,
+        total: 0
       }
 
       if(service_info.uses_setting_value) {
