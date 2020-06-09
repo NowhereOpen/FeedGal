@@ -24,7 +24,14 @@ export async function getEntriesPaginationData(
   direction:PaginationDirection,
   service_pagination_req_param:ServicePaginationReqParam
 ):Promise<GystEntryResponseSuccess> {
-  const { service_id, pagination_data, oauth_connected_user_entry_id, service_setting_id, setting_value, setting_value_id } = service_pagination_req_param
+  const {
+    service_id,
+    service_setting_id,
+    setting_value,
+    setting_value_id,
+    pagination_data,
+    oauth_connected_user_entry_id,
+  } = service_pagination_req_param
 
   let pagination_output!:PaginationOutput
 
@@ -32,6 +39,7 @@ export async function getEntriesPaginationData(
     { service_id, pagination_options: pagination_data.options },
     async () => {
       pagination_output = await _getEntriesPaginationData(direction, service_pagination_req_param)
+      return pagination_output.result
     }
   )
 
@@ -45,7 +53,11 @@ export async function getEntriesPaginationData(
   }
 
   const response:GystEntryResponseSuccess = {
-    service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id,
+    service_id,
+    service_setting_id,
+    setting_value_id,
+    setting_value,
+    oauth_connected_user_entry_id,
     entries: output.entries,
     service_response: output.service_response,
     pagination_data: { index, options: output.pagination_options },

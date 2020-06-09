@@ -127,10 +127,10 @@ export type handleErrorParam = {
 
 export async function handleError(
   { service_id, pagination_options }:handleErrorParam,
-  cb:() => Promise<void>
+  cb:() => Promise<LoaderModuleOutput>
 ):Promise<GystEntryWarning|undefined> {
   try {
-    await cb()
+    const output:LoaderModuleOutput = await cb()
   }
   catch(e) {
     if(service_id == "league-of-legends") {

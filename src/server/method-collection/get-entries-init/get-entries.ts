@@ -6,20 +6,36 @@ import { GystEntryResponseSuccess } from "~/src/common/types/gyst-entry"
 import { handleError } from "~/src/server/method-collection/common"
 
 export async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<GystEntryResponseSuccess> {
-  const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
+  const {
+    service_id,
+    service_setting_id,
+    setting_value_id,
+    setting_value,
+    oauth_connected_user_entry_id
+  } = param
+  
   let response!:GystEntryResponseSuccess
   let output:LoaderModuleOutput = {
     entries:[], pagination_options: { new: null, old: null }, service_response: null
   }
   const warning = await handleError(param, async () => {
     output = await _getEntriesInitWithParam(param)
+    return output
   })
 
   response = {
     entries: output.entries,
-    pagination_data: { index: 0, options: output.pagination_options },
+    pagination_data: {
+      index: 0,
+      options: output.pagination_options
+    },
     service_response: output.service_response,
-    oauth_connected_user_entry_id, service_id, service_setting_id, setting_value, setting_value_id, warning
+    oauth_connected_user_entry_id,
+    service_id,
+    service_setting_id,
+    setting_value,
+    setting_value_id,
+    warning
   }
 
   return response
