@@ -9,7 +9,6 @@
 import { Entry, LoadEntryParamDetail } from "~/src/common/types/gyst-entry"
 
 export type GystEntryWrapper = {
-  pagination_index:number
   entry:Entry
   load_entry_param_detail:LoadEntryParamDetail
 }

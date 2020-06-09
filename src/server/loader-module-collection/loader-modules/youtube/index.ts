@@ -24,14 +24,14 @@ export class YouTubeLoaderModule extends OAuthBaseLoaderModule {
       to_moment: moment()
     }
 
-    return getEntries(param.token_data.access_token, 0, date_range)
+    return getEntries(param.token_data.access_token, date_range)
   }
 
-  async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam, direction:PaginationDirection, pagination_updated_index:number) {
+  async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam, direction:PaginationDirection) {
     const date_range = {
       from_moment: moment(pagination_value.from_moment),
       to_moment: moment(pagination_value.to_moment)
     }
-    return getEntries(param.token_data.access_token, pagination_updated_index, date_range)
+    return getEntries(param.token_data.access_token, date_range)
   }
 }

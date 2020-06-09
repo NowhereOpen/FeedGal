@@ -16,7 +16,7 @@ export async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promis
   
   let response!:GystEntryResponseSuccess
   let output:LoaderModuleOutput = {
-    entries:[], pagination_options: { new: null, old: null }, service_response: null
+    entries:[], service_response: null
   }
   const warning = await handleError(param, async () => {
     output = await _getEntriesInitWithParam(param)
@@ -25,10 +25,7 @@ export async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promis
 
   response = {
     entries: output.entries,
-    pagination_data: {
-      index: 0,
-      options: output.pagination_options
-    },
+    pagination_data: output.pagination_data,
     service_response: output.service_response,
     oauth_connected_user_entry_id,
     service_id,

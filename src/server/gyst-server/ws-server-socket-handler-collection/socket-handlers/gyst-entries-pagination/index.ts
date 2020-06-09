@@ -49,7 +49,7 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
     let response!:GystEntryResponse
 
     try {
-      if(warning && warning.name == "RATE_LIMIT" && service_pagination_req_param.pagination_data.index == 0) {
+      if(warning && warning.name == "RATE_LIMIT" && service_pagination_req_param.pagination_data == undefined) {
         const response:GystEntryResponseSuccess = await getEntriesInitWithParam(<FlattenedLoaderParam> {
           service_id,
           service_setting_id,

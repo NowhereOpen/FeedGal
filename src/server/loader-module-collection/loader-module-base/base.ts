@@ -59,15 +59,14 @@ export abstract class BaseLoaderModule<
   }
 
   abstract getEntriesInit(param:GetEntriesInitParamType):Promise<LoaderModuleOutput>
-  async getEntriesPagination(direction:PaginationDirection, pagination_updated_index:number, param:GetEntriesPaginationParamType):Promise<LoaderModuleOutput> {
-    const pagination_value = param.pagination_data.options[direction]
-    return this.getEntriesPaginationImpl(pagination_value, param, direction, pagination_updated_index)
+  async getEntriesPagination(direction:PaginationDirection, param:GetEntriesPaginationParamType):Promise<LoaderModuleOutput> {
+    const pagination_value = param.pagination_data[direction]
+    return this.getEntriesPaginationImpl(pagination_value, param, direction)
   }
   abstract getEntriesPaginationImpl(
     pagination_value:any,
     param:GetEntriesPaginationParamType,
-    direction:PaginationDirection,
-    pagination_updated_index:number
+    direction:PaginationDirection
   ):Promise<LoaderModuleOutput>
   
   /**

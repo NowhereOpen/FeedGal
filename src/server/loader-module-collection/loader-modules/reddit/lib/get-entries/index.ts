@@ -1,14 +1,14 @@
 import urlJoin from "url-join"
 import moment from "moment"
 
-import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
+import { LoaderModuleOutput, PaginationData, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
 import { getBestListing } from "~/src/server/lib/loader-module-helpers/services/reddit"
 
-export async function getEntries(reddit_cred:any, pagination_index:number, pagination_param?:any):Promise<LoaderModuleOutput> {
+export async function getEntries(reddit_cred:any, pagination_param?:any):Promise<LoaderModuleOutput> {
   const response = await getBestListing(reddit_cred, pagination_param)
   return {
     entries: response.data.children.map(formatEntries),
-    pagination_options: getPaginationData(response, pagination_index),
+    pagination_data: getPaginationData(response),
     service_response: response
   }
 }
@@ -44,18 +44,10 @@ function getCreatedFromEntry(entry:any) {
  * May need to return `new: { before: post_id }, old: { after: post_id }` if `direction` isn't
  * passed for `getServiceEntries`.
  */
-function getPaginationData(res_data:any, pagination_index:number=0):PaginationOptions {
-  if(pagination_index == 0) {
-    return {
-      new: res_data.data.before,
-      old: res_data.data.after
-    }
-  }
-  else {
-    return {
-      // Reddit `data.before` is null for non-pagination request
-      new: null,
-      old: res_data.data.after
-    }
+function getPaginationData(res_data:any):PaginationData {
+  // Reddit `data.before` is null for non-pagination request
+  return {
+    new: res_data.data.before,
+    old: res_data.data.after
   }
 }

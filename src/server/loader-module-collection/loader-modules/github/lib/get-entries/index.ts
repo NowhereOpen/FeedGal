@@ -1,4 +1,4 @@
-import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
+import { LoaderModuleOutput, PaginationData, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
 import { getCommits } from "~/src/server/lib/loader-module-helpers/services/github"
 
 export async function getEntries(
@@ -31,7 +31,7 @@ export async function getEntries(
 
   return {
     entries: commits.map(entry => formatEntries(entry)),
-    pagination_options: getPaginationData(pagination_page),
+    pagination_data: getPaginationData(pagination_page),
     service_response: commits
   }
 }
@@ -77,7 +77,7 @@ function formatEntries(entry:any):Entry {
   }
 }
 
-function getPaginationData(pagination_page:any|undefined):PaginationOptions {
+function getPaginationData(pagination_page:any|undefined):PaginationData {
   if([undefined, 1].includes(pagination_page)) {
     /**
      * The first page starts at 1.

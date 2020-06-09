@@ -85,7 +85,8 @@ export type GystEntryWarning = {
 
 export type GystEntryResponseSuccess = LoadEntryParamDetail & {
   entries:Entry[]
-  pagination_data:PaginationData
+  // Undefined when there had been a warning
+  pagination_data?:PaginationData
   service_response?: any
   warning?: GystEntryWarning
 }
@@ -103,6 +104,6 @@ export type GystEntryResponse = GystEntryResponseSuccess | GystEntryResponseErro
  * which are the entries and service response
  */
 export type ServicePaginationReqParam = LoadEntryParamDetail & {
-  pagination_data:PaginationData
+  pagination_data?:PaginationData
   warning?: Omit<GystEntryWarning, "message">
 }

@@ -41,14 +41,12 @@ export async function getEntriesInitNonOAuth(service_id:string, setting_value:an
 export async function getEntriesPaginationOAuth(
   service_id:string,
   direction:PaginationDirection,
-  pagination_updated_index:number,
   pagination_data:PaginationData,
   token_data:any,
   setting_value?:any
 ):Promise<LoaderModuleOutput> {
   let result:LoaderModuleOutput = await (loader_collection[service_id] as OAuthBaseLoaderModule).getEntriesPagination(
     direction,
-    pagination_updated_index,
     { pagination_data, setting_value, token_data }
   )
 
@@ -58,13 +56,11 @@ export async function getEntriesPaginationOAuth(
 export async function getEntriesPaginationNonOAuth(
   service_id:string,
   direction:PaginationDirection,
-  pagination_updated_index:number,
   pagination_data:PaginationData,
   setting_value?:any
 ):Promise<LoaderModuleOutput> {
   const result = await (loader_collection[service_id] as NonOAuthLoaderModule).getEntriesPagination(
     direction,
-    pagination_updated_index,
     { pagination_data, setting_value }
   )
   return result

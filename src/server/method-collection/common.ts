@@ -118,11 +118,11 @@ export function commonErrorDetailGenerator(e:Error, known_errors:GystEntryError[
   return error_detail
 }
 
-import { LoaderModuleOutput, PaginationOptions } from "../loader-module-collection/loader-module-base/types"
+import { LoaderModuleOutput, PaginationData } from "../loader-module-collection/loader-module-base/types"
 
 export type handleErrorParam = {
   service_id:string
-  pagination_options?: PaginationOptions
+  pagination_options?: PaginationData
 }
 
 export async function handleError(

@@ -93,7 +93,7 @@ export async function getLatestVideosFromSubscriptionsWithXML(access_token:strin
   return latest_videos
 }
 
-export type DateRange = { from_moment?:Moment, to_moment?:Moment }
+export type DateRange = { from_moment:Moment, to_moment:Moment }
 
 export async function getAllLatestVideosFromDateRanage(access_token:string, date_range:DateRange) {
   const videos_from_subscriptions:LatestVideosFromSubscriptions[] = await getLatestVideosFromSubscriptions(access_token, date_range)

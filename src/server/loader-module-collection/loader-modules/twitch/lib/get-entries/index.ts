@@ -21,7 +21,7 @@ export async function getEntries(twitch_cred:TwitchCred, pagiantion_index:number
 
   return {
     entries: live_channels.map(formatEntries),
-    pagination_options: getPaginationOption(),
+    pagination_data: getPaginationOption(),
     service_response: live_channels
   }
 }

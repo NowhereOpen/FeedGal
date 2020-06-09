@@ -5,7 +5,8 @@ import * as _ from "lodash"
 
 import {
   LoadStatus,
-  ClientSideField
+  ClientSideField,
+  LoadStatusServiceSetting
 } from "~/src/common/types/loader"
 import {
   GystEntryResponseGeneralError,
@@ -54,7 +55,6 @@ function gystEntriesFromResponse(response:GystEntryResponseSuccess | GystEntryRe
 
   const entries = (<GystEntryResponseSuccess>response).entries
   const wrapper_entries = entries.map(entry => (<GystEntryWrapperType> {
-    pagination_index: response.pagination_data.index,
     entry,
     load_entry_param_detail: {
       service_setting_id: response.service_setting_id,
@@ -74,7 +74,7 @@ function getParam(load_entry_param:LoadEntryParam, load_status:LoadStatus):Clien
 
   const service_setting = load_status.find(entry => entry._id == service_setting_id)!
 
-  if(service_setting.uses_setting_value == false) return service_setting
+  if(setting_value_id == null) return service_setting
 
   const setting_value = service_setting.setting_values.find(entry => entry._id == setting_value_id)!
   return setting_value
@@ -294,6 +294,18 @@ export default class Store extends VuexModule {
   get getParam() {
     return (load_entry_param:LoadEntryParam) => {
       return getParam(load_entry_param, this.load_status)
+    }
+  }
+
+  get isDisabled() {
+    return (load_entry_param:LoadEntryParam) => {
+      const param:LoadStatusServiceSetting = <LoadStatusServiceSetting> getParam({ service_setting_id: load_entry_param.service_setting_id }, this.load_status)
+      /**
+       * 2020-06-09 20:35
+       * 
+       * `is_disabled` only exists in service setting at the moment
+       */
+      return param.is_disabled
     }
   }
 

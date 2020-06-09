@@ -18,8 +18,6 @@ import { handleError } from "~/src/server/method-collection/common"
 
 import { refreshTokenIfFail } from "../common"
 
-export type PaginationOutput = { result: LoaderModuleOutput, pagination_updated_index:number }
-
 export async function getEntriesPaginationData(
   direction:PaginationDirection,
   service_pagination_req_param:ServicePaginationReqParam
@@ -33,24 +31,15 @@ export async function getEntriesPaginationData(
     oauth_connected_user_entry_id,
   } = service_pagination_req_param
 
-  let pagination_output!:PaginationOutput
+  let output:LoaderModuleOutput = { entries: [], service_response: null, pagination_data: pagination_data }
 
   const warning = await handleError(
-    { service_id, pagination_options: pagination_data.options },
+    { service_id, pagination_options: pagination_data },
     async () => {
-      pagination_output = await _getEntriesPaginationData(direction, service_pagination_req_param)
-      return pagination_output.result
+      output = await _getEntriesPaginationData(direction, service_pagination_req_param)
+      return output
     }
   )
-
-  let output:LoaderModuleOutput = { entries: [], service_response: null, pagination_options: pagination_data.options }
-  let index = service_pagination_req_param.pagination_data.index
-
-  if(warning == undefined) {
-    const { result, pagination_updated_index } = pagination_output
-    output = result
-    index = pagination_updated_index
-  }
 
   const response:GystEntryResponseSuccess = {
     service_id,
@@ -60,7 +49,7 @@ export async function getEntriesPaginationData(
     oauth_connected_user_entry_id,
     entries: output.entries,
     service_response: output.service_response,
-    pagination_data: { index, options: output.pagination_options },
+    pagination_data: output.pagination_data,
     warning
   }
 
@@ -70,38 +59,23 @@ export async function getEntriesPaginationData(
 async function _getEntriesPaginationData(
   direction:PaginationDirection,
   service_pagination_req_param:ServicePaginationReqParam
-):Promise<PaginationOutput> {
+):Promise<LoaderModuleOutput> {
   const service_id = service_pagination_req_param.service_id
-  const pagination_current_index = service_pagination_req_param.pagination_data.index
-
-  /**
-   * 2020-03-15 15:28
-   * 
-   * Used in getting gyst entries and included in the response.
-   */
-  let pagination_updated_index!:number
-
-  if(direction == "new") {
-    pagination_updated_index = pagination_updated_index - 1
-  }
-  else if(direction == "old") {
-    pagination_updated_index = pagination_updated_index + 1
-  }
 
   const is_oauth = getServiceInfo(service_id).is_oauth
-  const pagination_data = service_pagination_req_param.pagination_data
+  const pagination_data = service_pagination_req_param.pagination_data!
   const setting_value = service_pagination_req_param.setting_value
 
   let result!:LoaderModuleOutput
   const { oauth_connected_user_entry_id } = service_pagination_req_param
   if(is_oauth) {
     await refreshTokenIfFail(service_id, oauth_connected_user_entry_id!, async (token_data) => {
-      result = await getEntriesPaginationOAuth(service_id, direction, pagination_updated_index, pagination_data, token_data, setting_value)
+      result = await getEntriesPaginationOAuth(service_id, direction, pagination_data, token_data, setting_value)
     })
   }
   else {
-    result = await getEntriesPaginationNonOAuth(service_id, direction, pagination_updated_index, pagination_data, setting_value)
+    result = await getEntriesPaginationNonOAuth(service_id, direction, pagination_data, setting_value)
   }
 
-  return { result, pagination_updated_index }
+  return result
 }

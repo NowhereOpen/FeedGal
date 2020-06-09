@@ -1,6 +1,6 @@
 import moment from "moment"
 
-import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
+import { LoaderModuleOutput, PaginationData, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
 import { _getEventsWithinRange } from "~/src/server/lib/loader-module-helpers/services/google-calendar"
 
 type DateRange = { from: any, to: any }
@@ -9,7 +9,7 @@ export async function getEntries(access_token:string, calendar_id:string, date_r
   const entries:any[] = await _getEventsWithinRange(access_token, date_range, calendar_id)
   return {
     entries: entries.map(formatEntries),
-    pagination_options: getPaginationData(date_range),
+    pagination_data: getPaginationData(date_range),
     service_response: entries
   }
 }
@@ -30,7 +30,7 @@ function formatEntries(entry:any):Entry {
   }
 }
 
-function getPaginationData(date_range?:DateRange):PaginationOptions {
+function getPaginationData(date_range?:DateRange):PaginationData {
   if(date_range == null) {
     date_range = {
       from: moment().startOf("week"),

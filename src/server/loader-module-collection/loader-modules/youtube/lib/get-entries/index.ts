@@ -1,14 +1,14 @@
 import moment from "moment"
 
-import { LoaderModuleOutput, PaginationOptions, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
+import { LoaderModuleOutput, PaginationData, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
 import { getAllLatestVideosFromDateRanage, DateRange } from "~/src/server/lib/loader-module-helpers/services/youtube"
 
-export async function getEntries(access_token:string, pagiantion_index:number, date_range:DateRange):Promise<LoaderModuleOutput> {
+export async function getEntries(access_token:string, date_range:DateRange):Promise<LoaderModuleOutput> {
   const result = await getAllLatestVideosFromDateRanage(access_token, date_range)
 
   return {
     entries: result.map(formatEntries),
-    pagination_options: getPaginationData(pagiantion_index, date_range)
+    pagination_data: getPaginationData(date_range)
   }
 }
 
@@ -31,30 +31,15 @@ function formatEntries(video:any):Entry {
   }
 }
 
-function getPaginationData(pagination_index:number, prev_pagination_value?:any):PaginationOptions {
-  let date_range
-
-  if(pagination_index == 0) {
-    date_range = {
-      from_moment: moment().subtract(7, "days"),
-      to_moment: moment()
-    }
-  }
-  else {
-    date_range = {
-      from_moment: moment(prev_pagination_value["from_moment"]),
-      to_moment: moment(prev_pagination_value["to_moment"]),
-    }
-  }
-
+function getPaginationData(prev_pagination_value:DateRange):PaginationData {
   return {
     new: {
-      from_moment: date_range.to_moment,
-      to_moment: date_range.to_moment.clone().add(7, "days")
+      from_moment: prev_pagination_value.to_moment,
+      to_moment: prev_pagination_value.to_moment.clone().add(7, "days")
     },
     old: {
-      to_moment: date_range.from_moment,
-      from_moment: date_range.from_moment.clone().subtract(7, "days")
+      to_moment: prev_pagination_value.from_moment,
+      from_moment: prev_pagination_value.from_moment.clone().subtract(7, "days")
     }
   }
 }

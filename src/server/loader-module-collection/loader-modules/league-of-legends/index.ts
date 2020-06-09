@@ -25,7 +25,7 @@ export class LeagueOfLegendsLoaderModule extends NonOAuthLoaderModule<LeagueOfLe
     return getEntries(this.static_credential_data, param.setting_value.region, param.setting_value.summoner_name)
   }
 
-  async getEntriesPaginationImpl(pagination_value:any, param:NonOAuthPaginationParam, direction:PaginationDirection, pagination_updated_index:number) {
+  async getEntriesPaginationImpl(pagination_value:any, param:NonOAuthPaginationParam, direction:PaginationDirection) {
     return getEntries(this.static_credential_data, param.setting_value.region, param.setting_value.summoner_name, pagination_value)
   }
 

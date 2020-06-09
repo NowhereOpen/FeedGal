@@ -20,7 +20,7 @@ export class RedditLoaderModule extends OAuthBaseLoaderModule<RedditStaticCreden
 
   async getEntriesInit(param:OAuthGetEntriesInitParam) {
     const reddit_cred = { access_token: param.token_data.access_token, user_agent: this.static_credential_data }
-    return getEntries(reddit_cred, 0)
+    return getEntries(reddit_cred)
   }
 
   async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam, direction:PaginationDirection) {
@@ -32,6 +32,6 @@ export class RedditLoaderModule extends OAuthBaseLoaderModule<RedditStaticCreden
     else if(direction == "new") {
       pagination_param = { before: pagination_value }
     }
-    return getEntries(reddit_cred, param.pagination_data.index, pagination_param)
+    return getEntries(reddit_cred, pagination_param)
   }
 }

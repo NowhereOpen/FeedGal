@@ -21,7 +21,7 @@ export class DarkSkyLoaderModule extends NonOAuthLoaderModule<DarkSkyCredential>
   async getEntriesInit({ setting_value }:NonOAuthGetEntriesInitParam) {
     return {
       entries:[],
-      pagination_options: { new: "", old: "" },
+      pagination_data: { new: "", old: "" },
       service_response: {}
     }
   }
@@ -29,7 +29,7 @@ export class DarkSkyLoaderModule extends NonOAuthLoaderModule<DarkSkyCredential>
   async getEntriesPaginationImpl(pagination_value:any, param:NonOAuthPaginationParam) {
     return {
       entries:[],
-      pagination_options: { new: "", old: "" },
+      pagination_data: { new: "", old: "" },
       service_response: {}
     }
   }

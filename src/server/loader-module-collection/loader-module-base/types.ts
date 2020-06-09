@@ -1,4 +1,3 @@
-export type PaginationOptions = { new: any, old: any }
 export type PaginationDirection = "old" | "new"
 export type NonOAuthGetEntriesInitParam = {
   setting_value?:any
@@ -20,18 +19,14 @@ export type NonOAuthGetEntriesInitParam = {
  * 
  * Used as a part of the response. But the structure of the response should not be
  * considered by `loader-module-collection` module.
- */
-/**
+ * 
  * 2020-03-21 15:49
  * The `direction` is included in the request. And because this is
  * a common type, when the server is sending this back to the client,
  * the `direction` is nowhere to be used. The `direction` is only
  * relevent when making a request.
  */
-export type PaginationData = {
-  index: number
-  options: PaginationOptions
-}
+export type PaginationData = { new: any, old: any }
 
 export type NonOAuthPaginationParam = {
   pagination_data:PaginationData
@@ -72,7 +67,7 @@ export type ValidationResult = {
 
 export type LoaderModuleOutput = {
   entries:any[]
-  pagination_options:PaginationOptions
+  pagination_data?:PaginationData
   service_response?:any
 }
 

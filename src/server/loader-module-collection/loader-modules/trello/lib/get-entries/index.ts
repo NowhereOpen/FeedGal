@@ -6,7 +6,7 @@ export async function getEntries(trello_cred:TrelloCred, pagination_param?:any):
 
   return {
     entries: data.map(formatEntries),
-    pagination_options: getPaginationOption(data),
+    pagination_data: getPaginationOption(data),
     service_response: data
   }
 }
