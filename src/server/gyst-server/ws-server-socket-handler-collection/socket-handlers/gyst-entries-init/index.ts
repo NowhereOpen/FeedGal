@@ -10,7 +10,7 @@ import {
 import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
 import { FlattenedLoaderParam, flattenServiceSettings, getEntriesInitWithParam } from "~/src/server/method-collection/get-entries-init"
 import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader-module-base/types"
-import { commonErrorDetailGenerator, handleError } from "~/src/server/method-collection/common"
+import { commonErrorDetailGenerator } from "~/src/server/method-collection/common"
 
 export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
   respond(data:any) {

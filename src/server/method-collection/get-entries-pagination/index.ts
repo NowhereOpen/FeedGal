@@ -31,10 +31,10 @@ export async function getEntriesPaginationData(
     oauth_connected_user_entry_id,
   } = service_pagination_req_param
 
-  let output:LoaderModuleOutput = { entries: [], service_response: null, pagination_data: pagination_data }
+  let output:LoaderModuleOutput = { entries: [], service_response: null, pagination_data }
 
   const warning = await handleError(
-    { service_id, pagination_options: pagination_data },
+    { service_id, pagination_data },
     async () => {
       output = await _getEntriesPaginationData(direction, service_pagination_req_param)
       return output

@@ -18,10 +18,13 @@ export async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promis
   let output:LoaderModuleOutput = {
     entries:[], service_response: null
   }
-  const warning = await handleError(param, async () => {
-    output = await _getEntriesInitWithParam(param)
-    return output
-  })
+  const warning = await handleError(
+    { service_id },
+    async () => {
+      output = await _getEntriesInitWithParam(param)
+      return output
+    }
+  )
 
   response = {
     entries: output.entries,

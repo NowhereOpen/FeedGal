@@ -1,7 +1,7 @@
 import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
 import { getEntriesInitWithParam, FlattenedLoaderParam } from "~/src/server/method-collection/get-entries-init"
 import { getEntriesPaginationData } from "~/src/server/method-collection/get-entries-pagination"
-import { commonErrorDetailGenerator, handleError } from "~/src/server/method-collection/common"
+import { commonErrorDetailGenerator } from "~/src/server/method-collection/common"
 import {
   ServicePaginationReqParam,
   GystEntryResponse,

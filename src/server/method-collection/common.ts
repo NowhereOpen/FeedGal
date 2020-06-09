@@ -122,15 +122,24 @@ import { LoaderModuleOutput, PaginationData } from "../loader-module-collection/
 
 export type handleErrorParam = {
   service_id:string
-  pagination_options?: PaginationData
+  pagination_data?: PaginationData
 }
 
 export async function handleError(
-  { service_id, pagination_options }:handleErrorParam,
+  { service_id, pagination_data }:handleErrorParam,
   cb:() => Promise<LoaderModuleOutput>
 ):Promise<GystEntryWarning|undefined> {
   try {
     const output:LoaderModuleOutput = await cb()
+    if(service_id == "github") {
+      if(output.entries.length == 0) {
+        return {
+          name: "ALL_LOADED",
+          message: "All entries have been loaded.",
+          data: ""
+        }
+      }
+    }
   }
   catch(e) {
     if(service_id == "league-of-legends") {

@@ -75,7 +75,7 @@ export type GystEntryResponseGeneralError = {
   error: GystEntryResponseErrorDetails
 }
 
-export type GystEntryWarningTypes = "RATE_LIMIT" | "ZERO_RETURNED" | "DISABLED"
+export type GystEntryWarningTypes = "RATE_LIMIT" | "ALL_LOADED" | "DISABLED"
 
 export type GystEntryWarning = {
   name?: GystEntryWarningTypes
