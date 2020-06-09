@@ -57,8 +57,11 @@ import {
   GystEntryResponse,
   GystEntryResponseSuccess,
   PaginationReqData,
-  LoadEntryParam
+  LoadEntryParam,
+  ServicePaginationReqParam,
 } from "~/src/common/types/gyst-entry"
+import { PaginationDirection } from "../src/server/loader-module-collection/loader-module-base/types"
+import { LoadStatusServiceSetting, LoadStatusSettingValue } from "../src/common/types/loader"
 
 @Component({
   components: { GystEntryLoadStatus, GystEntryWrapper }
@@ -119,6 +122,9 @@ export default class IndexPage extends Vue {
     });
   }
 
+  /**
+   * Same behavior as when clicking on the "load more" button at the bottom
+   */
   async onScrolledToBottom() {
     this.loadMore()
   }
@@ -127,24 +133,11 @@ export default class IndexPage extends Vue {
     this.is_waiting_request = false;
   }
 
+  /**
+   * Same behavior as when scrolling to the bottom
+   */
   onClickLoadMore() {
     this.loadMore()
-  }
-
-  loadMore() {
-    this.loadEntries()
-    this.loader.load_status.forEach(service_setting => {
-      const service_setting_id = service_setting._id
-      if(service_setting.uses_setting_value) {
-        service_setting.setting_values.forEach(setting_value => {
-          const setting_value_id = setting_value._id
-          this.loadMoreIfPossible({ service_setting_id, setting_value_id })
-        })
-      }
-      else {
-        this.loadMoreIfPossible({ service_setting_id })
-      }
-    })
   }
 
   isAtBottom() {
@@ -160,52 +153,97 @@ export default class IndexPage extends Vue {
     }
   }
 
-  loadEntries() {
+  loadMore() {
     this.loader.loadFromPreloadedStorage()
+
+    const all_params = this.getAllLoadEntryParams()
+      .filter(param => {
+        const load_entry_param = this.loader.getParam(param)
+        
+        const error_exists = "error" in load_entry_param
+        const is_disabled = "warning" in load_entry_param && load_entry_param.warning!.name == "DISABLED"
+        const is_enough_loaded = this.loader.isEnoughPreloaded(param)
+
+        return is_enough_loaded == false && error_exists == false && is_disabled == false
+      })
+
+    this.requestPagination("old", all_params)
   }
 
-  loadEntriesFromResponse(response:GystEntryResponseSuccess, condition:boolean) {
+  async onGystInitEntries(response:GystEntryResponse) {
+    this.handleSocketResponse(response)
+  }
+
+  async onGystPaginationEntries(response:GystEntryResponse) {
+    this.handleSocketResponse(response)
+  }
+
+  getAllLoadEntryParams() {
+    const output:LoadEntryParam[] = []
+    this.loader.load_status.forEach(service_setting => {
+      const service_setting_id = service_setting._id
+      if(service_setting.uses_setting_value) {
+        service_setting.setting_values.forEach(setting_value => {
+          const setting_value_id = setting_value._id
+          output.push({ service_setting_id, setting_value_id })
+        })
+      }
+      else {
+        output.push({ service_setting_id })
+      }
+    })
+
+    return output
+  }
+
+  requestPagination(direction:PaginationDirection, params:LoadEntryParam[]) {
+    const DIRECTION = "old"
+    const pagination_req_data:ServicePaginationReqParam[] = []
+    
+    params.forEach(param => {
+      const data = this.loader.getPaginationReqDataForLoadEntryParam(param)
+      pagination_req_data.push(data)
+
+      this.loader.updateIsLoading({ param, value: true })
+    })
+
+    this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
+  }
+
+  handleSocketResponse(response:GystEntryResponse) {
+    this.loader.updatePaginationReqData(response)
     this.updateIsWaitingRequest(response)
 
     if("error" in response == false) {
       this.loader.concatToPreloadedStorage(<GystEntryResponseSuccess> response)
-      if(condition || this.isAtBottom()) {
-        this.loadEntries()
+      /**
+       * 2020-06-09 09:29
+       * 
+       * Always concat to preloaded storage, but when the user opened the app (visit the page)
+       * for the first time, or the users is at the bottom of the page, load into 'loaded
+       * storage' directly.
+       */
+      if(this.loader.isLoadedEmpty || this.isAtBottom()) {
+        this.loader.loadFromPreloadedStorage()
       }
     }
 
-    this.loadMoreIfPossible(response)
-  }
-
-  loadMoreIfPossible(param:LoadEntryParam) {
     /**
-     * If entries loaded with `response.load_entry_param_detail` doesn't exist in `preloaded_entries`, load more
-     * automatically unless it returned error, or an empty response (end of pagination) from the last request.
+     * 2020-06-09 10:08
+     * 
+     * Don't request for next pagination when there is `RATE_LIMIT` warning because it will result in
+     * somewhat 'endless loop' of making request and resposne with `RATE_LIMIT` warning until the
+     * outside service finally returns a proper response or some error/warning that is not converted
+     * into `RATE_LIMIT` by the gyst server.
      */
-    const is_enough_loaded = this.loader.isEnoughPreloaded(param)
-    const can_load_more = this.loader.canLoadMore(param)
-
-    if(is_enough_loaded == false && can_load_more) {
-      const DIRECTION = "old"
-      const pagination_req_data = this.loader.getPaginationReqDataForLoadEntryParam(param)
-      this.loader.updateIsLoading({ param, value: true })
-      this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
+    const rate_limit_warning = "warning" in response && response.warning!.name == "RATE_LIMIT"
+    const error_exists = "error" in response
+    const is_enough_loaded = this.loader.isEnoughPreloaded(<LoadEntryParam> response)
+    if(is_enough_loaded || rate_limit_warning || error_exists) {
+      return
     }
-  }
 
-  async onGystInitEntries(response:GystEntryResponse) {
-    if("error" in response && response.error.name == "NO_SERVICE_SETTINGS") {
-      this.loader.updatePaginationReqData(response)
-    }
-    else {
-      this.loader.updatePaginationReqData(response)
-      this.loadEntriesFromResponse(<GystEntryResponseSuccess> response, this.loader.isLoadedEmpty)
-    }
-  }
-
-  async onGystPaginationEntries(response:GystEntryResponse) {
-    this.loader.updatePaginationReqData(response)
-    this.loadEntriesFromResponse(<GystEntryResponseSuccess> response, this.loader.isLoadedEmpty)
+    this.requestPagination("old", [{ service_setting_id: response.service_setting_id, setting_value_id: response.setting_value_id }])
   }
 }
 </script>

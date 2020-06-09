@@ -10,7 +10,7 @@ import {
 } from "~/src/common/types/gyst-entry"
 
 import { validateOwnership } from "./validate-ownership"
-import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader-module-base/types"
+import { LoaderModuleOutput, PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
 
 export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHandler {
   respond(data:any) {
@@ -20,7 +20,7 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
   async handleImpl() {
     const services_pagination_req_data:ServicePaginationReqParam[] = this.req.pagination_req_data
 
-    const direction = this.req.direction
+    const direction:PaginationDirection = this.req.direction
 
     const oauth_connected_user_entry_ids:string[] = services_pagination_req_data
       .filter(entry => entry.oauth_connected_user_entry_id)
@@ -31,37 +31,46 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
       // Something weird happened on the client side.
     }
 
-    await Promise.all(
-      services_pagination_req_data.map(async (service_pagination_req_param:ServicePaginationReqParam) => {
-        const { service_id, service_setting_id, setting_value_id, setting_value, warning, oauth_connected_user_entry_id } = service_pagination_req_param
+    services_pagination_req_data.forEach(async (service_pagination_req_param:ServicePaginationReqParam) => {
+      this.makePaginationRequest(direction, service_pagination_req_param)
+    })
+  }
 
-        let response!:GystEntryResponse
+  async makePaginationRequest(direction:PaginationDirection, service_pagination_req_param:ServicePaginationReqParam) {
+    const {
+      service_id,
+      service_setting_id,
+      setting_value_id,
+      setting_value,
+      warning,
+      oauth_connected_user_entry_id
+    } = service_pagination_req_param
 
-        try {
-          if(warning && warning.name == "RATE_LIMIT") {
-            const response:GystEntryResponseSuccess = await getEntriesInitWithParam(<FlattenedLoaderParam> {
-              service_id,
-              service_setting_id,
-              oauth_connected_user_entry_id,
-              setting_value,
-              setting_value_id
-            })
-            return this.respond(response)
-          }
-          else {
-            response = await getEntriesPaginationData(direction, service_pagination_req_param)
-          }
-        }
-        catch(e) {
-          const error_detail = commonErrorDetailGenerator(e)
-          response = <GystEntryResponseError> {
-            service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id, 
-            error: error_detail
-          }
-        }
-        
-        this.respond(response)
-      })
-    )
+    let response!:GystEntryResponse
+
+    try {
+      if(warning && warning.name == "RATE_LIMIT" && service_pagination_req_param.pagination_data.index == 0) {
+        const response:GystEntryResponseSuccess = await getEntriesInitWithParam(<FlattenedLoaderParam> {
+          service_id,
+          service_setting_id,
+          oauth_connected_user_entry_id,
+          setting_value,
+          setting_value_id
+        })
+        return this.respond(response)
+      }
+      else {
+        response = await getEntriesPaginationData(direction, service_pagination_req_param)
+      }
+    }
+    catch(e) {
+      const error_detail = commonErrorDetailGenerator(e)
+      response = <GystEntryResponseError> {
+        service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id, 
+        error: error_detail
+      }
+    }
+    
+    this.respond(response)
   }
 }

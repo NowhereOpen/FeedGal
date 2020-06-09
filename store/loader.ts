@@ -240,13 +240,13 @@ export default class Store extends VuexModule {
   }
 
   get getPaginationReqDataForLoadEntryParam() {
-    return (load_entry_param:LoadEntryParam):ServicePaginationReqParam[] => {
+    return (load_entry_param:LoadEntryParam):ServicePaginationReqParam => {
       const { service_setting_id, setting_value_id } = load_entry_param
       const service_setting = this.load_status.find(entry => entry._id == service_setting_id)!
       const setting_value = service_setting.setting_values.find(entry => entry._id == setting_value_id)
 
       const pagination_req_data:ServicePaginationReqParam = {
-        oauth_connected_user_entry_id: service_setting.oauth_info?.oauth_id,
+        oauth_connected_user_entry_id: service_setting.oauth_info?.user_info?.entry_id,
         pagination_data: (service_setting.pagination_data || setting_value?.pagination_data)!,
         service_id: service_setting.service_id,
         service_setting_id,
@@ -255,7 +255,7 @@ export default class Store extends VuexModule {
         warning: service_setting.warning || setting_value?.warning
       }
 
-      return [pagination_req_data]
+      return pagination_req_data
     }
   }
 
@@ -291,20 +291,11 @@ export default class Store extends VuexModule {
     }
   }
 
-  /**
-   * Check if last entry returned empty response or error. If yes, return false
-   * if not, return true. There are different types of errors and flags that this
-   * function can handle.
-   */
-  get canLoadMore() {
+  get getParam() {
     return (load_entry_param:LoadEntryParam) => {
-      const param = getParam(load_entry_param, this.load_status)
-      const error_exists = "error" in param
-      const rate_limit_warning = "warning" in param && param.warning!.name == "RATE_LIMIT"
-      return error_exists == false || rate_limit_warning
+      return getParam(load_entry_param, this.load_status)
     }
   }
-
 
   @Mutation
   startLoading() {
@@ -349,14 +340,14 @@ export default class Store extends VuexModule {
       param.error = _response.error
     }
     else {
+      param.pagination_data = response.pagination_data
       if("warning" in response) {
         param.warning = response.warning
       }
       else {
-        param.pagination_data = response.pagination_data
         delete param.warning
-        delete param.error
       }
+      delete param.error
     }
   }
 }

@@ -65,7 +65,14 @@ export default class GystEntryLoadStatus extends Vue {
   }
 
   getWarningText(entry:ClientSideField) {
-    return "warning" in entry ? entry.warning!.message : ""
+    if("warning" in entry) {
+      if(entry.warning!.name == "RATE_LIMIT") {
+        return "'Rate limit' occurred for this service. May eventually load."
+      }
+      else {
+        return entry.warning!.message
+      }
+    }
   }
 
   getErrorText(entry:ClientSideField) {
