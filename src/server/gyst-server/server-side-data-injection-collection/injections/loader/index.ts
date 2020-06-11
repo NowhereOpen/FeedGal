@@ -30,6 +30,4 @@ export async function inject(state:any, user_id:string) {
     }
   })
   state.load_status = <LoadStatus> load_status
-  const service_infos = await getServiceInfos(user_id)
-  state.service_infos = service_infos
 }
