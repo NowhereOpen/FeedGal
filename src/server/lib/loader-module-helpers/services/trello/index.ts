@@ -72,7 +72,8 @@ export async function getCards(trello_cred:TrelloCred, board_id:string, req_data
  * @param req_data 
  */
 export async function getActions(trello_cred:TrelloCred, board_id:string, req_data?:any) {
-  return await makeRequest("get", `/boards/${board_id}/actions`, trello_cred, req_data)
+  const params = Object.assign({ entities: true }, req_data)
+  return await makeRequest("get", `/boards/${board_id}/actions`, trello_cred, { params })
 }
 
 export async function getMemberAction(trello_cred:TrelloCred, params?:any) {

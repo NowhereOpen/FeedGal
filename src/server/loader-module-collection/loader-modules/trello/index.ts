@@ -32,6 +32,8 @@ export class TrelloLoaderModule extends OAuthBaseLoaderModule<TrelloStaticCreden
     else if(direction == "new") {
       pagination_param = { since: pagination_value }
     }
-    return getEntries(trello_cred, pagination_param)
+    const entries = await getEntries(trello_cred, pagination_param)
+
+    return entries
   }
 }

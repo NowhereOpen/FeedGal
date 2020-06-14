@@ -112,6 +112,7 @@ export function commonErrorDetailGenerator(e:Error, known_errors:GystEntryError[
     }
   }
   else {
+    console.error(`[ERROR][commonErrorDtailGenerator] Make sure to throw a 'known error' so that it can be handled by this function.`)
     throw e
   }
 
@@ -131,7 +132,7 @@ export async function handleError(
 ):Promise<GystEntryWarning|undefined> {
   try {
     const output:LoaderModuleOutput = await cb()
-    if(service_id == "github") {
+    if(["github", "trello"].includes(service_id)) {
       if(output.entries.length == 0) {
         return {
           name: "ALL_LOADED",

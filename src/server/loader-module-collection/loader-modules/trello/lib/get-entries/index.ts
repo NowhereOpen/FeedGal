@@ -1,14 +1,23 @@
 import { LoaderModuleOutput, Entry } from "~/src/server//loader-module-collection/loader-module-base/types"
-import { getMemberAction, TrelloCred } from "~/src/server/lib/loader-module-helpers/services/trello"
+import { getActions, getMemberAction, TrelloCred } from "~/src/server/lib/loader-module-helpers/services/trello"
 
 export async function getEntries(trello_cred:TrelloCred, pagination_param?:any):Promise<LoaderModuleOutput> {
   const data = await getMemberAction(trello_cred, pagination_param)
+  // const data = await getActions(trello_cred, "5e5fa366328e540e26c067aa", pagination_param)
+  let pagination_data = { new: undefined, old: undefined }
 
-  return {
-    entries: data.map(formatEntries),
-    pagination_data: getPaginationOption(data),
+  if(data.length > 0) {
+    pagination_data = getPaginationOption(data)
+  }
+
+  const entries = data.map(formatEntries)
+  const output = {
+    entries,
+    pagination_data,
     service_response: data
   }
+
+  return output
 }
 
 function formatEntries(action:any):Entry {

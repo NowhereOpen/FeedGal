@@ -128,40 +128,6 @@ export default class Store extends VuexModule {
   }
 
   /**
-   * 2020-05-25 18:26
-   * 
-   * https://vuex.vuejs.org/guide/getters.html#method-style-access
-   * 
-   * > You can also pass arguments to getters by returning a function.
-   */
-  get getPaginationReqData() {
-    /**
-     * Filter out services whose service id is 'too old'.
-     */
-    return (direction:PaginationDirection) => {
-      const service_old_entries:{ [service_id:string]:number } = {}
-      const OLD_ENTRIES_COUNT_THRESHOLD = 5
-
-      this.preloaded_entries.forEach(entry => {
-        const moment_datetime_info = moment(entry.entry.datetime_info)
-        const service_id = entry.entry.service_id
-
-        service_old_entries[service_id] = (service_old_entries[service_id] || 0) + 1
-      })
-
-      const pagination_req_data = this.load_status
-        .filter(entry => {
-          const service_id = entry.service_id
-          const has_old_entries = service_id in service_old_entries
-          return "error" in entry == false && has_old_entries ? service_old_entries[service_id] < OLD_ENTRIES_COUNT_THRESHOLD : true
-        })
-        .map(entry => entry.pagination_data)
-
-      return pagination_req_data
-    }
-  }
-
-  /**
    * 2020-06-14 22:49 
    * 
    * Assume that service setting's `is_loading` is correct. For example, if it's `false`, it means
