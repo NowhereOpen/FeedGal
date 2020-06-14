@@ -6,9 +6,14 @@ import { getBestListing } from "~/src/server/lib/loader-module-helpers/services/
 
 export async function getEntries(reddit_cred:any, pagination_param?:any):Promise<LoaderModuleOutput> {
   const response = await getBestListing(reddit_cred, pagination_param)
+  let pagination_data = { old: undefined, new: undefined }
+  if(response.data.children.length > 0) {
+    pagination_data = getPaginationData(response)
+  }
+
   return {
     entries: response.data.children.map(formatEntries),
-    pagination_data: getPaginationData(response),
+    pagination_data,
     service_response: response
   }
 }
