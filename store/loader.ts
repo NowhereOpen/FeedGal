@@ -6,7 +6,8 @@ import * as _ from "lodash"
 import {
   LoadStatus,
   ClientSideField,
-  LoadStatusServiceSetting
+  LoadStatusServiceSetting,
+  LoadStatusSettingValue
 } from "~/src/common/types/loader"
 import {
   GystEntryResponseGeneralError,
@@ -22,6 +23,8 @@ import {
 import { ServiceInfo } from "~/src/common/types/service-info"
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
 import { PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
+
+import { getParam, gystEntriesFromResponse, iterateLoadStatus } from "~/src/cli/store/loader"
 
 /**
  * 2020-05-31 07:38
@@ -40,45 +43,10 @@ import { PaginationDirection } from "~/src/server/loader-module-collection/loade
  * are methods that load controller doesn't need but loader component does.
  */
 
-const MAX_DURATION_DIFF:DurationInputObject = { days: 2 }
 const LOAD_ENTRIES_NUM = 10
 const LOAD_OLD_ENTRIES_NUM = 10
 
-function getAllowedDatetimeMoment(datetime:null|moment.Moment) {
-  const datetime_moment:moment.Moment = datetime != null ? datetime.clone() : moment()
-  const allowed_datetime:moment.Moment = datetime_moment.subtract(moment.duration(MAX_DURATION_DIFF))
-  return allowed_datetime
-}
 
-function gystEntriesFromResponse(response:GystEntryResponseSuccess | GystEntryResponseSuccess) {
-  if("error" in response) return [];
-
-  const entries = (<GystEntryResponseSuccess>response).entries
-  const wrapper_entries = entries.map(entry => (<GystEntryWrapperType> {
-    entry,
-    load_entry_param_detail: {
-      service_setting_id: response.service_setting_id,
-      setting_value_id: response.setting_value_id,
-
-      oauth_connected_user_entry_id: response.oauth_connected_user_entry_id,
-      service_id: response.service_id,
-      setting_value: response.setting_value,
-    }
-  }))
-
-  return wrapper_entries
-}
-
-function getParam(load_entry_param:LoadEntryParam, load_status:LoadStatus):ClientSideField {
-  const { service_setting_id, setting_value_id } = load_entry_param
-
-  const service_setting = load_status.find(entry => entry._id == service_setting_id)!
-
-  if(setting_value_id == null) return service_setting
-
-  const setting_value = service_setting.setting_values.find(entry => entry._id == setting_value_id)!
-  return setting_value
-}
 
 @Module({
   name: "loader",
@@ -193,6 +161,12 @@ export default class Store extends VuexModule {
     }
   }
 
+  /**
+   * 2020-06-14 22:49 
+   * 
+   * Assume that service setting's `is_loading` is correct. For example, if it's `false`, it means
+   * all of its setting values are also `false`.
+   */
   get isAllLoaded() {
     return () => this.load_status.every(status => status.is_loading == false || status.is_invalid || status.is_disabled)
   }
@@ -256,15 +230,11 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  startLoading() {
-    this.load_status.forEach(service_setting => {
-      if(service_setting.uses_setting_value) {
-        service_setting.setting_values.forEach(setting_value => {
-          setting_value.is_loading = true
-        })
-      }
-      else {
-        service_setting.is_loading = true
+  async startLoading() {
+    await iterateLoadStatus(this.load_status, async (service_setting:LoadStatusServiceSetting, setting_value?:LoadStatusSettingValue) => {
+      service_setting.is_loading = true
+      if(setting_value) {
+        setting_value.is_loading = true
       }
     })
   }
@@ -288,6 +258,14 @@ export default class Store extends VuexModule {
     }
 
     param.is_loading = false
+
+    const service_setting = <LoadStatusServiceSetting> getParam({ service_setting_id: response.service_setting_id }, this.load_status)!
+    if(service_setting.uses_setting_value) {
+      const all_loaded = service_setting.setting_values.every(setting_value => setting_value.is_loading == false)
+      if(all_loaded) {
+        service_setting.is_loading = false
+      }
+    }
   }
 
   @Mutation
