@@ -97,8 +97,6 @@ export default class Store extends VuexModule {
   load_status:LoadStatus = []
   service_infos:ServiceInfo[] = []
 
-  oldest_loaded_datetime:moment.Moment|null = null
-
   /**
    * 2020-05-25 18:39
    * 
@@ -135,17 +133,13 @@ export default class Store extends VuexModule {
   @Mutation
   forceLoadFromPreloadedStorage() {
     const entries:GystEntryWrapperType[] = []
-    const allowed_datetime = getAllowedDatetimeMoment(this.oldest_loaded_datetime)
 
     for(let a=0; a < this.preloaded_entries.length; a++) {
       const entry = this.preloaded_entries[a]
-      const moment_datetime_info = moment(entry.entry.datetime_info)
 
-      if(moment_datetime_info.isBefore(allowed_datetime)) {
-        entries.push(entry)
+      entries.push(entry)
         this.preloaded_entries.splice(a, 1)
         a--
-      }
 
       if(entries.length >= LOAD_OLD_ENTRIES_NUM) {
         break
@@ -158,31 +152,6 @@ export default class Store extends VuexModule {
   @Mutation
   concatToPreloadedStorage(response:GystEntryResponseSuccess) {
     const entries = gystEntriesFromResponse(response)
-
-    /**
-     * 2020-05-27 16:11
-     * 
-     * Update the `oldest_loaded_datetime`. Let's say there is a datetime range A, B, C
-     * where A and C are too old, so the oldest entry in A and latest entry in C are
-     * `MAX_DURATION_DIFF` apart, the `oldest_loaded_datetime` will then be the datetime
-     * of the oldest entry in A.
-     * 
-     * If service Foo returns entries with datetime range A and C, then A will be loaded
-     * from preloaded storage and C will be considered "too old". If service Bar returns
-     * entries with datetime range B LATER, then the entries from Foo of datetime range
-     * C will be loaded from preloaded data properly.
-     * 
-     * So, the `oldest_loaded_datetime` can be updated everytime response is retrieved.
-     */
-    entries.forEach(entry => {
-      const allowed_datetime_head:moment.Moment = getAllowedDatetimeMoment(this.oldest_loaded_datetime)
-      const oldest_loaded_datetime:moment.Moment = this.oldest_loaded_datetime || moment()
-      const moment_datetime_info = moment(entry.entry.datetime_info)
-
-      if(moment_datetime_info.isSameOrAfter(allowed_datetime_head) && moment_datetime_info.isBefore(oldest_loaded_datetime)) {
-        this.oldest_loaded_datetime = moment_datetime_info
-      }
-    })
 
     this.preloaded_entries = this.preloaded_entries.concat(entries)
     
@@ -202,25 +171,14 @@ export default class Store extends VuexModule {
      * Filter out services whose service id is 'too old'.
      */
     return (direction:PaginationDirection) => {
-      const allowed_datetime:moment.Moment = getAllowedDatetimeMoment(this.oldest_loaded_datetime)
       const service_old_entries:{ [service_id:string]:number } = {}
-
-      /**
-       * 2020-05-28 16:55 
-       * 
-       * Need to consider "old entries count threshold". For example, Google Calendar returns an event that's 'all day' and
-       * is very long with datetime that of the start date of the event. This event will be considered 'old' by GYST. Without
-       * the "old entries count threshold", google calendar entries will not be loaded when pagiantion request occurs.
-       */
       const OLD_ENTRIES_COUNT_THRESHOLD = 5
 
       this.preloaded_entries.forEach(entry => {
         const moment_datetime_info = moment(entry.entry.datetime_info)
         const service_id = entry.entry.service_id
 
-        if(moment_datetime_info.isBefore(allowed_datetime)) {
-          service_old_entries[service_id] = (service_old_entries[service_id] || 0) + 1
-        }
+        service_old_entries[service_id] = (service_old_entries[service_id] || 0) + 1
       })
 
       const pagination_req_data = this.load_status
@@ -259,20 +217,8 @@ export default class Store extends VuexModule {
     }
   }
 
-  get oldEntriesExist() {
-    return () => this.preloaded_entries.some(entry => moment(entry.entry.datetime_info).isBefore(getAllowedDatetimeMoment(this.oldest_loaded_datetime)))
-  }
-
-  get getOldEntries() {
-    return () => this.preloaded_entries.filter(entry => moment(entry.entry.datetime_info).isBefore(getAllowedDatetimeMoment(this.oldest_loaded_datetime)))
-  }
-
   get isLoadedEmpty() {
     return this.loaded_entries.length == 0
-  }
-
-  get onlyOldEntriesExist() {
-    return () => this.preloaded_entries.every(entry => moment(entry.entry.datetime_info).isBefore(getAllowedDatetimeMoment(this.oldest_loaded_datetime)))
   }
 
   get isEnoughPreloaded() {
