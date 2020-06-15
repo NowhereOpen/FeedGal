@@ -6,37 +6,54 @@ div
       :key="index"
     )
       v-col.pa-0
-        div.oauth-login-btn
-          a.btn.btn-block.btn-social(
-            :class="{ [oauth_info.btn_class]: true }"
-            :href="redirectUrl(oauth_info)"
-            :data-oauth-info-id="oauth_info.service_id"
-          )
-            span.fa(:class="{ [oauth_info.fa_value]: true } ")
-            span #[span.oauth-info-name {{ oauth_info.service_name }}] (#[span.accounts-connected {{ oauth_info.total_connected }}])
+        div.container(
+          :class="{ [oauth_info.btn_class]: true }"
+        )
+          div.oauth-login-btn
+            a.btn.btn-block.btn-social(
+              :class="{ [oauth_info.btn_class]: true }"
+              :href="redirectUrl(oauth_info)"
+              :data-oauth-info-id="oauth_info.service_id"
+            )
+              span.fa(:class="{ [oauth_info.fa_value]: true } ")
+              span Add new #[span.oauth-info-name {{ oauth_info.service_name }}] account (#[span.accounts-connected {{ getTotalConnected(oauth_info.service_id) }}])
+          
+          div.ml-4
+            div(v-for="oauth_user of oauth_info.all_connected_accounts")
+              span
+                span.mr-2 {{ oauth_user.friendly_name || oauth_user.service_user_id }}
+                RevokeBtn.mr-2(
+                  @confirm="onRevokeConfirm($event, oauth_user)"
+                )
+                span.caption Last connected on {{ oauth_user.connected_at }}
 </template>
 
 <script lang="ts">
-import { Component, Vue, State } from "nuxt-property-decorator"
+import axios from "axios"
+import { Component, Vue, Mutation, State, Getter } from "nuxt-property-decorator"
+
 import { UrlsGystResource } from "~/src/common/urls"
 
-@Component
-export default class ConnectNewAccountPage extends Vue {
-  oauth_infos:any[] = []
+import RevokeBtn from "~/components/page-settings-accounts/RevokeBtn.vue"
 
-  mounted() {
-    const _oauth_infos = this.$store.state['page-settings-accounts'].oauth_infos
-    this.oauth_infos = _oauth_infos.map((oauth_info:any) => {
-      const icon_value = oauth_info.service_id
-      return Object.assign(oauth_info, {
-        btn_class: "btn-" + icon_value,
-        fa_value: "fa-" + icon_value
-      })
-    })
-  }
+@Component({
+  components: { RevokeBtn }
+})
+export default class ConnectNewAccountPage extends Vue {
+  @Mutation("page-settings-accounts/revokeOAuthAccount") revokeOAuthAccount!:Function
+  @State(state => state["page-settings-accounts"].oauth_infos) oauth_infos!:any[]
+  @Getter("page-settings-accounts/getTotalConnected") getTotalConnected!:Function
 
   redirectUrl(oauth_info:any) {
     return UrlsGystResource.connectNewAccount(oauth_info.service_id)
+  }
+
+  async onRevokeConfirm(reset:Function, oauth_user:any) {
+    const url = UrlsGystResource.disconnectService(oauth_user._id)
+    const { data } = await axios.post(url)
+    this.revokeOAuthAccount(oauth_user.service_id, oauth_user._id)
+
+    reset()
   }
 }
 </script>

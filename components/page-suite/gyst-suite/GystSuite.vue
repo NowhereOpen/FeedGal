@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   div.settings-container
-    div(v-for="service_setting of service_settings")
+    div(v-for="service_setting of service_settings" :key="service_setting._id")
       GoogleCalendarServiceSetting(
         v-if="service_setting.service_id == 'google-calendar'"
         :service-setting="service_setting"
