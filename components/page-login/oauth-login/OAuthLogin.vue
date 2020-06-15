@@ -2,9 +2,9 @@
 div
   v-card.third-party-services-container.pa-0(no-gutters)
     v-card-title
-      h2 With your favorite service
+      h2 Sign up or login
     v-card-text
-      div Sign up or login with ...
+      div With your favorite service
       v-container(no-gutters)
         v-row(
           v-for="(oauth_info, index) in oauth_infos"

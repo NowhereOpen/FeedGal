@@ -4,7 +4,7 @@ import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-serv
 
 import { UrlsGystResource } from "~/src/common/urls"
 
-import { UserInfo } from "~/src/server/gyst-server/common/session"
+import { UserInfo, popRedirectUrl } from "~/src/server/gyst-server/common/session"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 
 import { OAuthBaseClass } from "gyst-cred-module-suite"
@@ -149,7 +149,8 @@ export class RedirectHandleOAuthCallbackRequestHandler extends SessionRequestHan
 
         await oauth_access_token_storage.storeTokenData(this.service_id, oauth_connected_user_entry_id, this.token_response)
 
-        redirect_url = UrlsGystResource.userServiceAccountsPage()
+        redirect_url = popRedirectUrl(<any> this.req)
+        log(`Connecting account successful. Redirecting to '${redirect_url}'`)
 
         // // Connect service
         // redirect_url = await new LoggedInOAuthCallbackTask(this.req).getRedirectUrl()

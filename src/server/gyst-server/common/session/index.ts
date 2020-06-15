@@ -92,3 +92,15 @@ export function clearDataForSignup(session_container:SessionContainer) {
 export function isSigningUp(session_container:SessionContainer) {
   return "signup" in session_container.session && ["user_info", "token_data"].every(prop => prop in session_container.session.signup)
 }
+
+export function setRedirectUrl(session_container:SessionContainer, url?:string) {
+  if(url) {
+    session_container.session.redirect_url = url
+  }
+}
+
+export function popRedirectUrl(session_container:SessionContainer):string {
+  const url = session_container.session.redirect_url
+  delete session_container.session.redirect_url
+  return url
+}
