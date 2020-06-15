@@ -1,27 +1,34 @@
 <template lang="pug">
 div
   div.title Load status
-  div(v-for="service_setting of load_status")
-    LoadStatusEntry(
-      :text="service_setting.service_name"
-      :total="getServiceSettingTotal(service_setting)"
-      :is_loading="getServiceSettingIsLoading(service_setting)"
-      :is_warning="'warning' in service_setting"
-      :warning_text="getWarningText(service_setting)"
-      :is_error="'error' in service_setting"
-      :error_text="getErrorText(service_setting)"
-    )
-    div.ml-2(v-if="service_setting.uses_setting_value")
-      div(v-for="setting_value of getSettingValues(service_setting)")
+  div
+    div(v-if="is_general_error")
+      div(v-if="is_no_service_settings_error")
+        div Please connect accounts #[a(href="/settings/accounts") here] and update your suite #[a(href="/suite") here].
+      div(v-else)
+        div An error occured and the DEV forgot to handle it. SMH
+    div(v-else)
+      div(v-for="service_setting of load_status")
         LoadStatusEntry(
-          :text="setting_value.displayed_as"
-          :total="setting_value.total"
-          :is_loading="setting_value.is_loading"
-          :is_warning="'warning' in setting_value"
-          :warning_text="getWarningText(setting_value)"
-          :is_error="'error' in setting_value"
-          :error_text="getErrorText(setting_value)"
+          :text="service_setting.service_name"
+          :total="getServiceSettingTotal(service_setting)"
+          :is_loading="getServiceSettingIsLoading(service_setting)"
+          :is_warning="'warning' in service_setting"
+          :warning_text="getWarningText(service_setting)"
+          :is_error="'error' in service_setting"
+          :error_text="getErrorText(service_setting)"
         )
+        div.ml-2(v-if="service_setting.uses_setting_value")
+          div(v-for="setting_value of getSettingValues(service_setting)")
+            LoadStatusEntry(
+              :text="setting_value.displayed_as"
+              :total="setting_value.total"
+              :is_loading="setting_value.is_loading"
+              :is_warning="'warning' in setting_value"
+              :warning_text="getWarningText(setting_value)"
+              :is_error="'error' in setting_value"
+              :error_text="getErrorText(setting_value)"
+            )
 </template>
 
 <script lang="ts">
@@ -30,6 +37,7 @@ import { Vue, Component, State, Getter } from "nuxt-property-decorator"
 import LoadStatusEntry from "./LoadStatusEntry.vue"
 
 import { LoadStatus, LoadStatusServiceSetting, LoadStatusSettingValue, ClientSideField } from "~/src/common/types/loader"
+import { GystEntryResponseErrorDetails } from "~/src/common/types/gyst-entry"
 
 @Component({
   components: {
@@ -38,6 +46,8 @@ import { LoadStatus, LoadStatusServiceSetting, LoadStatusSettingValue, ClientSid
 })
 export default class GystEntryLoadStatus extends Vue {
   @State(state => state['loader'].load_status) load_status!:LoadStatus
+  @Getter("loader/is_general_error") is_general_error!:boolean
+  @Getter("loader/is_no_service_settings_error") is_no_service_settings_error!:boolean
 
   getServiceSettingTotal(service_setting:LoadStatusServiceSetting) {
     return service_setting.uses_setting_value ?

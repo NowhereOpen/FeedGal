@@ -35,12 +35,13 @@ div
     )
       span Scroll to the bottom to load more entries or click
       v-btn.ml-2.manual-pagination-button(
+        :disabled="is_general_error"
         @click="onClickLoadMore"
       ) Load more
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, getModule, State, Getter } from "nuxt-property-decorator"
+import { Vue, Component, Prop, getModule, State, Getter, Mutation } from "nuxt-property-decorator"
 import io from "socket.io-client"
 
 import GystEntryWrapper from "~/components/common/gyst-entry-loader/GystEntryWrapper.vue"
@@ -69,6 +70,9 @@ import { LoadStatusServiceSetting, LoadStatusSettingValue } from "../src/common/
 export default class IndexPage extends Vue {
   @State(state => state["session"].is_logged_in) is_logged_in!:boolean
   @State(state => state["loader"].loaded_entries) loaded_entries!:any[]
+  @Mutation("loader/setGeneralError") setGeneralError!:Function
+  @Getter("loader/is_general_error") is_general_error!:boolean
+
   loader:Loader = <any> null
 
   socket:SocketIOClient.Socket = <any> null
@@ -126,6 +130,12 @@ export default class IndexPage extends Vue {
    * Same behavior as when clicking on the "load more" button at the bottom
    */
   async onScrolledToBottom() {
+    /**
+     * 2020-06-15 16:45
+     * Case for clicking is handled in the template `:disabled`.
+     */
+    if(this.is_general_error) return
+
     this.loadMore()
   }
 
@@ -212,6 +222,19 @@ export default class IndexPage extends Vue {
   }
 
   handleSocketResponse(response:GystEntryResponse) {
+    /**
+     * 2020-06-15 16:48
+     * 
+     * This if statement may seem odd. Would love to have a utility function that checks if the
+     * error is general error, and uses it here and in the `store/loader`. So, when refactoring
+     * make sure to do use such function here and in the `store/loader`.
+     */
+    if("error" in response && response.error.name == "NO_SERVICE_SETTINGS") {
+      this.is_waiting_request = false
+      this.setGeneralError(response)
+      return
+    }
+
     this.loader.updatePaginationReqData(response)
     this.updateIsWaitingRequest(response)
 

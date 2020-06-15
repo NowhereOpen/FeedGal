@@ -18,7 +18,8 @@ import {
   PaginationReqDataSuccess,
   PaginationReqData,
   ServicePaginationReqParam,
-  LoadEntryParam
+  LoadEntryParam,
+  GystEntryResponseErrorDetails
 } from "~/src/common/types/gyst-entry"
 import { ServiceInfo } from "~/src/common/types/service-info"
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
@@ -46,8 +47,6 @@ import { getParam, gystEntriesFromResponse, iterateLoadStatus } from "~/src/cli/
 const LOAD_ENTRIES_NUM = 10
 const LOAD_OLD_ENTRIES_NUM = 10
 
-
-
 @Module({
   name: "loader",
   namespaced: true,
@@ -64,6 +63,40 @@ export default class Store extends VuexModule {
    */
   load_status:LoadStatus = []
   service_infos:ServiceInfo[] = []
+
+  /**
+   * 2020-06-15 16:30
+   * 
+   * "General error" like no server setting only. Such error is thrown when
+   * the user signed up for the first time
+   */
+  general_error:GystEntryResponseErrorDetails|null = null
+
+  get is_general_error() {
+    return this.general_error != null
+  }
+
+  /**
+   * Should be called when `this.general_error` is not null. So, just don't forget to
+   * `general_error != null && isNoServiceSettingsError()`
+   */
+  get is_no_service_settings_error() {
+    return this.general_error!.name == "NO_SERVICE_SETTINGS"
+  }
+
+  @Mutation
+  setGeneralError(response:GystEntryResponse) {
+    if("error" in response) {
+      /**
+       * 2020-06-15 16:40 
+       * 
+       * `NO_SERVICE_SETTINGS` is the only error that I can think of as a 'general error'.
+       */
+      if(response.error.name == "NO_SERVICE_SETTINGS") {
+        this.general_error = <GystEntryResponseErrorDetails> response.error
+      }
+    }
+  }
 
   /**
    * 2020-05-25 18:39
