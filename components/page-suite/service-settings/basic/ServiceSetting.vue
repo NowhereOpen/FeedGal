@@ -10,10 +10,6 @@ div.service-setting
         :is-oauth="isOAuth()"
       )
       v-spacer
-      div(v-if="isOAuth()")
-        v-btn(
-          @click="openUpdateAccount()"
-        ) Update Account
       div
         div(v-if="confirm_remove == false")
           v-btn(
@@ -29,27 +25,6 @@ div.service-setting
           ) Cancel
 
     v-card-text
-      div.service-setting-account-editor-container(
-        :data-is-oauth="isOAuth()"
-      )
-        div.service-setting-account-editor(
-          v-if="isOAuth() && open_update_account == true"
-        )
-          v-select(
-            :label="'Use other connected ' + serviceSetting.service_name  + ' account'"
-            :items="getConnectedUsers()"
-            v-model="editor.oauth_connected_user_entry_id"
-            item-value="_id"
-            item-text="displayed_account_name"
-          )
-
-          v-btn(
-            @click="updateAccount()"
-          ) Update
-
-          v-btn(
-            @click="open_update_account = false"
-          ) Cancel
       div.service-setting-viewer-container(
         :data-is-setting-visible="isSettingVisible()"
       )
@@ -104,8 +79,6 @@ import SettingValueEditor from "../../service-setting-components/SettingValueEdi
 import SettingValueContainer from "../../service-setting-components/SettingValueContainer.vue"
 import ToggleServiceCheckbox from "../../service-setting-components/ToggleServiceCheckbox.vue"
 
-import { ValidationResult } from "~/src/common/types/gyst-suite"
-
 import { ServiceSetting, SettingValue, OAuthUserInfo } from "~/src/common/types/gyst-suite"
 import { ServiceInfo as ServiceInfoType } from "~/src/common/types/service-info"
 
@@ -128,18 +101,7 @@ export default class ServiceSettingComp extends Vue {
   @Mutation("page-suite/updateSettingValue") updateSettingValue!:Function
   @Mutation("page-suite/deleteSettingValue") deleteSettingValue!:Function
 
-  open_update_account = false
   confirm_remove = false
-
-  editor:any = {
-    oauth_connected_user_entry_id: null
-  }
-
-  selectCurrentlySelectedOAuthConnectedUser() {
-    if(this.serviceSetting.is_oauth && this.serviceSetting.oauth_info!.is_connected) {      
-      this.editor.oauth_connected_user_entry_id = this.serviceSetting.oauth_info!.user_info!.entry_id
-    }
-  }
 
   setIsEditing(value:boolean) {
     ;(<SettingValueContainer> this.$refs["setting-value-container"]).setIsEditing(value)
@@ -149,34 +111,6 @@ export default class ServiceSettingComp extends Vue {
     const service_id = this.serviceSetting.service_id
     const service_info = (<ServiceInfoType []> <any> this.$attrs.service_infos).find(entry => entry.service_id == service_id)
     return service_info!.oauth!.oauth_connected_users
-  }
-
-  openUpdateAccount() {
-    this.open_update_account = true
-    this.selectCurrentlySelectedOAuthConnectedUser()
-  }
-
-  updateAccount() {
-    this.$emit("update-oauth-account", async (gyst_suite_id:string) => {
-      try {
-        const { data } = await requestMaker.settings.gyst_suites.updateServiceSettingOAuthAccount(
-          this.serviceSetting._id,
-          this.editor.oauth_connected_user_entry_id
-        )
-
-        this.serviceSetting.oauth_info!.user_info = <OAuthUserInfo> data.new_oauth_connected_user
-        this.serviceSetting.oauth_info!.is_connected = true
-      }
-      catch(e) {
-        if(e.response.data.name == "INVALID_NEW_OAUTH_ACCOUNT") {
-          return
-        }
-
-        throw e
-      }
-
-      this.open_update_account = false
-    })    
   }
 
   isOAuth() {
