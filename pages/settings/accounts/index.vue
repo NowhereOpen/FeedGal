@@ -31,11 +31,15 @@ div
               div
                 span
                   span {{ oauth_user.friendly_name || oauth_user.service_user_id }}
-                  RevokeBtn.ml-2(
-                    :disabled="oauth_user.is_signup"
-                    @click="onRevokeClick(oauth_user, $event)"
-                  )
-              div.caption.ml-2
+                  v-tooltip(bottom :disabled="oauth_user.is_signup == false")
+                    template(v-slot:activator="{ on }")
+                      span(v-on="on")
+                        RevokeBtn.ml-2(
+                          :disabled="oauth_user.is_signup"
+                          @click="onRevokeClick(oauth_user, $event)"
+                        )
+                    span You signed up with this account.
+                  div.caption.ml-2
                 span Last connected on {{ oauth_user.connected_at }}
 
   RevokeConfirmDialog(

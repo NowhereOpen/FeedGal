@@ -4,6 +4,8 @@ import { cred_module_collection } from "~/src/server/cred-module-collection"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
+import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
+import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 
 export class GetDisconnectServiceRequestHandler extends ExpressRequest {
   oauth_connected_user_entry_id!:string
@@ -39,11 +41,23 @@ export class GetDisconnectServiceRequestHandler extends ExpressRequest {
     await oauth_access_token_storage.invalidateAccessToken(this.service_id, this.oauth_connected_user_entry_id)
     const updated_access_token_entry = await oauth_access_token_storage.getAccessTokenEntry(this.service_id, this.oauth_connected_user_entry_id)
     const disconnect_result = await oauth_connected_user_storage.disconnect(this.oauth_connected_user_entry_id)
+    const service_settings = await service_setting_storage.getAllServiceSettingsForConnectedUser(this.oauth_connected_user_entry_id)
+    const service_setting_result = await service_setting_storage.deleteOAuthUser(this.oauth_connected_user_entry_id)
+    const setting_values_result:any = {}
+    await Promise.all(
+      service_settings.map(async service_setting => {
+        const id = service_setting._id
+        const result = await setting_value_storage.clearServiceSettingSettingValueValues(id)
+        setting_values_result[id] = result
+      })
+    )
     
     this.res_data = {
       revoke_result: data,
       updated_access_token_entry,
-      disconnect_result
+      disconnect_result,
+      service_setting_result,
+      setting_values_result
     }
   }
 }

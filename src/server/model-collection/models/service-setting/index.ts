@@ -69,8 +69,8 @@ export class ServiceSettingStorage extends MongoStorage implements IServiceSetti
     return this.model.deleteOne({ _id: service_setting_id })
   }
 
-  async deleteUser(user_id:string) {
-    const result = await this.model.deleteMany({ user_id })
+  async deleteOAuthUser(oauth_connected_user_entry_id:string) {
+    const result = await this.model.deleteMany({ oauth_connected_user_entry_id })
     const delete_count = result.deletedCount ? result.deletedCount : 0
     return {
       delete_count

@@ -1,6 +1,6 @@
 import { DeleteUser, DeleteResult } from "~/src/server/model-collection/model-base"
 
-export interface IServiceSetting extends DeleteUser {
+export interface IServiceSetting {
   // Create
   createNewServiceSetting(user_id:string, service_id:string, oauth_connected_user_entry_id:string):Promise<any>
 
@@ -19,4 +19,5 @@ export interface IServiceSetting extends DeleteUser {
 
   // Delete
   deleteServiceSetting(service_setting_id:string):Promise<any>
+  deleteOAuthUser(oauth_connected_user_entry_id:string):Promise<any>
 }
