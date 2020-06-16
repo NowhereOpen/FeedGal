@@ -18,7 +18,7 @@ div
       div(v-else)
         v-progress-circular(v-if="is_loading" indeterminate size=20)
 
-    template(v-slot:setting-value="{ value }")
+    template(v-slot:setting-value="{ setting_value: { value } }")
       //- MAY need to refactor this into its own component
       div.calendar-name-container
         div(v-if="calendars.length == 0")
@@ -77,19 +77,14 @@ export default class GoogleCalendarServiceSetting extends ServiceSetting {
     this.calendars = data
   }
 
-  getCalendarNameFromId(id:string) {
-    /**
-     * 2020-01-21 16:11
-     * 
-     * When the google calendar service value editor was a text field, I used "primary"
-     * as the id of the calendar to add the 'primary' calendar. But now, I can just
-     * select the primary calendar from `v-select` and use its actual `id` property as the
-     * value. This corresponds to the calendar with `primary: true` key-value pair.
-     * 
-     * So, no need to check if `calendar.primary == true` because `id` will now all have
-     * the same format. No 'special' `"primary"` value.
-     */
-    let target_calendar = this.calendars.find(entry => entry.id == id)
+  /**
+   * 2020-06-17 04:39 
+   * 
+   * Use this to get the "calendar name", the 'summary' field in the calendar object from google
+   * calendar API because the setting value will be an email form value.
+   */
+  getCalendarNameFromId(calendar_id:string) {
+    let target_calendar = this.calendars.find(entry => entry.id == calendar_id)
 
     if(target_calendar == undefined) {
       /**
