@@ -9,28 +9,39 @@ div
         div.container(
           :class="{ [oauth_info.btn_class]: true }"
         )
-          div.oauth-login-btn
-            a.btn.btn-block.btn-social(
-              :class="{ [oauth_info.btn_class]: true }"
-              :href="redirectUrl(oauth_info)"
-              :data-oauth-info-id="oauth_info.service_id"
-            )
-              span.fa(:class="{ [oauth_info.fa_value]: true } ")
-              span Add new #[span.oauth-info-name {{ oauth_info.service_name }}] account (#[span.accounts-connected {{ getTotalConnected(oauth_info.service_id) }}])
+          div.mb-2
+            div.oauth-login-btn
+              a.btn.btn-block.btn-social(
+                :class="{ [oauth_info.btn_class]: true }"
+                :href="redirectUrl(oauth_info)"
+                :data-oauth-info-id="oauth_info.service_id"
+              )
+                span.fa(:class="{ [oauth_info.fa_value]: true } ")
+                span Add new #[span.oauth-info-name {{ oauth_info.service_name }}] account (#[span.accounts-connected {{ getTotalConnected(oauth_info.service_id) }}])
+            div(v-if="'revoke_info' in oauth_info")
+              span Manually revoke from #[a(:href="oauth_info.revoke_info.url") here]
+              v-tooltip(bottom)
+                template(v-slot:activator="{ on }")
+                  v-icon.ml-1(v-on="on") info
+                span {{ oauth_info.revoke_info.msg }}
+              span .
           
-          div.ml-4
+          div
             div(v-for="oauth_user of oauth_info.all_connected_accounts")
-              span
-                span.mr-2 {{ oauth_user.friendly_name || oauth_user.service_user_id }}
-                RevokeBtn.mr-2(
-                  @confirm="onRevokeConfirm($event, oauth_user)"
-                )
-                span.caption Last connected on {{ oauth_user.connected_at }}
+              div
+                span
+                  span {{ oauth_user.friendly_name || oauth_user.service_user_id }}
+                  RevokeBtn.ml-2(
+                    @confirm="onRevokeConfirm($event, oauth_user)"
+                  )
+              div.caption.ml-2
+                span Last connected on {{ oauth_user.connected_at }}
 </template>
 
 <script lang="ts">
 import axios from "axios"
 import { Component, Vue, Mutation, State, Getter } from "nuxt-property-decorator"
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import { UrlsGystResource } from "~/src/common/urls"
 
