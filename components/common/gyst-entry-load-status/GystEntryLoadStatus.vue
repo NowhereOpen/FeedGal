@@ -18,6 +18,10 @@ div
           :is_error="'error' in service_setting"
           :error_text="getErrorText(service_setting)"
         )
+        div.caption(
+          v-if="service_setting.is_oauth && duplicateServiceIdExists(service_setting)"
+        )
+          span Connected with #[span.font-italic {{ getAccountNameForDuplicateServiceId(service_setting) }}]
         div.ml-2(v-if="service_setting.uses_setting_value")
           div(v-for="setting_value of getSettingValues(service_setting)")
             LoadStatusEntry(
@@ -48,6 +52,16 @@ export default class GystEntryLoadStatus extends Vue {
   @State(state => state['loader'].load_status) load_status!:LoadStatus
   @Getter("loader/is_general_error") is_general_error!:boolean
   @Getter("loader/is_no_service_settings_error") is_no_service_settings_error!:boolean
+
+  duplicateServiceIdExists(service_setting:LoadStatusServiceSetting) {
+    const { _id: service_setting_id, service_id } = service_setting
+    const result = this.load_status.some(service_setting => service_setting._id != service_setting_id && service_setting.service_id == service_id)
+    return result
+  }
+
+  getAccountNameForDuplicateServiceId(service_setting:LoadStatusServiceSetting) {
+    return service_setting.oauth_info!.user_info!.friendly_name || service_setting.oauth_info!.user_info!.user_id
+  }
 
   getServiceSettingTotal(service_setting:LoadStatusServiceSetting) {
     return service_setting.uses_setting_value ?
