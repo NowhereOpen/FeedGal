@@ -1,20 +1,10 @@
 <template lang="pug">
 span
-  span(v-if="is_confirm == false")
+  span
     v-btn(
       small
       :disabled="disabled"
-      @click="is_confirm = true"
-    ) Revoke
-  span(v-else)
-    v-btn(
-      small
-      @click="is_confirm = false"
-    ) Cancel
-    v-btn(
-      small
-      color="red"
-      @click="onRevokeConfirm"
+      @click="onClick"
     )
       v-progress-circular.mr-2(v-if="is_waiting" indeterminate size="20")
       span Revoke
@@ -26,19 +16,14 @@ import { Component, Vue, State, Prop } from "nuxt-property-decorator"
 @Component
 export default class RevokeBtnComponent extends Vue {
   @Prop() disabled!:boolean
-
-  is_confirm = false
-  
   is_waiting = false
 
-  reset() {
-    this.is_confirm = false
-    this.is_waiting = false
+  setIsWaiting(value:boolean) {
+    this.is_waiting = value
   }
 
-  onRevokeConfirm() {
-    this.is_waiting = true
-    this.$emit('confirm', this.reset.bind(this))
+  onClick() {
+    this.$emit('click', this)
   }
 }
 </script>

@@ -6,6 +6,7 @@ import { Module, VuexModule, Mutation } from "vuex-module-decorators"
 })
 export default class Store extends VuexModule {
   oauth_infos:any[] = []
+  service_settings:any[] = []
 
   @Mutation
   revokeOAuthAccount(service_id:string, oauth_user_entry_id:string) {

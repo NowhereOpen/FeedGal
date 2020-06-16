@@ -27,15 +27,21 @@ div
               span .
           
           div
-            div(v-for="oauth_user of oauth_info.all_connected_accounts")
+            div(v-for="oauth_user of oauth_info.all_connected_accounts" :key="oauth_user._id")
               div
                 span
                   span {{ oauth_user.friendly_name || oauth_user.service_user_id }}
                   RevokeBtn.ml-2(
-                    @confirm="onRevokeConfirm($event, oauth_user)"
+                    :disabled="oauth_user.is_signup"
+                    @click="onRevokeClick(oauth_user, $event)"
                   )
               div.caption.ml-2
                 span Last connected on {{ oauth_user.connected_at }}
+
+  RevokeConfirmDialog(
+    ref="RevokeConfirmDialog"
+    @confirm="onRevokeConfirm"
+  )
 </template>
 
 <script lang="ts">
@@ -45,10 +51,11 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import { UrlsGystResource } from "~/src/common/urls"
 
+import RevokeConfirmDialog from "~/components/page-settings-accounts/RevokeConfirmDialog.vue"
 import RevokeBtn from "~/components/page-settings-accounts/RevokeBtn.vue"
 
 @Component({
-  components: { RevokeBtn }
+  components: { RevokeBtn, RevokeConfirmDialog }
 })
 export default class ConnectNewAccountPage extends Vue {
   @Mutation("page-settings-accounts/revokeOAuthAccount") revokeOAuthAccount!:Function
@@ -59,12 +66,17 @@ export default class ConnectNewAccountPage extends Vue {
     return UrlsGystResource.connectNewAccount(oauth_info.service_id)
   }
 
-  async onRevokeConfirm(reset:Function, oauth_user:any) {
-    const url = UrlsGystResource.disconnectService(oauth_user._id)
-    const { data } = await axios.post(url)
-    this.revokeOAuthAccount(oauth_user.service_id, oauth_user._id)
+  async onRevokeClick(oauth_user:any, comp:RevokeBtn) {
+    ;(<RevokeConfirmDialog> this.$refs["RevokeConfirmDialog"]).open(oauth_user, comp)
+  }
 
-    reset()
+  async onRevokeConfirm({ user_info, comp }:{ user_info:any, comp:Vue }) {
+    const revoke_btn = <RevokeBtn>comp
+    revoke_btn.setIsWaiting(true)
+    const url = UrlsGystResource.disconnectService(user_info._id)
+    const { data } = await axios.post(url)
+    this.revokeOAuthAccount(user_info.service_id, user_info._id)
+    revoke_btn.setIsWaiting(false)
   }
 }
 </script>

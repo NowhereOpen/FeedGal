@@ -16,6 +16,10 @@ export type TaskCb = (token_response:any) => Promise<any>
 export async function refreshTokenIfFail(service_id:string, oauth_connected_user_entry_id:string, cb:TaskCb) {
   const service_info = getServiceInfo(service_id)
   const oauth_service_id = service_info.oauth_service_id!
+  await refreshTokenIfFailOAuthServiceId(oauth_service_id, oauth_connected_user_entry_id, cb)
+}
+
+export async function refreshTokenIfFailOAuthServiceId(oauth_service_id:string, oauth_connected_user_entry_id:string, cb:TaskCb) {
   const cred_module = cred_module_collection[oauth_service_id]
   const task = new RefreshTokenIfFailTask(cred_module, cb, oauth_service_id, oauth_connected_user_entry_id)
 

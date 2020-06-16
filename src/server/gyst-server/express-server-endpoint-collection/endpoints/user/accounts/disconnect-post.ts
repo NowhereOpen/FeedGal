@@ -1,5 +1,5 @@
 import { ExpressRequest } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/base"
-import { refreshTokenIfFail } from "~/src/server/method-collection/common"
+import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection/common"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
@@ -19,7 +19,7 @@ export class GetDisconnectServiceRequestHandler extends ExpressRequest {
   async doTasks() {
     let data
     
-    await refreshTokenIfFail(this.service_id, this.oauth_connected_user_entry_id, async (token_data) => {
+    await refreshTokenIfFailOAuthServiceId(this.service_id, this.oauth_connected_user_entry_id, async (token_data) => {
       const response = await cred_module_collection[this.service_id].revokeToken(token_data)
       /**
        * 2020-06-16 00:06
