@@ -2,7 +2,7 @@ import { LoaderModuleOutput, Entry } from "~/src/server//loader-module-collectio
 import { getHomeTimeline } from "~/src/server/lib/loader-module-helpers/services/twitter"
 
 export async function getEntries(twitter_cred:any, pagination_param?:any):Promise<LoaderModuleOutput> {
-  let home_timeline_tweets = await getHomeTimeline(twitter_cred, pagination_param)
+  let home_timeline_tweets:any[] = await getHomeTimeline(twitter_cred, pagination_param)
 
   let pagination_data = { new: null, old: null }
   if(home_timeline_tweets.length > 0) {

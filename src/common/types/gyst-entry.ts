@@ -46,13 +46,28 @@ export type LoadEntryParamDetail = LoadEntryParam & {
     * 
     * `null` when the service doesn't use oauth
     */
-  oauth_connected_user_entry_id: string|undefined
+  oauth_connected_user_entry_id?: string
   setting_value?:any
 }
 
 export type GystEntryError = "NO_SETTING_VALUES" | "NO_SERVICE_SETTINGS" | "DEV_FAULT" | "DEV_FAULT_MSG" |
-  "INVALID_SETTING_VALUE" | "ERROR_ON_REFRESH_TOKEN" | "OAUTH_CONNECTED_USER_NOT_EXIST"
+  "INVALID_SETTING_VALUE" | "ERROR_ON_REFRESH_TOKEN" | "OAUTH_CONNECTED_USER_NOT_EXIST" |
+  /**
+   * 2020-06-18 17:11
+   * 
+   * I don't like the name of this error. Had to come up with new something better ... or different than
+   * `OAUTH_CONNECTED_USER_NOT_EXIST` or `ERROR_ON_REFRESH_TOKEN`. So there is uncertainty among some
+   * error names, and `TOKEN_ERROR` isn't an exception.
+   * 
+   * Need to work on removing and reworking error names.
+   */
+  "TOKEN_ERROR"
 
+/**
+ * 2020-06-18 17:30 
+ * 
+ * Because this type has `name` and `message` this can be javascript Error object friendly.
+ */
 export type GystEntryResponseErrorDetails = {
   name: GystEntryError
   message: string

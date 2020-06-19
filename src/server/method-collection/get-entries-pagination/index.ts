@@ -14,7 +14,7 @@ import {
   LoaderModuleOutput
 } from "~/src/server/loader-module-collection/loader-module-base/types"
 
-import { handleError } from "~/src/server/method-collection/common"
+import { handleError } from "~/src/server/method-collection/common/get-entries"
 
 import { refreshTokenIfFail } from "../common"
 
@@ -34,7 +34,7 @@ export async function getEntriesPaginationData(
   let output:LoaderModuleOutput = { entries: [], service_response: null, pagination_data }
 
   const warning = await handleError(
-    { service_id, pagination_data },
+    service_pagination_req_param,
     async () => {
       output = await _getEntriesPaginationData(direction, service_pagination_req_param)
       return output

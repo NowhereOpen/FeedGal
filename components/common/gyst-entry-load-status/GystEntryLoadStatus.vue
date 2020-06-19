@@ -15,14 +15,14 @@ div
           :is_loading="getServiceSettingIsLoading(service_setting)"
           :is_warning="'warning' in service_setting"
           :warning_text="getWarningText(service_setting)"
-          :is_error="'error' in service_setting"
-          :error_text="getErrorText(service_setting)"
+          :is_error="getErrorTextServiceSetting(service_setting) != undefined"
+          :error_text="getErrorTextServiceSetting(service_setting)"
         )
         div.caption(
           v-if="service_setting.is_oauth && duplicateServiceIdExists(service_setting)"
         )
           span Connected with #[span.font-italic {{ getAccountNameForDuplicateServiceId(service_setting) }}]
-        div.ml-2(v-if="service_setting.uses_setting_value")
+        div.ml-2(v-if="service_setting.uses_setting_value && getErrorTextServiceSetting(service_setting) == undefined")
           div(v-for="setting_value of getSettingValues(service_setting)")
             LoadStatusEntry(
               :text="setting_value.displayed_as"
@@ -30,12 +30,13 @@ div
               :is_loading="setting_value.is_loading"
               :is_warning="'warning' in setting_value"
               :warning_text="getWarningText(setting_value)"
-              :is_error="'error' in setting_value"
-              :error_text="getErrorText(setting_value)"
+              :is_error="getErrorTextSettingValue(setting_value) != undefined"
+              :error_text="getErrorTextSettingValue(setting_value)"
             )
 </template>
 
 <script lang="ts">
+import _ from "lodash"
 import { Vue, Component, State, Getter } from "nuxt-property-decorator"
 
 import LoadStatusEntry from "./LoadStatusEntry.vue"
@@ -74,9 +75,13 @@ export default class GystEntryLoadStatus extends Vue {
       return false
     }
 
-    return service_setting.uses_setting_value ?
-      service_setting.setting_values.every((setting_value) => setting_value.is_loading || setting_value.is_invalid) :
-      service_setting.is_loading
+    if(service_setting.uses_setting_value) {
+      const valid_setting_values = service_setting.setting_values.filter(setting_value => setting_value.is_invalid == false)
+      return valid_setting_values.length == 0 ? false : valid_setting_values.every((setting_value) => setting_value.is_loading)
+    }
+    else {
+      return service_setting.is_loading
+    }
   }
 
   getSettingValues(service_setting:LoadStatusServiceSetting) {
@@ -99,8 +104,33 @@ export default class GystEntryLoadStatus extends Vue {
     }
   }
 
-  getErrorText(entry:ClientSideField) {
-    return "error" in entry ? entry.error!.message : ""
+  getErrorTextCommon(entry:ClientSideField):string|undefined {
+    if("error" in entry) {
+      return entry.error!.message
+    }
+  }
+
+  getErrorTextServiceSetting(service_setting:LoadStatusServiceSetting) {
+    const error = this.getErrorTextCommon(service_setting)
+    if(error) {
+      return error
+    }
+    else if(_.get(service_setting, "oauth_info.user_info.is_error", false)) {
+      return "Please reconnect your service account."
+    }
+  }
+
+  getErrorTextSettingValue(setting_value:LoadStatusSettingValue) {
+    const error = this.getErrorTextCommon(setting_value)
+    if(error) {
+      return error
+    }
+    else if(setting_value.is_invalid) {
+      /**
+       * Same error message as `INVALID_SETTING_VALUE`
+       */
+      return "Please update your setting."
+    }
   }
 }
 </script>

@@ -80,6 +80,11 @@ export class OAuthConnectedUserStorage extends MongoStorage implements IOAuthCon
     }
   }
 
+  async isErrorWithOAuthUserEntryId(id:string) {
+    const entry = await this.model.findOne({ _id: id })
+    return entry!.get("error_with_access_token")
+  }
+
   async countSignupAccounts(service_id:string) {
     const results = await this.model.find({ service_id, is_signup: true })
     return results.length

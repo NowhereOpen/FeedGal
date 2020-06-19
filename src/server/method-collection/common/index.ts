@@ -1,9 +1,10 @@
-import { RefreshTokenIfFailTask as _RefreshTokenIfFailTask, OAuthBaseClass } from "gyst-cred-module-suite"
+import { RefreshTokenIfFailTask as _RefreshTokenIfFailTask, OAuthBaseClass, ErrorBeforeRefreshing } from "gyst-cred-module-suite"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 import { OAuthBaseLoaderModule } from "~/src/server/loader-module-collection/loader-module-base/oauth"
+import { isTokenError } from "~/src/server/lib/oauth-cred-module-helper"
 
 import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
-import { getServiceInfo } from "../loader-module-collection"
+import { getServiceInfo } from "~/src/server/loader-module-collection"
 
 export type TaskCb = (token_response:any) => Promise<any>
 
@@ -23,7 +24,15 @@ export async function refreshTokenIfFailOAuthServiceId(oauth_service_id:string, 
   const cred_module = cred_module_collection[oauth_service_id]
   const task = new RefreshTokenIfFailTask(cred_module, cb, oauth_service_id, oauth_connected_user_entry_id)
 
-  await task.useToken()
+  try {
+    await task.useToken()
+  }
+  catch(e) {
+    if(e instanceof ErrorBeforeRefreshing) {
+      throw e.original_error
+    }
+    throw e
+  }
 }
 
 /**
@@ -75,101 +84,23 @@ class RefreshTokenIfFailTask extends _RefreshTokenIfFailTask {
       updated_token_data
     )
   }
-}
 
-import {
-  GystEntryWarning,
-  GystEntryError,
-  GystEntryResponseErrorDetails,
-  LoadEntryParamDetail
-} from "~/src/common/types/gyst-entry"
+  /**
+   * Prevent from refreshing token when the error is not related to token error.
+   */
+  isThrowOnFirstTry(e:Error) {
+    /**
+     * 2020-06-18 08:00 
+     * 
+     * Instead of checking if it's a SettingValueError or other types, check if it's a 
+     * token error. If it's not the error detail (whether setting value error, etc)
+     * should be handled outside of this `refreshTokenIfFail`.
+     */
 
-export function commonErrorDetailGenerator(e:Error, known_errors:GystEntryError[]=[]) {
-  const is_known_error = ["DEV_FAULT_MSG", "DEV_FAULT", ...known_errors].includes(e.name)
-  let error_detail:GystEntryResponseErrorDetails
-  if(is_known_error) {
-    if(e.name == "DEV_FAULT") {
-      error_detail = {
-        name: "DEV_FAULT",
-        message: "The developer did something wrong.",
-        data: {
-          error: {
-            name: e.name,
-            message: e.message
-          }
-        }
-      }
-    }
-    else {
-      /**
-       * 2020-03-21 22:39
-       * `response.error = e` doesn't set `response.error.message`
-       * when `e` is an error created with `new Error("Some message")`
-       * for some reason. So have to assign each property individually.
-       */
-      error_detail = {
-        name: <GystEntryError> e.name,
-        message: e.message,
-        // Can be undefined
-        data: (<any> e).data
-      }
-    }
-  }
-  else {
-    console.error(`[ERROR][commonErrorDtailGenerator] Make sure to throw a 'known error' so that it can be handled by this function.`)
-    throw e
-  }
-
-  return error_detail
-}
-
-import { LoaderModuleOutput, PaginationData } from "../loader-module-collection/loader-module-base/types"
-
-export type handleErrorParam = {
-  service_id:string
-  pagination_data?: PaginationData
-}
-
-export async function handleError(
-  { service_id, pagination_data }:handleErrorParam,
-  cb:() => Promise<LoaderModuleOutput>
-):Promise<GystEntryWarning|undefined> {
-  try {
-    const output:LoaderModuleOutput = await cb()
-    if(["github", "trello"].includes(service_id)) {
-      if(output.entries.length == 0) {
-        return {
-          name: "ALL_LOADED",
-          message: "All entries have been loaded.",
-          data: ""
-        }
-      }
-    }
-  }
-  catch(e) {
-    if(service_id == "league-of-legends") {
-      if("response" in e ) {
-        const status = e.response.status
-        if(status == 403) {
-          throw <GystEntryResponseErrorDetails> {
-            data: "",
-            message: "The server admin forgot to refresh the Riot API KEY 🤦.",
-            name: "DEV_FAULT_MSG"
-          }
-        }
-        else if(status == 429) {
-          return {
-            name: "RATE_LIMIT",
-            message: "",
-            data: ""
-          }
-        }
-        else {
-          throw e
-        }
-      }
-    }
-
-    throw e
+    /**
+     * Throw error if it's not a token error. If token error, return false so that it
+     * doesn't throw on first try
+     */
+    return isTokenError(this.oauth_service_id, e) == false
   }
 }

@@ -160,14 +160,17 @@ export default class Store extends VuexModule {
     this.preloaded_entries.sort((a,b) => moment(b.entry.datetime_info).isAfter(moment(a.entry.datetime_info)) ? 1 : -1)
   }
 
-  /**
-   * 2020-06-14 22:49 
-   * 
-   * Assume that service setting's `is_loading` is correct. For example, if it's `false`, it means
-   * all of its setting values are also `false`.
-   */
   get isAllLoaded() {
-    return () => this.load_status.every(status => status.is_loading == false || status.is_invalid || status.is_disabled)
+    return () => this.load_status.every(status => {
+      if(status.uses_setting_value) {
+        return status.setting_values.every(setting_value => {
+          return setting_value.is_loading == false || setting_value.is_invalid || setting_value.error
+        })
+      }
+      else {
+        return status.is_loading == false || status.is_disabled || status.oauth_info?.user_info?.is_error || status.error
+      }
+    })
   }
 
   get getPaginationReqDataForLoadEntryParam() {

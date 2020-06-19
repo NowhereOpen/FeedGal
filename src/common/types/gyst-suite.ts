@@ -18,6 +18,7 @@ export type OAuthUserInfo = {
   user_id:string
   friendly_name:string
   user_uid:string
+  is_error?:boolean
 }
 
 export type ServiceSetting = {

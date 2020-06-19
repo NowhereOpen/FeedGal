@@ -8,7 +8,7 @@ import {
   OAuthValidateSettingValueParam
 } from "../../loader-module-base/types"
 
-import {  } from "./lib/get-displayed-setting-value"
+export { isSettingValueError } from "./lib/is-setting-value-error"
 import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import { GoogleCalendarSettingValueValidation } from "./lib/validate-setting-value"

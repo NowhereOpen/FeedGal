@@ -27,7 +27,6 @@ export async function makeRequest(method:"get"|"post"|"stream", path:string, twi
   const tweets = await new Promise((res, rej) => {
     const cb = (error:any, tweets:any, response:any) => {
       if(error) {
-        console.log(error)
         return rej(error)
       }
       res(tweets)

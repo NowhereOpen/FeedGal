@@ -1,16 +1,16 @@
 import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
 import { getEntriesInitWithParam, FlattenedLoaderParam } from "~/src/server/method-collection/get-entries-init"
 import { getEntriesPaginationData } from "~/src/server/method-collection/get-entries-pagination"
-import { commonErrorDetailGenerator } from "~/src/server/method-collection/common"
 import {
   ServicePaginationReqParam,
   GystEntryResponse,
   GystEntryResponseSuccess,
   GystEntryResponseError
 } from "~/src/common/types/gyst-entry"
-
-import { validateOwnership } from "./validate-ownership"
 import { LoaderModuleOutput, PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
+
+import { commonErrorDetailGenerator } from "../../common"
+import { validateOwnership } from "./validate-ownership"
 
 export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHandler {
   respond(data:any) {

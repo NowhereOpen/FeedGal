@@ -1,3 +1,4 @@
+import _ from "lodash"
 import { getDisplayedSettingValue, getServiceInfo } from "~/src/server/loader-module-collection"
 
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
@@ -32,12 +33,56 @@ export async function getServiceSetting(service_setting_id:string) {
   const entry = _entry!.toJSON()
 
   const entry_id = entry._id
-  const oauth_connected_user_entry_id = entry.oauth_connected_user_entry_id
   const service_id = entry.service_id
 
   const service_info = getServiceInfo(service_id)
+  const is_oauth = service_info.is_oauth
+  const uses_setting_value = service_info.uses_setting_value
 
-  const _setting_values = await setting_value_storage.getAllSettingValues(entry_id)
+  const service_setting:ServiceSetting = {
+    _id: entry._id,
+    service_id: entry.service_id,
+    service_name: service_info.name,
+    alias: entry.alias,
+    resource_name: "",
+    setting_values: [],
+    is_oauth,
+    uses_setting_value,
+    is_disabled: entry.is_disabled
+  }
+
+  if(service_setting.is_oauth) {
+    const oauth_connected_user_entry_id = entry.oauth_connected_user_entry_id
+    const connected_user_info = await oauth_connected_user_storage.getEntry(oauth_connected_user_entry_id)
+    const is_connected = connected_user_info != null
+    const is_error = connected_user_info!.get("error_with_access_token")
+
+    service_setting.oauth_info = {
+      oauth_id: <string> service_info.oauth_service_id,
+      is_connected
+    }
+
+    if(is_connected) {
+      service_setting.oauth_info.user_info = {
+        entry_id: connected_user_info!._id,
+        user_id: connected_user_info!.get("service_user_id"),
+        friendly_name: connected_user_info!.get("friendly_name"),
+        user_uid: connected_user_info!.get("user_uid"),
+        is_error
+      }
+    }
+  }
+
+  // const is_error =  _.get(service_setting, "oauth_info.user_info.is_error", false) == false
+  if(uses_setting_value) {
+    service_setting.setting_values = await getSettingValues(service_id, entry_id)
+  }
+
+  return service_setting
+}
+
+async function getSettingValues(service_id:string, service_setting_id:string) {
+  const _setting_values = await setting_value_storage.getAllSettingValues(service_setting_id)
   const setting_values = _setting_values.map(_entry => {
     const entry = _entry.toJSON()
     const setting_value = entry.value
@@ -57,36 +102,5 @@ export async function getServiceSetting(service_setting_id:string) {
     }
   })
 
-  const service_setting:ServiceSetting = {
-    _id: entry._id,
-    service_id: entry.service_id,
-    service_name: service_info.name,
-    alias: entry.alias,
-    resource_name: "",
-    setting_values,
-    is_oauth: service_info.is_oauth,
-    uses_setting_value: service_info.uses_setting_value,
-    is_disabled: entry.is_disabled
-  }
-
-  if(service_setting.is_oauth) {
-    const connected_user_info = await oauth_connected_user_storage.getEntry(oauth_connected_user_entry_id)
-    const is_connected = connected_user_info != null
-
-    service_setting.oauth_info = {
-      oauth_id: <string> service_info.oauth_service_id,
-      is_connected
-    }
-
-    if(is_connected) {
-      service_setting.oauth_info.user_info = {
-        entry_id: connected_user_info!._id,
-        user_id: connected_user_info!.get("service_user_id"),
-        friendly_name: connected_user_info!.get("friendly_name"),
-        user_uid: connected_user_info!.get("user_uid"),
-      }
-    }
-  }
-
-  return service_setting
+  return setting_values
 }

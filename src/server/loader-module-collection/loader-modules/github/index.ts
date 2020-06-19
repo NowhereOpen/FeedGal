@@ -8,7 +8,7 @@ import {
 
 import { getAccessTokenFromTokenResponse } from "~/src/server/lib/loader-module-helpers/services/github"
 
-import {  } from "./lib/get-displayed-setting-value"
+export { isSettingValueError } from "./lib/is-setting-value-error"
 import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import { GithubSettingValueValidation } from "./lib/validate-setting-value"

@@ -14,6 +14,7 @@ export interface ISettingValue extends DeleteUser {
   getValidSettingValues(service_setting_id:string):Promise<any>
   getServiceSettingTotalSettingValues(service_setting_id:string):Promise<number>
   settingValueExists(service_setting_id:string, setting_value:any): Promise<boolean>
+  isInvalid(setting_valud_id:string):Promise<boolean>
 
   // Update (2)
   updateSettingValue(setting_value_id:string, setting_value:any):Promise<any>

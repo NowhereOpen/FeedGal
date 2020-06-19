@@ -19,6 +19,13 @@ export async function validateSettingValue(service_setting_id:string, setting_va
 
   let result!:ValidationResult
 
+  /**
+   * 2020-06-19 10:31
+   * 
+   * Not setting error or invalidating oauth account or setting value from this file because
+   * I expect this is when the user visits the page, currently in the server-side-data-injection
+   * file for `/suite`.
+   */
   if(is_oauth) {
     await refreshTokenIfFail(service_id, oauth_connected_user_entry_id, async (token_data) => {
       result = await validateSettingValueOAuth(service_id, token_data, setting_value)

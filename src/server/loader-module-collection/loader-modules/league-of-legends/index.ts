@@ -6,6 +6,7 @@ import {
   NonOAuthValidateSettingValueParam
 } from "../../loader-module-base/types"
 
+export { isSettingValueError } from "./lib/is-setting-value-error"
 import { getDisplayedSettingValue } from "./lib/get-displayed-setting-value"
 import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"

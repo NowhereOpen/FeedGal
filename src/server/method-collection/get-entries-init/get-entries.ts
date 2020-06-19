@@ -3,7 +3,7 @@ import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader
 import { FlattenedLoaderParam } from "./type"
 import { refreshTokenIfFail } from "../common"
 import { GystEntryResponseSuccess } from "~/src/common/types/gyst-entry"
-import { handleError } from "~/src/server/method-collection/common"
+import { handleError } from "~/src/server/method-collection/common/get-entries"
 
 export async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<GystEntryResponseSuccess> {
   const {
@@ -19,7 +19,7 @@ export async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promis
     entries:[], service_response: null
   }
   const warning = await handleError(
-    { service_id },
+    param,
     async () => {
       output = await _getEntriesInitWithParam(param)
       return output

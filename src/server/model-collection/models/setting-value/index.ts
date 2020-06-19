@@ -45,6 +45,12 @@ export class SettingValueStorage extends MongoStorage implements ISettingValue {
     return exists != null
   }
 
+  async isInvalid(setting_valud_id:string):Promise<boolean> {
+    const result = await this.model.findOne({ _id: setting_valud_id })
+    const is_invalid = result!.get("is_invalid")
+    return is_invalid
+  }
+
   // Update (2)
   async updateSettingValue(setting_value_id:string, setting_value:any) {
     return this.model.updateOne(

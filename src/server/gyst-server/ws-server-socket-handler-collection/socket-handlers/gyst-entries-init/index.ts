@@ -10,7 +10,10 @@ import {
 import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
 import { FlattenedLoaderParam, flattenServiceSettings, getEntriesInitWithParam } from "~/src/server/method-collection/get-entries-init"
 import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader-module-base/types"
-import { commonErrorDetailGenerator } from "~/src/server/method-collection/common"
+
+import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
+
+import { commonErrorDetailGenerator } from "../../common"
 
 export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
   respond(data:any) {
@@ -34,13 +37,31 @@ export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
     await Promise.all(
       parameters.map(async param => {
         const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
+
+        if(oauth_connected_user_entry_id) {
+          const is_error = await oauth_connected_user_storage.isErrorWithOAuthUserEntryId(oauth_connected_user_entry_id)
+          if(is_error) {
+            const entry_response = <GystEntryResponseError> {
+              service_id,
+              oauth_connected_user_entry_id,
+              setting_value,
+              service_setting_id,
+              setting_value_id,
+              error: {
+                name: "TOKEN_ERROR",
+                data: {},
+                message: "Please reconnect your service account.",
+              }
+            }
+          }
+        }
     
         try {
-          const response:GystEntryResponseSuccess = await getEntriesInitWithParam(param)        
+          const response:GystEntryResponseSuccess = await getEntriesInitWithParam(param)
           return this.respond(response)
         }
         catch(e) {
-          const known_errors:GystEntryError[] = ["OAUTH_CONNECTED_USER_NOT_EXIST", "INVALID_SETTING_VALUE", "ERROR_ON_REFRESH_TOKEN"]
+          const known_errors:GystEntryError[] = ["TOKEN_ERROR", "INVALID_SETTING_VALUE"]
           const error_detail = commonErrorDetailGenerator(e, known_errors)
 
           const entry_response = <GystEntryResponseError> {
