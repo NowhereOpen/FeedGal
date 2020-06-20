@@ -150,6 +150,10 @@ export class OAuthConnectedUserStorage extends MongoStorage implements IOAuthCon
     return this.model.find({ user_id, service_id })
   }
 
+  async getAllAliveAccounts(user_id:UserId) {
+    return this.model.find({ user_id, error_with_access_token: false })
+  }
+
   async userConnected(service_id:string, user_uid:string):Promise<boolean> {
     return await this.model.exists({ service_id, service_user_uid: user_uid })
   }

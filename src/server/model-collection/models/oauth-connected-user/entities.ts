@@ -21,8 +21,9 @@ export interface IOAuthConnectedUser extends DeleteUser {
    * Uses gyst user id. Uses service id and its related data such as user_uid
    */
   getAllConnectedServiceIds(user_id:UserId):Promise<string[]>
-  isServiceAlreadyConnected(user_id:UserId, service_id:string):Promise<boolean>
   getAllConnectedAccountsForServiceId(user_id:UserId, service_id:string):Promise<any[]>
+  getAllAliveAccounts(user_id:UserId):Promise<any[]>
+  isServiceAlreadyConnected(user_id:UserId, service_id:string):Promise<boolean>
   isServiceAccountAlreadyConnected(user_id:UserId, service_id:string, user_uid:string):Promise<boolean>
   getSignupEntry(service_id:string, user_uid:string):Promise<any>
   getEntryWithUserUid(service_id:string, user_uid:string):Promise<any>

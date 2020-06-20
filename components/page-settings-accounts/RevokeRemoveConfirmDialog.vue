@@ -5,9 +5,9 @@ div
     width='600'
   )
     v-card
-      v-card-title Revoke Account
+      v-card-title {{ words.action }} Account
       v-card-text
-        div Revoking the account will remove all the settings associated with this service account.
+        div {{ words.actioning }} the account will remove all the settings associated with this service account.
         div.mt-2
           div(v-if="! isInUse()")
             div This service is not being used.
@@ -27,21 +27,27 @@ div
         v-btn(
           small
           color="red"
-          @click="onRevokeClick"
-        ) Revoke
+          @click="onConfirmClick"
+        ) {{ words.action }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, State, Prop } from "nuxt-property-decorator"
 
+type Words = { action: string, actioning: string }
+
 @Component
-export default class RevokeBtnComponent extends Vue {
+export default class RevokeRemoveConfirmBtnComponent extends Vue {
   @State(state => state["page-settings-accounts"].service_settings) service_settings!:any[]
   info:any[] = []
   comp:Vue = <any> null
 
+  is_remove = false
   is_open = false
   user_info:any = {}
+
+  words:Words = { action: "", actioning: "" }
+
   /**
    * 2020-06-17 03:10 
    * 
@@ -52,7 +58,8 @@ export default class RevokeBtnComponent extends Vue {
    * keep this component only once instead of having it in all the button components
    * rendered with `v-for`.
    */
-  open(user_info:any, comp:Vue) {
+  open(user_info:any, comp:Vue, words:Words) {
+    this.words = words
     this.comp = comp
     /**
      * 2020-06-17 02:37 
@@ -76,7 +83,7 @@ export default class RevokeBtnComponent extends Vue {
     })
   }
 
-  onRevokeClick() {
+  onConfirmClick() {
     this.$emit('confirm', { user_info: this.user_info, comp: this.comp })
     this.is_open = false
   }

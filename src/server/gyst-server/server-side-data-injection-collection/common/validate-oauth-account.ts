@@ -1,4 +1,9 @@
+import { ErrorOnRefreshRequest } from "gyst-cred-module-suite"
+
 import { getDisplayedSettingValue, getServiceInfo } from "~/src/server/loader-module-collection"
+
+import { cred_module_collection } from "~/src/server/cred-module-collection"
+
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 
@@ -28,6 +33,10 @@ export async function validateOAuthAccounts(user_id:string) {
         const oauth_service_id = service_info.oauth_service_id!
         const oauth_connected_user_entry_id = service_setting.oauth_connected_user_entry_id
 
+        const is_error = await oauth_connected_user_storage.isErrorWithOAuthUserEntryId(oauth_connected_user_entry_id)
+
+        if(is_error) return
+
         await validateOAuthAccount(oauth_service_id, oauth_connected_user_entry_id)
       }
     })
@@ -36,8 +45,8 @@ export async function validateOAuthAccounts(user_id:string) {
 
 async function validateOAuthAccount(oauth_service_id:string, oauth_connected_user_entry_id:string) {
   try {
-    await refreshTokenIfFailOAuthServiceId(oauth_service_id, oauth_connected_user_entry_id, async () => {
-
+    await refreshTokenIfFailOAuthServiceId(oauth_service_id, oauth_connected_user_entry_id, async (token_data) => {
+      const user_info = await cred_module_collection[oauth_service_id].getUserInfo(token_data)
     })
   }
   catch(e) {
@@ -49,7 +58,7 @@ async function validateOAuthAccount(oauth_service_id:string, oauth_connected_use
      * authorized apps" or something.
      */
     
-    if(e) {
+    if(e instanceof ErrorOnRefreshRequest) {
       await oauth_connected_user_storage.setError(oauth_connected_user_entry_id, true)
     }
   }

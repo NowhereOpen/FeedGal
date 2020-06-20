@@ -29,22 +29,32 @@ div
           div
             div(v-for="oauth_user of oauth_info.all_connected_accounts" :key="oauth_user._id")
               div
-                span
+                span.container
                   span {{ oauth_user.friendly_name || oauth_user.service_user_id }}
-                  v-tooltip(bottom :disabled="oauth_user.is_signup == false")
-                    template(v-slot:activator="{ on }")
-                      span(v-on="on")
+                  span(v-if="oauth_user.error_with_access_token")
+                    v-tooltip(bottom)
+                      template(v-slot:activator="{ on }")
                         RevokeBtn.ml-2(
-                          :disabled="oauth_user.is_signup"
-                          @click="onRevokeClick(oauth_user, $event)"
+                          @click="onRemoveClick(oauth_user, $event)"
+                          text="Remove"
                         )
-                    span You signed up with this account.
-                  div.caption.ml-2
-                span Last connected on {{ oauth_user.connected_at }}
+                      span It seems that you revoked your authorization. You can reconnect this account or remove.
+                  span(v-else)
+                    v-tooltip(bottom :disabled="oauth_user.is_signup == false")
+                      template(v-slot:activator="{ on }")
+                        span(v-on="on")
+                          RevokeBtn.ml-2(
+                            :disabled="isRevokeDisabled(oauth_user)"
+                            @click="onRevokeClick(oauth_user, $event)"
+                            text="Revoke"
+                          )
+                      span You signed up with this account.
+              div
+                span.caption Last connected on {{ oauth_user.connected_at }}
 
-  RevokeConfirmDialog(
-    ref="RevokeConfirmDialog"
-    @confirm="onRevokeConfirm"
+  RevokeRemoveConfirmDialog(
+    ref="RevokeRemoveConfirmDialog"
+    @confirm="onRevokeRemoveConfirm"
   )
 </template>
 
@@ -55,11 +65,11 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import { UrlsGystResource } from "~/src/common/urls"
 
-import RevokeConfirmDialog from "~/components/page-settings-accounts/RevokeConfirmDialog.vue"
+import RevokeRemoveConfirmDialog from "~/components/page-settings-accounts/RevokeRemoveConfirmDialog.vue"
 import RevokeBtn from "~/components/page-settings-accounts/RevokeBtn.vue"
 
 @Component({
-  components: { RevokeBtn, RevokeConfirmDialog }
+  components: { RevokeBtn, RevokeRemoveConfirmDialog }
 })
 export default class ConnectNewAccountPage extends Vue {
   @Mutation("page-settings-accounts/revokeOAuthAccount") revokeOAuthAccount!:Function
@@ -71,16 +81,25 @@ export default class ConnectNewAccountPage extends Vue {
   }
 
   async onRevokeClick(oauth_user:any, comp:RevokeBtn) {
-    ;(<RevokeConfirmDialog> this.$refs["RevokeConfirmDialog"]).open(oauth_user, comp)
+    ;(<RevokeRemoveConfirmDialog> this.$refs["RevokeRemoveConfirmDialog"]).open(oauth_user, comp, { action: "Revoke", actioning: "Revoking" })
   }
 
-  async onRevokeConfirm({ user_info, comp }:{ user_info:any, comp:Vue }) {
+  async onRevokeRemoveConfirm({ user_info, comp }:{ user_info:any, comp:Vue }) {
     const revoke_btn = <RevokeBtn>comp
     revoke_btn.setIsWaiting(true)
     const url = UrlsGystResource.disconnectService(user_info._id)
     const { data } = await axios.post(url)
     this.revokeOAuthAccount(user_info.service_id, user_info._id)
     revoke_btn.setIsWaiting(false)
+  }
+
+  isRevokeDisabled(oauth_user:any) {
+    return oauth_user.is_signup || oauth_user.error_with_access_token
+  }
+
+  onRemoveClick(oauth_user:any, comp:RevokeBtn) {
+    ;(<RevokeRemoveConfirmDialog> this.$refs["RevokeRemoveConfirmDialog"]).open(oauth_user, comp, { action: "Remove", actioning: "Removing" })
+    // const oauth_connected_user_entry_id = oauth_user._id
   }
 }
 </script>
