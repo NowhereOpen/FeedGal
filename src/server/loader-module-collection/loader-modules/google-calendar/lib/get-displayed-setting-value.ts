@@ -1,3 +1,3 @@
-export function getDisplayedSettingvalue(setting_value:any) {
-
+export function getDisplayedSettingValue(setting_value:any) {
+  return setting_value.summary
 }

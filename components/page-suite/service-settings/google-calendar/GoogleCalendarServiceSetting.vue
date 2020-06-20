@@ -13,7 +13,7 @@ div
           label="Choose calendar"
           :items="calendars"
           item-text="summary"
-          item-value="id"
+          :item-value="getCalendarItemValue"
         )
       div(v-else)
         v-progress-circular(v-if="is_loading" indeterminate size=20)
@@ -26,14 +26,14 @@ div
             span Loading calendars
             v-progress-circular.ml-2(indeterminate size=10)
         div(v-else)
-          div(v-if="getCalendarNameFromId(value) == undefined")
+          div(v-if="value.summary == undefined")
             v-tooltip(bottom)
               template(v-slot:activator="{ on }")
                 div.red--text(
                   v-on="on"
-                ) {{ value }}
+                ) {{ value.summary }}
               div The calendar with this id does not exist.
-          div(v-else) {{ getCalendarNameFromId(value) }}
+          div(v-else) {{ value.summary }}
 </template>
 
 <script lang="ts">
@@ -95,6 +95,13 @@ export default class GoogleCalendarServiceSetting extends ServiceSetting {
     }
     else {
       return target_calendar.summary
+    }
+  }
+
+  getCalendarItemValue(calendar:any) {
+    return {
+      id: calendar.id,
+      summary: calendar.summary
     }
   }
 }

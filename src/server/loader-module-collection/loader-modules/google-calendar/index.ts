@@ -9,6 +9,7 @@ import {
 } from "../../loader-module-base/types"
 
 export { isSettingValueError } from "./lib/is-setting-value-error"
+import { getDisplayedSettingValue } from "./lib/get-displayed-setting-value"
 import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import { GoogleCalendarSettingValueValidation } from "./lib/validate-setting-value"
@@ -20,7 +21,7 @@ export class GoogleCalendarLoaderModule extends OAuthBaseLoaderModule {
 
   async getEntriesInit(param:OAuthGetEntriesInitParam) {
     const access_token = param.token_data["access_token"]
-    return getEntries(access_token, param.setting_value, {
+    return getEntries(access_token, param.setting_value.id, {
       from: moment().startOf("week"),
       to: moment().endOf("week"),
     })
@@ -32,12 +33,16 @@ export class GoogleCalendarLoaderModule extends OAuthBaseLoaderModule {
       from: moment(pagination_value.from),
       to: moment(pagination_value.to)
     }
-    return getEntries(access_token, param.setting_value, date_range)
+    return getEntries(access_token, param.setting_value.id, date_range)
   }
 
   async validateSettingValue(param:OAuthValidateSettingValueParam) {
     const access_token = param.token_data["access_token"]
-    const task = new GoogleCalendarSettingValueValidation(access_token, param.setting_value)
+    const task = new GoogleCalendarSettingValueValidation(access_token, param.setting_value.id)
     return await task.getResult()
+  }
+
+  getDisplayedSettingValue(setting_value:any) {
+    return getDisplayedSettingValue(setting_value)
   }
 }

@@ -9,13 +9,17 @@ import {
 
 export class GoogleCalendarSettingValueValidation extends SettingValueValidationBase {
   access_token:string
+  calendar_id:string
+  calendar_summary:string
   constructor(access_token:string, setting_value:any) {
     super(setting_value)
+    this.calendar_id = this.setting_value.id
+    this.calendar_summary = this.setting_value.summary
     this.access_token = access_token
   }
 
   async getSettingValueData() {
-    return await getCalendar(this.access_token, this.setting_value)
+    return await getCalendar(this.access_token, this.calendar_id)
   }
 
   getErrorMessage(error:any) {
@@ -35,7 +39,7 @@ export class GoogleCalendarSettingValueValidation extends SettingValueValidation
   }
 
   preValidate() {
-    if((<string>this.setting_value).trim() == "") {
+    if((<string>this.calendar_id).trim() == "") {
       throw new ControlledError("Calendar id must not be empty.")
     }
   }
