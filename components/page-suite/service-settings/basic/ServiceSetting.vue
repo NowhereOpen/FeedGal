@@ -104,6 +104,7 @@ export default class ServiceSettingComp extends Vue {
   confirm_remove = false
 
   setIsEditing(value:boolean) {
+    this.$emit("editor-open")
     ;(<SettingValueContainer> this.$refs["setting-value-container"]).setIsEditing(value)
   }
 

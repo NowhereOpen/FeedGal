@@ -10,11 +10,17 @@ import {
 export class GoogleCalendarSettingValueValidation extends SettingValueValidationBase {
   access_token:string
   calendar_id:string
-  calendar_summary:string
   constructor(access_token:string, setting_value:any) {
     super(setting_value)
     this.calendar_id = this.setting_value.id
-    this.calendar_summary = this.setting_value.summary
+    /**
+     * 2020-06-21 09:25 
+     * 
+     * Not considering `summary` when validating.
+     * 
+     * But still accepting the whole object because all the others do too.
+     */
+    // this.calendar_summary = this.setting_value.summary
     this.access_token = access_token
   }
 

@@ -5,6 +5,7 @@ div
     @disconnect="$emit('disconnect', $event)"
     v-bind="$attrs"
     v-on="$listeners"
+    @editor-open="onEditorOpen"
   )
     template(v-slot:editor-body="{ editor }")
       div(v-if="is_loaded")
@@ -21,19 +22,14 @@ div
     template(v-slot:setting-value="{ setting_value: { value } }")
       //- MAY need to refactor this into its own component
       div.calendar-name-container
-        div(v-if="calendars.length == 0")
-          span
-            span Loading calendars
-            v-progress-circular.ml-2(indeterminate size=10)
-        div(v-else)
-          div(v-if="value.summary == undefined")
-            v-tooltip(bottom)
-              template(v-slot:activator="{ on }")
-                div.red--text(
-                  v-on="on"
-                ) {{ value.summary }}
-              div The calendar with this id does not exist.
-          div(v-else) {{ value.summary }}
+        div(v-if="value.summary == undefined")
+          v-tooltip(bottom)
+            template(v-slot:activator="{ on }")
+              div.red--text(
+                v-on="on"
+              ) {{ value.summary }}
+            div The calendar with this id does not exist.
+        div(v-else) {{ value.summary }}
 </template>
 
 <script lang="ts">
@@ -51,8 +47,9 @@ import { ServiceSetting as ServiceSettingType } from "~/src/common/types/gyst-su
 export default class GoogleCalendarServiceSetting extends ServiceSetting {
   @Prop() serviceSetting!:ServiceSettingType
 
-  is_loading = false
   is_loaded = false
+  is_loading = false
+
   calendars:any[] = []
 
   mounted() {
@@ -63,18 +60,6 @@ export default class GoogleCalendarServiceSetting extends ServiceSetting {
     if(this.serviceSetting.oauth_info!.is_connected == false) {
       return
     }
-
-    this.is_loading = true
-
-    await this.loadCalendars()
-
-    this.is_loading = false
-    this.is_loaded = true
-  }
-
-  async loadCalendars() {
-    const { data } = await requestMaker.settings.gyst_suites.getGoogleCalendars(this.serviceSetting._id)
-    this.calendars = data
   }
 
   /**
@@ -103,6 +88,26 @@ export default class GoogleCalendarServiceSetting extends ServiceSetting {
       id: calendar.id,
       summary: calendar.summary
     }
+  }
+
+  async onEditorOpen() {
+    /**
+     * 2020-06-21 09:27 
+     * 
+     * Expect the user to refresh the page if the page doesn't load calendars 'properly'
+     * after the user has made changed to one's google calendar while on this page.
+     */
+    if(this.is_loaded) return
+
+    this.is_loading = true
+    await this.loadCalendars()
+    this.is_loading = false
+    this.is_loaded = true
+  }
+
+  async loadCalendars() {
+    const { data } = await requestMaker.settings.gyst_suites.getGoogleCalendars(this.serviceSetting._id)
+    this.calendars = data
   }
 }
 </script>

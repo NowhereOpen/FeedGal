@@ -38,7 +38,7 @@ export class GoogleCalendarLoaderModule extends OAuthBaseLoaderModule {
 
   async validateSettingValue(param:OAuthValidateSettingValueParam) {
     const access_token = param.token_data["access_token"]
-    const task = new GoogleCalendarSettingValueValidation(access_token, param.setting_value.id)
+    const task = new GoogleCalendarSettingValueValidation(access_token, param.setting_value)
     return await task.getResult()
   }
 
