@@ -22,23 +22,18 @@ import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection
  * Again, invalidating IS required in both files.
  */
 export async function validateOAuthAccounts(user_id:string) {
-  const service_settings = await service_setting_storage.getAllServiceSettingsForUserId(user_id)
+  const oauth_accounts = await oauth_connected_user_storage.getAllAliveAccounts(user_id)
   await Promise.all(
-    service_settings.map(async _service_setting => {
-      const service_setting = _service_setting.toJSON()
-      const service_id = service_setting.service_id
-      const service_info = getServiceInfo(service_id)
+    oauth_accounts.map(async _oauth_account => {
+      const oauth_account = _oauth_account.toJSON()
+      const service_id = oauth_account.service_id
+      const oauth_connected_user_entry_id = oauth_account._id
 
-      if(service_info.is_oauth) {
-        const oauth_service_id = service_info.oauth_service_id!
-        const oauth_connected_user_entry_id = service_setting.oauth_connected_user_entry_id
+      const is_error = await oauth_connected_user_storage.isErrorWithOAuthUserEntryId(oauth_connected_user_entry_id)
 
-        const is_error = await oauth_connected_user_storage.isErrorWithOAuthUserEntryId(oauth_connected_user_entry_id)
+      if(is_error) return
 
-        if(is_error) return
-
-        await validateOAuthAccount(oauth_service_id, oauth_connected_user_entry_id)
-      }
+      await validateOAuthAccount(service_id, oauth_connected_user_entry_id)
     })
   )
 }
