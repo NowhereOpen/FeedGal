@@ -1,7 +1,7 @@
 {
-  "name": "gyst",
+  "name": "feedgal",
   "version": "1.0.0",
-  "description": "Get Your Stuff Together",
+  "description": "Galaxy of Feeds. FeedGal",
   "author": "chulman444",
   "private": true,
   "scripts": {
