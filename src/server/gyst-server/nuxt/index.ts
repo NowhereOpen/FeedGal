@@ -1,5 +1,7 @@
+import _ from "lodash"
 import path from "path"
 import { RequestHandler } from "express"
+import { app_settings_reader } from "../../gyst-app-setting-reader"
 /**
  * 2020-02-06 07:09
  * 
@@ -24,6 +26,8 @@ export async function setup(root_to_nuxt_config_fp:string):Promise<NuxtSetupRetu
   const nuxt_config_resolved_path = path.resolve(root_to_nuxt_config_fp)
   const config = require(nuxt_config_resolved_path)
   config.dev = process.env.NODE_ENV !== 'production'
+
+  _.set(config, "server.port", app_settings_reader.getPort())
 
   // Init Nuxt.js
   nuxt = new Nuxt(config)

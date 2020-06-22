@@ -5,6 +5,7 @@ gyst:
     #     "host" of browser's `document.location.host`
     ext-host: 
     protocol: http
+    port: 3000
     private-key-path: sslcert/server.key
     certificate-path: sslcert/server.cert
     db-name: "gyst"

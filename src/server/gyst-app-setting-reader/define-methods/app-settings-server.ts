@@ -9,6 +9,14 @@ export function attach(TargetClass:any) {
     return value
   }
 
+  TargetClass.prototype.getPort = function():number {
+    if("PORT" in process.env) {
+      return Number(process.env.PORT)
+    }
+    const file_port = this.getSettings(["server", "port"], 3000)
+    return Number(file_port)
+  }
+
   TargetClass.prototype.getPrivateKeyPath = function():string {
     return this.getSettings(["server", "private-key-path"])
   }

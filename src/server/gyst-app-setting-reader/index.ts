@@ -34,6 +34,7 @@ export class AppSettingsReader extends StrictFileReader {
   // Server
   getExternalHost():string { return <any> this.notImplemented() }
   getProtocol():"http"|"https" { return <any> this.notImplemented() }
+  getPort():number { return <any> this.notImplemented() }
   getPrivateKeyPath():string { return <any> this.notImplemented() }
   getCertificatePath():string { return <any> this.notImplemented() }
   getDBName():string { return <any> this.notImplemented() }

@@ -94,6 +94,7 @@ function getTwitter() {
 function getOAuthRedirectUrl(service_id:string) {
   const external_host = app_settings_reader.getExternalHost()
   const protocol = app_settings_reader.getProtocol()
+  const port = app_settings_reader.getPort()
 
   let backend_url = ""
 
@@ -103,7 +104,7 @@ function getOAuthRedirectUrl(service_id:string) {
    * Use hardcoded "localhost" for now.
    */
   if(external_host == "localhost" || isIp(external_host)) {
-    backend_url = `${protocol}://${external_host}:${process.env.PORT}`
+    backend_url = `${protocol}://${external_host}:${port}`
   }
   else {
     backend_url = `${protocol}://${external_host}`
