@@ -7,8 +7,8 @@ import { UrlsGystResource } from "~/src/common/urls"
 import { UserInfo, popRedirectUrl } from "~/src/server/gyst-server/common/session"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 
-import { OAuthBaseClass } from "gyst-cred-module-suite"
-import { isOAuth1CallbackUrlValid, isOAuth2CallbackUrlValid } from "gyst-cred-module-suite"
+import { OAuthBaseClass } from "oauth-module-suite"
+import { isOAuth1CallbackUrlValid, isOAuth2CallbackUrlValid } from "oauth-module-suite"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { gyst_user_storage } from "~/src/server/model-collection/models/user"

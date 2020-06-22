@@ -24,8 +24,7 @@
     "types": [
       "@types/node",
       "@nuxt/types",
-      "cypress",
-      "gyst-cred-module-suite"
+      "cypress"
     ]
   },
   "exclude": [

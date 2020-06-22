@@ -2,16 +2,16 @@ import isIp from "is-ip"
 import { service_credentials_reader } from "~/src/server/service-credential-reader"
 import { app_settings_reader } from "~/src/server/gyst-app-setting-reader"
 
-import { OAuthBaseClass } from "gyst-cred-module-suite"
+import { OAuthBaseClass } from "oauth-module-suite"
 
-import { Bitbucket } from "gyst-cred-module-suite"
-import { Facebook } from "gyst-cred-module-suite"
-import { Github } from "gyst-cred-module-suite"
-import { Google } from "gyst-cred-module-suite"
-import { Reddit } from "gyst-cred-module-suite"
-import { Trello } from "gyst-cred-module-suite"
-import { Twitch } from "gyst-cred-module-suite"
-import { Twitter } from "gyst-cred-module-suite"
+import { Bitbucket } from "oauth-module-suite"
+import { Facebook } from "oauth-module-suite"
+import { Github } from "oauth-module-suite"
+import { Google } from "oauth-module-suite"
+import { Reddit } from "oauth-module-suite"
+import { Trello } from "oauth-module-suite"
+import { Twitch } from "oauth-module-suite"
+import { Twitter } from "oauth-module-suite"
 
 export let cred_module_collection:{ [service_id:string]: OAuthBaseClass } = {}
 

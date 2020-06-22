@@ -14,7 +14,7 @@ import {
   TrelloLib,
   TwitchLib,
   TwitterLib
-} from "gyst-cred-module-suite"
+} from "oauth-module-suite"
 
 /**
  * 

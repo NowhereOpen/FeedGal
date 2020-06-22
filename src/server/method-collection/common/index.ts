@@ -1,4 +1,4 @@
-import { RefreshTokenIfFailTask as _RefreshTokenIfFailTask, OAuthBaseClass, ErrorBeforeRefreshing } from "gyst-cred-module-suite"
+import { RefreshTokenIfFailTask as _RefreshTokenIfFailTask, OAuthBaseClass, ErrorBeforeRefreshing } from "oauth-module-suite"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 import { OAuthBaseLoaderModule } from "~/src/server/loader-module-collection/loader-module-base/oauth"
 import { isTokenError } from "~/src/server/lib/oauth-cred-module-helper"

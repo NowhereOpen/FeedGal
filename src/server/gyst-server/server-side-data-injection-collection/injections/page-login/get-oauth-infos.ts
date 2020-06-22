@@ -1,6 +1,6 @@
 import { PageLoginOAuthInfo } from "~/src/common/types/oauth-info-variations"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
-import { OAuthBaseClass } from "gyst-cred-module-suite"
+import { OAuthBaseClass } from "oauth-module-suite"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 
 export async function getOAuthInfos() {

@@ -1,4 +1,4 @@
-import { ErrorOnRefreshRequest } from "gyst-cred-module-suite"
+import { ErrorOnRefreshRequest } from "oauth-module-suite"
 import {
   GystEntryWarning,
   GystEntryResponseErrorDetails,
