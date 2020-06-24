@@ -32,6 +32,8 @@ export async function setup(root_to_nuxt_config_fp:string):Promise<NuxtSetupRetu
   // Init Nuxt.js
   nuxt = new Nuxt(config)
 
+  setupErrorHandler(nuxt)
+
   /**
    * 2020-05-20 12:14
    * `await nuxt.ready()` used to be in `else` statement after `if(config.dev)` but this was
@@ -56,4 +58,38 @@ export async function setup(root_to_nuxt_config_fp:string):Promise<NuxtSetupRetu
   return {
     host, port, nuxt_middleware, nuxt_config, nuxt
   }
+}
+
+function setupErrorHandler(nuxt:any) {
+  /**
+   * @param app Connect instance. Not an express app instance.
+   */
+  nuxt.hook("render:errorMiddleware", function(app:any) {
+    /**
+     * 2020-06-24 20:59
+     * 
+     * From `node_modules/@nuxt/server/dist/server.js` the `errorMiddleware` uses `""`.
+     */
+    app.use("", (err:any, req:any, res:any, next:Function) => {
+      /**
+       * 2020-06-24 21:01
+       * 
+       * Had a problem with `NuxtServerError` `Module parse failed: Unexpected token` regarding
+       * the usage of `?`. Spent so many hours trying to fix, debug, and learn the problem.
+       * Only to find out that I could fix it by updating `tsconfig.json` `target: "esnext"` to
+       * `target: "ES2019"`. But the exact same config worked locally but didn't on the VM
+       * instance. Very confusing.
+       */
+      if("message" in err && err.message.includes("Module parse failed: Unexpected token")) {
+        console.error(err)
+        console.log(
+          `If the problem is related with Typescript Syntax (such as the \`?\` optional parameter)`,
+          `try updating the 'target' option in the \`tsconfig.json\`. Refer to the comment in`,
+          `\`src/server/gyst-server/nuxt/index.ts\`.`
+        )
+      }
+
+      throw err
+    })
+  })
 }
