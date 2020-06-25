@@ -4,6 +4,15 @@ export function attach(TargetClass:any) {
     return value
   }
 
+  TargetClass.prototype.isPublic = function():boolean {
+    if(process.env.IS_PUBLIC === "true") {
+      return true
+    }
+    
+    let value:boolean = this.getSettings(["server", "is-public"], false)
+    return value
+  }
+
   TargetClass.prototype.getProtocol = function():"http"|"https" {
     let value = this.getSettings(["server", "protocol"], "http")
     return value

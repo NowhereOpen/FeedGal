@@ -1,6 +1,6 @@
 import fs from "fs"
 
-import { setup as setupGystAppSettingReader } from "~/src/server/gyst-app-setting-reader"
+import { setup as setupGystAppSettingReader, AppSettingsReader } from "~/src/server/gyst-app-setting-reader"
 import { setup as setupServiceCredentialReader } from "~/src/server/service-credential-reader"
 import { setup as setupMongoose } from "~/src/server/mongoose"
 import { setup as setupLoaderModuleCollection } from "~/src/server/loader-module-collection"
@@ -24,8 +24,9 @@ function start() {
 
   const protocol = app_settings.getProtocol()
   const session_secret = app_settings.getSessionSecret()
+  const is_public = app_settings.isPublic()
 
-  const service_setting:ServerSettings = { protocol, session_secret }
+  const service_setting:ServerSettings = { protocol, session_secret, is_public }
   if(protocol == "https") {
     const private_key_path = app_settings.getPrivateKeyPath()
     const certificate_path = app_settings.getCertificatePath()

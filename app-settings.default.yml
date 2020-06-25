@@ -4,6 +4,9 @@ gyst:
     #   - Used in generating the callback url for oauth authentication, so use the
     #     "host" of browser's `document.location.host`
     ext-host: 
+    # If set to `true` ignores `protocol` and `port` and runs both http and https
+    # servers on 80 and 443 port, respectively. Requires root privilege.
+    is-public: false
     protocol: http
     port: 3000
     private-key-path: sslcert/server.key
