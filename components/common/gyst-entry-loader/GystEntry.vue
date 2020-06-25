@@ -27,7 +27,10 @@ div
                       :class="{ ['url-context-' + index]: true }"
                       :href="context.url"
                       target="_blank"
-                    ) {{ context.name }}
+                    )
+                      span {{ context.name }}
+                      span.ml-1(v-if="index == 0")
+                        i.fa(:class="{ ['fa-' + gystEntry.service_id]: true, ['btn-' + gystEntry.service_id]: true }")
                     span(v-else) {{ context.name }}
                     //- Prints ' > '
                     span(v-if="index < gystEntry.contexts.length - 1") &nbsp;&gt;&nbsp;
@@ -124,3 +127,23 @@ export default class GystEntry extends Vue {
   }
 }
 </script>
+
+<style lang="less">
+@import "~font-awesome/less/font-awesome.less";
+@import "~bootstrap3/less/variables.less";
+@import "~bootstrap3/less/mixins";
+@import "~bootstrap3/less/buttons.less";
+@import "~bootstrap-social/bootstrap-social.less";
+
+.btn-reddit {
+  .btn-social(#ff5700)
+}
+
+.btn-twitch {
+  .btn-social(#6441a5)
+}
+
+.btn-trello {
+  .btn-social(#0079BF)
+}
+</style>
