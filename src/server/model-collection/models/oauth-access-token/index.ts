@@ -112,8 +112,8 @@ export class OAuthAccessTokenStorage extends MongoStorage implements IOAuthAcces
     return entries.length
   }
 
-  async deleteUser(oauth_connected_user_entry_id:string) {
-    const result = await this.model.deleteMany({ oauth_connected_user_entry_id })
+  async deleteEntry(service_id:string, oauth_connected_user_entry_id:string) {
+    const result = await this.model.deleteOne({ service_id, oauth_connected_user_entry_id })
     return {
       delete_count: result.deletedCount ? result.deletedCount : 0
     }

@@ -52,7 +52,6 @@ export default class DefaultLayout extends Vue {
   title = "GYST"
   links = [
     { name: "Main", href: "/" },
-    { name: "User", href: "/user" },
     { name: "Suite", href: "/suite" },
     { name: "Connected Accounts", href: "/settings/accounts" },
   ]

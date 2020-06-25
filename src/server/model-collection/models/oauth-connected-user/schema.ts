@@ -2,6 +2,7 @@ export const schema = {
   // gyst_user_id
   user_id: String,
   
+  // OAuth service id
   service_id: String,
   service_user_uid: String,
   

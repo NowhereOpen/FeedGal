@@ -52,9 +52,24 @@ div
               div
                 span.caption Last connected on {{ oauth_user.connected_at }}
 
+  hr.mt-4
+
+  div.mt-4
+    h1 Remove FeedGal Account
+    v-btn(
+      @click="onRemoveAccountClick"
+    ) Remove
+
+  //- Rendered conditionally
   RevokeRemoveConfirmDialog(
     ref="RevokeRemoveConfirmDialog"
     @confirm="onRevokeRemoveConfirm"
+  )
+
+  //- Rendered conditionally
+  RemoveAccountConfirmDialog(
+    ref="RemoveAccountConfirmDialog"
+    @confirm="onRemoveAccountConfirm"
   )
 </template>
 
@@ -66,10 +81,11 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import { UrlsGystResource } from "~/src/common/urls"
 
 import RevokeRemoveConfirmDialog from "~/components/page-settings-accounts/RevokeRemoveConfirmDialog.vue"
+import RemoveAccountConfirmDialog from "~/components/page-settings-accounts/RemoveAccountConfirmDialog.vue"
 import RevokeBtn from "~/components/page-settings-accounts/RevokeBtn.vue"
 
 @Component({
-  components: { RevokeBtn, RevokeRemoveConfirmDialog }
+  components: { RevokeBtn, RevokeRemoveConfirmDialog, RemoveAccountConfirmDialog }
 })
 export default class ConnectNewAccountPage extends Vue {
   @Mutation("page-settings-accounts/revokeOAuthAccount") revokeOAuthAccount!:Function
@@ -100,6 +116,20 @@ export default class ConnectNewAccountPage extends Vue {
   onRemoveClick(oauth_user:any, comp:RevokeBtn) {
     ;(<RevokeRemoveConfirmDialog> this.$refs["RevokeRemoveConfirmDialog"]).open(oauth_user, comp, { action: "Remove", actioning: "Removing" })
     // const oauth_connected_user_entry_id = oauth_user._id
+  }
+
+  onRemoveAccountClick() {
+    const comp = <RemoveAccountConfirmDialog> this.$refs["RemoveAccountConfirmDialog"]
+    comp.open()
+  }
+
+  async onRemoveAccountConfirm() {
+    const url = UrlsGystResource.deleteUser()
+    await axios.delete(url)
+
+    setTimeout(() => {
+      this.$router.push("/")
+    }, 1500)
   }
 }
 </script>

@@ -1,6 +1,4 @@
-import { DeleteUser, DeleteResult } from "~/src/server/model-collection/model-base"
-
-export interface IOAuthAccessToken extends DeleteUser {
+export interface IOAuthAccessToken {
   /**
    * OAuth1 methods. The 'token data' used in `auth_url`. In OAuth1,
    * the 'token data' are required before the 'auth url'.
