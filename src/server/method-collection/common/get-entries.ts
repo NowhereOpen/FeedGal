@@ -29,7 +29,12 @@ export async function handleError(
 
   try {
     const output:LoaderModuleOutput = await cb()
-    if(["github", "trello"].includes(service_id)) {
+    /**
+     * 2020-06-28 00:51
+     * In case of Twitch, could refresh the thumbnail and see if there exists any new streams that
+     * started or ended but using `ALL_LOADED` for now.
+     */
+    if(["github", "trello", "twitch"].includes(service_id)) {
       if(output.entries.length == 0) {
         return {
           name: "ALL_LOADED",
