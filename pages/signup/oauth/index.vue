@@ -18,6 +18,19 @@ import { Vue, Component } from "nuxt-property-decorator"
 
 import * as requestMaker from "~/src/cli/request-maker"
 
+/**
+ * 2020-06-28 00:03
+ * 
+ * Do not use `$router` expecting the page to reload after changing the url. Refer to:
+ * 
+ *   - https://forum.vuejs.org/t/this-router-push-doesnt-reload-the-page/39700
+ * 
+ * The client side router isn't expected to reload. This is important especially with
+ * server side data injection because using `$router` doesn't let the server side data
+ * injection to happen. So, when the user is redirectted to `/login` nothing will
+ * appear on that page.
+ */
+
 @Component({
   components: {}
 })
@@ -35,22 +48,19 @@ export default class OAuthSignupPage extends Vue {
   async onSignupBtnClick() {
     try {
       await requestMaker.oauth_signup.createNewAccount(this.signup_form)
-      this.$router.push("/login?relogin=true")
+      this.visit("/login", { relogin: true })
     }
     catch(e) {
       if("response" in e && e.response.status == 403 && e.response.data.name == "INVALID_SESSION") {
-        this.$router.push("/login")
+        this.visit("/login")
         return
       }
       else if("response" in e && e.response.status == 400 && e.response.data.name == "LOGIN_EXISTS") {
-        this.$router.push("/login?error=signup_exists")
+        this.visit("/login", { error: "signup_exists" })
         return
       }
       throw e
     }
-    // this.$router.push("/gyst", () => {
-    //   window.location.reload(true)
-    // })
   }
 
   async onCancelBtnClick() {
@@ -58,7 +68,16 @@ export default class OAuthSignupPage extends Vue {
      * Revoke the access token, or something.
      */
     await requestMaker.oauth_signup.cancelSignup()
-    this.$router.push("/login")
+    this.visit("/login")
+  }
+
+  visit(pathname:string, params?:any) {
+    let parameters = ""
+    if(params) {
+      const sp = new URLSearchParams(params)
+      parameters = sp.toString()
+    }
+    location.replace(`${pathname}?${parameters}`)
   }
 }
 </script>
