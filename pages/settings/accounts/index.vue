@@ -128,7 +128,14 @@ export default class ConnectNewAccountPage extends Vue {
     await axios.delete(url)
 
     setTimeout(() => {
-      this.$router.push("/")
+      /**
+       * 2020-06-28 00:36 
+       * 
+       * Use `location.replace` over `$router.push` for the same reason for navigating from `/signup/oauth`
+       * to `/login`. Without this, the client side will continue to think that the user is logged in when
+       * the server side knows and updated the session to be an anon user.
+       */
+      location.replace("/")
     }, 1500)
   }
 }
