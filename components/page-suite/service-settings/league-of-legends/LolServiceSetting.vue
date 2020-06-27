@@ -28,10 +28,12 @@ div
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator"
 
+// Compopnents
 import ServiceSetting from "../basic/ServiceSetting.vue"
 import LolRegionSelect from "./LolRegionSelect.vue"
 
-import { ServiceSetting as ServiceSettingType } from "~/src/common/types/gyst-suite"
+// Types
+import { ServiceSetting as ServiceSettingType } from "~/src/common/types/pages/suite"
 
 @Component({
   components: { ServiceSetting, LolRegionSelect }

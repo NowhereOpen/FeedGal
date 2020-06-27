@@ -1,11 +1,14 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
-import { OAuthUserInfo } from "~/src/common/types/gyst-suite"
 import { validateSettingValue } from "~/src/server/method-collection/validate-setting-value"
 
+// Models
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
+
+// Types
+import { OAuthUserInfo } from "~/src/common/types/common/gyst-suite"
 
 export class PatchUpdateOAuthAccountRequestHandler extends SessionRequestHandlerBase {
   service_setting_id!:string

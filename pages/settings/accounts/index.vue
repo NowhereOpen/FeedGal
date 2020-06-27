@@ -80,16 +80,20 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import { UrlsGystResource } from "~/src/common/urls"
 
+// Components
 import RevokeRemoveConfirmDialog from "~/components/page-settings-accounts/RevokeRemoveConfirmDialog.vue"
 import RemoveAccountConfirmDialog from "~/components/page-settings-accounts/RemoveAccountConfirmDialog.vue"
 import RevokeBtn from "~/components/page-settings-accounts/RevokeBtn.vue"
+
+// Types
+import { OAuthInfos } from "~/src/common/types/pages/settings-accounts"
 
 @Component({
   components: { RevokeBtn, RevokeRemoveConfirmDialog, RemoveAccountConfirmDialog }
 })
 export default class ConnectNewAccountPage extends Vue {
   @Mutation("page-settings-accounts/revokeOAuthAccount") revokeOAuthAccount!:Function
-  @State(state => state["page-settings-accounts"].oauth_infos) oauth_infos!:any[]
+  @State(state => state["page-settings-accounts"].oauth_infos) oauth_infos!:OAuthInfos
   @Getter("page-settings-accounts/getTotalConnected") getTotalConnected!:Function
 
   redirectUrl(oauth_info:any) {

@@ -51,6 +51,7 @@ import Loader from "~/store/loader.ts"
 
 import * as requestMaker from "~/src/cli/request-maker"
 import { isGeneralError } from "~/src/cli/gyst-entry-response"
+import { LoadedEntries } from "~/src/common/types/pages/main"
 
 import {
   GystEntryResponseGeneralError,
@@ -69,7 +70,7 @@ import { LoadStatusServiceSetting, LoadStatusSettingValue } from "../src/common/
 })
 export default class IndexPage extends Vue {
   @State(state => state["session"].is_logged_in) is_logged_in!:boolean
-  @State(state => state["loader"].loaded_entries) loaded_entries!:any[]
+  @State(state => state["loader"].loaded_entries) loaded_entries!:LoadedEntries
   @Mutation("loader/setGeneralError") setGeneralError!:Function
   @Getter("loader/is_general_error") is_general_error!:boolean
 

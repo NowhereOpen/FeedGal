@@ -3,6 +3,9 @@ import moment from "moment"
 import { DurationInputObject } from "moment"
 import * as _ from "lodash"
 
+import { getParam, gystEntriesFromResponse, iterateLoadStatus } from "~/src/cli/store/loader"
+
+// Types
 import {
   LoadStatus,
   ClientSideField,
@@ -21,11 +24,9 @@ import {
   LoadEntryParam,
   GystEntryResponseErrorDetails
 } from "~/src/common/types/gyst-entry"
-import { ServiceInfo } from "~/src/common/types/service-info"
+import { ServiceInfo } from "~/src/common/types/common/service-info"
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
 import { PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
-
-import { getParam, gystEntriesFromResponse, iterateLoadStatus } from "~/src/cli/store/loader"
 
 /**
  * 2020-05-31 07:38

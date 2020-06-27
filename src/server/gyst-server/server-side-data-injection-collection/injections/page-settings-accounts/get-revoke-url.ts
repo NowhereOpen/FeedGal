@@ -7,7 +7,7 @@
  */
 // 
 
-import { RevokeInfo } from "src/common/types/oauth-service-info"
+import { RevokeInfo } from "src/common/types/pages/settings-accounts"
 
 export function getRevokeInfo(service_id:string):RevokeInfo|undefined {
   if(service_id == "bitbucket") {

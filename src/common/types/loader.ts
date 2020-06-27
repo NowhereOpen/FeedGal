@@ -20,7 +20,7 @@ export type ClientSideField = {
 import {
   ServiceSetting,
   SettingValue
-} from "~/src/common/types/gyst-suite"
+} from "~/src/common/types/common/gyst-suite"
 
 export type LoadStatusSettingValue = SettingValue & ClientSideField
 export type LoadStatusServiceSetting = Omit<ServiceSetting, "setting_values"> & ClientSideField & {

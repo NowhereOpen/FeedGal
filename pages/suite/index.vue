@@ -27,10 +27,12 @@ div
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator"
 
+// Components
 import GystSuite from "~/components/page-suite/gyst-suite/GystSuite.vue"
 import NewServiceSettingEditor from "~/components/page-suite/NewServiceSettingEditor.vue"
 
-import { GystSuite as GystSuiteType, ServiceSetting } from "~/src/common/types/gyst-suite"
+// Types
+// import { GystSuite as GystSuiteType, ServiceSetting } from "~/src/common/types/common/gyst-suite"
 
 import * as requestMaker from "~/src/cli/request-maker"
 

@@ -35,11 +35,13 @@ div
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator"
 
-import ServiceSetting from "../basic/ServiceSetting.vue"
-
 import * as requestMaker from "~/src/cli/request-maker"
 
-import { ServiceSetting as ServiceSettingType } from "~/src/common/types/gyst-suite"
+// Components
+import ServiceSetting from "../basic/ServiceSetting.vue"
+
+// Types
+import { ServiceSetting as ServiceSettingType } from "~/src/common/types/pages/suite"
 
 @Component({
   components: { ServiceSetting }

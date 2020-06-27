@@ -62,8 +62,9 @@ import * as _ from "lodash"
 
 import * as requestMaker from "~/src/cli/request-maker"
 import { UrlsGystResource } from "~/src/common/urls"
-import { ServiceInfo } from "~/src/common/types/service-info"
-import { ServiceSetting } from "~/src/common/types/gyst-suite"
+
+// Types
+import { ServiceInfo, ServiceSetting } from "~/src/common/types/pages/suite"
 
 @Component({
   components: {}

@@ -72,6 +72,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import * as requestMaker from "~/src/cli/request-maker"
 
+// Components
 import ServiceInfo from "../../service-setting-components/ServiceInfo.vue"
 // import ConnectOAuthBtn from "../../service-setting-components/ConnectOAuthBtn.vue"
 // import DisconnectOAuth from "../../service-setting-components/DisconnectOAuth.vue"
@@ -79,8 +80,13 @@ import SettingValueEditor from "../../service-setting-components/SettingValueEdi
 import SettingValueContainer from "../../service-setting-components/SettingValueContainer.vue"
 import ToggleServiceCheckbox from "../../service-setting-components/ToggleServiceCheckbox.vue"
 
-import { ServiceSetting, SettingValue, OAuthUserInfo } from "~/src/common/types/gyst-suite"
-import { ServiceInfo as ServiceInfoType } from "~/src/common/types/service-info"
+// Types
+import {
+  ServiceSetting,
+  SettingValue,
+  OAuthUserInfo,
+  ServiceInfo as ServiceInfoType
+} from "~/src/common/types/pages/suite"
 
 @Component({
   components: {

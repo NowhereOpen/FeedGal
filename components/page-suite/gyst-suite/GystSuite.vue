@@ -26,12 +26,14 @@ div
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator"
+
+// Components
 import ServiceSetting from "../service-settings/basic/ServiceSetting.vue"
 import GoogleCalendarServiceSetting from "../service-settings/google-calendar/GoogleCalendarServiceSetting.vue"
 import LolServiceSetting from "../service-settings/league-of-legends/LolServiceSetting.vue"
 
-import { ServiceSetting as ServiceSettingType } from "~/src/common/types/gyst-suite"
-import { ServiceInfo } from "~/src/common/types/service-info"
+// Types
+import { ServiceInfo, ServiceSetting as ServiceSettingType } from "~/src/common/types/pages/suite"
 
 import * as requestMaker from "~/src/cli/request-maker"
 

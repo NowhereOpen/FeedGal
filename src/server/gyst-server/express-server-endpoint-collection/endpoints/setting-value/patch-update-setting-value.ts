@@ -1,8 +1,11 @@
 import { SettingValueCreateUpdateBaseRequestHandler } from "./setting-value-create-update-base"
 
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
-import { SettingValue } from "~/src/common/types/gyst-suite"
+
 import { getDisplayedSettingValue } from "~/src/server/loader-module-collection"
+
+// Types
+import { SettingValue } from "~/src/common/types/common/gyst-suite"
 
 export class PatchUpdateSettingValueRequestHandler extends SettingValueCreateUpdateBaseRequestHandler {
   setting_value_id!:string
