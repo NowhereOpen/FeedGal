@@ -1,7 +1,7 @@
 import {
   GystEntryResponseSuccess,
   ServicePaginationReqParam
-} from "~/src/common/types/gyst-entry"
+} from "~/src/common/types/pages/main"
 
 import {
   getServiceInfo,

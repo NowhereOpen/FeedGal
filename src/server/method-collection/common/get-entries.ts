@@ -3,7 +3,7 @@ import {
   GystEntryWarning,
   GystEntryResponseErrorDetails,
   LoadEntryParamDetail
-} from "~/src/common/types/gyst-entry"
+} from "~/src/common/types/pages/main"
 import { LoaderModuleOutput, ServiceInfo } from "~/src/server/loader-module-collection/loader-module-base/types"
 
 import { getServiceInfo } from "~/src/server/loader-module-collection"

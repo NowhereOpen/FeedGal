@@ -51,19 +51,19 @@ import Loader from "~/store/loader.ts"
 
 import * as requestMaker from "~/src/cli/request-maker"
 import { isGeneralError } from "~/src/cli/gyst-entry-response"
-import { LoadedEntries } from "~/src/common/types/pages/main"
 
+// Types
+import { PaginationDirection } from "../src/server/loader-module-collection/loader-module-base/types"
 import {
+  LoadedEntries,
+  LoadStatusServiceSetting,
+  LoadStatusSettingValue,
   GystEntryResponseGeneralError,
-  PaginationData,
   GystEntryResponse,
   GystEntryResponseSuccess,
-  PaginationReqData,
   LoadEntryParam,
   ServicePaginationReqParam,
-} from "~/src/common/types/gyst-entry"
-import { PaginationDirection } from "../src/server/loader-module-collection/loader-module-base/types"
-import { LoadStatusServiceSetting, LoadStatusSettingValue } from "../src/common/types/loader"
+} from "~/src/common/types/pages/main"
 
 @Component({
   components: { GystEntryLoadStatus, GystEntryWrapper }

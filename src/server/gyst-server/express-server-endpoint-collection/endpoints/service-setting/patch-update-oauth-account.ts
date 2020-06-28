@@ -8,7 +8,7 @@ import { oauth_connected_user_storage } from "~/src/server/model-collection/mode
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 
 // Types
-import { OAuthUserInfo } from "~/src/common/types/common/gyst-suite"
+import { OAuthUserInfo } from "~/src/common/types/common/suite"
 
 export class PatchUpdateOAuthAccountRequestHandler extends SessionRequestHandlerBase {
   service_setting_id!:string

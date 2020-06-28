@@ -6,7 +6,7 @@ import {
   GystEntryResponseGeneralError,
   GystEntryError,
   GystEntryWarning
-} from "~/src/common/types/gyst-entry"
+} from "~/src/common/types/pages/main"
 import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
 import { FlattenedLoaderParam, flattenServiceSettings, getEntriesInitWithParam } from "~/src/server/method-collection/get-entries-init"
 import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader-module-base/types"

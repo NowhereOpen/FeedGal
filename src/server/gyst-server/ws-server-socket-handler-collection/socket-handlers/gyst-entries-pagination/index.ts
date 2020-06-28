@@ -6,7 +6,7 @@ import {
   GystEntryResponse,
   GystEntryResponseSuccess,
   GystEntryResponseError
-} from "~/src/common/types/gyst-entry"
+} from "~/src/common/types/pages/main"
 import { LoaderModuleOutput, PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
 
 import { commonErrorDetailGenerator } from "../../common"

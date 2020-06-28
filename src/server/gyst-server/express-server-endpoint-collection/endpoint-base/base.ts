@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 
-import { GystHttpRequestError, GystHttpRequestErrorName } from "~/src/common/types/gyst-entry"
+import { ServerSideError, ServerSideErrorName } from "~/src/common/types/common/server-side-errors"
 
 export abstract class ExpressRequest {
   req!:Request
@@ -50,8 +50,8 @@ export abstract class ExpressRequest {
    * to send error, or use `this.res` directly (when redirecting) then check for
    * `this.res.headersSent` between each step.
    */
-  sendError(status:number, name:GystHttpRequestErrorName, message:string, data?:any) {
-    const error_data:GystHttpRequestError = {
+  sendError(status:number, name:ServerSideErrorName, message:string, data?:any) {
+    const error_data:ServerSideError = {
       error: {
         name, message, data
       }

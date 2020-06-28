@@ -1,7 +1,7 @@
 import {
   GystEntryError,
   GystEntryResponseErrorDetails
-} from "~/src/common/types/gyst-entry"
+} from "~/src/common/types/pages/main"
 
 export function commonErrorDetailGenerator(e:Error, known_errors:GystEntryError[]=[]) {
   const is_known_error = ["DEV_FAULT_MSG", "DEV_FAULT", ...known_errors].includes(e.name)

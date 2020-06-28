@@ -36,7 +36,7 @@ import { Component, Prop, Vue } from "nuxt-property-decorator"
 
 import DeleteValueBtn from "./DeleteValueBtn.vue"
 
-import { ServiceSetting, SettingValue } from "~/src/common/types/service-setting"
+import { ServiceSetting, SettingValue } from "~/src/common/types/pages/suite"
 
 @Component({
   components: { DeleteValueBtn }

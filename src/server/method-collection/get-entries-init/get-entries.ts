@@ -2,7 +2,7 @@ import { getServiceInfo, getEntriesInitNonOAuth, getEntriesInitOAuth } from "~/s
 import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader-module-base/types"
 import { FlattenedLoaderParam } from "./type"
 import { refreshTokenIfFail } from "../common"
-import { GystEntryResponseSuccess } from "~/src/common/types/gyst-entry"
+import { GystEntryResponseSuccess } from "~/src/common/types/pages/main"
 import { handleError } from "~/src/server/method-collection/common/get-entries"
 
 export async function getEntriesInitWithParam(param:FlattenedLoaderParam):Promise<GystEntryResponseSuccess> {

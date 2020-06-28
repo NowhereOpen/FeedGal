@@ -1,4 +1,4 @@
-import { ServiceSetting, SettingValue } from "~/src/common/types/common/gyst-suite"
+import { ServiceSetting, SettingValue } from "~/src/common/types/common/suite"
 import { OAuthConnectedUser } from "~/src/common/types/models/oauth-connected-user"
 
 export type RevokeInfo = {

@@ -3,12 +3,12 @@ import {
   ClientSideField,
   LoadStatusServiceSetting,
   LoadStatusSettingValue
-} from "~/src/common/types/loader"
+} from "~/src/common/types/pages/main"
 import {
-  GystEntryResponseSuccess,
-  LoadEntryParam
-} from "~/src/common/types/gyst-entry"
-import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
+  GystEntryResponseSuccess
+} from "~/src/common/types/pages/main/loader"
+import { LoadEntryParam } from "~/src/common/types/common/load-entry-param"
+import { GystEntryWrapper as GystEntryWrapperType } from "~/src/common/types/pages/main"
 
 export function gystEntriesFromResponse(response:GystEntryResponseSuccess | GystEntryResponseSuccess) {
   if("error" in response) return [];
