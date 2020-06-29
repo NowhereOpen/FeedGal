@@ -7,20 +7,24 @@ import {
   ControlledError
 } from "~/src/server/loader-module-collection/loader-module-base/setting-value-validation-base"
 
-export class GithubSettingValueValidation extends SettingValueValidationBase {
+import { SettingValue } from "./type"
+
+export class GithubSettingValueValidation extends SettingValueValidationBase<SettingValue> {
   access_token:string
-  constructor(access_token:string, setting_value:string) {
+
+  owner_name:string
+  repo_name:string
+
+  constructor(access_token:string, setting_value:SettingValue) {
     super(setting_value)
+    this.owner_name = this.setting_value.is_mine ? this.setting_value.user_id : this.setting_value.owner
+    this.repo_name = this.setting_value.repo
     this.access_token = access_token
   }
 
   async getSettingValueData() {    
-    const tokens = this.setting_value.split("/")
-    const username = tokens[0]
-    const repo_name = tokens[1]
-    
     // Returns 404 error when repo doesn't exist.
-    const repo = await getRepo(this.access_token, username, repo_name)
+    const repo = await getRepo(this.access_token, this.owner_name, this.repo_name)
 
     /**
      * 2020-03-24 11:36
@@ -28,7 +32,7 @@ export class GithubSettingValueValidation extends SettingValueValidationBase {
      * Github decided to allow "lenient search" when it has a search API. So, when you have
      * `foo-bar` repo, passing `foo` returns `foo-bar` instead of an error. ... Why?
      */
-    if(repo.full_name != this.setting_value) {
+    if(repo.name != this.repo_name || repo.owner.login != this.owner_name) {
       const error = new ControlledError(`Did you mean '${repo.name}'? Please use the exact repo name.`)
       throw error
     }
@@ -61,8 +65,12 @@ export class GithubSettingValueValidation extends SettingValueValidationBase {
   }
 
   preValidate() {
-    if(this.setting_value.trim() == "") {
+    if(this.repo_name.trim() == "") {
       throw new ControlledError("Repo name must not be empty.")
+    }
+
+    if(this.owner_name.trim() == "") {
+      throw new ControlledError("Owner name must not be empty.")
     }
   }
 }

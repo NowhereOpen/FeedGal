@@ -13,16 +13,6 @@ div
         :error-messages="editor.validation === false ? [editor.error] : undefined"
         label="Summoner name"
       )
-
-    template(v-slot:setting-value="{ setting_value }")
-      v-row
-        div {{ setting_value.displayed_as }}
-        //- 
-          div.region Region:
-            span.region-value {{ value.region }}
-          div &nbsp;&nbsp;&nbsp;&nbsp;
-          div.summoner-name Summoner name:
-            span.summoner-name-value {{ value.summoner_name }}
 </template>
 
 <script lang="ts">

@@ -12,6 +12,7 @@ export { isSettingValueError } from "./lib/is-setting-value-error"
 import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import { GithubSettingValueValidation } from "./lib/validate-setting-value"
+import { getDisplayedSettingvalue } from "./lib/get-displayed-setting-value"
 
 export class GithubLoaderModule extends OAuthBaseLoaderModule {
   constructor() {
@@ -32,7 +33,11 @@ export class GithubLoaderModule extends OAuthBaseLoaderModule {
     const access_token:string = getAccessTokenFromTokenResponse(param.token_data)
     const task = new GithubSettingValueValidation(access_token, param.setting_value)
     const result = await task.getResult()
-    console.log(`github loader module avlidatSettingValue result: `,result)
     return result
+  }
+
+  getDisplayedSettingValue(setting_value:any):string {
+    const displayed_value = getDisplayedSettingvalue(setting_value)
+    return displayed_value
   }
 }

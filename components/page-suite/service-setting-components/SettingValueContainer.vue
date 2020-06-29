@@ -7,7 +7,7 @@ div
       :data-for-value="setting_value.value"
     )
       slot(name="setting-value" :setting_value="setting_value")
-        div.value-entry {{ setting_value.value }}
+        div.value-entry {{ setting_value.displayed_as }}
 
       v-spacer
       div.value-actions.d-flex

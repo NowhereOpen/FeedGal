@@ -16,6 +16,13 @@ div
         v-bind="$data"
       )
 
+      GithubServiceSetting(
+        v-else-if="service_setting.service_id == 'github'"
+        :service-setting="service_setting"
+        v-on="$listeners"
+        v-bind="$data"
+      )
+
       ServiceSetting(
         v-else
         :service-setting="service_setting"
@@ -30,6 +37,7 @@ import { Vue, Component } from "nuxt-property-decorator"
 // Components
 import ServiceSetting from "../service-settings/basic/ServiceSetting.vue"
 import GoogleCalendarServiceSetting from "../service-settings/google-calendar/GoogleCalendarServiceSetting.vue"
+import GithubServiceSetting from "../service-settings/github/GithubServiceSetting.vue"
 import LolServiceSetting from "../service-settings/league-of-legends/LolServiceSetting.vue"
 
 // Types
@@ -41,7 +49,8 @@ import * as requestMaker from "~/src/cli/request-maker"
   components: {
     ServiceSetting,
     GoogleCalendarServiceSetting,
-    LolServiceSetting
+    LolServiceSetting,
+    GithubServiceSetting
   }
 })
 export default class GystSuite extends Vue {

@@ -4,10 +4,10 @@ export type ResDataForValidation = any
 
 export class ControlledError extends Error {}
 
-export abstract class SettingValueValidationBase {
-  setting_value:any
+export abstract class SettingValueValidationBase<T=any> {
+  setting_value:T
 
-  constructor(setting_value:any) {
+  constructor(setting_value:T) {
     this.setting_value = setting_value
   }
 

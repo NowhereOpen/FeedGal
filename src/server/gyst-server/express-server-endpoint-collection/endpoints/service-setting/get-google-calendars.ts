@@ -6,7 +6,7 @@ import { getCalendars } from "~/src/server/lib/loader-module-helpers/services/go
 import { refreshTokenIfFail } from "~/src/server/method-collection/common"
 
 // Types
-import { GystEntryResponseErrorDetails } from "~/src/common/types/gyst-entry"
+import { GystEntryResponseErrorDetails } from "~/src/common/types/pages/main"
 
 export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase {
   service_setting_id!:string
