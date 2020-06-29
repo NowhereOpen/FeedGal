@@ -52,24 +52,25 @@ import Loader from "~/store/loader.ts"
 import * as requestMaker from "~/src/cli/request-maker"
 import { isGeneralError } from "~/src/cli/gyst-entry-response"
 
+// Types
+import { PaginationDirection } from "../src/server/loader-module-collection/loader-module-base/types"
 import {
+  LoadedEntries,
+  LoadStatusServiceSetting,
+  LoadStatusSettingValue,
   GystEntryResponseGeneralError,
-  PaginationData,
   GystEntryResponse,
   GystEntryResponseSuccess,
-  PaginationReqData,
   LoadEntryParam,
   ServicePaginationReqParam,
-} from "~/src/common/types/gyst-entry"
-import { PaginationDirection } from "../src/server/loader-module-collection/loader-module-base/types"
-import { LoadStatusServiceSetting, LoadStatusSettingValue } from "../src/common/types/loader"
+} from "~/src/common/types/pages/main"
 
 @Component({
   components: { GystEntryLoadStatus, GystEntryWrapper }
 })
 export default class IndexPage extends Vue {
   @State(state => state["session"].is_logged_in) is_logged_in!:boolean
-  @State(state => state["loader"].loaded_entries) loaded_entries!:any[]
+  @State(state => state["loader"].loaded_entries) loaded_entries!:LoadedEntries
   @Mutation("loader/setGeneralError") setGeneralError!:Function
   @Getter("loader/is_general_error") is_general_error!:boolean
 

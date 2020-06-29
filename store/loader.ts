@@ -1,31 +1,25 @@
 import { Module, VuexModule, Mutation } from "vuex-module-decorators"
 import moment from "moment"
-import { DurationInputObject } from "moment"
 import * as _ from "lodash"
 
+import { getParam, gystEntriesFromResponse, iterateLoadStatus } from "~/src/cli/store/loader"
+
+// Types
 import {
   LoadStatus,
-  ClientSideField,
   LoadStatusServiceSetting,
   LoadStatusSettingValue
-} from "~/src/common/types/loader"
+} from "~/src/common/types/pages/main"
 import {
-  GystEntryResponseGeneralError,
-  PaginationData,
   GystEntryResponse,
   GystEntryResponseSuccess,
   GystEntryResponseError,
-  PaginationReqDataSuccess,
-  PaginationReqData,
   ServicePaginationReqParam,
   LoadEntryParam,
   GystEntryResponseErrorDetails
-} from "~/src/common/types/gyst-entry"
-import { ServiceInfo } from "~/src/common/types/service-info"
-import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
-import { PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
-
-import { getParam, gystEntriesFromResponse, iterateLoadStatus } from "~/src/cli/store/loader"
+} from "~/src/common/types/pages/main"
+import { ServiceInfo } from "~/src/common/types/common/service-info"
+import { GystEntryWrapper as GystEntryWrapperType } from "~/src/common/types/pages/main"
 
 /**
  * 2020-05-31 07:38
@@ -61,8 +55,8 @@ export default class Store extends VuexModule {
    * 
    * Refer to Server side data injection
    */
+  // Injected
   load_status:LoadStatus = []
-  service_infos:ServiceInfo[] = []
 
   /**
    * 2020-06-15 16:30

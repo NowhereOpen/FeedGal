@@ -1,16 +1,18 @@
 import _ from "lodash"
 import { getDisplayedSettingValue, getServiceInfo } from "~/src/server/loader-module-collection"
 
+// Model
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models//oauth-connected-user"
 
-import { ServiceSetting, SettingValue } from "~/src/common/types/gyst-suite"
+// Types
+import { ServiceSetting, SettingValue } from "~/src/common/types/common/suite"
 
 /**
  * Merge service setting and its service settings.
  */
-export async function getServiceSettingsForGystSuiteId(user_id:string) {
+export async function getServiceSettingsForGystSuiteId(user_id:string):Promise<ServiceSetting[]> {
   const __service_settings = await service_setting_storage.getAllServiceSettingsForUserId(user_id)
   const service_setting_ids = __service_settings.map(entry => entry._id)
   const service_settings:ServiceSetting[] = []

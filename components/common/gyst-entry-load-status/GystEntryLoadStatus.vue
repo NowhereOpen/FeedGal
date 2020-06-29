@@ -41,8 +41,14 @@ import { Vue, Component, State, Getter } from "nuxt-property-decorator"
 
 import LoadStatusEntry from "./LoadStatusEntry.vue"
 
-import { LoadStatus, LoadStatusServiceSetting, LoadStatusSettingValue, ClientSideField } from "~/src/common/types/loader"
-import { GystEntryResponseErrorDetails } from "~/src/common/types/gyst-entry"
+// Types
+import {
+  GystEntryResponseErrorDetails,
+  LoadStatus,
+  LoadStatusServiceSetting,
+  LoadStatusSettingValue,
+  ClientSideField
+} from "~/src/common/types/pages/main"
 
 @Component({
   components: {

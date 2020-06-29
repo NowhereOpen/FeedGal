@@ -38,14 +38,15 @@ import { Vue, Component, State } from "nuxt-property-decorator"
 import OAuthLogin from "~/components/page-login/oauth-login/OAuthLogin.vue"
 
 import * as requestMaker from "~/src/cli/request-maker"
+import { UserInfo, OAuthInfos } from "~/src/common/types/pages/login"
 
 @Component({
   components: { OAuthLogin }
 })
 export default class LoginPage extends Vue {
   @State(state => state.session.is_logged_in) is_logged_in!:boolean
-  @State(state => state['page-login'].user_info) user_info!:any
-  @State(state => state['page-login'].oauth_infos) oauth_infos!:any[]
+  @State(state => state['page-login'].user_info) user_info!:UserInfo
+  @State(state => state['page-login'].oauth_infos) oauth_infos!:OAuthInfos
 
   // Display message
   messages = {

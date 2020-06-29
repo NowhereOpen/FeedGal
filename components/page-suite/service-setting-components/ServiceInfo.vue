@@ -15,7 +15,7 @@ div
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator"
 
-import { ServiceSetting } from "~/src/common/types/gyst-suite"
+import { ServiceSetting } from "~/src/common/types/pages/suite"
 
 @Component
 export default class ServiceInfo extends Vue {

@@ -31,12 +31,13 @@ div
 import { Component, Vue, Prop } from "nuxt-property-decorator"
 
 import { UrlsGystResource } from "~/src/common/urls"
+import { OAuthInfo, OAuthInfos } from "~/src/common/types/pages/login"
 
 @Component
 export default class OAuthLoginComponent extends Vue {
-  oauth_infos:any[] = []
+  oauth_infos:OAuthInfo[] = []
   
-  async loadSupportedOAuthServices(oauth_infos:any[]) {
+  async loadSupportedOAuthServices(oauth_infos:OAuthInfos) {
     this.oauth_infos = Object.entries(oauth_infos).map((entry) => entry[1])
 
     this.oauth_infos = this.oauth_infos.map(oauth_info => {

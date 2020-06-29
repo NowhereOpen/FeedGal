@@ -5,7 +5,7 @@ import {
   GystEntryResponseError,
   GystEntryResponseGeneralError,
   PaginationData
-} from "~/src/common/types/gyst-entry"
+} from "~/src/common/types/pages/main"
 
 export abstract class Loadable extends Vue {
   total_loaded:number = 0

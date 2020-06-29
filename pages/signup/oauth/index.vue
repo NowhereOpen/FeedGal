@@ -18,6 +18,9 @@ import { Vue, Component } from "nuxt-property-decorator"
 
 import * as requestMaker from "~/src/cli/request-maker"
 
+// Types
+import { SignupForm } from "~/src/common/types/pages/signup-oauth"
+
 /**
  * 2020-06-28 00:03
  * 
@@ -35,7 +38,7 @@ import * as requestMaker from "~/src/cli/request-maker"
   components: {}
 })
 export default class OAuthSignupPage extends Vue {
-  signup_form = {
+  signup_form:SignupForm = {
     friendly_name: "",
     user_id: ""
   }

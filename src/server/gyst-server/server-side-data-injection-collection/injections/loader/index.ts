@@ -1,11 +1,17 @@
-import { ClientSideField, LoadStatus, LoadStatusServiceSetting } from "~/src/common/types/loader"
-import { getServiceInfos } from "../../common/get-service-infos"
 import { getServiceSettingsForGystSuiteId } from "~/src/server/gyst-server/common/gyst-suite"
-import { GystEntryWarning } from "~/src/common/types/gyst-entry"
 
-export async function inject(state:any, user_id:string) {
-  const load_status = await getServiceSettingsForGystSuiteId(user_id)
-  load_status.forEach(_service_setting => {
+// Types
+import { GystEntryWarning } from "~/src/common/types/pages/main"
+import {
+  State,
+  ClientSideField,
+  LoadStatus,
+  LoadStatusServiceSetting
+} from "~/src/common/types/pages/main"
+
+export async function inject(state:State, user_id:string) {
+  const _load_status = await getServiceSettingsForGystSuiteId(user_id)
+  const load_status = _load_status.map(_service_setting => {
     const service_setting:LoadStatusServiceSetting = <any> _service_setting
     Object.assign(service_setting, <ClientSideField> {
       is_loading: false,
@@ -28,6 +34,8 @@ export async function inject(state:any, user_id:string) {
         })
       })
     }
+
+    return service_setting
   })
-  state.load_status = <LoadStatus> load_status
+  state.load_status = load_status
 }

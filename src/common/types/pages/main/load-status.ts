@@ -1,9 +1,12 @@
-import { 
-  LoadEntryParamDetail,
+import {
   GystEntryResponseErrorDetails,
   PaginationData,
   GystEntryWarning
-} from "./gyst-entry"
+} from "./loader"
+import {
+  ServiceSetting,
+  SettingValue
+} from "~/src/common/types/common/suite"
 
 export type ClientSideField = {
   /**
@@ -17,23 +20,12 @@ export type ClientSideField = {
   warning?: GystEntryWarning
 }
 
-import {
-  ServiceSetting,
-  SettingValue
-} from "~/src/common/types/gyst-suite"
-
-export type LoadStatusSettingValue = SettingValue & ClientSideField
 export type LoadStatusServiceSetting = Omit<ServiceSetting, "setting_values"> & ClientSideField & {
-  // Service Setting
   service_name:string
   is_disabled:boolean
-
-  // Setting Value
-  displayed_as?:string
-  is_invalid?:boolean
 
   // Overrides
   setting_values: LoadStatusSettingValue[]
 }
-
+export type LoadStatusSettingValue = SettingValue & ClientSideField
 export type LoadStatus = LoadStatusServiceSetting[]

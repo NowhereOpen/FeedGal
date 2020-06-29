@@ -2,13 +2,13 @@ import { getServiceInfo } from "~/src/server/loader-module-collection"
 
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 
-import { ServiceInfo as _ServiceInfo } from "~/src/server/loader-module-collection/loader-module-base/types"
-
-import { ServiceInfo, ServiceInfoOAuthInfo, OAuthConnectedUser } from "~/src/common/types/service-info"
-
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 
-export async function getServiceInfos(user_id:string) {
+// Types
+import { ServiceInfo, ServiceInfoOAuthInfo, OAuthConnectedUser } from "~/src/common/types/common/service-info"
+import { ServiceInfo as _ServiceInfo } from "~/src/server/loader-module-collection/loader-module-base/types"
+
+export async function getServiceInfos(user_id:string):Promise<ServiceInfo[]> {
   const service_ids = ["dark-sky", "github", "google-calendar", "league-of-legends", "reddit", "trello", "twitch", "twitter", "youtube"]
   const services:ServiceInfo[] = []
 

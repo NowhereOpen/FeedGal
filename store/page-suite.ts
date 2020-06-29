@@ -1,6 +1,12 @@
 import { Module, VuexModule, Mutation } from "vuex-module-decorators"
-import { ServiceInfo } from "~/src/common/types/service-info"
-import { ServiceSetting, SettingValue } from "~/src/common/types/gyst-suite"
+
+// Types
+import {
+  ServiceInfos,
+  ServiceSettings,
+  ServiceSetting,
+  SettingValue
+} from "~/src/common/types/pages/suite"
 
 @Module({
   namespaced: true,
@@ -8,10 +14,10 @@ import { ServiceSetting, SettingValue } from "~/src/common/types/gyst-suite"
 })
 export default class Store extends VuexModule {
   // Added service settings
-  service_settings:ServiceSetting[] = []
+  service_settings:ServiceSettings = []
 
   // Available service infos
-  service_infos:ServiceInfo[] = []
+  service_infos:ServiceInfos = []
 
   @Mutation
   setServiceSettings(service_settings:any) {

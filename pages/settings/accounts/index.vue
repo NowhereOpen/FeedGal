@@ -84,9 +84,13 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import { UrlsGystResource } from "~/src/common/urls"
 
+// Components
 import RevokeRemoveConfirmDialog from "~/components/page-settings-accounts/RevokeRemoveConfirmDialog.vue"
 import RemoveAccountConfirmDialog from "~/components/page-settings-accounts/RemoveAccountConfirmDialog.vue"
 import RevokeBtn from "~/components/page-settings-accounts/RevokeBtn.vue"
+
+// Types
+import { OAuthInfos } from "~/src/common/types/pages/settings-accounts"
 
 @Component({
   components: { RevokeBtn, RevokeRemoveConfirmDialog, RemoveAccountConfirmDialog }

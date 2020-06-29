@@ -38,7 +38,7 @@ import CommentLoader from "./CommentLoader.vue"
 
 import * as requestMaker from "~/src/cli/request-maker"
 
-import { GystEntryWrapper as GystEntryWrapperType } from "~/src/cli/types/gyst-entry"
+import { GystEntryWrapper as GystEntryWrapperType } from "~/src/common/types/pages/main"
 
 @Component({
   components: { GystEntry, CommentLoader }

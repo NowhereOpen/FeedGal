@@ -1,5 +1,4 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
-import { UserInfo } from "~/src/server/gyst-server/common/session"
 
 // Models
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
@@ -7,9 +6,13 @@ import { oauth_connected_user_storage } from "~/src/server/model-collection/mode
 import { gyst_user_storage } from "~/src/server/model-collection/models/user"
 import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
 
+// Types
+import { SignupForm } from "~/src/common/types/pages/signup-oauth"
+import { UserInfo } from "~/src/server/gyst-server/common/session"
+
 export class PostCreateNewAccountRequestHandler extends SessionRequestHandlerBase {
   // Signup form from `signup/oauth` page
-  signup_form!:any
+  signup_form!:SignupForm
   token_data!:any
   authenticated_user_info!:UserInfo
   oauth_service_id!:string

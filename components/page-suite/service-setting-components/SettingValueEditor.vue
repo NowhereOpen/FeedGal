@@ -22,7 +22,7 @@ import { Component, Vue, Prop } from "nuxt-property-decorator"
 import * as _ from "lodash"
 import { AxiosResponse } from "axios"
 
-import { SettingValue } from "~/src/common/types/service-setting"
+import { SettingValue } from "~/src/common/types/pages/suite"
 
 @Component
 export default class ServiceSettingEditorComp extends Vue {
