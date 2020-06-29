@@ -3,7 +3,7 @@ import { getCommits } from "~/src/server/lib/loader-module-helpers/services/gith
 
 export async function getEntries(
   access_token:string,
-  full_name:string,
+  user_name:string, repo_name:string,
   pagination_page?:string|number
 ):Promise<LoaderModuleOutput> {
   /**
@@ -12,7 +12,6 @@ export async function getEntries(
    * Support only master branch for now.
    */
   const branch_name = "master"
-  const [user_name, repo_name] = full_name.split("/")
   const params:any = { sha: branch_name }
 
   if(pagination_page) {

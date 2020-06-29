@@ -265,7 +265,8 @@ export default class IndexPage extends Vue {
     const all_loaded_warning = "warning" in response && response.warning!.name == "ALL_LOADED"
     const error_exists = "error" in response
     const is_enough_loaded = this.loader.isEnoughPreloaded(<LoadEntryParam> response)
-    if(is_enough_loaded || rate_limit_warning || error_exists || all_loaded_warning) {
+    const count_loaded_entries = "entries" in response ? response.entries.length : 0
+    if(count_loaded_entries == 0 || is_enough_loaded || rate_limit_warning || error_exists || all_loaded_warning) {
       return
     }
 

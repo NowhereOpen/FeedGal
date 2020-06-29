@@ -8,6 +8,7 @@ import {
 } from "~/src/server/loader-module-collection/loader-module-base/setting-value-validation-base"
 
 import { SettingValue } from "./type"
+import { getOwnerFromSettingValue } from "./utility"
 
 export class GithubSettingValueValidation extends SettingValueValidationBase<SettingValue> {
   access_token:string
@@ -17,7 +18,7 @@ export class GithubSettingValueValidation extends SettingValueValidationBase<Set
 
   constructor(access_token:string, setting_value:SettingValue) {
     super(setting_value)
-    this.owner_name = this.setting_value.is_mine ? this.setting_value.user_id : this.setting_value.owner
+    this.owner_name = getOwnerFromSettingValue(this.setting_value)
     this.repo_name = this.setting_value.repo
     this.access_token = access_token
   }

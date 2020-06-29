@@ -1,6 +1,7 @@
 import { SettingValue } from "./type"
+import { getOwnerFromSettingValue } from "./utility"
 
 export function getDisplayedSettingvalue(setting_value:SettingValue) {
-  const owner = setting_value.is_mine ? setting_value.user_id : setting_value.owner
+  const owner = getOwnerFromSettingValue(setting_value)
   return owner + "/" + setting_value.repo
 }

@@ -13,6 +13,7 @@ import { getEntries } from "./lib/get-entries"
 import { ServiceInfo } from "./lib/service-info"
 import { GithubSettingValueValidation } from "./lib/validate-setting-value"
 import { getDisplayedSettingvalue } from "./lib/get-displayed-setting-value"
+import { getOwnerFromSettingValue } from "./lib/utility"
 
 export class GithubLoaderModule extends OAuthBaseLoaderModule {
   constructor() {
@@ -21,12 +22,12 @@ export class GithubLoaderModule extends OAuthBaseLoaderModule {
 
   async getEntriesInit(param:OAuthGetEntriesInitParam) {
     const access_token:string = getAccessTokenFromTokenResponse(param.token_data)
-    return getEntries(access_token, param.setting_value)
+    return getEntries(access_token, getOwnerFromSettingValue(param.setting_value), param.setting_value.repo)
   }
 
   async getEntriesPaginationImpl(pagination_value:any, param:OAuthPaginationParam) {
     const access_token:string = getAccessTokenFromTokenResponse(param.token_data)
-    return getEntries(access_token, param.setting_value, pagination_value)
+    return getEntries(access_token, getOwnerFromSettingValue(param.setting_value), param.setting_value.repo, pagination_value)
   }
 
   async validateSettingValue(param:OAuthValidateSettingValueParam) {
