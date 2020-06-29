@@ -23,15 +23,13 @@ div
                 span.contexts(v-if="'contexts' in gystEntry")
                   span(v-for="(context, index) of gystEntry.contexts" :key="index")
                     a(
-                      v-if="'url' in context"
                       :class="{ ['url-context-' + index]: true }"
                       :href="context.url"
                       target="_blank"
                     )
                       span {{ context.name }}
                       span.ml-1(v-if="index == 0")
-                        i.fa(:class="{ ['fa-' + gystEntry.service_id]: true, ['btn-' + gystEntry.service_id]: true }")
-                    span(v-else) {{ context.name }}
+                        ServiceIcon(:service-id="gystEntry.service_id")
                     //- Prints ' > '
                     span(v-if="index < gystEntry.contexts.length - 1") &nbsp;&gt;&nbsp;
               v-row(no-gutters)
@@ -74,7 +72,12 @@ import * as _ from "lodash"
 import moment from "moment"
 import humanizeDuration from "humanize-duration"
 
-@Component
+// Components
+import ServiceIcon from "./ServiceIcon.vue"
+
+@Component({
+  components: { ServiceIcon }
+})
 export default class GystEntry extends Vue {
   @Prop() gystEntry:any
   /**
@@ -127,23 +130,3 @@ export default class GystEntry extends Vue {
   }
 }
 </script>
-
-<style lang="less">
-@import "~font-awesome/less/font-awesome.less";
-@import "~bootstrap3/less/variables.less";
-@import "~bootstrap3/less/mixins";
-@import "~bootstrap3/less/buttons.less";
-@import "~bootstrap-social/bootstrap-social.less";
-
-.btn-reddit {
-  .btn-social(#ff5700)
-}
-
-.btn-twitch {
-  .btn-social(#6441a5)
-}
-
-.btn-trello {
-  .btn-social(#0079BF)
-}
-</style>
