@@ -77,6 +77,16 @@ export default class NewServiceSettingEditor extends Vue {
   selected_oauth_account_id:string|null = ""
 
   onChooseService() {
+    this.chooseService(this.selected_service_id!)
+  }
+
+  /**
+   * 2020-06-30 00:52
+   * 
+   * Used from the outside as well.
+   */
+  chooseService(service_id:string, oauth_user_entry_id?:string) {
+    this.selected_service_id = service_id
     this.selected_service = <ServiceInfo> this.service_infos.find(service => service.service_id == this.selected_service_id)
 
     /**
@@ -86,7 +96,12 @@ export default class NewServiceSettingEditor extends Vue {
      * I just came up with this idea LOL.
      */
     if(this.selected_service.is_oauth && this.selected_service.oauth!.oauth_connected_users.length > 0) {
-      this.selected_oauth_account_id = this.selected_service.oauth!.oauth_connected_users[0]._id
+      if(oauth_user_entry_id) {
+        this.selected_oauth_account_id = oauth_user_entry_id
+      }
+      else {
+        this.selected_oauth_account_id = this.selected_service.oauth!.oauth_connected_users[0]._id
+      }
     }
     else {
       this.selected_oauth_account_id = null

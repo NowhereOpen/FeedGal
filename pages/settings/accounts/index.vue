@@ -31,6 +31,7 @@ div
               div
                 span.container
                   span {{ oauth_user.friendly_name || oauth_user.service_user_id }}
+
                   span(v-if="oauth_user.error_with_access_token")
                     v-tooltip(bottom)
                       template(v-slot:activator="{ on }")
@@ -49,6 +50,9 @@ div
                             text="Revoke"
                           )
                       span You signed up with this account.
+                  
+                  span.ml-2(v-if="isInUse(oauth_user) == false")
+                    span Start loading feeds for this account. Edit in #[a(:href="getSuiteUrl(oauth_user)") suite]
               div
                 span.caption Last connected on {{ oauth_user.connected_at }}
 
@@ -90,6 +94,7 @@ import RevokeBtn from "~/components/page-settings-accounts/RevokeBtn.vue"
 export default class ConnectNewAccountPage extends Vue {
   @Mutation("page-settings-accounts/revokeOAuthAccount") revokeOAuthAccount!:Function
   @State(state => state["page-settings-accounts"].oauth_infos) oauth_infos!:any[]
+  @State(state => state["page-settings-accounts"].service_settings) service_settings!:any[]
   @Getter("page-settings-accounts/getTotalConnected") getTotalConnected!:Function
 
   redirectUrl(oauth_info:any) {
@@ -137,6 +142,15 @@ export default class ConnectNewAccountPage extends Vue {
        */
       location.replace("/")
     }, 1500)
+  }
+
+  isInUse(oauth_user:any) {
+    return -1 < this.service_settings.findIndex(service_setting => service_setting.is_oauth && service_setting.oauth_info.is_connected && service_setting.oauth_info.user_info.entry_id == oauth_user._id)
+  }
+
+  getSuiteUrl(oauth_user:any) {
+    const sp = new URLSearchParams({ oauth_service_id: oauth_user.service_id, oauth_user_entry_id: oauth_user._id })
+    return `/suite?${sp.toString()}`
   }
 }
 </script>

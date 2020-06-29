@@ -47,8 +47,6 @@ export async function handleError(
     }
   }
   catch(e) {
-    const status = e.response.status
-
     const service_info = getServiceInfo(service_id)
     const is_token_error = isTokenError(service_info, e)
     const is_setting_value_error = isSettingValueError(service_info, e)
@@ -65,6 +63,8 @@ export async function handleError(
     }
     else {
       if("response" in e ) {
+        const status = e.response.status
+        
         if(service_id == "league-of-legends") {
           if(status == 403) {
             throw <GystEntryResponseErrorDetails> {

@@ -40,6 +40,18 @@ import * as requestMaker from "~/src/cli/request-maker"
 export default class ServiceSettingPage extends Vue {
   is_service_setting_editor_open = false
 
+  mounted() {
+    const oauth_service_id = <string> this.$route.query.oauth_service_id
+    const oauth_user_entry_id = <string> this.$route.query.oauth_user_entry_id
+
+    if(oauth_service_id != undefined) {
+      this.is_service_setting_editor_open = true
+      let service_id = oauth_service_id
+      if(service_id == "google") service_id = "youtube"
+      ;(<NewServiceSettingEditor> this.$refs["new-service-setting-editor"]).chooseService(service_id, oauth_user_entry_id)
+    }
+  }
+
   getServiceSettingsLength() {
     return this.$store.state["page-suite"].service_settings.length
   }
