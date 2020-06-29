@@ -186,7 +186,7 @@ export class RedirectHandleOAuthCallbackRequestHandler extends SessionRequestHan
         this.storeDataForSignup(this.service_id, this.user_info, this.token_response)
 
         const path = UrlsGystResource.oauthSignupPage()
-        redirect_url = makeCallbackUrl(urlJoin(this.origin, path), this.user_info, this.service_id)
+        redirect_url = makeOAuthSignupUrl(urlJoin(this.origin, path), this.user_info, this.service_id)
       }
 
       // Signup or login
@@ -214,7 +214,7 @@ async function isLogin(service_id:string, user_uid:string) {
  * The built url should be signup page, and the search parameters will be used by the frontend
  * to fill out the forms for the user for easier usage.
  */
-function makeCallbackUrl(base_url:string, detail:UserInfo, service_id:string):string {
+function makeOAuthSignupUrl(base_url:string, detail:UserInfo, service_id:string):string {
   const { friendly_name, user_id } = detail
   const _callback_url = new URL(base_url)
 

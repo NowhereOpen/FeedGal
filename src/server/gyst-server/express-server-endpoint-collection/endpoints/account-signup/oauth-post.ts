@@ -1,6 +1,8 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 import { UserInfo } from "~/src/server/gyst-server/common/session"
 
+// Models
+import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { gyst_user_storage } from "~/src/server/model-collection/models/user"
 import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
@@ -10,8 +12,9 @@ export class PostCreateNewAccountRequestHandler extends SessionRequestHandlerBas
   signup_form!:any
   token_data!:any
   authenticated_user_info!:UserInfo
-  service_id!:string
-  gyst_user_id!:string
+  oauth_service_id!:string
+
+  oauth_connected_user_entry_id!:string
 
   async storeParams():Promise<void> {
     this.signup_form = this.req.body.signup_form
@@ -20,33 +23,49 @@ export class PostCreateNewAccountRequestHandler extends SessionRequestHandlerBas
 
     this.token_data = token_data
     this.authenticated_user_info = user_info
-    this.service_id = service_id
+    this.oauth_service_id = service_id
   }
 
   async doTasks():Promise<void> {
     // Must have "friendly_name"
-    this.gyst_user_id = await gyst_user_storage.createNewGystUser(this.signup_form)
+    this.user_id = await gyst_user_storage.createNewGystUser(this.signup_form)
 
-    const oauth_connected_user_entry_id = await oauth_connected_user_storage!.connectAsSignup(
-      this.gyst_user_id,
-      this.service_id,
+    this.oauth_connected_user_entry_id = await oauth_connected_user_storage!.connectAsSignup(
+      this.user_id,
+      this.oauth_service_id,
       this.authenticated_user_info,
       this.authenticated_user_info.json_content
     )
   
-    await oauth_access_token_storage!.storeTokenData(this.service_id, oauth_connected_user_entry_id, this.token_data)
+    await oauth_access_token_storage!.storeTokenData(this.oauth_service_id, this.oauth_connected_user_entry_id, this.token_data)
+
+    await this.addServices()
   
     // gystSession.loginUser(req, user_id)
     
     this.clearDataForSignup()
   
     console.log(`[create-new-account] Successfully created a new account with:`)
-    console.log(`(user id='${this.gyst_user_id}', oauth service='${this.service_id}')`)
+    console.log(`(user id='${this.user_id}', oauth service='${this.oauth_service_id}')`)
     console.log(this.authenticated_user_info)
     console.log(`[create-new-account] End of log`)
   }
 
   async getResponse():Promise<any> {
-    return { user_id: this.gyst_user_id }
+    return { user_id: this.user_id }
+  }
+
+  async addServices() {
+    if(["bitbucket", "facebook"].includes(this.oauth_service_id)) {
+      return
+    }
+
+    if(this.oauth_service_id == "google") {
+      await service_setting_storage.createNewServiceSetting(this.user_id!, "youtube", this.oauth_connected_user_entry_id)
+      await service_setting_storage.createNewServiceSetting(this.user_id!, "google-calendar", this.oauth_connected_user_entry_id)
+    }
+    else {
+      await service_setting_storage.createNewServiceSetting(this.user_id!, this.oauth_service_id, this.oauth_connected_user_entry_id)
+    }
   }
 }

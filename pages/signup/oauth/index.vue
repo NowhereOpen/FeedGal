@@ -40,9 +40,18 @@ export default class OAuthSignupPage extends Vue {
     user_id: ""
   }
 
+  service_id:string = ""
+
   created() {
+    /**
+     * 2020-06-29 23:23
+     * 
+     * Refer to `src/server/gyst-server/express-server-endpoint-collection/endpoints/oauth/callback-handler-redirect.ts` for search parameters included
+     * in the url.
+     */
     this.signup_form.friendly_name = <string> (this.$route.query.friendly_name != undefined ? this.$route.query.friendly_name : this.$route.query.user_id)
     this.signup_form.user_id = <string>this.$route.query.user_id
+    this.service_id = <string>this.$route.query.service_id
   }
 
   async onSignupBtnClick() {
