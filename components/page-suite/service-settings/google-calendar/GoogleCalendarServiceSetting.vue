@@ -15,6 +15,7 @@ div
           :items="calendars"
           item-text="summary"
           :item-value="getCalendarItemValue"
+          :error-messages="error_message == null ? [] : error_message"
         )
       div(v-else)
         v-progress-circular(v-if="is_loading" indeterminate size=20)
@@ -34,6 +35,7 @@ div
 
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator"
+import _ from "lodash"
 
 import ServiceSetting from "../basic/ServiceSetting.vue"
 
@@ -46,6 +48,8 @@ import { ServiceSetting as ServiceSettingType } from "~/src/common/types/gyst-su
 })
 export default class GoogleCalendarServiceSetting extends ServiceSetting {
   @Prop() serviceSetting!:ServiceSettingType
+
+  error_message:string|null = null
 
   is_loaded = false
   is_loading = false
@@ -107,7 +111,15 @@ export default class GoogleCalendarServiceSetting extends ServiceSetting {
 
   async loadCalendars() {
     const { data } = await requestMaker.settings.gyst_suites.getGoogleCalendars(this.serviceSetting._id)
-    this.calendars = data
+    if(Array.isArray(data)) {
+      this.calendars = data
+      this.error_message = null
+    }
+    else {
+      if(_.get(data, "name") == "DEV_FAULT_MSG") {
+        this.error_message = data.message
+      }
+    }
   }
 }
 </script>

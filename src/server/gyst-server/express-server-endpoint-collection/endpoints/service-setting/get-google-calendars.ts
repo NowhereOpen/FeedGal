@@ -1,8 +1,12 @@
-import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
+import _ from "lodash"
 
+import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { getCalendars } from "~/src/server/lib/loader-module-helpers/services/google-calendar"
 import { refreshTokenIfFail } from "~/src/server/method-collection/common"
+
+// Types
+import { GystEntryResponseErrorDetails } from "~/src/common/types/gyst-entry"
 
 export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase {
   service_setting_id!:string
@@ -14,10 +18,32 @@ export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase 
   async doTasks():Promise<void> {
     const oauth_connected_user_entry_id:string = await service_setting_storage.getOAuthConnectedUserEntryId(this.service_setting_id)
     let google_calendars
-    await refreshTokenIfFail("google-calendar", oauth_connected_user_entry_id, async (token_data) => {
-      const res_data = await getCalendars(token_data["access_token"])
-      google_calendars = res_data.items
-    })
+
+    try {
+      await refreshTokenIfFail("google-calendar", oauth_connected_user_entry_id, async (token_data) => {
+        const res_data = await getCalendars(token_data["access_token"])
+        google_calendars = res_data.items
+      })
+    }
+    catch(e) {
+      /**
+       * 2020-06-29 22:40 
+       * 
+       * TODO. May need a common way to handle this? The exact error is used in `src/server/method-collection/common/get-entries.ts`
+       * as well.
+       */
+      if(_.get(e, "response.data.error.status") == "PERMISSION_DENIED") {
+        this.res_data = <GystEntryResponseErrorDetails> {
+          data: "",
+          message: "Authorization to this service wasn't granted when you connected the account.",
+          name: "DEV_FAULT_MSG"
+        }
+        return
+      }
+      else {
+        throw e
+      }
+    }
 
     this.res_data = google_calendars
   }

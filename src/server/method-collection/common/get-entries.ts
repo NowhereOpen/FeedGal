@@ -1,4 +1,6 @@
+import _ from "lodash"
 import { ErrorOnRefreshRequest } from "oauth-module-suite"
+
 import {
   GystEntryWarning,
   GystEntryResponseErrorDetails,
@@ -45,6 +47,8 @@ export async function handleError(
     }
   }
   catch(e) {
+    const status = e.response.status
+
     const service_info = getServiceInfo(service_id)
     const is_token_error = isTokenError(service_info, e)
     const is_setting_value_error = isSettingValueError(service_info, e)
@@ -62,7 +66,6 @@ export async function handleError(
     else {
       if("response" in e ) {
         if(service_id == "league-of-legends") {
-          const status = e.response.status
           if(status == 403) {
             throw <GystEntryResponseErrorDetails> {
               data: "",
@@ -79,6 +82,21 @@ export async function handleError(
           }
           else {
             throw e
+          }
+        }
+        else if(service_info.oauth_service_id == "google") {
+          /**
+           * 2020-06-29 22:10
+           * 
+           * Note. There are many 403 errors. But all errors regarding granting access has
+           * `e.response.data.error.status == PERMISSION_DENIED`
+           */
+          if(status == 403 && _.get(e, "response.data.error.status") == "PERMISSION_DENIED") {
+            throw <GystEntryResponseErrorDetails> {
+              data: "",
+              message: "Authorization to this service wasn't granted when you connected the account.",
+              name: "DEV_FAULT_MSG"
+            }
           }
         }
       }
