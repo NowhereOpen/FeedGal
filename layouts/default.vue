@@ -49,11 +49,12 @@ export default class DefaultLayout extends Vue {
   miniVariant = false
   right = true
   rightDrawer = false
-  title = "GYST"
+  title = "FeedGal"
   links = [
     { name: "Main", href: "/" },
     { name: "Suite", href: "/suite" },
     { name: "Connected Accounts", href: "/settings/accounts" },
+    { name: "About", href: "/about" }
   ]
 
   cur_link:any|null = null
