@@ -58,7 +58,7 @@ div
 
 <script lang="ts">
 import { Prop, Vue, Component, State } from "nuxt-property-decorator"
-import * as _ from "lodash"
+import _ from "lodash"
 
 import * as requestMaker from "~/src/cli/request-maker"
 import { UrlsGystResource } from "~/src/common/urls"
@@ -131,9 +131,9 @@ export default class NewServiceSettingEditor extends Vue {
     let name = service_info.name
 
     if(service_info.is_oauth) {
-      name += " (OAuth)"
+      const connected_users = _.get(service_info, "oauth.oauth_connected_users", [])
 
-      if(service_info.oauth!.is_connected) {
+      if(connected_users.length > 0) {
         name += ` (${service_info.oauth!.oauth_connected_users.length} ${service_info.oauth!.service_name} Accounts)`
       }
     }
