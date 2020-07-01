@@ -1,5 +1,8 @@
 <template lang="pug">
 div
+  v-container.faq-container
+    v-row.issue1(align="center")
+      span #[v-icon(color="yellow") warning] I want to connect multiple accounts, but I can't! #[a(href="/about#issue1") Solution]
   v-container(no-gutters)
     v-row(
       v-for="(oauth_info, index) in oauth_infos"

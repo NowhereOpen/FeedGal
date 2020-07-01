@@ -3,7 +3,8 @@ div
   v-card
     v-card-text
       div You are signing up using #[span.signup-service-name {{ $route.query.service_id }}].
-      div.check-user-id-container(v-if="signup_form.user_id") Is this you? #[span.check-user-id {{ signup_form.user_id }}]
+      div.check-user-id-container(v-if="signup_form.user_id") Is this you? #[b.check-user-id {{ signup_form.user_id }}]
+      div #[v-icon(color="yellow") mdi-alert] This is not me! #[a(href="/about#issue1") Solution]
       v-text-field.friendly-name-form(
         v-model="signup_form.friendly_name"
         label="Displayed name"
