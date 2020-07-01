@@ -31,7 +31,6 @@ export type ServiceSetting = {
 
   is_oauth:boolean
   uses_setting_value:boolean
-  is_disabled:boolean
 
   // Exists only when  `is_oauth` is true
   oauth_info?: {

@@ -42,12 +42,6 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  setIsDisabled({ service_setting, disabled }:{ service_setting:ServiceSetting, disabled:boolean }) {
-    const target = this.service_settings.find(entry => service_setting == entry)!
-    target!.is_disabled = disabled
-  }
-
-  @Mutation
   addNewSettingValue({ entry, service_setting }:{ entry:SettingValue, service_setting:ServiceSetting }) {
     const target = this.service_settings.find(entry => service_setting == entry)!
     target.setting_values.push(entry)

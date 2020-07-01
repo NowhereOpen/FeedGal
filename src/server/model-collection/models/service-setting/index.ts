@@ -22,10 +22,6 @@ export class ServiceSettingStorage extends MongoStorage implements IServiceSetti
     return this.model.find({ oauth_connected_user_entry_id })
   }
 
-  async getEnabledServiceSettingsForUserId(user_id:string) {
-    return this.model.find({ user_id, is_disabled: new Int32(0) })
-  }
-
   async getTotalServiceSettingsForUserId(user_id:string) {
     return this.model.countDocuments({ user_id })
   }
@@ -52,18 +48,18 @@ export class ServiceSettingStorage extends MongoStorage implements IServiceSetti
     return this.model.updateOne({ _id: service_setting_id }, { oauth_connected_user_entry_id: new_oauth_connected_user_entry_id })
   }
 
-  async toggleServiceDisabled(service_setting_id:string):Promise<any> {
-    await this.model.updateOne(
-      { _id: service_setting_id },
-      {
-        $bit: {
-          // Toggles value using `xor` and `Int32`
-          is_disabled: { xor: <number> new Int32(1) }
-        }
-      },
-      { upsert: true }
-    )
-  }
+  // async toggleServiceDisabled(service_setting_id:string):Promise<any> {
+  //   await this.model.updateOne(
+  //     { _id: service_setting_id },
+  //     {
+  //       $bit: {
+  //         // Toggles value using `xor` and `Int32`
+  //         is_disabled: { xor: <number> new Int32(1) }
+  //       }
+  //     },
+  //     { upsert: true }
+  //   )
+  // }
 
   async deleteServiceSetting(service_setting_id:string):Promise<any> {
     return this.model.deleteOne({ _id: service_setting_id })

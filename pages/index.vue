@@ -173,10 +173,9 @@ export default class IndexPage extends Vue {
         
         const error_exists = "error" in load_entry_param
         const all_loaded_warning = "warning" in load_entry_param && load_entry_param.warning!.name == "ALL_LOADED"
-        const is_disabled = this.loader.isDisabled(param)
         const is_enough_loaded = this.loader.isEnoughPreloaded(param)
 
-        return error_exists == false && is_enough_loaded == false && is_disabled == false && all_loaded_warning == false
+        return error_exists == false && is_enough_loaded == false && all_loaded_warning == false
       })
 
     this.requestPagination("old", all_params)

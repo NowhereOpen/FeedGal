@@ -77,10 +77,6 @@ export default class GystEntryLoadStatus extends Vue {
   }
 
   getServiceSettingIsLoading(service_setting:LoadStatusServiceSetting) {
-    if(service_setting.is_disabled) {
-      return false
-    }
-
     if(service_setting.uses_setting_value) {
       const valid_setting_values = service_setting.setting_values.filter(setting_value => setting_value.is_invalid == false)
       return valid_setting_values.length == 0 ? false : valid_setting_values.every((setting_value) => setting_value.is_loading)

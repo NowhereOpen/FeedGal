@@ -162,7 +162,7 @@ export default class Store extends VuexModule {
         })
       }
       else {
-        return status.is_loading == false || status.is_disabled || status.oauth_info?.user_info?.is_error || status.error
+        return status.is_loading == false || status.oauth_info?.user_info?.is_error || status.error
       }
     })
   }
@@ -210,18 +210,6 @@ export default class Store extends VuexModule {
   get getParam() {
     return (load_entry_param:LoadEntryParam) => {
       return getParam(load_entry_param, this.load_status)
-    }
-  }
-
-  get isDisabled() {
-    return (load_entry_param:LoadEntryParam) => {
-      const param:LoadStatusServiceSetting = <LoadStatusServiceSetting> getParam({ service_setting_id: load_entry_param.service_setting_id }, this.load_status)
-      /**
-       * 2020-06-09 20:35
-       * 
-       * `is_disabled` only exists in service setting at the moment
-       */
-      return param.is_disabled
     }
   }
 

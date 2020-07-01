@@ -6,7 +6,7 @@ import { setting_value_storage } from "~/src/server/model-collection/models/sett
 import { FlattenedLoaderParam } from "./type"
 
 export async function flattenServiceSettings(user_id:string):Promise<FlattenedLoaderParam[]> {
-  const _service_settings = await service_setting_storage.getEnabledServiceSettingsForUserId(user_id)
+  const _service_settings = await service_setting_storage.getAllServiceSettingsForUserId(user_id)
   const service_settings = _service_settings.map(entry => entry.toJSON())
 
   let flattened:FlattenedLoaderParam[] = []

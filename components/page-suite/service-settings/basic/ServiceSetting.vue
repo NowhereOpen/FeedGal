@@ -52,16 +52,6 @@ div.service-setting
           
       div(v-if="isOAuth() ? ! serviceSetting.oauth_info.is_connected : false")
         span Connect the service first to edit the settings.
-
-    v-card-actions.actions-container(
-      :data-is-visible="isActionsVisible()"
-    )
-      div.actions(v-if="isActionsVisible()")
-        ToggleServiceCheckbox(
-          ref="toggle-service-checkbox"
-          :is-disabled="serviceSetting.is_disabled"
-          @change="onToggleServiceChange"
-        )
 </template>
 
 <script lang="ts">
@@ -74,11 +64,8 @@ import * as requestMaker from "~/src/cli/request-maker"
 
 // Components
 import ServiceInfo from "../../service-setting-components/ServiceInfo.vue"
-// import ConnectOAuthBtn from "../../service-setting-components/ConnectOAuthBtn.vue"
-// import DisconnectOAuth from "../../service-setting-components/DisconnectOAuth.vue"
 import SettingValueEditor from "../../service-setting-components/SettingValueEditor.vue"
 import SettingValueContainer from "../../service-setting-components/SettingValueContainer.vue"
-import ToggleServiceCheckbox from "../../service-setting-components/ToggleServiceCheckbox.vue"
 
 // Types
 import {
@@ -93,7 +80,6 @@ import {
     ServiceInfo,
     SettingValueEditor,
     SettingValueContainer,
-    ToggleServiceCheckbox,
   }
 })
 export default class ServiceSettingComp extends Vue {
@@ -102,7 +88,6 @@ export default class ServiceSettingComp extends Vue {
   // Used by "sub component" like `LeagueOfLegendsServiceSetting`
   @Prop() editorDefaultValue:any
 
-  @Mutation("page-suite/setIsDisabled") setIsDisabled!:Function
   @Mutation("page-suite/addNewSettingValue") addNewSettingValue!:Function
   @Mutation("page-suite/updateSettingValue") updateSettingValue!:Function
   @Mutation("page-suite/deleteSettingValue") deleteSettingValue!:Function
@@ -192,18 +177,6 @@ export default class ServiceSettingComp extends Vue {
 
     ;(<SettingValueEditor> this.$refs["editor"]).resetEditor()
     ;(<SettingValueContainer> this.$refs["setting-value-container"]).setIsEditing(false)
-  }
-
-  async onToggleServiceChange(new_value:boolean) {
-    const service_id:string = this.serviceSetting.service_id
-    const service_setting_id:string = this.serviceSetting._id
-    ;(<ToggleServiceCheckbox>this.$refs["toggle-service-checkbox"]).setIsWaiting(true)
-    
-    const { data } = await requestMaker.settings.gyst_suites.toggleService(service_setting_id)
-    const disabled = data.result
-    this.setIsDisabled({ service_setting: this.serviceSetting, disabled })
-
-    ;(<ToggleServiceCheckbox>this.$refs["toggle-service-checkbox"]).setIsWaiting(false)
   }
 
   async onDeleteSettingValue(setting_value_id:string) {

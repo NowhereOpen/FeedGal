@@ -18,14 +18,6 @@ export async function inject(state:State, user_id:string) {
       total: 0
     })
 
-    if(service_setting.is_disabled) {
-      service_setting.warning = <GystEntryWarning> {
-        name: "DISABLED",
-        data: null,
-        message: "The service setting is disabled"
-      }
-    }
-
     if(service_setting.uses_setting_value) {
       service_setting.setting_values.forEach(setting_value => {
         Object.assign(setting_value, <ClientSideField> {

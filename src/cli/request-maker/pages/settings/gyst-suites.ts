@@ -11,10 +11,6 @@ export async function addNewServiceSetting(service_id:string, oauth_connected_us
   return axios.post(UrlsGystResource.addNewServiceSetting(), { service_id, oauth_connected_user_id })
 }
 
-export async function toggleService(service_setting_id:string) {
-  return axios.get(UrlsGystResource.toggleService(service_setting_id))
-}
-
 export async function deleteServiceSetting(service_setting_id:string) {
   return axios.delete(UrlsGystResource.deleteServiceSetting(service_setting_id))
 }

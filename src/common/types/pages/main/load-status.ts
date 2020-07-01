@@ -22,7 +22,6 @@ export type ClientSideField = {
 
 export type LoadStatusServiceSetting = Omit<ServiceSetting, "setting_values"> & ClientSideField & {
   service_name:string
-  is_disabled:boolean
 
   // Overrides
   setting_values: LoadStatusSettingValue[]

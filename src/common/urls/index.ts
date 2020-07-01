@@ -72,10 +72,6 @@ export class UrlsGystResource {
   static addNewServiceSetting() {
     return `/settings/service-setting/create`
   }
-    
-  static toggleService(service_setting_id:string) {
-    return `/settings/service-setting/${service_setting_id}/toggle-service`
-  }
 
   static deleteServiceSetting(service_setting_id:string) {
     return `/settings/service-setting/${service_setting_id}/delete`
