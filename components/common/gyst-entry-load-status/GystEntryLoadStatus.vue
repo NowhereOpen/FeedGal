@@ -39,11 +39,13 @@ div
 import _ from "lodash"
 import { Vue, Component, State, Getter } from "nuxt-property-decorator"
 
+import { RATE_LIMIT } from "~/src/common/warning-error"
+
+// Compopnents
 import LoadStatusEntry from "./LoadStatusEntry.vue"
 
 // Types
 import {
-  GystEntryResponseErrorDetails,
   LoadStatus,
   LoadStatusServiceSetting,
   LoadStatusSettingValue,
@@ -87,18 +89,13 @@ export default class GystEntryLoadStatus extends Vue {
   }
 
   getSettingValues(service_setting:LoadStatusServiceSetting) {
-    if("warning" in service_setting && service_setting.warning!.name == "DISABLED") {
-      return []
-    }
-    else {
-      return service_setting.setting_values
-    }
+    return service_setting.setting_values
   }
 
   getWarningText(entry:ClientSideField) {
     if("warning" in entry) {
-      if(entry.warning!.name == "RATE_LIMIT") {
-        return "'Rate limit' occurred for this service. May eventually load."
+      if(entry.warning!.name == RATE_LIMIT.name) {
+        return entry.warning!.message
       }
       else {
         return entry.warning!.message

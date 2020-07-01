@@ -1,22 +1,30 @@
 import _ from "lodash"
 import { ErrorOnRefreshRequest } from "oauth-module-suite"
 
-import {
-  GystEntryWarning,
-  GystEntryResponseErrorDetails,
-  LoadEntryParamDetail
-} from "~/src/common/types/pages/main"
-import { LoaderModuleOutput, ServiceInfo } from "~/src/server/loader-module-collection/loader-module-base/types"
-
 import { getServiceInfo } from "~/src/server/loader-module-collection"
 import { isTokenError as _isTokenError } from "~/src/server/lib/oauth-cred-module-helper"
 import { isSettingValueError as _isSettingValueError } from "~/src/server/loader-module-collection/is-setting-value-error"
 
-import { GOOGLE_AUTHORIZATION_ERROR, RIOT_API_ERROR } from "~/src/common/warning-error"
+import {
+  GOOGLE_AUTHORIZATION_ERROR,
+  RIOT_API_ERROR,
+  RATE_LIMIT,
+  INVALID_SETTING_VALUE,
+  TOKEN_MARKED_ERROR,
+  ALL_LOADED
+} from "~/src/common/warning-error"
 
 // Models
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
+
+// Types
+import {
+  GystEntryResponseErrorDetails,
+  LoadEntryParamDetail
+} from "~/src/common/types/pages/main"
+import { Warning } from "~/src/common/types/common/warning-error"
+import { LoaderModuleOutput, ServiceInfo } from "~/src/server/loader-module-collection/loader-module-base/types"
 
 /**
  * 2020-06-18 17:28 
@@ -27,7 +35,7 @@ import { setting_value_storage } from "~/src/server/model-collection/models/sett
 export async function handleError(
   detail:LoadEntryParamDetail,
   cb:() => Promise<LoaderModuleOutput>
-):Promise<GystEntryWarning|undefined> {
+):Promise<Warning|undefined> {
   const { service_id, setting_value_id, service_setting_id, oauth_connected_user_entry_id } = detail
   
   await throwControlledError(detail)
@@ -41,11 +49,7 @@ export async function handleError(
      */
     if(["github", "trello", "twitch"].includes(service_id)) {
       if(output.entries.length == 0) {
-        return {
-          name: "ALL_LOADED",
-          message: "All entries have been loaded.",
-          data: ""
-        }
+        return ALL_LOADED
       }
     }
   }
@@ -57,12 +61,12 @@ export async function handleError(
     if(is_token_error) {
       await oauth_connected_user_storage.setError(oauth_connected_user_entry_id!, true)
 
-      throw makeTokenError()
+      throw TOKEN_MARKED_ERROR
     }
     else if(is_setting_value_error) {
       await setting_value_storage.invalidateSettingValue(setting_value_id!)
 
-      throw makeSettingValueError()
+      throw INVALID_SETTING_VALUE
     }
     else {
       if("response" in e ) {
@@ -73,11 +77,7 @@ export async function handleError(
             throw <GystEntryResponseErrorDetails> RIOT_API_ERROR
           }
           else if(status == 429) {
-            return {
-              name: "RATE_LIMIT",
-              message: "",
-              data: ""
-            }
+            return RATE_LIMIT
           }
           else {
             throw e
@@ -105,31 +105,15 @@ async function throwControlledError({ service_id, oauth_connected_user_entry_id,
   if(oauth_connected_user_entry_id) {
     const is_error = await oauth_connected_user_storage.isErrorWithUserUid(service_id, oauth_connected_user_entry_id)
     if(is_error) {
-      throw makeTokenError()
+      throw TOKEN_MARKED_ERROR
     }
   }
   
   if(setting_value_id) {
     const is_invalid = await setting_value_storage.isInvalid(setting_value_id)
     if(is_invalid) {
-      throw makeSettingValueError()
+      throw INVALID_SETTING_VALUE
     }
-  }
-}
-
-function makeTokenError():GystEntryResponseErrorDetails {
-  return {
-    data: "",
-    message: "Please reconnect your service account.",
-    name: "TOKEN_MARKED_ERROR"
-  }
-}
-
-function makeSettingValueError():GystEntryResponseErrorDetails {
-  return {
-    data: "",
-    message: "Please update your setting.",
-    name: "INVALID_SETTING_VALUE"
   }
 }
 

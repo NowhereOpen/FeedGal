@@ -1,7 +1,6 @@
 import { getServiceSettingsForGystSuiteId } from "~/src/server/gyst-server/common/gyst-suite"
 
 // Types
-import { GystEntryWarning } from "~/src/common/types/pages/main"
 import {
   State,
   ClientSideField,

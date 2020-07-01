@@ -1,12 +1,12 @@
 import {
   GystEntryResponseErrorDetails,
   PaginationData,
-  GystEntryWarning
 } from "./loader"
 import {
   ServiceSetting,
   SettingValue
 } from "~/src/common/types/common/suite"
+import { Warning } from "~/src/common/types/common/warning-error"
 
 export type ClientSideField = {
   /**
@@ -17,7 +17,7 @@ export type ClientSideField = {
 
   pagination_data?: PaginationData
   error?: GystEntryResponseErrorDetails
-  warning?: GystEntryWarning
+  warning?: Warning
 }
 
 export type LoadStatusServiceSetting = Omit<ServiceSetting, "setting_values"> & ClientSideField & {

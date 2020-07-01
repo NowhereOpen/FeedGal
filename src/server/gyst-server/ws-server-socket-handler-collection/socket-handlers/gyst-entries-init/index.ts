@@ -12,8 +12,6 @@ import {
   GystEntryResponseError,
   GystEntryResponseErrorDetails,
   GystEntryResponseGeneralError,
-  GystEntryError,
-  GystEntryWarning
 } from "~/src/common/types/pages/main"
 import { ErrorName } from "~/src/common/types/common/warning-error"
 
