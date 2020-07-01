@@ -14,7 +14,6 @@ import { GetLogoutRequestHandler } from "./endpoints/user/logout-post"
 import { DeleteUserRequestHandler } from "./endpoints/user/user-delete"
 
 import { DeleteServiceSettingRequestHandler } from "./endpoints/service-setting/delete-service-setting"
-import { PatchUpdateOAuthAccountRequestHandler } from "./endpoints/service-setting/patch-update-oauth-account"
 import { PostCreateNewServiceSettingRequestHandler } from "./endpoints/service-setting/post-create-new-service-setting"
 import { GetGoogleCalendarsRequestHandler } from "./endpoints/service-setting/get-google-calendars"
 import { GetToggleServiceSettingRequestHandler } from "./endpoints/service-setting/get-toggle-service-setting"
@@ -34,7 +33,6 @@ export function setup(app:Application) {
   app.get(UrlsGystResource.connectNewAccount(":oauth_service_id"), new RedirectConnectNewAccountRequestHandler().handler())
 
   app.delete(UrlsGystResource.deleteServiceSetting(":service_setting_id"), new DeleteServiceSettingRequestHandler().handler())
-  app.patch(UrlsGystResource.updateServiceSettingOAuthAccount(":service_setting_id"), new PatchUpdateOAuthAccountRequestHandler().handler())
   app.post(UrlsGystResource.addNewServiceSetting(), new PostCreateNewServiceSettingRequestHandler().handler())
   app.get(UrlsGystResource.getGoogleCalendars(":service_setting_id"), new GetGoogleCalendarsRequestHandler().handler())
   app.get(UrlsGystResource.toggleService(":service_setting_id"), new GetToggleServiceSettingRequestHandler().handler())

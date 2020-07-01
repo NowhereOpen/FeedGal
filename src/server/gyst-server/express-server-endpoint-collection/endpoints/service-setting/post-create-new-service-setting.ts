@@ -24,15 +24,6 @@ export class PostCreateNewServiceSettingRequestHandler extends SessionRequestHan
   }
 
   async doTasks():Promise<void> {
-    if(this.service_info.is_oauth && this.oauth_connected_user_id == null) {
-      return this.sendError(
-        400,
-        "OAUTH_CONNECTED_USER_NOT_EXIST",
-        "You must create a service setting with an associated oauth account.",
-        { oauth_connected_user_id: this.oauth_connected_user_id }
-      )
-    }
-
     const result = await service_setting_storage.createNewServiceSetting(this.user_id!, this.service_id, this.oauth_connected_user_id, this.alias)
     this.res_data.service_setting = await getServiceSetting(result._id)
   }

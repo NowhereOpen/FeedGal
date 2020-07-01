@@ -3,17 +3,15 @@ import { LoadEntryParamDetail } from "~/src/common/types/common/load-entry-param
 import { GystEntryWarning } from "./common"
 
 export type GystEntryError = "NO_SETTING_VALUES" | "NO_SERVICE_SETTINGS" | "DEV_FAULT" | "DEV_FAULT_MSG" |
-  "INVALID_SETTING_VALUE" | "ERROR_ON_REFRESH_TOKEN" | "OAUTH_CONNECTED_USER_NOT_EXIST" |
+  "INVALID_SETTING_VALUE" | "ERROR_ON_REFRESH_TOKEN" |
   /**
-   * 2020-06-18 17:11
+   * 2020-07-01 09:00
    * 
-   * I don't like the name of this error. Had to come up with new something better ... or different than
-   * `OAUTH_CONNECTED_USER_NOT_EXIST` or `ERROR_ON_REFRESH_TOKEN`. So there is uncertainty among some
-   * error names, and `TOKEN_ERROR` isn't an exception.
-   * 
-   * Need to work on removing and reworking error names.
+   * Token was marked as an error. So the user needs to reconnect the service or something to fix this.
+   * Token isn't removed when an error occurs because that can be confusing for user. Instead, mark it as
+   * an error. And when using the token, check if it is marked as an error or not.
    */
-  "TOKEN_ERROR"
+  "TOKEN_MARKED_ERROR"
 
 /**
  * 2020-06-18 17:30 

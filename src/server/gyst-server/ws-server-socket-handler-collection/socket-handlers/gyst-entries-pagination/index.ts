@@ -1,6 +1,8 @@
 import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
 import { getEntriesInitWithParam, FlattenedLoaderParam } from "~/src/server/method-collection/get-entries-init"
 import { getEntriesPaginationData } from "~/src/server/method-collection/get-entries-pagination"
+
+// Types
 import {
   ServicePaginationReqParam,
   GystEntryResponse,
@@ -8,6 +10,7 @@ import {
   GystEntryResponseError
 } from "~/src/common/types/pages/main"
 import { LoaderModuleOutput, PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
+import { ErrorName } from "~/src/common/types/common/warning-error"
 
 import { commonErrorDetailGenerator } from "../../common"
 import { validateOwnership } from "./validate-ownership"
@@ -64,7 +67,8 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
       }
     }
     catch(e) {
-      const error_detail = commonErrorDetailGenerator(e)
+      const known_errors:ErrorName[] = ["TOKEN_MARKED_ERROR", "INVALID_SETTING_VALUE", "GOOGLE_AUTHORIZATION_ERROR", "RIOT_KEY_EXPIRED"]
+      const error_detail = commonErrorDetailGenerator(e, known_errors)
       response = <GystEntryResponseError> {
         service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id, 
         error: error_detail

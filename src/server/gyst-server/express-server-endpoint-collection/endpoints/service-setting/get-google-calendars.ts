@@ -5,6 +5,8 @@ import { service_setting_storage } from "~/src/server/model-collection/models/se
 import { getCalendars } from "~/src/server/lib/loader-module-helpers/services/google-calendar"
 import { refreshTokenIfFail } from "~/src/server/method-collection/common"
 
+import { GOOGLE_AUTHORIZATION_ERROR } from "~/src/common/warning-error"
+
 // Types
 import { GystEntryResponseErrorDetails } from "~/src/common/types/pages/main"
 
@@ -33,11 +35,7 @@ export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase 
        * as well.
        */
       if(_.get(e, "response.data.error.status") == "PERMISSION_DENIED") {
-        this.res_data = <GystEntryResponseErrorDetails> {
-          data: "",
-          message: "Authorization to this service wasn't granted when you connected the account.",
-          name: "DEV_FAULT_MSG"
-        }
+        this.res_data = <GystEntryResponseErrorDetails> GOOGLE_AUTHORIZATION_ERROR
         return
       }
       else {

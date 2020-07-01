@@ -7,6 +7,14 @@ import {
   ControlledError
 } from "~/src/server/loader-module-collection/loader-module-base/setting-value-validation-base"
 
+/**
+ * 2020-07-01 10:01
+ * 
+ * Import this for now. I don't want to spoil `loader-module-collection` files by importing things
+ * like this. Only the `message` of this object is needed. Had the exact same string before.
+ */
+import { RIOT_API_ERROR } from "~/src/common/warning-error"
+
 export class LeagueOfLegendsSettingValueValidation extends SettingValueValidationBase {
   api_key:string
   
@@ -32,7 +40,7 @@ export class LeagueOfLegendsSettingValueValidation extends SettingValueValidatio
       }
 
       if(_.get(error, "response.data.status.status_code", false) == 403) {
-        return "The server admin forgot to refresh the Riot API KEY 🤦."
+        return RIOT_API_ERROR.message!
       }
     }
   }

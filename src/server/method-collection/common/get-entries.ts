@@ -12,6 +12,9 @@ import { getServiceInfo } from "~/src/server/loader-module-collection"
 import { isTokenError as _isTokenError } from "~/src/server/lib/oauth-cred-module-helper"
 import { isSettingValueError as _isSettingValueError } from "~/src/server/loader-module-collection/is-setting-value-error"
 
+import { GOOGLE_AUTHORIZATION_ERROR, RIOT_API_ERROR } from "~/src/common/warning-error"
+
+// Models
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 
@@ -67,11 +70,7 @@ export async function handleError(
         
         if(service_id == "league-of-legends") {
           if(status == 403) {
-            throw <GystEntryResponseErrorDetails> {
-              data: "",
-              message: "The server admin forgot to refresh the Riot API KEY 🤦.",
-              name: "DEV_FAULT_MSG"
-            }
+            throw <GystEntryResponseErrorDetails> RIOT_API_ERROR
           }
           else if(status == 429) {
             return {
@@ -92,11 +91,7 @@ export async function handleError(
            * `e.response.data.error.status == PERMISSION_DENIED`
            */
           if(status == 403 && _.get(e, "response.data.error.status") == "PERMISSION_DENIED") {
-            throw <GystEntryResponseErrorDetails> {
-              data: "",
-              message: "Authorization to this service wasn't granted when you connected the account.",
-              name: "DEV_FAULT_MSG"
-            }
+            throw <GystEntryResponseErrorDetails> GOOGLE_AUTHORIZATION_ERROR
           }
         }
       }
@@ -126,7 +121,7 @@ function makeTokenError():GystEntryResponseErrorDetails {
   return {
     data: "",
     message: "Please reconnect your service account.",
-    name: "TOKEN_ERROR"
+    name: "TOKEN_MARKED_ERROR"
   }
 }
 
