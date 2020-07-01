@@ -2,7 +2,7 @@ import fs from "fs"
 
 import { setup as setupGystAppSettingReader, AppSettingsReader } from "~/src/server/gyst-app-setting-reader"
 import { setup as setupServiceCredentialReader } from "~/src/server/service-credential-reader"
-import { setup as setupMongoose } from "~/src/server/mongoose"
+import { setup as setupMongoose } from "~/src/server/lib/mongoose"
 import { setup as setupLoaderModuleCollection } from "~/src/server/loader-module-collection"
 import { setup as setupCredModuleCollection } from "~/src/server/cred-module-collection"
 import { setup as setupModelCollection } from "~/src/server/model-collection"
