@@ -2,7 +2,7 @@ import { PaginationData, Entry } from "~/src/server/loader-module-collection/loa
 import { LoadEntryParamDetail } from "~/src/common/types/common/load-entry-param"
 import { GystEntryWarning } from "./common"
 
-export type GystEntryError = "NO_SETTING_VALUES" | "NO_SERVICE_SETTINGS" | "DEV_FAULT" | "DEV_FAULT_MSG" |
+export type GystEntryError = "NO_SETTING_VALUES" | "NO_SERVICE_SETTINGS" |
   "INVALID_SETTING_VALUE" | "ERROR_ON_REFRESH_TOKEN" |
   /**
    * 2020-07-01 09:00

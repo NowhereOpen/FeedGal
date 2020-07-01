@@ -38,6 +38,7 @@ import { Component, Vue, Prop } from "nuxt-property-decorator"
 import _ from "lodash"
 
 import * as requestMaker from "~/src/cli/request-maker"
+import { GOOGLE_AUTHORIZATION_ERROR } from "~/src/common/warning-error"
 
 // Components
 import ServiceSetting from "../basic/ServiceSetting.vue"
@@ -118,7 +119,7 @@ export default class GoogleCalendarServiceSetting extends ServiceSetting {
       this.error_message = null
     }
     else {
-      if(_.get(data, "name") == "DEV_FAULT_MSG") {
+      if(_.get(data, "error.name") == GOOGLE_AUTHORIZATION_ERROR.name) {
         this.error_message = data.message
       }
     }

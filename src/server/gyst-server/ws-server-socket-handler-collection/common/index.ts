@@ -1,7 +1,7 @@
 import { ErrorName, Error } from "~/src/common/types/common/warning-error"
 
 export function commonErrorDetailGenerator(e:Error, known_errors:ErrorName[]=[]) {
-  const is_known_error = ["DEV_FAULT_MSG", "DEV_FAULT", ...known_errors].includes(e.name)
+  const is_known_error = known_errors.includes(e.name)
   let error_detail:Error
   if(is_known_error) {
     /**
