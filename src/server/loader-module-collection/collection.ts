@@ -3,7 +3,6 @@ import { OAuthBaseLoaderModule } from "./loader-module-base/oauth"
 
 import { service_credentials_reader } from "~/src/server/service-credential-reader"
 
-import { DarkSkyLoaderModule } from "./loader-modules/dark-sky"
 import { GithubLoaderModule } from "./loader-modules/github"
 import { GoogleCalendarLoaderModule } from "./loader-modules/google-calendar"
 import { LeagueOfLegendsLoaderModule } from "./loader-modules/league-of-legends"
@@ -17,7 +16,6 @@ export let loader_collection:{ [service_id:string]: NonOAuthLoaderModule|OAuthBa
 
 export function setup() {  
   loader_collection = {
-    "dark-sky": getDarkSky(),
     "github": getGithub(),
     "google-calendar": getGoogleCalendar(),
     "league-of-legends": getLeagueOfLegends(),
@@ -36,11 +34,6 @@ export function setup() {
 //   const client_secret = service_credentials_reader.getClientSecret(service_id)
 //   const instance = new BitbucketLoaderModule(client_id, client_secret)
 // }
-
-function getDarkSky() {
-  const instance = new DarkSkyLoaderModule("dark-sky")
-  return instance
-}
 
 // function getFacebook() {
 //   const service_id = "facebook"

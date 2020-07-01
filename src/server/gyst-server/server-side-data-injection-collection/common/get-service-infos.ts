@@ -9,7 +9,7 @@ import { ServiceInfo, ServiceInfoOAuthInfo, OAuthConnectedUser } from "~/src/com
 import { ServiceInfo as _ServiceInfo } from "~/src/server/loader-module-collection/loader-module-base/types"
 
 export async function getServiceInfos(user_id:string):Promise<ServiceInfo[]> {
-  const service_ids = ["dark-sky", "github", "google-calendar", "league-of-legends", "reddit", "trello", "twitch", "twitter", "youtube"]
+  const service_ids = ["github", "google-calendar", "league-of-legends", "reddit", "trello", "twitch", "twitter", "youtube"]
   const services:ServiceInfo[] = []
 
   /**
