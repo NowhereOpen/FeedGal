@@ -25,17 +25,6 @@ export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
   async handleImpl() {
     const parameters:FlattenedLoaderParam[] = await flattenServiceSettings(this.user_id!)
 
-    if(parameters.length == 0) {
-      const response:GystEntryResponseGeneralError = {
-        error: {
-          name: "NO_SERVICE_SETTINGS",
-          message: "The selected Gyst suite has no service settings. Couldn't load any entries.",
-          data: {}
-        }
-      }
-      return this.respond(response)
-    }
-
     await Promise.all(
       parameters.map(async param => {
         const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param

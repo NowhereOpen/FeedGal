@@ -1,5 +1,3 @@
-import { type } from "cypress/types/jquery"
-
 export type WarningName = "NO_SETTING_VALUES" | "NO_SERVICE_SETTINGS" | "RATE_LIMIT" | "ALL_LOADED"
 
 export type ErrorName =
@@ -16,16 +14,7 @@ export type ErrorName =
   "RIOT_KEY_EXPIRED" |
   "SETTING_VALUE_VALIDATION_ERROR" |
   "MUST_BE_ANON_USER" |
-  "MUST_BE_LOGGED_IN" |
-
-  /**
-   * 2020-07-01 12:33
-   * 
-   * TEMPORARY solution. The client is handling this as an error in:
-   * 
-   *   - `src/server/gyst-server/ws-server-socket-handler-collection/socket-handlers/gyst-entries-init/index.ts`
-   */
-  "NO_SERVICE_SETTINGS"
+  "MUST_BE_LOGGED_IN"
 
 export type Warning = {
   name: WarningName

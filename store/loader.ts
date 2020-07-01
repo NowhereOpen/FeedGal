@@ -59,40 +59,6 @@ export default class Store extends VuexModule {
   load_status:LoadStatus = []
 
   /**
-   * 2020-06-15 16:30
-   * 
-   * "General error" like no server setting only. Such error is thrown when
-   * the user signed up for the first time
-   */
-  general_error:GystEntryResponseErrorDetails|null = null
-
-  get is_general_error() {
-    return this.general_error != null
-  }
-
-  /**
-   * Should be called when `this.general_error` is not null. So, just don't forget to
-   * `general_error != null && isNoServiceSettingsError()`
-   */
-  get is_no_service_settings_error() {
-    return this.general_error!.name == "NO_SERVICE_SETTINGS"
-  }
-
-  @Mutation
-  setGeneralError(response:GystEntryResponse) {
-    if("error" in response) {
-      /**
-       * 2020-06-15 16:40 
-       * 
-       * `NO_SERVICE_SETTINGS` is the only error that I can think of as a 'general error'.
-       */
-      if(response.error.name == "NO_SERVICE_SETTINGS") {
-        this.general_error = <GystEntryResponseErrorDetails> response.error
-      }
-    }
-  }
-
-  /**
    * 2020-05-25 18:39
    * 
    * `load-status` isn't required apparently. Data is injected with "server side data injection" then
@@ -152,6 +118,10 @@ export default class Store extends VuexModule {
     
     // Sort entries in chronological order
     this.preloaded_entries.sort((a,b) => moment(b.entry.datetime_info).isAfter(moment(a.entry.datetime_info)) ? 1 : -1)
+  }
+
+  get isLoadStatusEmpty() {
+    return () => this.load_status.length == 0
   }
 
   get isAllLoaded() {

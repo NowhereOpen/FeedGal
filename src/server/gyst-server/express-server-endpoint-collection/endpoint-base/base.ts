@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 
-import { ServerSideError, ServerSideErrorName } from "~/src/common/types/common/server-side-errors"
+import { ErrorName, Error } from "~/src/common/types/common/warning-error"
 
 export abstract class ExpressRequest {
   req!:Request
@@ -50,11 +50,12 @@ export abstract class ExpressRequest {
    * to send error, or use `this.res` directly (when redirecting) then check for
    * `this.res.headersSent` between each step.
    */
-  sendError(status:number, name:ServerSideErrorName, message:string, data?:any) {
-    const error_data:ServerSideError = {
-      error: {
-        name, message, data
-      }
+  sendError(status:number, name:ErrorName, message:string, data?:any) {
+    const error_data = {
+      error: <Error> {
+        name, message
+      },
+      data
     }
 
     this.res.status(status).send(error_data)

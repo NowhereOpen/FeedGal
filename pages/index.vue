@@ -35,7 +35,7 @@ div
     )
       span Scroll to the bottom to load more entries or click
       v-btn.ml-2.manual-pagination-button(
-        :disabled="is_general_error"
+        :disabled="isLoadStatusEmpty()"
         @click="onClickLoadMore"
       ) Load more
 </template>
@@ -71,8 +71,7 @@ import {
 export default class IndexPage extends Vue {
   @State(state => state["session"].is_logged_in) is_logged_in!:boolean
   @State(state => state["loader"].loaded_entries) loaded_entries!:LoadedEntries
-  @Mutation("loader/setGeneralError") setGeneralError!:Function
-  @Getter("loader/is_general_error") is_general_error!:boolean
+  @Getter("loader/isLoadStatusEmpty") isLoadStatusEmpty!:Function
 
   loader:Loader = <any> null
 
@@ -98,6 +97,10 @@ export default class IndexPage extends Vue {
     this.setupClientSocket()
 
     if(this.is_logged_in) {
+      if(this.loader.isLoadStatusEmpty()) {
+        return
+      }
+
       this.loader.startLoading()
       this.is_waiting_request = true
       this.socket.emit(`gyst-entries-init`)
@@ -135,8 +138,6 @@ export default class IndexPage extends Vue {
      * 2020-06-15 16:45
      * Case for clicking is handled in the template `:disabled`.
      */
-    if(this.is_general_error) return
-
     this.loadMore()
   }
 
@@ -222,19 +223,6 @@ export default class IndexPage extends Vue {
   }
 
   handleSocketResponse(response:GystEntryResponse) {
-    /**
-     * 2020-06-15 16:48
-     * 
-     * This if statement may seem odd. Would love to have a utility function that checks if the
-     * error is general error, and uses it here and in the `store/loader`. So, when refactoring
-     * make sure to do use such function here and in the `store/loader`.
-     */
-    if("error" in response && response.error.name == "NO_SERVICE_SETTINGS") {
-      this.is_waiting_request = false
-      this.setGeneralError(response)
-      return
-    }
-
     this.loader.updatePaginationReqData(response)
     this.updateIsWaitingRequest(response)
 

@@ -1,38 +1,39 @@
 <template lang="pug">
 div
   div.title Load status
-  div
-    div(v-if="is_general_error")
-      div(v-if="is_no_service_settings_error")
+  //- 2020-07-01 14:20
+    Without this, the page throws error when loading entries after logging in. This happening after deleting `.nuxt`
+    directory then running the application.
+  client-only
+    div
+      div(v-if="isLoadStatusEmpty()")
         div Please connect accounts #[a(href="/settings/accounts") here] and update your suite #[a(href="/suite") here].
       div(v-else)
-        div An error occured and the DEV forgot to handle it. SMH
-    div(v-else)
-      div(v-for="service_setting of load_status")
-        LoadStatusEntry(
-          :text="service_setting.service_name"
-          :total="getServiceSettingTotal(service_setting)"
-          :is_loading="getServiceSettingIsLoading(service_setting)"
-          :is_warning="'warning' in service_setting"
-          :warning_text="getWarningText(service_setting)"
-          :is_error="getErrorTextServiceSetting(service_setting) != undefined"
-          :error_text="getErrorTextServiceSetting(service_setting)"
-        )
-        div.caption(
-          v-if="service_setting.is_oauth && duplicateServiceIdExists(service_setting)"
-        )
-          span Connected with #[span.font-italic {{ getAccountNameForDuplicateServiceId(service_setting) }}]
-        div.ml-2(v-if="service_setting.uses_setting_value && getErrorTextServiceSetting(service_setting) == undefined")
-          div(v-for="setting_value of getSettingValues(service_setting)")
-            LoadStatusEntry(
-              :text="setting_value.displayed_as"
-              :total="setting_value.total"
-              :is_loading="setting_value.is_loading"
-              :is_warning="'warning' in setting_value"
-              :warning_text="getWarningText(setting_value)"
-              :is_error="getErrorTextSettingValue(setting_value) != undefined"
-              :error_text="getErrorTextSettingValue(setting_value)"
-            )
+        div(v-for="service_setting of load_status")
+          LoadStatusEntry(
+            :text="service_setting.service_name"
+            :total="getServiceSettingTotal(service_setting)"
+            :is_loading="getServiceSettingIsLoading(service_setting)"
+            :is_warning="'warning' in service_setting"
+            :warning_text="getWarningText(service_setting)"
+            :is_error="getErrorTextServiceSetting(service_setting) != undefined"
+            :error_text="getErrorTextServiceSetting(service_setting)"
+          )
+          div.caption(
+            v-if="service_setting.is_oauth && duplicateServiceIdExists(service_setting)"
+          )
+            span Connected with #[span.font-italic {{ getAccountNameForDuplicateServiceId(service_setting) }}]
+          div.ml-2(v-if="service_setting.uses_setting_value && getErrorTextServiceSetting(service_setting) == undefined")
+            div(v-for="setting_value of getSettingValues(service_setting)")
+              LoadStatusEntry(
+                :text="setting_value.displayed_as"
+                :total="setting_value.total"
+                :is_loading="setting_value.is_loading"
+                :is_warning="'warning' in setting_value"
+                :warning_text="getWarningText(setting_value)"
+                :is_error="getErrorTextSettingValue(setting_value) != undefined"
+                :error_text="getErrorTextSettingValue(setting_value)"
+              )
 </template>
 
 <script lang="ts">
@@ -59,8 +60,7 @@ import {
 })
 export default class GystEntryLoadStatus extends Vue {
   @State(state => state['loader'].load_status) load_status!:LoadStatus
-  @Getter("loader/is_general_error") is_general_error!:boolean
-  @Getter("loader/is_no_service_settings_error") is_no_service_settings_error!:boolean
+  @Getter("loader/isLoadStatusEmpty") isLoadStatusEmpty!:Function
 
   duplicateServiceIdExists(service_setting:LoadStatusServiceSetting) {
     const { _id: service_setting_id, service_id } = service_setting
