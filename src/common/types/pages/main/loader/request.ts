@@ -1,4 +1,4 @@
-import { PaginationData } from "~/src/server/loader-module-collection/loader-module-base/types"
+import { PaginationData } from "~/src/server/method-collection/common/services/base/types"
 import { LoadEntryParamDetail } from "~/src/common/types/common/load-entry-param"
 import { Warning } from "~/src/common/types/common/warning-error"
 /**

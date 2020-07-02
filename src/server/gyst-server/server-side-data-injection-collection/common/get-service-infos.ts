@@ -1,4 +1,4 @@
-import { getServiceInfo } from "~/src/server/loader-module-collection"
+import { getServiceInfo } from "~/src/server/method-collection"
 
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 
@@ -6,7 +6,7 @@ import { oauth_connected_user_storage } from "~/src/server/model-collection/mode
 
 // Types
 import { ServiceInfo, ServiceInfoOAuthInfo, OAuthConnectedUser } from "~/src/common/types/common/service-info"
-import { ServiceInfo as _ServiceInfo } from "~/src/server/loader-module-collection/loader-module-base/types"
+import { ServiceInfo as _ServiceInfo } from "~/src/server/method-collection/common/services/base/types"
 
 export async function getServiceInfos(user_id:string):Promise<ServiceInfo[]> {
   const service_ids = ["github", "google-calendar", "league-of-legends", "reddit", "trello", "twitch", "twitter", "youtube"]

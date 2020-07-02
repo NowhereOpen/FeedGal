@@ -2,7 +2,7 @@ import { SettingValueCreateUpdateBaseRequestHandler } from "./setting-value-crea
 
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 
-import { getDisplayedSettingValue } from "~/src/server/loader-module-collection"
+import { getDisplayedSettingValue } from "~/src/server/method-collection"
 
 // Types
 import { SettingValue } from "~/src/common/types/common/suite"

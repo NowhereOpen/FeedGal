@@ -1,5 +1,6 @@
 import axios from "axios"
 import { UrlsGystResource } from "~/src/common/urls"
+import { ServiceSetting } from "~/src/common/types/common/suite"
 
 /**
  * ============================================
@@ -25,12 +26,12 @@ export async function getGoogleCalendars(service_setting_id:string) {
  * ============================================
  */
 
-export async function addNewSettingValue(service_setting_id:string, setting_value:any) {
-  return axios.post(UrlsGystResource.addNewSettingValue(), { service_setting_id, setting_value })
+export async function addNewSettingValue(service_setting:ServiceSetting, setting_value:any) {
+  return axios.post(UrlsGystResource.addNewSettingValue(), { service_setting, setting_value })
 }
 
-export async function updateSettingValue(service_setting_id:string, setting_value_id:string, setting_value:any) {
-  return axios.patch(UrlsGystResource.updateSettingValue(setting_value_id), { service_setting_id, setting_value })
+export async function updateSettingValue(service_setting:ServiceSetting, setting_value_id:string, setting_value:any) {
+  return axios.patch(UrlsGystResource.updateSettingValue(setting_value_id), { service_setting, setting_value })
 }
 
 export async function deleteSettingValue(setting_value_id:string) {

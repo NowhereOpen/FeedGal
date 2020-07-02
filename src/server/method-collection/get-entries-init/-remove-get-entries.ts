@@ -1,7 +1,7 @@
 import { getServiceInfo, getEntriesInitNonOAuth, getEntriesInitOAuth } from "~/src/server/loader-module-collection"
 import { LoaderModuleOutput } from "~/src/server/loader-module-collection/loader-module-base/types"
 import { FlattenedLoaderParam } from "./type"
-import { refreshTokenIfFail } from "../common"
+import { refreshTokenIfFail } from "../common/refresh-token-if-fail"
 import { GystEntryResponseSuccess } from "~/src/common/types/pages/main"
 import { handleError } from "~/src/server/method-collection/common/get-entries"
 

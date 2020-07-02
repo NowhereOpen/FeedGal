@@ -134,21 +134,15 @@ export default class ServiceSettingComp extends Vue {
     try {
       if(is_new) {
         response = await requestMaker.settings.gyst_suites.addNewSettingValue(
-          this.serviceSetting._id,
-          {
-            value: new_value,
-            service_id: this.serviceSetting.service_id
-          }
+          this.serviceSetting,
+          new_value
         )
       }
       else {
         response = await requestMaker.settings.gyst_suites.updateSettingValue(
-          this.serviceSetting._id,
+          this.serviceSetting,
           <string> setting_value_id,
-          {
-            value: new_value,
-            service_id: this.serviceSetting.service_id 
-          }
+          new_value
         )
       }
     }

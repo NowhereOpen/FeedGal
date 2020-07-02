@@ -1,6 +1,13 @@
-import { SessionSocketEventHandler } from "~/src/server/gyst-server/ws-server-socket-handler-collection/socket-handler-base/session"
-import { getEntriesInitWithParam, FlattenedLoaderParam } from "~/src/server/method-collection/get-entries-init"
-import { getEntriesPaginationData } from "~/src/server/method-collection/get-entries-pagination"
+import _ from "lodash"
+
+import { getEntriesInit, FlattenedLoaderParam } from "~/src/server/method-collection/get-entries-init"
+import { getEntriesPagination } from "~/src/server/method-collection/get-entries-pagination"
+
+import { SessionSocketEventHandler } from "../../socket-handler-base/session"
+
+import { commonErrorDetailGenerator } from "../../common"
+import { throwControlledError, handleError } from "../../common/convert-error"
+import { validateOwnership } from "./validate-ownership"
 
 // Types
 import {
@@ -9,15 +16,37 @@ import {
   GystEntryResponseSuccess,
   GystEntryResponseError
 } from "~/src/common/types/pages/main"
-import { LoaderModuleOutput, PaginationDirection } from "~/src/server/loader-module-collection/loader-module-base/types"
-import { ErrorName } from "~/src/common/types/common/warning-error"
-
-import { commonErrorDetailGenerator } from "../../common"
-import { validateOwnership } from "./validate-ownership"
+import { EntriesResult, PaginationDirection } from "~/src/server/method-collection/common/services/base/types"
+import { ErrorName, Error } from "~/src/common/types/common/warning-error"
 
 export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHandler {
-  respond(data:any) {
-    this.socket.emit("gyst-entries-with-pagination-response", data)
+  respond(param:ServicePaginationReqParam, entries_result:EntriesResult) {
+    const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
+
+    this.socket.emit("gyst-entries-init-response", <GystEntryResponseSuccess>{
+      service_id,
+      oauth_connected_user_entry_id,
+      setting_value,
+      service_setting_id,
+      setting_value_id,
+      entries: entries_result.entries,
+      pagination_data: entries_result.pagination_data,
+      service_response: entries_result.service_response,
+      warning: entries_result.warning
+    })
+  }
+
+  respondError(param:ServicePaginationReqParam, error:Error) {
+    const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
+
+    this.socket.emit("gyst-entries-init-response", <GystEntryResponseError>{
+      service_id,
+      oauth_connected_user_entry_id,
+      setting_value,
+      service_setting_id,
+      setting_value_id,
+      error,
+    })
   }
 
   async handleImpl() {
@@ -40,41 +69,25 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
   }
 
   async makePaginationRequest(direction:PaginationDirection, service_pagination_req_param:ServicePaginationReqParam) {
-    const {
-      service_id,
-      service_setting_id,
-      setting_value_id,
-      setting_value,
-      warning,
-      oauth_connected_user_entry_id
-    } = service_pagination_req_param
-
-    let response!:GystEntryResponse
+    const error = await throwControlledError(service_pagination_req_param)
+    if(error) {
+      return this.respondError(service_pagination_req_param, error)
+    }
 
     try {
-      if(warning && warning.name == "RATE_LIMIT" && service_pagination_req_param.pagination_data == undefined) {
-        const response:GystEntryResponseSuccess = await getEntriesInitWithParam(<FlattenedLoaderParam> {
-          service_id,
-          service_setting_id,
-          oauth_connected_user_entry_id,
-          setting_value,
-          setting_value_id
-        })
-        return this.respond(response)
+      let entries_result:EntriesResult
+      if(_.get(service_pagination_req_param, "warning.name") == "RATE_LIMIT" && service_pagination_req_param.pagination_data == undefined) {
+        entries_result = await getEntriesInit(<FlattenedLoaderParam> service_pagination_req_param)
       }
       else {
-        response = await getEntriesPaginationData(direction, service_pagination_req_param)
+        entries_result = await getEntriesPagination(direction, service_pagination_req_param)
       }
+
+      this.respond(service_pagination_req_param, entries_result)
     }
     catch(e) {
-      const known_errors:ErrorName[] = ["TOKEN_MARKED_ERROR", "INVALID_SETTING_VALUE", "GOOGLE_AUTHORIZATION_ERROR", "RIOT_KEY_EXPIRED"]
-      const error_detail = commonErrorDetailGenerator(e, known_errors)
-      response = <GystEntryResponseError> {
-        service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id, 
-        error: error_detail
-      }
+      const error = await handleError(service_pagination_req_param, e)
+      return this.respondError(service_pagination_req_param, error)
     }
-    
-    this.respond(response)
   }
 }

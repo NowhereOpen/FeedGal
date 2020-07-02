@@ -1,39 +1,31 @@
-import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
-import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
-import {
-  getServiceInfo,
-  validateSettingValueNonOAuth,
-  validateSettingValueOAuth
-} from "~/src/server/loader-module-collection"
+import { collection } from "../common/services"
 
-import { ValidationResult } from "~/src/server/loader-module-collection/loader-module-base/types"
+import { refreshTokenIfFailOAuthServiceId } from "../common/refresh-token-if-fail"
+import { ServiceSetting } from "~/src/common/types/pages/suite"
 
-import { refreshTokenIfFail } from "../common"
+// Types
+import { ValidationResult } from "../common/services/base/types"
 
-export async function validateSettingValue(service_setting_id:string, setting_value:any) {
-  const _entry = await service_setting_storage.getEntry(service_setting_id)
-  const entry = _entry!.toJSON()
-  const { service_id, oauth_connected_user_entry_id } = entry
+const service_ids = ["github", "google-calendar", "league-of-legends"]
 
-  const is_oauth = getServiceInfo(service_id).is_oauth
+export async function validateSettingValue(service_setting:ServiceSetting, setting_value:any) {
+  const service_id = service_setting.service_id
+  const methods = collection[service_id]
+  const service_info = methods.getServiceInfo()
 
-  let result!:ValidationResult
+  let result:ValidationResult
 
-  /**
-   * 2020-06-19 10:31
-   * 
-   * Not setting error or invalidating oauth account or setting value from this file because
-   * I expect this is when the user visits the page, currently in the server-side-data-injection
-   * file for `/suite`.
-   */
-  if(is_oauth) {
-    await refreshTokenIfFail(service_id, oauth_connected_user_entry_id, async (token_data) => {
-      result = await validateSettingValueOAuth(service_id, token_data, setting_value)
+  if(service_info.is_oauth) {
+    const oauth_service_id = service_info.oauth_service_id!
+    const oauth_user_entry_id = service_setting.oauth_info!.user_info!.entry_id
+
+    await refreshTokenIfFailOAuthServiceId(oauth_service_id, oauth_user_entry_id, async (token_data:any) => {
+      result = await collection[service_id].validateSettingValue!(token_data, setting_value)
     })
   }
   else {
-    result = await validateSettingValueNonOAuth(service_id, setting_value)
+    result = await collection[service_id].validateSettingValue!(setting_value)
   }
 
-  return result
+  return result!
 }

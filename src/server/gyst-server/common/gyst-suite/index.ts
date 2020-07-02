@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { getDisplayedSettingValue, getServiceInfo } from "~/src/server/loader-module-collection"
+import { getDisplayedSettingValue, getServiceInfo } from "~/src/server/method-collection"
 
 // Model
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"

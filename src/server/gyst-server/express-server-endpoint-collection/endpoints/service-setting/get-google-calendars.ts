@@ -3,12 +3,12 @@ import _ from "lodash"
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { getCalendars } from "~/src/server/lib/loader-module-helpers/services/google-calendar"
-import { refreshTokenIfFail } from "~/src/server/method-collection/common"
+import { refreshTokenIfFail } from "~/src/server/method-collection/common/refresh-token-if-fail"
 
 import { GOOGLE_AUTHORIZATION_ERROR } from "~/src/common/warning-error"
 
 // Types
-import { GystEntryResponseErrorDetails } from "~/src/common/types/pages/main"
+import { Error } from "~/src/common/types/common/warning-error"
 
 export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase {
   service_setting_id!:string
@@ -35,7 +35,7 @@ export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase 
        * as well.
        */
       if(_.get(e, "response.data.error.status") == "PERMISSION_DENIED") {
-        this.res_data = { error: <GystEntryResponseErrorDetails> GOOGLE_AUTHORIZATION_ERROR }
+        this.res_data = { error: <Error> GOOGLE_AUTHORIZATION_ERROR }
         return
       }
       else {

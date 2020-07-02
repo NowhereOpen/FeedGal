@@ -1,7 +1,7 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
-import { ServiceInfo } from "~/src/server/loader-module-collection/loader-module-base/types"
-import { getServiceInfo } from "~/src/server/loader-module-collection"
+import { ServiceInfo } from "~/src/server/method-collection/common/services/base/types"
+import { getServiceInfo } from "~/src/server/method-collection"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { gyst_user_storage } from "~/src/server/model-collection/models/user"
@@ -9,7 +9,7 @@ import { oauth_access_token_storage } from "~/src/server/model-collection/models
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
-import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection/common"
+import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection/common/refresh-token-if-fail"
 
 export class DeleteUserRequestHandler extends SessionRequestHandlerBase {
   storeParams():void|Promise<void> {}

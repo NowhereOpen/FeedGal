@@ -1,5 +1,5 @@
 import { ExpressRequest } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/base"
-import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection/common"
+import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection/common/refresh-token-if-fail"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"

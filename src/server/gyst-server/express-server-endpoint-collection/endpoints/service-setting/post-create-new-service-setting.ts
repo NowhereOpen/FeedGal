@@ -1,13 +1,13 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
-import { getServiceInfo } from "~/src/server/loader-module-collection"
+import { getServiceInfo } from "~/src/server/method-collection"
 import { getServiceSetting } from "~/src/server/gyst-server/common/gyst-suite"
 
 // Models
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 
 // Types
-import { ServiceInfo } from "~/src/server/loader-module-collection/loader-module-base/types"
+import { ServiceInfo } from "~/src/server/method-collection/common/services/base/types"
 
 export class PostCreateNewServiceSettingRequestHandler extends SessionRequestHandlerBase {
   service_id!:string

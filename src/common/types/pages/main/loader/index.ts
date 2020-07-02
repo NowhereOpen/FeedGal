@@ -1,20 +1,9 @@
-import { PaginationData, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
+import { PaginationData, Entry } from "~/src/server/method-collection/common/services/base/types"
 import { LoadEntryParamDetail } from "~/src/common/types/common/load-entry-param"
-import { ErrorName, Warning } from "~/src/common/types/common/warning-error"
-
-/**
- * 2020-06-18 17:30 
- * 
- * Because this type has `name` and `message` this can be javascript Error object friendly.
- */
-export type GystEntryResponseErrorDetails = {
-  name: ErrorName
-  message: string
-  data: any
-}
+import { Warning, Error } from "~/src/common/types/common/warning-error"
 
 export type GystEntryResponseGeneralError = {
-  error: GystEntryResponseErrorDetails
+  error: Error
 }
 
 export type GystEntryResponseSuccess = LoadEntryParamDetail & {
@@ -26,10 +15,10 @@ export type GystEntryResponseSuccess = LoadEntryParamDetail & {
 }
 
 export type GystEntryResponseError = LoadEntryParamDetail & {
-  error: GystEntryResponseErrorDetails
+  error: Error
 }
 
 export type GystEntryResponse = GystEntryResponseSuccess | GystEntryResponseError
 
-export { PaginationData, Entry } from "~/src/server/loader-module-collection/loader-module-base/types"
+export { PaginationData, Entry } from "~/src/server/method-collection/common/services/base/types"
 export * from "./request"

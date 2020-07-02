@@ -4,20 +4,25 @@ import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-serv
 
 import { validateSettingValue } from "~/src/server/method-collection/validate-setting-value"
 
+// Types
+import { ServiceSetting } from "~/src/common/types/pages/suite"
+
 export abstract class SettingValueCreateUpdateBaseRequestHandler extends SessionRequestHandlerBase {
   service_id!:string
+  service_setting!:ServiceSetting
   setting_value!:any
   service_setting_id!:string
 
   storeParams():void|Promise<void> {    
     this.service_id = this.req.body.setting_value.service_id
-    this.setting_value = this.req.body.setting_value.value
-    this.service_setting_id = this.req.body.service_setting_id
+    this.service_setting = this.req.body.service_setting
+    this.setting_value = this.req.body.setting_value
+    this.service_setting_id = this.service_setting._id
   }
 
   async doTasks():Promise<void> {
     // Validate the value first
-    const validation_result = await validateSettingValue(this.service_setting_id, this.setting_value)
+    const validation_result = await validateSettingValue(this.service_setting, this.setting_value)
 
     /**
      * 2020-03-24 11:10

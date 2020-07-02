@@ -1,4 +1,4 @@
-import { getServiceInfo } from "~/src/server/loader-module-collection"
+import { collection } from "../common/services"
 
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
@@ -16,7 +16,7 @@ export async function flattenServiceSettings(user_id:string):Promise<FlattenedLo
       const service_id = service_setting.service_id
       const service_setting_entry_id = service_setting._id
       
-      const service_info = getServiceInfo(service_id)
+      const service_info = collection[service_id].getServiceInfo()
 
       const uses_setting_value = service_info.uses_setting_value
       const is_oauth = service_info.is_oauth

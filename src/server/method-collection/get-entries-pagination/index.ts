@@ -1,81 +1,38 @@
+import { collection } from "../common/services"
+
+import { refreshTokenIfFailOAuthServiceId } from "../common/refresh-token-if-fail"
+
+// Types
 import {
-  GystEntryResponseSuccess,
   ServicePaginationReqParam
 } from "~/src/common/types/pages/main"
+import { EntriesResult, PaginationDirection, PaginationParam } from "../common/services/base/types"
 
-import {
-  getServiceInfo,
-  getEntriesPaginationNonOAuth,
-  getEntriesPaginationOAuth
-} from "~/src/server/loader-module-collection"
 
-import {
-  PaginationDirection,
-  LoaderModuleOutput
-} from "~/src/server/loader-module-collection/loader-module-base/types"
+export async function getEntriesPagination(direction:PaginationDirection, param:ServicePaginationReqParam):Promise<EntriesResult> {
+  const service_id = param.service_id
+  const methods = collection[service_id]
+  const service_info = methods.getServiceInfo()
 
-import { handleError } from "~/src/server/method-collection/common/get-entries"
-
-import { refreshTokenIfFail } from "../common"
-
-export async function getEntriesPaginationData(
-  direction:PaginationDirection,
-  service_pagination_req_param:ServicePaginationReqParam
-):Promise<GystEntryResponseSuccess> {
-  const {
-    service_id,
-    service_setting_id,
-    setting_value,
-    setting_value_id,
-    pagination_data,
-    oauth_connected_user_entry_id,
-  } = service_pagination_req_param
-
-  let output:LoaderModuleOutput = { entries: [], service_response: null, pagination_data }
-
-  const warning = await handleError(
-    service_pagination_req_param,
-    async () => {
-      output = await _getEntriesPaginationData(direction, service_pagination_req_param)
-      return output
-    }
-  )
-
-  const response:GystEntryResponseSuccess = {
-    service_id,
-    service_setting_id,
-    setting_value_id,
-    setting_value,
-    oauth_connected_user_entry_id,
-    entries: output.entries,
-    service_response: output.service_response,
-    pagination_data: output.pagination_data,
-    warning
+  const pagination_param:PaginationParam = {
+    direction,
+    pagination_data: param.pagination_data!,
+    pagination_value: param.pagination_data![direction],
+    setting_value: param.setting_value
   }
 
-  return response
-}
+  let result:EntriesResult
 
-async function _getEntriesPaginationData(
-  direction:PaginationDirection,
-  service_pagination_req_param:ServicePaginationReqParam
-):Promise<LoaderModuleOutput> {
-  const service_id = service_pagination_req_param.service_id
+  if(service_info.is_oauth) {
+    const oauth_service_id = service_info.oauth_service_id!
 
-  const is_oauth = getServiceInfo(service_id).is_oauth
-  const pagination_data = service_pagination_req_param.pagination_data!
-  const setting_value = service_pagination_req_param.setting_value
-
-  let result!:LoaderModuleOutput
-  const { oauth_connected_user_entry_id } = service_pagination_req_param
-  if(is_oauth) {
-    await refreshTokenIfFail(service_id, oauth_connected_user_entry_id!, async (token_data) => {
-      result = await getEntriesPaginationOAuth(service_id, direction, pagination_data, token_data, setting_value)
+    await refreshTokenIfFailOAuthServiceId(oauth_service_id, param.oauth_connected_user_entry_id!, async (token_data) => {
+      result = await collection[service_id].getEntriesPagination(token_data, pagination_param)
     })
   }
   else {
-    result = await getEntriesPaginationNonOAuth(service_id, direction, pagination_data, setting_value)
+    result = await collection[service_id].getEntriesPagination(pagination_param)
   }
 
-  return result
+  return result!
 }

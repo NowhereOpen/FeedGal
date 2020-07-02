@@ -1,4 +1,4 @@
-import { getDisplayedSettingValue, getServiceInfo } from "~/src/server/loader-module-collection"
+import { getDisplayedSettingValue, getServiceInfo } from "~/src/server/method-collection"
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 
