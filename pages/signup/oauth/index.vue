@@ -7,10 +7,14 @@ div
       div #[v-icon(color="yellow") mdi-alert] This is not me! #[a(href="/about#issue1") Solution]
       v-text-field.friendly-name-form(
         v-model="signup_form.friendly_name"
+        :rules="[validateSignupForm]"
         label="Displayed name"
       )
     v-card-actions
-      v-btn.signup-btn(@click="onSignupBtnClick") Sign up
+      v-btn.signup-btn(
+        @click="onSignupBtnClick"
+        :disabled="validateSignupForm() != undefined"
+      ) Sign up
       v-btn.cancel-btn(@click="onCancelBtnClick") Cancel
 </template>
 
@@ -59,21 +63,37 @@ export default class OAuthSignupPage extends Vue {
   }
 
   async onSignupBtnClick() {
+    if(this.signup_form.friendly_name.trim() == "") {
+      this.alertBadSignupFormEmptyFriendlyName()
+      return
+    }
+
     try {
       await requestMaker.oauth_signup.createNewAccount(this.signup_form)
       this.visit("/login", { relogin: true })
     }
     catch(e) {
-      if("response" in e && e.response.status == 403 && e.response.data.name == "INVALID_SESSION") {
-        this.visit("/login")
+      if("response" in e && e.response.status == 403 && e.response.data.name == "MUST_BE_ANON_USER") {
+        alert("You are already logged in. Redirecting to '/login' in a few seconds.")
+        setTimeout(() => this.visit("/login"), 2000)
         return
       }
-      else if("response" in e && e.response.status == 400 && e.response.data.name == "LOGIN_EXISTS") {
-        this.visit("/login", { error: "signup_exists" })
+      else if("response" in e && e.response.status == 400 && e.response.data.name == "BAD_SIGNUP_FORM") {
+        this.alertBadSignupFormEmptyFriendlyName()
         return
       }
       throw e
     }
+  }
+
+  validateSignupForm():string|undefined {
+    if(this.signup_form.friendly_name.trim() == "") {
+      return "Friendly name must not be empty."
+    }
+  }
+
+  alertBadSignupFormEmptyFriendlyName() {
+    alert("Friendly name must not be empty.")
   }
 
   async onCancelBtnClick() {

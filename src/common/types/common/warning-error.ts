@@ -14,7 +14,8 @@ export type ErrorName =
   "RIOT_KEY_EXPIRED" |
   "SETTING_VALUE_VALIDATION_ERROR" |
   "MUST_BE_ANON_USER" |
-  "MUST_BE_LOGGED_IN"
+  "MUST_BE_LOGGED_IN" |
+  "BAD_SIGNUP_FORM"
 
 export type Warning = {
   name: WarningName

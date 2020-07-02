@@ -30,6 +30,15 @@ export class PostCreateNewAccountRequestHandler extends SessionRequestHandlerBas
   }
 
   async doTasks():Promise<void> {
+    if(this.isLoggedIn()) {
+      this.sendError(403, "MUST_BE_ANON_USER", "You cannot sign up for a new account while logged in.")
+      return
+    }
+
+    if(this.signup_form.friendly_name.trim() == "") {
+      this.sendError(400, "BAD_SIGNUP_FORM", "Friendly name must not be empty.")
+    }
+
     // Must have "friendly_name"
     this.user_id = await gyst_user_storage.createNewGystUser(this.signup_form)
 
