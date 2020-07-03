@@ -20,7 +20,7 @@ import { setting_value_storage } from "~/src/server/model-collection/models/sett
 import {
   LoadEntryParamDetail
 } from "~/src/common/types/pages/main"
-import { Warning, Error } from "~/src/common/types/common/warning-error"
+import { WarningObject, ErrorObject } from "~/src/common/types/common/warning-error"
 import { EntriesResult, ServiceInfo } from "~/src/server/method-collection/common/services/base/types"
 
 /**
@@ -32,7 +32,7 @@ import { EntriesResult, ServiceInfo } from "~/src/server/method-collection/commo
 export async function handleError(
   detail:LoadEntryParamDetail,
   e:any
-):Promise<Error> {
+):Promise<ErrorObject> {
   const { service_id, setting_value_id, service_setting_id, oauth_connected_user_entry_id } = detail
 
   const service_info = getServiceInfo(service_id)
@@ -55,7 +55,7 @@ export async function handleError(
       
       if(service_id == "league-of-legends") {
         if(status == 403) {
-          return <Error> RIOT_API_ERROR
+          return <ErrorObject> RIOT_API_ERROR
         }
       }
       else if(service_info.oauth_service_id == "google") {
@@ -66,7 +66,7 @@ export async function handleError(
          * `e.response.data.error.status == PERMISSION_DENIED`
          */
         if(status == 403 && _.get(e, "response.data.error.status") == "PERMISSION_DENIED") {
-          return <Error> GOOGLE_AUTHORIZATION_ERROR
+          return <ErrorObject> GOOGLE_AUTHORIZATION_ERROR
         }
       }
     }
@@ -75,7 +75,7 @@ export async function handleError(
   throw e
 }
 
-export async function throwControlledError({ service_id, oauth_connected_user_entry_id, setting_value_id }:LoadEntryParamDetail):Promise<Error|undefined> {
+export async function throwControlledError({ service_id, oauth_connected_user_entry_id, setting_value_id }:LoadEntryParamDetail):Promise<ErrorObject|undefined> {
   if(oauth_connected_user_entry_id) {
     const is_error = await oauth_connected_user_storage.isErrorWithUserUid(service_id, oauth_connected_user_entry_id)
     if(is_error) {
@@ -91,7 +91,7 @@ export async function throwControlledError({ service_id, oauth_connected_user_en
   }
 }
 
-function isTokenError(service_info:ServiceInfo, e:Error):boolean {  
+function isTokenError(service_info:ServiceInfo, e:ErrorObject):boolean {  
   /**
    * If it's a token error, it must have gone through `refreshTokenifFail` which throws an 
    * error that wraps the original error in `original_error`.
@@ -107,7 +107,7 @@ function isTokenError(service_info:ServiceInfo, e:Error):boolean {
   return _isTokenError(service_id, (<any> e).original_error)
 }
 
-function isSettingValueError(service_info:ServiceInfo, e:Error):boolean {  
+function isSettingValueError(service_info:ServiceInfo, e:ErrorObject):boolean {  
   if(service_info.uses_setting_value == false) return false
 
   const service_id = service_info.service_id

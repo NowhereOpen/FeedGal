@@ -17,12 +17,12 @@ export type ErrorName =
   "MUST_BE_LOGGED_IN" |
   "BAD_SIGNUP_FORM"
 
-export type Warning = {
+export type WarningObject = {
   name: WarningName
   message?: string
 }
 
-export type Error = {
+export type ErrorObject = {
   name: ErrorName
   message?: string
 }

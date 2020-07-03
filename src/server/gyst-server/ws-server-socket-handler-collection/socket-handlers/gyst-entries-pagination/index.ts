@@ -17,7 +17,7 @@ import {
   GystEntryResponseError
 } from "~/src/common/types/pages/main"
 import { EntriesResult, PaginationDirection } from "~/src/server/method-collection/common/services/base/types"
-import { ErrorName, Error } from "~/src/common/types/common/warning-error"
+import { ErrorName, ErrorObject } from "~/src/common/types/common/warning-error"
 
 export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHandler {
   respond(param:ServicePaginationReqParam, entries_result:EntriesResult) {
@@ -36,7 +36,7 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
     })
   }
 
-  respondError(param:ServicePaginationReqParam, error:Error) {
+  respondError(param:ServicePaginationReqParam, error:ErrorObject) {
     const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
 
     this.socket.emit("gyst-entries-init-response", <GystEntryResponseError>{

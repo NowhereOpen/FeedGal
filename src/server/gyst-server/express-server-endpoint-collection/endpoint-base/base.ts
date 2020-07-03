@@ -1,6 +1,6 @@
 import { Request, Response, Handler, ErrorRequestHandler } from "express"
 
-import { ErrorName, Error as ErrorObject } from "~/src/common/types/common/warning-error"
+import { ErrorName, ErrorObject } from "~/src/common/types/common/warning-error"
 
 export abstract class ExpressRequest {
   req!:Request

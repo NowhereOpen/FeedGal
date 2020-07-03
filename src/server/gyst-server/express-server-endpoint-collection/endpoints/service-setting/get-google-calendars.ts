@@ -8,7 +8,7 @@ import { refreshTokenIfFail } from "~/src/server/method-collection/common/refres
 import { GOOGLE_AUTHORIZATION_ERROR } from "~/src/common/warning-error"
 
 // Types
-import { Error } from "~/src/common/types/common/warning-error"
+import { ErrorObject } from "~/src/common/types/common/warning-error"
 
 export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase {
   service_setting_id!:string
@@ -35,7 +35,7 @@ export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase 
        * as well.
        */
       if(_.get(e, "response.data.error.status") == "PERMISSION_DENIED") {
-        this.res_data = { error: <Error> GOOGLE_AUTHORIZATION_ERROR }
+        this.res_data = { error: <ErrorObject> GOOGLE_AUTHORIZATION_ERROR }
         return
       }
       else {

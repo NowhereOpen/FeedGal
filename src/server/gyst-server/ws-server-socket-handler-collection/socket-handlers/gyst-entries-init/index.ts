@@ -11,7 +11,7 @@ import {
   GystEntryResponseSuccess,
   GystEntryResponseError
 } from "~/src/common/types/pages/main"
-import { ErrorName, Error } from "~/src/common/types/common/warning-error"
+import { ErrorName, ErrorObject } from "~/src/common/types/common/warning-error"
 import { EntriesResult } from "~/src/server/method-collection/common/services/base/types"
 
 export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
@@ -31,7 +31,7 @@ export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
     })
   }
 
-  respondError(param:FlattenedLoaderParam, error:Error) {
+  respondError(param:FlattenedLoaderParam, error:ErrorObject) {
     const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
 
     this.socket.emit("gyst-entries-init-response", <GystEntryResponseError>{

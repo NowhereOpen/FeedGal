@@ -1,8 +1,8 @@
-import { ErrorName, Error } from "~/src/common/types/common/warning-error"
+import { ErrorName, ErrorObject } from "~/src/common/types/common/warning-error"
 
-export function commonErrorDetailGenerator(e:Error, known_errors:ErrorName[]=[]) {
+export function commonErrorDetailGenerator(e:ErrorObject, known_errors:ErrorName[]=[]) {
   const is_known_error = known_errors.includes(e.name)
-  let error_detail:Error
+  let error_detail:ErrorObject
   if(is_known_error) {
     /**
      * 2020-03-21 22:39

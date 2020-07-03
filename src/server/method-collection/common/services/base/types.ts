@@ -65,12 +65,12 @@ export type ValidationResult = {
   error_message?: string
 }
 
-import { Warning } from "~/src/common/types/common/warning-error"
+import { WarningObject } from "~/src/common/types/common/warning-error"
 export type EntriesResult = {
   entries:Entry[]
   pagination_data?:PaginationData
   service_response?:any
-  warning?:Warning
+  warning?:WarningObject
 }
 
 export type Entry = {
