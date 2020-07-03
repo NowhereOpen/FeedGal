@@ -16,7 +16,6 @@ import {
   GystEntryResponseError,
   ServicePaginationReqParam,
   LoadEntryParam,
-  GystEntryResponseErrorDetails
 } from "~/src/common/types/pages/main"
 import { ServiceInfo } from "~/src/common/types/common/service-info"
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/common/types/pages/main"

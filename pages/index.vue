@@ -53,7 +53,6 @@ import * as requestMaker from "~/src/cli/request-maker"
 import { isGeneralError } from "~/src/cli/gyst-entry-response"
 
 // Types
-import { PaginationDirection } from "../src/server/loader-module-collection/loader-module-base/types"
 import {
   LoadedEntries,
   LoadStatusServiceSetting,
@@ -179,7 +178,7 @@ export default class IndexPage extends Vue {
         return error_exists == false && is_enough_loaded == false && all_loaded_warning == false
       })
 
-    this.requestPagination("old", all_params)
+    this.requestPagination(all_params)
   }
 
   async onGystInitEntries(response:GystEntryResponse) {
@@ -208,7 +207,11 @@ export default class IndexPage extends Vue {
     return output
   }
 
-  requestPagination(direction:PaginationDirection, params:LoadEntryParam[]) {
+  /**
+   * 2020-07-04 06:29
+   * Hard coded with loading 'old' entries only
+   */
+  requestPagination(params:LoadEntryParam[]) {
     const DIRECTION = "old"
     const pagination_req_data:ServicePaginationReqParam[] = []
     
@@ -257,7 +260,7 @@ export default class IndexPage extends Vue {
       return
     }
 
-    this.requestPagination("old", [{ service_setting_id: response.service_setting_id, setting_value_id: response.setting_value_id }])
+    this.requestPagination([{ service_setting_id: response.service_setting_id, setting_value_id: response.setting_value_id }])
   }
 }
 </script>
