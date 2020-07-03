@@ -1,10 +1,8 @@
 import { Request, Response, NextFunction } from "express"
 
-import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
-import { setRedirectUrl } from "~/src/server/gyst-server/common/session"
-import { cred_module_collection } from "~/src/server/cred-module-collection"
+import { ExpressRequest } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/base"
 
-export class ErrorHandler extends SessionRequestHandlerBase {
+export class ErrorHandler extends ExpressRequest {
   error:any
   storeParams() {}
 

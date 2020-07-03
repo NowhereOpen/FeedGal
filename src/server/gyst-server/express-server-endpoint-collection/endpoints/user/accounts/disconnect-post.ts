@@ -1,4 +1,4 @@
-import { ExpressRequest } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/base"
+import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection/common/refresh-token-if-fail"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 
@@ -13,7 +13,7 @@ import { setting_value_storage } from "~/src/server/model-collection/models/sett
  * Handling revoking a valid account and removing an invalid or 'error' account that's been
  * revoked outside of FeedGal in this one endpoint for now.
  */
-export class GetDisconnectServiceRequestHandler extends ExpressRequest {
+export class GetDisconnectServiceRequestHandler extends SessionRequestHandlerBase {
   oauth_connected_user_entry_id!:string
   oauth_connected_user_entry!:any
   service_id!:string

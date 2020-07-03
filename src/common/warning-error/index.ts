@@ -29,3 +29,13 @@ export const TOKEN_MARKED_ERROR:ErrorObject = {
   name: "TOKEN_MARKED_ERROR",
   message: "Please reconnect your service account.",
 }
+
+export const MUST_BE_ANON_USER:ErrorObject = {
+  name: "MUST_BE_ANON_USER",
+  message: "You must be logged out."
+}
+
+export const MUST_BE_LOGGED_IN:ErrorObject = {
+  name: "MUST_BE_LOGGED_IN",
+  message: "You must be logged in."
+}

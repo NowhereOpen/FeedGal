@@ -1,6 +1,12 @@
 import * as gystSession from "~/src/server/gyst-server/common/session"
+import { MUST_BE_ANON_USER, MUST_BE_LOGGED_IN } from "~/src/common/warning-error"
 
 import { ExpressRequest } from "./base"
+
+// Types
+import { ErrorObject } from "~/src/common/types/common/warning-error"
+
+export enum UserType { USER_ONLY, ANON_ONLY, BOTH }
 
 /**
  * 2020-03-07 16:48
@@ -13,10 +19,31 @@ export abstract class SessionRequestHandlerBase extends ExpressRequest {
   is_logged_in!:boolean
   user_id:null|string = null
 
+  user_type:UserType 
+
+  constructor(user_type:UserType) {
+    super()
+    this.user_type = user_type
+  }
+
   onReceiveRequest() {
     this.is_logged_in = gystSession.isLoggedin(<any> this.req)
     if(this.is_logged_in) {
       this.user_id = gystSession.getLoggedInUserId(<any> this.req)
+    }
+
+    if(this.user_type == UserType.ANON_ONLY && this.is_logged_in) {
+      const error = MUST_BE_ANON_USER
+      this.sendError(403, error.name, error.message!)
+      return
+    }
+    else if(this.user_type == UserType.USER_ONLY && this.is_logged_in == false) {
+      const error = MUST_BE_LOGGED_IN
+      this.sendError(403, error.name, error.message!)
+      return
+    }
+    else if(this.user_type == UserType.BOTH) {
+      // Doesn't throw any error
     }
   }
 
