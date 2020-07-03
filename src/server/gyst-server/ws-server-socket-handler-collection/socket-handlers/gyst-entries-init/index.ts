@@ -1,64 +1,21 @@
-import { SessionSocketEventHandler } from "../../socket-handler-base/session"
+import { GetEntriesBaseSocketHandler } from "../../socket-handler-base/get-entries-base"
 import { FlattenedLoaderParam, flattenServiceSettings, getEntriesInit } from "~/src/server/method-collection/get-entries-init"
-import { throwControlledError, convertError } from "../../common/convert-error"
 
 // Types
-import {
-  GystEntryResponseSuccess,
-  GystEntryResponseError
-} from "~/src/common/types/pages/main"
-import { ErrorName, ErrorObject } from "~/src/common/types/common/warning-error"
 import { EntriesResult } from "~/src/server/method-collection/common/services/base/types"
 
-export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
-  respond(param:FlattenedLoaderParam, entries_result:EntriesResult) {
-    const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
-
-    this.socket.emit("gyst-entries-init-response", <GystEntryResponseSuccess>{
-      service_id,
-      oauth_connected_user_entry_id,
-      setting_value,
-      service_setting_id,
-      setting_value_id,
-      entries: entries_result.entries,
-      pagination_data: entries_result.pagination_data,
-      service_response: entries_result.service_response,
-      warning: entries_result.warning
-    })
+export class GystEntriesInitSocketHandler extends GetEntriesBaseSocketHandler {
+  constructor() {
+    super("gyst-entries-init")
   }
 
-  respondError(param:FlattenedLoaderParam, error:ErrorObject) {
-    const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
-
-    this.socket.emit("gyst-entries-init-error", <GystEntryResponseError>{
-      service_id,
-      oauth_connected_user_entry_id,
-      setting_value,
-      service_setting_id,
-      setting_value_id,
-      error,
-    })
-  }
-
-  async handleImpl() {
+  async getIterable() {
     const parameters:FlattenedLoaderParam[] = await flattenServiceSettings(this.user_id!)
+    return parameters
+  }
 
-    await Promise.all(
-      parameters.map(async param => {    
-        const error = await throwControlledError(param)
-        if(error) {
-          return this.respondError(param, error)
-        }
-
-        try {
-          const entries_result:EntriesResult = await getEntriesInit(param)
-          return this.respond(param, entries_result)
-        }
-        catch(e) {
-          const error = await convertError(param, e)
-          return this.respondError(param, error)
-        }
-      })
-    )
+  async getEntriesResult(param:FlattenedLoaderParam) {
+    const entries_result:EntriesResult = await getEntriesInit(param)
+    return entries_result
   }
 }

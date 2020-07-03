@@ -1,16 +1,12 @@
 import { Socket } from "socket.io"
 
 export abstract class SocketEventHandler {
-  req:any
-  ack:Function
-  socket:Socket
+  req!:any
+  ack!:Function
+  socket!:Socket
   session:any
 
-  constructor(req:any, ack:Function, socket:Socket) {
-    this.req = req
-    this.ack = ack
-    this.socket = socket
-    this.session = this.socket.handshake.session!
+  constructor() {
   }
 
   onReceiveRequest():Promise<void>|void {}
@@ -32,5 +28,16 @@ export abstract class SocketEventHandler {
         throw err
       }
     })
+  }
+
+  handler(socket:Socket) {
+    return async (req:any, ack:Function) => {
+      this.req = req
+      this.ack = ack
+      this.socket = socket
+      this.session = this.socket.handshake.session!
+      
+      await this.handle()
+    }
   }
 }

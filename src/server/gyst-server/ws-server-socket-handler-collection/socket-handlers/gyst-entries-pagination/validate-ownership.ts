@@ -1,5 +1,19 @@
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 
+// Types
+import {
+  ServicePaginationReqParam
+} from "~/src/common/types/pages/main"
+
+export async function validateOwnerships(user_id:string, services_pagination_req_data:ServicePaginationReqParam[]):Promise<boolean> {
+  const oauth_connected_user_entry_ids:string[] = services_pagination_req_data
+    .filter(entry => entry.oauth_connected_user_entry_id)
+    .map(({ oauth_connected_user_entry_id }) => <string> oauth_connected_user_entry_id)
+  const validate_ownership = await validateOwnership(user_id!, oauth_connected_user_entry_ids)
+
+  return validate_ownership
+}
+
 export async function validateOwnership(user_id:string, oauth_connectetd_user_entry_ids:string[]) {
   if(oauth_connectetd_user_entry_ids.length == 0) return true
 

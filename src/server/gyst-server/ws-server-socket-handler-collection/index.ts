@@ -5,7 +5,7 @@ import { GystEntriesWithPaginationSocketHandler } from "~/src/server/gyst-server
 
 export function setup(ws_server:WSServer) {
   ws_server.on("connection", (socket:Socket) => {
-    socket.on("gyst-entries-init", (req:any, ack:Function) => new GystEntriesInitSocketHandler(req, ack, socket).handle())
-    socket.on("gyst-entries-pagination", (req:any, ack:Function) => new GystEntriesWithPaginationSocketHandler(req, ack, socket).handle())
+    socket.on("gyst-entries-init", new GystEntriesInitSocketHandler().handler(socket))
+    socket.on("gyst-entries-pagination", new GystEntriesWithPaginationSocketHandler().handler(socket))
   })
 }
