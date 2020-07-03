@@ -1,6 +1,6 @@
-import { Request, Response } from "express"
+import { Request, Response, Handler, ErrorRequestHandler } from "express"
 
-import { ErrorName, Error } from "~/src/common/types/common/warning-error"
+import { ErrorName, Error as ErrorObject } from "~/src/common/types/common/warning-error"
 
 export abstract class ExpressRequest {
   req!:Request
@@ -52,7 +52,7 @@ export abstract class ExpressRequest {
    */
   sendError(status:number, name:ErrorName, message:string, data?:any) {
     const error_data = {
-      error: <Error> {
+      error: <ErrorObject> {
         name, message
       },
       data
@@ -61,7 +61,7 @@ export abstract class ExpressRequest {
     this.res.status(status).send(error_data)
   }
 
-  handler() {
+  handler():Handler|ErrorRequestHandler {
     return async (req:Request, res:Response) => {
       this.req = req
       this.res = res

@@ -66,6 +66,10 @@ function setupErrorHandler(nuxt:any) {
    */
   nuxt.hook("render:errorMiddleware", function(app:any) {
     /**
+     * 2020-07-02 22:01
+     * 
+     * NOTE. This is an error handler for the 'front end' instance.
+     * 
      * 2020-06-24 20:59
      * 
      * From `node_modules/@nuxt/server/dist/server.js` the `errorMiddleware` uses `""`.

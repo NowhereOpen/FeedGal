@@ -1,4 +1,13 @@
 import fs from "fs"
+/**
+ * 2020-07-04 03:00
+ * 
+ * When the handler is `async`, the error thrown in the handler just hangs, and
+ * won't even reach the error handler `(error, req, res, next) => ...`.
+ * 
+ * This module fixes that.
+ */
+require("express-async-errors")
 
 import { setup as setupGystAppSettingReader, AppSettingsReader } from "~/src/server/gyst-app-setting-reader"
 import { setup as setupServiceCredentialReader } from "~/src/server/service-credential-reader"

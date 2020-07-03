@@ -1,6 +1,8 @@
-import { Application } from "express"
+import { Application, Request, Response, NextFunction } from "express"
 
 import { UrlsGystResource } from "~/src/common/urls"
+
+import { ErrorHandler } from "./endpoint-base/error-handler"
 
 import { PostCancelSignupWithOAuthRequestHandler } from "./endpoints/account-signup/oauth-cancel-post"
 import { PostCreateNewAccountRequestHandler } from "./endpoints/account-signup/oauth-post"
@@ -41,4 +43,7 @@ export function setup(app:Application) {
   app.post(UrlsGystResource.addNewSettingValue(), new PostCreateNewSettingValueRequestHandler().handler())
 
   app.get(UrlsGystResource.oauthCallback(":service_id"), new RedirectHandleOAuthCallbackRequestHandler().handler())
+
+  // Error handler
+  app.use(new ErrorHandler().handler())
 }
