@@ -1,14 +1,28 @@
 <template lang="pug">
 div
   div.title Load status
-  //- 2020-07-01 14:20
-    Without this, the page throws error when loading entries after logging in. This happening after deleting `.nuxt`
-    directory then running the application.
-  client-only
-    div
-      div(v-if="isLoadStatusEmpty()")
-        div Please connect accounts #[a(href="/settings/accounts") here] and update your suite #[a(href="/suite") here].
-      div(v-else)
+  div
+    div(v-if="isLoadStatusEmpty()")
+      div Please connect accounts #[a(href="/settings/accounts") here] and update your suite #[a(href="/suite") here].
+    div(v-else)
+      //-
+        2020-07-04 06:11
+        For some reason, this new `div` between `v-else` and `v-for` allows me to recreate the error without having to
+        delete the `.nuxt` directry and restarting the server.
+
+        If this error is related to `The client-side rendered virtual DOM tree is not matching server-rendered content.`
+        warning, or using `server side data injection`, this should be fixed when I make requests instead.
+
+        2020-07-01 14:20
+        Without this, the page throws error when loading entries after logging in. This happening after deleting `.nuxt`
+        directory then running the application.
+
+        Error:
+        
+        ```
+        TypeError: Cannot read property 'toLowerCase' of undefined`    webpack-internal:///./.nuxt/client.js:160
+        ```
+      div
         div(v-for="service_setting of load_status")
           LoadStatusEntry(
             :text="service_setting.service_name"
