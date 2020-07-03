@@ -7,7 +7,7 @@ import { isSettingValueError as _isSettingValueError } from "~/src/server/method
 
 import {
   GOOGLE_AUTHORIZATION_ERROR,
-  RIOT_API_ERROR,
+  RIOT_KEY_EXPIRED_ERROR,
   INVALID_SETTING_VALUE,
   TOKEN_MARKED_ERROR,
 } from "~/src/common/warning-error"
@@ -55,7 +55,7 @@ export async function convertError(
       
       if(service_id == "league-of-legends") {
         if(status == 403) {
-          return <ErrorObject> RIOT_API_ERROR
+          return <ErrorObject> RIOT_KEY_EXPIRED_ERROR
         }
       }
       else if(service_info.oauth_service_id == "google") {

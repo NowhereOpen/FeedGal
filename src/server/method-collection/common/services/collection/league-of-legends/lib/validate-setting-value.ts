@@ -7,7 +7,13 @@ import {
   ControlledError
 } from "../../../base/setting-value-validation-base"
 
-import { RIOT_API_ERROR } from "~/src/common/warning-error"
+/**
+ * 2020-07-04 08:40
+ * 
+ * Import the error object because files in `method-collection` can import 'common modules' unlike
+ * files in `~/src/server/lib`.
+ */
+import { RIOT_KEY_EXPIRED_ERROR } from "~/src/common/warning-error"
 
 export class LeagueOfLegendsSettingValueValidation extends SettingValueValidationBase {
   api_key:string
@@ -34,7 +40,7 @@ export class LeagueOfLegendsSettingValueValidation extends SettingValueValidatio
       }
 
       if(_.get(error, "response.data.status.status_code", false) == 403) {
-        return RIOT_API_ERROR.message!
+        return RIOT_KEY_EXPIRED_ERROR.message!
       }
     }
   }

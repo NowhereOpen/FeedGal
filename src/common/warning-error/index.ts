@@ -5,7 +5,7 @@ export const GOOGLE_AUTHORIZATION_ERROR:ErrorObject = {
   message: "Authorization to this service wasn't granted when you connected the account"
 }
 
-export const RIOT_API_ERROR:ErrorObject = {
+export const RIOT_KEY_EXPIRED_ERROR:ErrorObject = {
   name: "RIOT_KEY_EXPIRED",
   message: "The server admin forgot to refresh the Riot API KEY 🤦.",
 }
