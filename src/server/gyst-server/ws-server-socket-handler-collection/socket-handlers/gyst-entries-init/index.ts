@@ -1,10 +1,6 @@
 import { SessionSocketEventHandler } from "../../socket-handler-base/session"
 import { FlattenedLoaderParam, flattenServiceSettings, getEntriesInit } from "~/src/server/method-collection/get-entries-init"
-import { commonErrorDetailGenerator } from "../../common"
-import { throwControlledError, handleError } from "../../common/convert-error"
-
-// Models
-import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
+import { throwControlledError, convertError } from "../../common/convert-error"
 
 // Types
 import {
@@ -59,7 +55,7 @@ export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
           return this.respond(param, entries_result)
         }
         catch(e) {
-          const error = await handleError(param, e)
+          const error = await convertError(param, e)
           return this.respondError(param, error)
         }
       })

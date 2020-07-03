@@ -5,8 +5,7 @@ import { getEntriesPagination } from "~/src/server/method-collection/get-entries
 
 import { SessionSocketEventHandler } from "../../socket-handler-base/session"
 
-import { commonErrorDetailGenerator } from "../../common"
-import { throwControlledError, handleError } from "../../common/convert-error"
+import { throwControlledError, convertError } from "../../common/convert-error"
 import { validateOwnership } from "./validate-ownership"
 
 // Types
@@ -86,7 +85,7 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
       this.respond(service_pagination_req_param, entries_result)
     }
     catch(e) {
-      const error = await handleError(service_pagination_req_param, e)
+      const error = await convertError(service_pagination_req_param, e)
       return this.respondError(service_pagination_req_param, error)
     }
   }

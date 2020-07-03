@@ -29,7 +29,7 @@ import { EntriesResult, ServiceInfo } from "~/src/server/method-collection/commo
  * The thrown error ARE actually javascript Error compatible because they have `name` and `message`
  * properties
  */
-export async function handleError(
+export async function convertError(
   detail:LoadEntryParamDetail,
   e:any
 ):Promise<ErrorObject> {
