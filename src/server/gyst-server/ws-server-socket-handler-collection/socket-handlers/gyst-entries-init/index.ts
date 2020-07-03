@@ -34,7 +34,7 @@ export class GystEntriesInitSocketHandler extends SessionSocketEventHandler {
   respondError(param:FlattenedLoaderParam, error:ErrorObject) {
     const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
 
-    this.socket.emit("gyst-entries-init-response", <GystEntryResponseError>{
+    this.socket.emit("gyst-entries-init-error", <GystEntryResponseError>{
       service_id,
       oauth_connected_user_entry_id,
       setting_value,

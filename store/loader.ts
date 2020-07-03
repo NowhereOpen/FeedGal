@@ -11,7 +11,6 @@ import {
   LoadStatusSettingValue
 } from "~/src/common/types/pages/main"
 import {
-  GystEntryResponse,
   GystEntryResponseSuccess,
   GystEntryResponseError,
   ServicePaginationReqParam,
@@ -200,16 +199,20 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  updateStatus(response:GystEntryResponse) {
+  updateLoadStatusStatus(response:GystEntryResponseSuccess) {
     const param = getParam(response, this.load_status)!
-    if("error" in response) {
-      param.error = response.error
+
+    if("warning" in response) {
+      param.warning = response.warning
     }
     else {
-      const total_entries = response.entries.length
-      param.total += total_entries
+      delete param.warning
     }
+    delete param.error
 
+    const total_entries = response.entries.length
+
+    param.total += total_entries
     param.is_loading = false
 
     const service_setting = <LoadStatusServiceSetting> getParam({ service_setting_id: response.service_setting_id }, this.load_status)!
@@ -222,21 +225,15 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  updatePaginationReqData(response:GystEntryResponse) {
+  updatePaginationReqData(response:GystEntryResponseSuccess) {
     const param = getParam(response, this.load_status)
-    if("error" in response) {
-      const _response = <GystEntryResponseError> response
-      param.error = _response.error
-    }
-    else {
-      param.pagination_data = response.pagination_data
-      if("warning" in response) {
-        param.warning = response.warning
-      }
-      else {
-        delete param.warning
-      }
-      delete param.error
-    }
+    param.pagination_data = response.pagination_data
+  }
+
+  @Mutation
+  updateLoadStatusError(response:GystEntryResponseError) {
+    const param = getParam(response, this.load_status)
+    param.error = response.error
+    param.is_loading = false
   }
 }

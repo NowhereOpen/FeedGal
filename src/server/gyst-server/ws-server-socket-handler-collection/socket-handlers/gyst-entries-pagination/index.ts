@@ -23,7 +23,7 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
   respond(param:ServicePaginationReqParam, entries_result:EntriesResult) {
     const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
 
-    this.socket.emit("gyst-entries-init-response", <GystEntryResponseSuccess>{
+    this.socket.emit("gyst-entries-pagination-response", <GystEntryResponseSuccess>{
       service_id,
       oauth_connected_user_entry_id,
       setting_value,
@@ -39,7 +39,7 @@ export class GystEntriesWithPaginationSocketHandler extends SessionSocketEventHa
   respondError(param:ServicePaginationReqParam, error:ErrorObject) {
     const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
 
-    this.socket.emit("gyst-entries-init-response", <GystEntryResponseError>{
+    this.socket.emit("gyst-entries-pagination-error", <GystEntryResponseError>{
       service_id,
       oauth_connected_user_entry_id,
       setting_value,

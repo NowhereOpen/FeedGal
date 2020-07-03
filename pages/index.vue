@@ -60,6 +60,7 @@ import {
   GystEntryResponseGeneralError,
   GystEntryResponse,
   GystEntryResponseSuccess,
+  GystEntryResponseError,
   LoadEntryParam,
   ServicePaginationReqParam,
 } from "~/src/common/types/pages/main"
@@ -113,7 +114,9 @@ export default class IndexPage extends Vue {
     this.socket = io()
 
     this.socket.on(`gyst-entries-init-response`, this.onGystInitEntries)
-    this.socket.on(`gyst-entries-with-pagination-response`, this.onGystPaginationEntries)
+    this.socket.on(`gyst-entries-pagination-response`, this.onGystPaginationEntries)
+    this.socket.on(`gyst-entries-init-error`, this.onGystInitError)
+    this.socket.on(`gyst-entries-pagination-error`, this.onGystPaginationError)
   }
 
   setPaginationOnScroll() {
@@ -155,9 +158,7 @@ export default class IndexPage extends Vue {
     return (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight
   }
 
-  updateIsWaitingRequest(response:GystEntryResponse) {
-    this.loader.updateStatus(response)
-    // ;(<GystEntryLoadStatus> this.$refs["gyst-entry-load-status"]).updateStatus(response)
+  updateIsWaitingRequest() {
     const is_all_loaded = this.loader.isAllLoaded()
     if(is_all_loaded) {
       this.is_waiting_request = false
@@ -181,12 +182,20 @@ export default class IndexPage extends Vue {
     this.requestPagination(all_params)
   }
 
-  async onGystInitEntries(response:GystEntryResponse) {
+  async onGystInitEntries(response:GystEntryResponseSuccess) {
     this.handleSocketResponse(response)
   }
 
-  async onGystPaginationEntries(response:GystEntryResponse) {
+  async onGystPaginationEntries(response:GystEntryResponseSuccess) {
     this.handleSocketResponse(response)
+  }
+
+  async onGystInitError(response:GystEntryResponseError) {
+    this.handleSocketResponseError(response)
+  }
+
+  async onGystPaginationError(response:GystEntryResponseError) {
+    this.handleSocketResponseError(response)
   }
 
   getAllLoadEntryParams() {
@@ -225,22 +234,21 @@ export default class IndexPage extends Vue {
     this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
   }
 
-  handleSocketResponse(response:GystEntryResponse) {
+  handleSocketResponse(response:GystEntryResponseSuccess) {
     this.loader.updatePaginationReqData(response)
-    this.updateIsWaitingRequest(response)
+    this.loader.updateLoadStatusStatus(response)
+    this.updateIsWaitingRequest()
 
-    if("error" in response == false) {
-      this.loader.concatToPreloadedStorage(<GystEntryResponseSuccess> response)
-      /**
-       * 2020-06-09 09:29
-       * 
-       * Always concat to preloaded storage, but when the user opened the app (visit the page)
-       * for the first time, or the users is at the bottom of the page, load into 'loaded
-       * storage' directly.
-       */
-      if(this.loader.isLoadedEmpty || this.isAtBottom()) {
-        this.loader.loadFromPreloadedStorage()
-      }
+    this.loader.concatToPreloadedStorage(response)
+    /**
+     * 2020-06-09 09:29
+     * 
+     * Always concat to preloaded storage, but when the user opened the app (visit the page)
+     * for the first time, or the users is at the bottom of the page, load into 'loaded
+     * storage' directly.
+     */
+    if(this.loader.isLoadedEmpty || this.isAtBottom()) {
+      this.loader.loadFromPreloadedStorage()
     }
 
     /**
@@ -253,14 +261,18 @@ export default class IndexPage extends Vue {
      */
     const rate_limit_warning = "warning" in response && response.warning!.name == "RATE_LIMIT"
     const all_loaded_warning = "warning" in response && response.warning!.name == "ALL_LOADED"
-    const error_exists = "error" in response
     const is_enough_loaded = this.loader.isEnoughPreloaded(<LoadEntryParam> response)
     const count_loaded_entries = "entries" in response ? response.entries.length : 0
-    if(count_loaded_entries == 0 || is_enough_loaded || rate_limit_warning || error_exists || all_loaded_warning) {
+    if(count_loaded_entries == 0 || is_enough_loaded || rate_limit_warning || all_loaded_warning) {
       return
     }
 
     this.requestPagination([{ service_setting_id: response.service_setting_id, setting_value_id: response.setting_value_id }])
+  }
+
+  handleSocketResponseError(response:GystEntryResponseError) {
+    this.loader.updateLoadStatusError(response)
+    this.updateIsWaitingRequest()
   }
 }
 </script>
