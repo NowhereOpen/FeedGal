@@ -1,4 +1,4 @@
-import { ValidationResult } from "./types"
+import { ValidationResult } from "~/src/common/types/pages/suite"
 
 export type ResDataForValidation = any
 
@@ -12,32 +12,29 @@ export abstract class SettingValueValidationBase<T=any> {
   }
   
   public async getResult():Promise<ValidationResult> {
+    this.preValidate()
+    
     try {
-      this.preValidate()
+      const data = await this.getSettingValueData()
+      const is_valid = await this.validate(data)
+      const setting_value = this.getSettingValue(data)
       
-      const res_data = await this.getSettingValueData()
-      const is_valid = await this.validate(res_data)
-      const setting_value = this.getSettingValue(res_data)
-
       return {
-        is_valid, res_data, setting_value
+        is_valid, data, setting_value
       }
     }
     catch(e) {
-      let error_message = undefined
-      // This includes `DuplicateSettingValueError` thrown by `this.validateDuplicate` in the try clause.
-      if(e instanceof ControlledError) {
-        error_message = e.message
-      }
-      else {
-        error_message = await this.getErrorMessage(e)
-        if(error_message == undefined) {
-          // Will be caught in the upper level
-          throw e
+      const invalid_reason = this.convertErrorToInvalidReason(e)
+
+      if(invalid_reason) {
+        return {
+          is_valid: false,
+          setting_value: this.setting_value,
+          invalid_reason: invalid_reason
         }
       }
-      return {
-        is_valid: false, setting_value: this.setting_value, error_message
+      else {
+        throw e
       }
     }
   }
@@ -48,7 +45,17 @@ export abstract class SettingValueValidationBase<T=any> {
   async getSettingValueData() {
     return this.setting_value
   }
-  abstract getErrorMessage(e:any):(string|undefined)|Promise<string|undefined>
+
+  /**
+   * 2020-07-04 13:17
+   * 
+   * ONLY convert errors that SHOULD be considered as invalid setting value. For example,
+   * LoL API returns 404 for summoner name that doesn't exist. However 403 error which is
+   * associated with the Api key SHOULD NOT be considered as invalid setting value. In
+   * such case, return undefined.
+   */
+  abstract convertErrorToInvalidReason(e:any):string|undefined
+
   /**
    * Assume that it's true if retrieving `res_data` had no problem.
    */

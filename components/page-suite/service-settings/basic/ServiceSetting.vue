@@ -72,7 +72,8 @@ import {
   ServiceSetting,
   SettingValue,
   OAuthUserInfo,
-  ServiceInfo as ServiceInfoType
+  ServiceInfo as ServiceInfoType,
+  ValidationResult
 } from "~/src/common/types/pages/suite"
 
 @Component({
@@ -131,34 +132,26 @@ export default class ServiceSettingComp extends Vue {
 
     let response!:any
 
-    try {
-      if(is_new) {
-        response = await requestMaker.settings.gyst_suites.addNewSettingValue(
-          this.serviceSetting,
-          new_value
-        )
-      }
-      else {
-        response = await requestMaker.settings.gyst_suites.updateSettingValue(
-          this.serviceSetting,
-          <string> setting_value_id,
-          new_value
-        )
-      }
+    if(is_new) {
+      response = await requestMaker.settings.gyst_suites.addNewSettingValue(
+        this.serviceSetting,
+        new_value
+      )
     }
-    catch(e) {
-      if('response' in e && 'data' in e.response && (<AxiosError> e).response!.status == 400 && e.response.data.error.name == "SETTING_VALUE_VALIDATION_ERROR") {
-        const error_data:ValidationResult = e.response.data.error.data
-        if(error_data.is_valid === false) {
-          ;(<SettingValueEditor> this.$refs["editor"]).setEditorError(error_data.error_message!)
-          return
-        }
-      }
-
-      throw e
+    else {
+      response = await requestMaker.settings.gyst_suites.updateSettingValue(
+        this.serviceSetting,
+        <string> setting_value_id,
+        new_value
+      )
     }
 
-    const res_data:any = response.data
+    const res_data:ValidationResult = response.data
+
+    if(response.data.is_valid == false) {
+      ;(<SettingValueEditor> this.$refs["editor"]).setEditorError(res_data.invalid_reason!)
+      return
+    }
 
     const entry:SettingValue = res_data.setting_value
 

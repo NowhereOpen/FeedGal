@@ -1,17 +1,16 @@
 import { collection } from "../common/services"
 
 import { refreshTokenIfFailOAuthServiceId } from "../common/refresh-token-if-fail"
-import { ServiceSetting } from "~/src/common/types/pages/suite"
 
 // Types
-import { ValidationResult } from "../common/services/base/types"
+import { ValidationResult } from "~/src/common/types/pages/suite"
+import { ServiceSetting } from "~/src/common/types/pages/suite"
 
 const service_ids = ["github", "google-calendar", "league-of-legends"]
 
 export async function validateSettingValue(service_setting:ServiceSetting, setting_value:any) {
   const service_id = service_setting.service_id
-  const methods = collection[service_id]
-  const service_info = methods.getServiceInfo()
+  const service_info = collection[service_id].getServiceInfo()
 
   let result:ValidationResult
 

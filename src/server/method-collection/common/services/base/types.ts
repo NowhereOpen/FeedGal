@@ -1,3 +1,5 @@
+import { ValidationResult } from "~/src/common/types/pages/suite"
+
 export type PaginationDirection = "old" | "new"
 export type NonOAuthGetEntriesInitParam = {
   setting_value?:any
@@ -54,15 +56,6 @@ export type ServiceInfo = {
   is_oauth:boolean
   oauth_service_id:string|null
   uses_setting_value:boolean
-}
-
-export type ValidationResult = {
-  is_valid: boolean
-  setting_value:any
-  // When `is_valid == true`
-  res_data?: any
-  // When `is_valid == false`
-  error_message?: string
 }
 
 import { WarningObject } from "~/src/common/types/common/warning-error"

@@ -49,7 +49,7 @@ export class GithubSettingValueValidation extends SettingValueValidationBase<Set
     return repo
   }
 
-  getErrorMessage(error:any) {
+  convertErrorToInvalidReason(error:any) {
     /**
      * 404 error response with:
      * 

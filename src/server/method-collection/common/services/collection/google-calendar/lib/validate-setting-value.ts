@@ -28,7 +28,7 @@ export class GoogleCalendarSettingValueValidation extends SettingValueValidation
     return await getCalendar(this.access_token, this.calendar_id)
   }
 
-  getErrorMessage(error:any) {
+  convertErrorToInvalidReason(error:any) {
     /**
      * 404 error response with:
      * 
@@ -37,7 +37,7 @@ export class GoogleCalendarSettingValueValidation extends SettingValueValidation
      *   message: "Not Found"
      * }
      */
-    if(_.get(error, "response.status") == "404") {
+    if(_.get(error, "response.status") == 404) {
       if(_.get(error, "response.data.error.errors[0]reason") == "notFound") {
         return "Calendar id was not found"
       }
