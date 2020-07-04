@@ -1,4 +1,4 @@
-import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
+import { RemoveDataBase } from "../common/remove-data"
 
 // Models
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
@@ -15,7 +15,11 @@ import { RevokeToken } from "~/src/server/method-collection/oauth"
  * Handling revoking a valid account and removing an invalid or 'error' account that's been
  * revoked outside of FeedGal in this one endpoint for now.
  */
-export class GetDisconnectServiceRequestHandler extends SessionRequestHandlerBase {
+export class GetDisconnectServiceRequestHandler extends RemoveDataBase<
+  { revoke_result: any },
+  { setting_values_results: any[], service_setting_result: any },
+  { disconnect_result: any }
+> {
   oauth_connected_user_entry_id!:string
   oauth_connected_user_entry!:any
   oauth_service_id!:string
@@ -26,32 +30,7 @@ export class GetDisconnectServiceRequestHandler extends SessionRequestHandlerBas
     this.oauth_service_id = this.oauth_connected_user_entry.service_id
   }
 
-  async doTasks() {
-    const revoke_result = await this.revoke()
-    await oauth_access_token_storage.invalidateAccessToken(this.oauth_service_id, this.oauth_connected_user_entry_id)
-    const updated_access_token_entry = await oauth_access_token_storage.getAccessTokenEntry(this.oauth_service_id, this.oauth_connected_user_entry_id)
-    const disconnect_result = await oauth_connected_user_storage.disconnect(this.oauth_connected_user_entry_id)
-    const service_settings = await service_setting_storage.getAllServiceSettingsForConnectedUser(this.oauth_connected_user_entry_id)
-    const service_setting_result = await service_setting_storage.deleteOAuthUser(this.oauth_connected_user_entry_id)
-    const setting_values_result:any = {}
-    await Promise.all(
-      service_settings.map(async service_setting => {
-        const id = service_setting._id
-        const result = await setting_value_storage.clearServiceSettingSettingValueValues(id)
-        setting_values_result[id] = result
-      })
-    )
-    
-    this.res_data = {
-      revoke_result,
-      updated_access_token_entry,
-      disconnect_result,
-      service_setting_result,
-      setting_values_result
-    }
-  }
-
-  async revoke():Promise<any|undefined> {
+  async handleAccessToken0() {
     /**
      * 2020-07-04 09:57
      * 
@@ -87,6 +66,37 @@ export class GetDisconnectServiceRequestHandler extends SessionRequestHandlerBas
       })
     }
 
-    return revoke_result
+    const updated_access_token_entry = await oauth_access_token_storage.getAccessTokenEntry(this.oauth_service_id, this.oauth_connected_user_entry_id)
+    await oauth_access_token_storage.invalidateAccessToken(this.oauth_service_id, this.oauth_connected_user_entry_id)
+
+    return { revoke_result }
+  }
+
+  async handleServiceSetting1() {
+    const service_settings = await service_setting_storage.getAllServiceSettingsForConnectedUser(this.oauth_connected_user_entry_id)
+    const service_setting_ids = service_settings.map(entry => entry._id)
+    const service_setting_result = await service_setting_storage.deleteOAuthUser(this.oauth_connected_user_entry_id)
+    const setting_values_results:any[] = []
+    await Promise.all(
+      service_setting_ids.map(async service_setting_id => {
+        const result = await setting_value_storage.clearServiceSettingSettingValueValues(service_setting_id)
+        setting_values_results.push(result)
+      })
+    )
+
+    return { service_setting_result, setting_values_results }
+  }
+
+  async handleConnectedAccount2() {
+    const disconnect_result = await oauth_connected_user_storage.disconnect(this.oauth_connected_user_entry_id)
+    return {
+      disconnect_result
+    }
+  }
+
+  async doTasks() {
+    const remove_data_result = await this.removeData()
+    
+    this.res_data = { remove_data_result }
   }
 }
