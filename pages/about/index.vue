@@ -28,6 +28,12 @@ div
 
       div
         | #[b TL;DR]. Log in to your second account on that service, continue authenticating on FeedGal.
+        | #[b TL;DR2]. Use FeedGal in incognito or private mode only to connect the new account.
+        | #[br]
+        | #[b CRITICAL]. If you signed up with the account from the service that forces you to take the "convenient log in", I am very sorry
+        | that you can't connect your other account on the same service while your 'Login account' is from that service.
+        | #[br]
+        | Method 1
         | #[br]
         | You must be very confused that FeedGal says you could connect multiple accounts, but it doesn't seem like so for some services.
         | We are very disappointed as well to inform you about this, but some services won't let you log in or choose another account that
@@ -42,6 +48,15 @@ div
         | Logging out from your account that's connected to FeedGal from a service does not remove it from FeedGal, so don't worry.
         | #[br]
         | Once your account is connected, you should be good to go (If you have any issues, please report to us).
+        | #[br]
+        | Method 2
+        | #[br]
+        | This requires using incognito or private mode on the browser. Open your browser in incognito (Chrome) or private (Firefox) mode.
+        | Navigate to Feedgal.com. Login. You need to enter your user name and password in this mode when you could just click your
+        | way through with browser in 'normal mode'. This is the same when you are connecting your other accounts, unless you have already
+        | authenticated while your 'private mode' browsers are open. 
+        | #[br]
+        | Very sorry fo the inconvenience.
 
 </template>
 
