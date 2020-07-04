@@ -1,11 +1,13 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
-import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection/common/refresh-token-if-fail"
-import { cred_module_collection } from "~/src/server/cred-module-collection"
 
+// Models
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
+
+// Methods
+import { RevokeToken } from "~/src/server/method-collection/oauth"
 
 /**
  * 2020-06-21 07:18 
@@ -16,30 +18,18 @@ import { setting_value_storage } from "~/src/server/model-collection/models/sett
 export class GetDisconnectServiceRequestHandler extends SessionRequestHandlerBase {
   oauth_connected_user_entry_id!:string
   oauth_connected_user_entry!:any
-  service_id!:string
+  oauth_service_id!:string
 
   async storeParams() {
     this.oauth_connected_user_entry_id = this.req.params.oauth_connected_user_entry_id
     this.oauth_connected_user_entry = await oauth_connected_user_storage.getEntry(this.oauth_connected_user_entry_id)
-    this.service_id = this.oauth_connected_user_entry.service_id
+    this.oauth_service_id = this.oauth_connected_user_entry.service_id
   }
 
   async doTasks() {
-    /**
-     * 2020-06-21 07:23
-     * 
-     * Checking whether it's supposed to be a remove action using a query instead of using
-     * data in request just because.
-     */
-    const is_remove = await oauth_connected_user_storage.isErrorWithOAuthUserEntryId(this.oauth_connected_user_entry_id)
-    
-    let revoke_result
-    if(is_remove == false) {
-      revoke_result = this.revoke()
-    }
-
-    await oauth_access_token_storage.invalidateAccessToken(this.service_id, this.oauth_connected_user_entry_id)
-    const updated_access_token_entry = await oauth_access_token_storage.getAccessTokenEntry(this.service_id, this.oauth_connected_user_entry_id)
+    const revoke_result = await this.revoke()
+    await oauth_access_token_storage.invalidateAccessToken(this.oauth_service_id, this.oauth_connected_user_entry_id)
+    const updated_access_token_entry = await oauth_access_token_storage.getAccessTokenEntry(this.oauth_service_id, this.oauth_connected_user_entry_id)
     const disconnect_result = await oauth_connected_user_storage.disconnect(this.oauth_connected_user_entry_id)
     const service_settings = await service_setting_storage.getAllServiceSettingsForConnectedUser(this.oauth_connected_user_entry_id)
     const service_setting_result = await service_setting_storage.deleteOAuthUser(this.oauth_connected_user_entry_id)
@@ -61,24 +51,41 @@ export class GetDisconnectServiceRequestHandler extends SessionRequestHandlerBas
     }
   }
 
-  async revoke() {
+  async revoke():Promise<any|undefined> {
+    /**
+     * 2020-07-04 09:57
+     * 
+     * Adding this comment because it confused me when I get back to this code.
+     * 
+     * Remove vs revoke. The user can revoke an account and when the user requests for it, we revoke and remove the
+     * associated account tied to the user.
+     * 
+     * When there had been an error but user revoked the authorization from outside service, we can't use the token.
+     * However we shouldn't remove the associated account because the user hasn't requested for it. We just mark it
+     * as an error and wait for the user to request to 'remove' it.
+     */
+    const is_remove = await oauth_connected_user_storage.isErrorWithOAuthUserEntryId(this.oauth_connected_user_entry_id)
+    const is_revoke = is_remove == false
+    
     let revoke_result
-    await refreshTokenIfFailOAuthServiceId(this.service_id, this.oauth_connected_user_entry_id, async (token_data) => {
-      const response = await cred_module_collection[this.service_id].revokeToken(token_data)
-      /**
-       * 2020-06-16 00:06
-       * 
-       * Feels too heavy to have another suite of oauth handler or something for each oauth service
-       * just because twitter (and more services?) doesn't return something that's consistent among
-       * other services
-       */
-      if(this.service_id != "twitter") {
-        revoke_result = response.data
+    if(is_revoke) {
+      const param = {
+        oauth_service_id : this.oauth_service_id,
+        oauth_user_entry_id: this.oauth_connected_user_entry_id
       }
-      else {
-        revoke_result = response
-      }
-    })
+
+      await new RevokeToken(param).run(async (e, result) => {
+        if(e) {
+          /**
+           * 2020-07-04 10:02
+           * 
+           * Do nothing when an error occurs because the associated because we will remove and invalidate associated
+           * suite entry, token, and oauth connected user entries anyways.
+           */
+        }
+        revoke_result = result
+      })
+    }
 
     return revoke_result
   }

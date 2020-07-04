@@ -1,8 +1,6 @@
 import { ErrorOnRefreshRequest } from "oauth-module-suite"
 
-import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection/common/refresh-token-if-fail"
-
-import { cred_module_collection } from "~/src/server/cred-module-collection"
+import { ValidateOAuthAccount } from "~/src/server/method-collection/oauth"
 
 // Models
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
@@ -24,35 +22,26 @@ export async function validateOAuthAccounts(user_id:string) {
   await Promise.all(
     oauth_accounts.map(async _oauth_account => {
       const oauth_account = _oauth_account.toJSON()
-      const service_id = oauth_account.service_id
-      const oauth_connected_user_entry_id = oauth_account._id
+      const oauth_service_id = oauth_account.service_id
+      const oauth_user_entry_id = oauth_account._id
 
-      const is_error = await oauth_connected_user_storage.isErrorWithOAuthUserEntryId(oauth_connected_user_entry_id)
+      const is_error = await oauth_connected_user_storage.isErrorWithOAuthUserEntryId(oauth_user_entry_id)
 
       if(is_error) return
 
-      await validateOAuthAccount(service_id, oauth_connected_user_entry_id)
+      new ValidateOAuthAccount({ oauth_service_id, oauth_user_entry_id }).run(async (e) => {
+        /**
+         * 2020-06-18 06:44
+         * 
+         * Expects error related with "expired or invalid token" or something. This means refreshing token
+         * failed and the likely cause is that the user revoked from the outside service page "manage
+         * authorized apps" or something.
+         */
+        
+        if(e instanceof ErrorOnRefreshRequest) {
+          await oauth_connected_user_storage.setError(oauth_user_entry_id, true)
+        }
+      })
     })
   )
-}
-
-async function validateOAuthAccount(oauth_service_id:string, oauth_connected_user_entry_id:string) {
-  try {
-    await refreshTokenIfFailOAuthServiceId(oauth_service_id, oauth_connected_user_entry_id, async (token_data) => {
-      const user_info = await cred_module_collection[oauth_service_id].getUserInfo(token_data)
-    })
-  }
-  catch(e) {
-    /**
-     * 2020-06-18 06:44
-     * 
-     * Expects error related with "expired or invalid token" or something. This means refreshing token
-     * failed and the likely cause is that the user revoked from the outside service page "manage
-     * authorized apps" or something.
-     */
-    
-    if(e instanceof ErrorOnRefreshRequest) {
-      await oauth_connected_user_storage.setError(oauth_connected_user_entry_id, true)
-    }
-  }
 }

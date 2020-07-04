@@ -1,15 +1,18 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
-import { ServiceInfo } from "~/src/server/method-collection/common/services/base/types"
-import { getServiceInfo } from "~/src/server/method-collection"
-
+// Models
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 import { gyst_user_storage } from "~/src/server/model-collection/models/user"
 import { oauth_access_token_storage } from "~/src/server/model-collection/models/oauth-access-token"
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
-import { cred_module_collection } from "~/src/server/cred-module-collection"
-import { refreshTokenIfFailOAuthServiceId } from "~/src/server/method-collection/common/refresh-token-if-fail"
+
+// Methods
+import { RevokeToken } from "~/src/server/method-collection/oauth"
+import { getServiceInfo } from "~/src/server/method-collection"
+
+// Types
+import { ServiceInfo } from "~/src/server/method-collection/common/services/base/types"
 
 export class DeleteUserRequestHandler extends SessionRequestHandlerBase {
   storeParams():void|Promise<void> {}
@@ -34,28 +37,10 @@ export class DeleteUserRequestHandler extends SessionRequestHandlerBase {
 
     await iterateConnectedAccounts(this.user_id!, async (connected_account) => {
       const oauth_service_id = connected_account.get("service_id")
-      const account_entry_id = connected_account._id
-
-      try {
-        await refreshTokenIfFailOAuthServiceId(oauth_service_id, account_entry_id, async (token_response) => {
-          const result = await cred_module_collection[oauth_service_id].revokeToken(token_response)
-          revoke_results.push({
-            oauth_service_id, account_entry_id, result: true
-          })
-        })
-      }
-      catch(e) {
-        /**
-         * Do nothing when an error occurs. SHOULD be an error related with revoking a token that is already
-         * revoked on the outside service or something.
-         */
-        console.log(`Error was caught while revoking but ignoring. Will delete its entry anyways.`)
-        revoke_results.push({
-          oauth_service_id, account_entry_id, result: "Error while revoking the token."
-        })
-      }
-
-      await oauth_access_token_storage.deleteEntry(oauth_service_id, account_entry_id)
+      const oauth_user_entry_id = connected_account._id
+      const result = this.revoke(oauth_service_id, oauth_user_entry_id)
+      revoke_results.push({ oauth_service_id, oauth_user_entry_id, result })
+      await oauth_access_token_storage.deleteEntry(oauth_service_id, oauth_user_entry_id)
     })
 
     const oauth_connected_user_result = await oauth_connected_user_storage.deleteUser(this.user_id!)
@@ -73,6 +58,22 @@ export class DeleteUserRequestHandler extends SessionRequestHandlerBase {
     }
 
     console.log(this.res_data)
+  }
+
+  async revoke(oauth_service_id:string, oauth_user_entry_id:string) {
+    let result:string|any
+    await new RevokeToken({ oauth_service_id, oauth_user_entry_id }).run(async (e, revoke_result) => {
+      if(e) {
+        /**
+         * Do nothing when an error occurs. SHOULD be an error related with revoking a token that is already
+         * revoked on the outside service or something.
+         */
+        console.log(`Error was caught while revoking but ignoring. Will delete its entry anyways.`)
+        revoke_result = "Error while revoking the token."
+      }
+      result = revoke_result
+    })
+    return result
   }
 }
 
