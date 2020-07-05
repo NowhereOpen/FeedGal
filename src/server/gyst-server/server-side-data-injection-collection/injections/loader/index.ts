@@ -1,4 +1,4 @@
-import { getServiceSettingsForGystSuiteId } from "~/src/server/gyst-server/common/gyst-suite"
+import { getSuiteServiceSettingsForUserId } from "~/src/server/gyst-server/common/gyst-suite"
 
 // Types
 import {
@@ -9,7 +9,7 @@ import {
 } from "~/src/common/types/pages/main"
 
 export async function inject(state:State, user_id:string) {
-  const _load_status = await getServiceSettingsForGystSuiteId(user_id)
+  const _load_status = await getSuiteServiceSettingsForUserId(user_id)
   const load_status = _load_status.map(_service_setting => {
     const service_setting:LoadStatusServiceSetting = <any> _service_setting
     Object.assign(service_setting, <ClientSideField> {
