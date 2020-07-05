@@ -10,9 +10,22 @@ import { oauth_connected_user_storage } from "~/src/server/model-collection/mode
 import { ServiceSetting, SettingValue } from "~/src/common/types/common/suite"
 
 /**
+ * 2020-07-05 13:43
+ * 
+ * I wonder if `/gyst-server/common/` is a good place for this method to be in. However, this is
+ * currently used in only three files for valid purpose at the moment:
+ * 
+ *   - src/server/gyst-server/server-side-data-injection-collection/injections/
+ *     - loader/index.ts
+ *     - page-suite/index.ts
+ *     - page-settings-accounts/index.ts
+ * 
+ * So I don't feel urgent to find a better place for this method at the moment.
+ */
+/**
  * Merge service setting and its service settings.
  */
-export async function getServiceSettingsForGystSuiteId(user_id:string):Promise<ServiceSetting[]> {
+export async function getSuiteServiceSettingsForUserId(user_id:string):Promise<ServiceSetting[]> {
   const __service_settings = await service_setting_storage.getAllServiceSettingsForUserId(user_id)
   const service_setting_ids = __service_settings.map(entry => entry._id)
   const service_settings:ServiceSetting[] = []

@@ -3,7 +3,6 @@ div
   ServiceSetting(
     :service-setting="serviceSetting"
     @disconnect="$emit('disconnect', $event)"
-    v-bind="$attrs"
     v-on="$listeners"
     @editor-open="onEditorOpen"
   )
