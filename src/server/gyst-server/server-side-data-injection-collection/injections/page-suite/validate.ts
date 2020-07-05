@@ -19,7 +19,7 @@ export async function validate(user_id:string) {
     const service_id = suite_entry.service_id
 
     try {
-      const result = await validateSettingValue(suite_entry, service_info)
+      const result = await validateSettingValue(suite_entry.oauth_connected_user_entry_id, suite_entry.service_id, suite_entry.setting_value)
       if(result.is_valid == false) {
         const setting_value_id = suite_entry.setting_value_id!
         await setting_value_storage.invalidateSettingValue(setting_value_id)

@@ -112,7 +112,7 @@ export default class GoogleCalendarServiceSetting extends ServiceSetting {
   }
 
   async loadCalendars() {
-    const { data } = await requestMaker.settings.gyst_suites.getGoogleCalendars(this.serviceSetting._id)
+    const { data } = await requestMaker.settings.suites.getGoogleCalendars(this.serviceSetting._id)
     if(Array.isArray(data)) {
       this.calendars = data
       this.error_message = null

@@ -135,23 +135,23 @@ export default class ServiceSettingComp extends Vue {
     let response!:any
 
     if(is_new) {
-      response = await requestMaker.settings.gyst_suites.addNewSettingValue(
-        this.serviceSetting,
+      response = await requestMaker.settings.suites.addNewSettingValue(
+        this.serviceSetting._id,
         new_value
       )
     }
     else {
-      response = await requestMaker.settings.gyst_suites.updateSettingValue(
-        this.serviceSetting,
+      response = await requestMaker.settings.suites.updateSettingValue(
         <string> setting_value_id,
         new_value
       )
     }
 
-    const res_data:ValidationResult = response.data
+    const res_data = response.data
+    const validation_result:ValidationResult = res_data.validation_result
 
-    if(response.data.is_valid == false) {
-      ;(<SettingValueEditor> this.$refs["editor"]).setEditorError(res_data.invalid_reason!)
+    if(validation_result.is_valid == false) {
+      ;(<SettingValueEditor> this.$refs["editor"]).setEditorError(validation_result.invalid_reason!)
       return
     }
 
@@ -169,7 +169,7 @@ export default class ServiceSettingComp extends Vue {
   }
 
   async onDeleteSettingValue(setting_value_id:string) {
-    const { data } = await requestMaker.settings.gyst_suites.deleteSettingValue(setting_value_id)
+    const { data } = await requestMaker.settings.suites.deleteSettingValue(setting_value_id)
     this.deleteSettingValue({ service_setting: this.serviceSetting, setting_value_id })
   }
 

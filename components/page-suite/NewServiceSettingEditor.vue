@@ -79,7 +79,7 @@ export default class NewServiceSettingEditor extends Vue {
 
   selected_service_id:string|null = null
   selected_service:EditorSelectable|null = null
-  selected_oauth_account_id:string|null = ""
+  selected_oauth_account_id:string|null = null
 
   onChooseService() {
     this.chooseService(this.selected_service_id!)
@@ -122,9 +122,9 @@ export default class NewServiceSettingEditor extends Vue {
   }
 
   async onAddNewService() {
-    const { data } = await requestMaker.settings.gyst_suites.addNewServiceSetting(
+    const { data } = await requestMaker.settings.suites.addNewServiceSetting(
       <string> this.selected_service_id,
-      <string> this.selected_oauth_account_id
+      <string|undefined> this.selected_oauth_account_id
     )
 
     const service_setting = data.service_setting

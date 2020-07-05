@@ -3,7 +3,7 @@ import * as _login from "./pages/login"
 import * as _oauth_signup from "./pages/oauth-signup"
 import * as _posts from "./pages/posts"
 // import * as _settings from "./pages/settings"
-import * as settings_gyst_suites from "./pages/settings/gyst-suites"
+import * as suites from "./pages/settings/gyst-suites"
 import * as settings_user from "./pages/settings/user"
 import * as _signup from "./pages/signup"
 import * as _user from "./pages/user"
@@ -13,7 +13,7 @@ export const login = _login
 export const oauth_signup = _oauth_signup
 export const posts = _posts
 export const settings = {
-  gyst_suites: settings_gyst_suites,
+  suites,
   user: settings_user
 }
 export const signup = _signup

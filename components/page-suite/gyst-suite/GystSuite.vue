@@ -37,7 +37,7 @@ import GithubServiceSetting from "../service-settings/github/GithubServiceSettin
 import LolServiceSetting from "../service-settings/league-of-legends/LolServiceSetting.vue"
 
 // Types
-import { ServiceInfo, ServiceSetting as ServiceSettingType } from "~/src/common/types/pages/suite"
+import { ServiceSetting as ServiceSettingType } from "~/src/common/types/pages/suite"
 
 import * as requestMaker from "~/src/cli/request-maker"
 
@@ -74,7 +74,7 @@ export default class GystSuite extends Vue {
   }
 
   async onRemoveServiceSetting(service_setting_id:string) {
-    const { data } = await requestMaker.settings.gyst_suites.deleteServiceSetting(service_setting_id)
+    const { data } = await requestMaker.settings.suites.deleteServiceSetting(service_setting_id)
 
     this.$store.commit("page-suite/removeServiceSetting", service_setting_id)
   }

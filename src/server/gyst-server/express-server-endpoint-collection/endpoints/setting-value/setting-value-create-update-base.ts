@@ -9,23 +9,42 @@ import { validateSettingValue } from "~/src/server/method-collection/validate-se
 
 // Models
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
+import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 
 // Types
-import { ServiceSetting, ValidationResult } from "~/src/common/types/pages/suite"
+import { ValidationResult } from "~/src/common/types/pages/suite"
 
 export abstract class SettingValueCreateUpdateBaseRequestHandler extends SessionRequestHandlerBase {
-  service_id!:string
-  service_setting!:ServiceSetting
+  /**
+   * 2020-07-05 17:33
+   * 
+   * I think accepting only two primary variables is the best use-wise. Rest of the information can
+   * be retrieved on the server side. Before, I accepted the whole 'service setting' data that includes
+   * oauth and connected user info, thinking that retrieving properties from this data is better.
+   * 
+   * Not thinking about APIs for developers, but even from the API point of view, this is much
+   * friendlier and easy to use.
+   */
+  // Included in the request
   service_setting_id!:string
-
   setting_value!:any
 
-  storeParams():void|Promise<void> {    
-    this.service_setting = this.req.body.service_setting
-    this.service_id = this.service_setting.service_id
-    this.service_setting_id = this.service_setting._id
+  // Retrieved on the server side
+  service_id!:string
+  oauth_connected_user_entry_id!:string|undefined
 
+  async storeParams() {
     this.setting_value = this.req.body.setting_value
+    this.service_setting_id = await this.getServiceSettingId()
+    await this.loadServiceSetting()
+  }
+
+  abstract getServiceSettingId():string|Promise<string>
+
+  async loadServiceSetting() {
+    const service_setting = await service_setting_storage.getEntry(this.service_setting_id)!
+    this.oauth_connected_user_entry_id = service_setting!.get("oauth_connected_user_entry_id")
+    this.service_id = service_setting!.get("service_id")
   }
 
   async doTasks():Promise<void> {
@@ -33,7 +52,7 @@ export abstract class SettingValueCreateUpdateBaseRequestHandler extends Session
     let validation_result!:ValidationResult
 
     try {
-      validation_result = await validateSettingValue(this.service_setting, this.setting_value)
+      validation_result = await validateSettingValue(this.oauth_connected_user_entry_id, this.service_id, this.setting_value)
     }
     catch(e) {
       if(e) {
@@ -81,7 +100,7 @@ export abstract class SettingValueCreateUpdateBaseRequestHandler extends Session
       await this.updateModel(setting_value)
     }
 
-    this.res_data = validation_result
+    this.res_data.validation_result = validation_result
   }
 
   abstract updateModel(setting_value:any):Promise<any>

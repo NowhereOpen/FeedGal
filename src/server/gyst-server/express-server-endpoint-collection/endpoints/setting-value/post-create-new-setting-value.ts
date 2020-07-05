@@ -2,6 +2,7 @@ import { SettingValueCreateUpdateBaseRequestHandler } from "./setting-value-crea
 
 // Models
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
+import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 
 // Methods
 import { getDisplayedSettingValue } from "~/src/server/method-collection"
@@ -10,6 +11,10 @@ import { getDisplayedSettingValue } from "~/src/server/method-collection"
 import { SettingValue } from "~/src/common/types/common/suite"
 
 export class PostCreateNewSettingValueRequestHandler extends SettingValueCreateUpdateBaseRequestHandler {
+  getServiceSettingId() {
+    return this.req.body.service_setting_id
+  }
+
   async updateModel(setting_value:any) {
     const _result = await setting_value_storage.createNewSettingValue(this.service_setting_id, setting_value)
     const result = _result.toJSON()
