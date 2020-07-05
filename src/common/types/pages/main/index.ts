@@ -1,14 +1,14 @@
-import { LoadEntryParamDetail } from "~/src/common/types/common/load-entry-param"
 import { Entry } from "./loader"
 import { LoadStatus } from "./load-status"
+import { SuiteEntry } from "~/src/common/types/common/suite"
 
 export * from "./load-status"
 export * from "./loader"
-export * from "~/src/common/types/common/load-entry-param"
+export { SuiteEntry } from "~/src/common/types/common/suite"
 
 export type GystEntryWrapper = {
   entry:Entry
-  load_entry_param_detail:LoadEntryParamDetail
+  suite_entry:SuiteEntry
 }
 export type LoadedEntries = GystEntryWrapper[]
 

@@ -8,15 +8,14 @@ import { getParam, gystEntriesFromResponse, iterateLoadStatus } from "~/src/cli/
 import {
   LoadStatus,
   LoadStatusServiceSetting,
-  LoadStatusSettingValue
-} from "~/src/common/types/pages/main"
-import {
+  LoadStatusSettingValue,
   GystEntryResponseSuccess,
   GystEntryResponseError,
   ServicePaginationReqParam,
-  LoadEntryParam,
+  SuiteEntry,
+  SuiteEntryIdObject,
+  GystEntryWrapper as GystEntryWrapperType
 } from "~/src/common/types/pages/main"
-import { GystEntryWrapper as GystEntryWrapperType } from "~/src/common/types/pages/main"
 
 /**
  * 2020-05-31 07:38
@@ -134,9 +133,9 @@ export default class Store extends VuexModule {
     })
   }
 
-  get getPaginationReqDataForLoadEntryParam() {
-    return (load_entry_param:LoadEntryParam):ServicePaginationReqParam => {
-      const { service_setting_id, setting_value_id } = load_entry_param
+  get getPaginationReqDataForSuiteEntryIdObject() {
+    return (ids:SuiteEntryIdObject):ServicePaginationReqParam => {
+      const { service_setting_id, setting_value_id } = ids
       const service_setting = this.load_status.find(entry => entry._id == service_setting_id)!
       const setting_value = service_setting.setting_values.find(entry => entry._id == setting_value_id)
 
@@ -160,12 +159,12 @@ export default class Store extends VuexModule {
 
   get isEnoughPreloaded() {
     const MIN_PRELOADED_COUNT = 10
-    return (load_entry_param:LoadEntryParam) => {
+    return (ids:SuiteEntryIdObject) => {
       let count = 0
 
       return this.preloaded_entries.some(entry => {
-        const detail = entry.load_entry_param_detail
-        if(detail.service_setting_id == load_entry_param.service_setting_id && detail.setting_value_id == load_entry_param.setting_value_id) {
+        const detail = entry.suite_entry
+        if(detail.service_setting_id == ids.service_setting_id && detail.setting_value_id == ids.setting_value_id) {
           count++
         }
 
@@ -175,8 +174,8 @@ export default class Store extends VuexModule {
   }
 
   get getParam() {
-    return (load_entry_param:LoadEntryParam) => {
-      return getParam(load_entry_param, this.load_status)
+    return (ids:SuiteEntryIdObject) => {
+      return getParam(ids, this.load_status)
     }
   }
 
@@ -191,7 +190,7 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  updateIsLoading(payload:{ param:LoadEntryParam, value:boolean }) {
+  updateIsLoading(payload:{ param:SuiteEntryIdObject, value:boolean }) {
     const { value, param } = payload
     const param_instance = getParam(param, this.load_status)
     param_instance.is_loading = value

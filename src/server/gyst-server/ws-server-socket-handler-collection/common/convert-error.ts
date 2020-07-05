@@ -18,8 +18,8 @@ import { setting_value_storage } from "~/src/server/model-collection/models/sett
 
 // Types
 import {
-  LoadEntryParamDetail
-} from "~/src/common/types/pages/main"
+  SuiteEntry
+} from "~/src/common/types/common/suite"
 import { WarningObject, ErrorObject } from "~/src/common/types/common/warning-error"
 import { EntriesResult, ServiceInfo } from "~/src/server/method-collection/common/services/base/types"
 
@@ -30,7 +30,7 @@ import { EntriesResult, ServiceInfo } from "~/src/server/method-collection/commo
  * properties
  */
 export async function convertError(
-  detail:LoadEntryParamDetail,
+  detail:SuiteEntry,
   e:any
 ):Promise<ErrorObject> {
   const { service_id, setting_value_id, service_setting_id, oauth_connected_user_entry_id } = detail
@@ -75,7 +75,7 @@ export async function convertError(
   throw e
 }
 
-export async function throwControlledError({ service_id, oauth_connected_user_entry_id, setting_value_id }:LoadEntryParamDetail):Promise<ErrorObject|undefined> {
+export async function throwControlledError({ service_id, oauth_connected_user_entry_id, setting_value_id }:SuiteEntry):Promise<ErrorObject|undefined> {
   if(oauth_connected_user_entry_id) {
     const is_error = await oauth_connected_user_storage.isErrorWithUserUid(service_id, oauth_connected_user_entry_id)
     if(is_error) {

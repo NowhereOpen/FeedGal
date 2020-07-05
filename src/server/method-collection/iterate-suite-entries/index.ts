@@ -3,18 +3,11 @@ import { iterateServiceSettings } from "../iterate-service-settings"
 // Types
 import { ServiceInfo } from "../common/services/base/types"
 import { SettingValue } from "~/src/common/types/models/setting-value"
+import { SuiteEntry } from "~/src/common/types/common/suite"
 import { CallbackParam as _CallbackParam, IncludeOption } from "../iterate-service-settings"
 
 // Models
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
-
-export type SuiteEntry = {
-  service_id:string
-  service_setting_id:string
-  oauth_connected_user_entry_id?:string
-  setting_value_id?:string
-  setting_value?:any
-}
 
 type CallbackParam = { suite_entry:SuiteEntry, service_info:ServiceInfo }
 type Callback = (param:CallbackParam) => Promise<void>

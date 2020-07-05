@@ -61,7 +61,8 @@ import {
   GystEntryResponse,
   GystEntryResponseSuccess,
   GystEntryResponseError,
-  LoadEntryParam,
+  SuiteEntry,
+  SuiteEntryIdObject,
   ServicePaginationReqParam,
 } from "~/src/common/types/pages/main"
 
@@ -168,7 +169,7 @@ export default class IndexPage extends Vue {
   loadMore() {
     this.loader.loadFromPreloadedStorage()
 
-    const all_params = this.getAllLoadEntryParams()
+    const all_params = this.getAllSuiteEntries()
       .filter(param => {
         const load_entry_param = this.loader.getParam(param)
         
@@ -198,18 +199,25 @@ export default class IndexPage extends Vue {
     this.handleSocketResponseError(response)
   }
 
-  getAllLoadEntryParams() {
-    const output:LoadEntryParam[] = []
+  getAllSuiteEntries() {
+    const output:SuiteEntry[] = []
     this.loader.load_status.forEach(service_setting => {
       const service_setting_id = service_setting._id
+      const suite_entry:SuiteEntry = {
+        service_id: service_setting.service_id,
+        service_setting_id: service_setting._id,
+        oauth_connected_user_entry_id: service_setting.oauth_info?.user_info?.entry_id
+      }
       if(service_setting.uses_setting_value) {
         service_setting.setting_values.forEach(setting_value => {
           const setting_value_id = setting_value._id
-          output.push({ service_setting_id, setting_value_id })
+          suite_entry.setting_value_id = setting_value._id
+          suite_entry.setting_value = setting_value.value
+          output.push(suite_entry)
         })
       }
       else {
-        output.push({ service_setting_id })
+        output.push(suite_entry)
       }
     })
 
@@ -220,12 +228,12 @@ export default class IndexPage extends Vue {
    * 2020-07-04 06:29
    * Hard coded with loading 'old' entries only
    */
-  requestPagination(params:LoadEntryParam[]) {
+  requestPagination(id_objects:SuiteEntryIdObject[]) {
     const DIRECTION = "old"
     const pagination_req_data:ServicePaginationReqParam[] = []
     
-    params.forEach(param => {
-      const data = this.loader.getPaginationReqDataForLoadEntryParam(param)
+    id_objects.forEach(param => {
+      const data = this.loader.getPaginationReqDataForSuiteEntryIdObject(param)
       pagination_req_data.push(data)
 
       this.loader.updateIsLoading({ param, value: true })
@@ -261,7 +269,7 @@ export default class IndexPage extends Vue {
      */
     const rate_limit_warning = "warning" in response && response.warning!.name == "RATE_LIMIT"
     const all_loaded_warning = "warning" in response && response.warning!.name == "ALL_LOADED"
-    const is_enough_loaded = this.loader.isEnoughPreloaded(<LoadEntryParam> response)
+    const is_enough_loaded = this.loader.isEnoughPreloaded(<SuiteEntry> response)
     const count_loaded_entries = "entries" in response ? response.entries.length : 0
     if(count_loaded_entries == 0 || is_enough_loaded || rate_limit_warning || all_loaded_warning) {
       return

@@ -1,14 +1,11 @@
-export * from "./flatten-service-settings"
-export * from "./type"
-
 import { collection } from "../common/services"
 import { refreshTokenIfFailOAuthServiceId } from "../common/refresh-token-if-fail"
 
 // Types
 import { EntriesResult } from "../common/services/base/types"
+import { SuiteEntry } from "~/src/common/types/common/suite"
 
 // Methods
-import { SuiteEntry } from "~/src/server/method-collection"
 
 export async function getEntriesInit(param:SuiteEntry):Promise<EntriesResult> {
   const service_id = param.service_id

@@ -2,12 +2,10 @@ import {
   LoadStatus,
   ClientSideField,
   LoadStatusServiceSetting,
-  LoadStatusSettingValue
-} from "~/src/common/types/pages/main"
-import {
+  LoadStatusSettingValue,
+  SuiteEntryIdObject,
   GystEntryResponseSuccess
-} from "~/src/common/types/pages/main/loader"
-import { LoadEntryParam } from "~/src/common/types/common/load-entry-param"
+} from "~/src/common/types/pages/main"
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/common/types/pages/main"
 
 export function gystEntriesFromResponse(response:GystEntryResponseSuccess | GystEntryResponseSuccess) {
@@ -16,7 +14,7 @@ export function gystEntriesFromResponse(response:GystEntryResponseSuccess | Gyst
   const entries = (<GystEntryResponseSuccess>response).entries
   const wrapper_entries = entries.map(entry => (<GystEntryWrapperType> {
     entry,
-    load_entry_param_detail: {
+    suite_entry: {
       service_setting_id: response.service_setting_id,
       setting_value_id: response.setting_value_id,
 
@@ -29,8 +27,8 @@ export function gystEntriesFromResponse(response:GystEntryResponseSuccess | Gyst
   return wrapper_entries
 }
 
-export function getParam(load_entry_param:LoadEntryParam, load_status:LoadStatus):ClientSideField {
-  const { service_setting_id, setting_value_id } = load_entry_param
+export function getParam(suite_entry:SuiteEntryIdObject, load_status:LoadStatus):ClientSideField {
+  const { service_setting_id, setting_value_id } = suite_entry
 
   const service_setting = load_status.find(entry => entry._id == service_setting_id)!
 

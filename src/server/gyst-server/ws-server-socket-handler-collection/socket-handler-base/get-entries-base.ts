@@ -8,7 +8,7 @@ import {
 } from "~/src/common/types/pages/main"
 import { ErrorName, ErrorObject } from "~/src/common/types/common/warning-error"
 import { EntriesResult } from "~/src/server/method-collection/common/services/base/types"
-import { SuiteEntry } from "~/src/server/method-collection"
+import { SuiteEntry } from "~/src/common/types/common/suite"
 
 export abstract class GetEntriesBaseSocketHandler extends SessionSocketEventHandler {
   message_base:string

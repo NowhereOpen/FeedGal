@@ -5,7 +5,7 @@ import { getEntriesInit, iterateSuiteEntries } from "~/src/server/method-collect
 
 // Types
 import { EntriesResult } from "~/src/server/method-collection/common/services/base/types"
-import { SuiteEntry } from "~/src/server/method-collection"
+import { SuiteEntry } from "~/src/common/types/common/suite"
 
 export class GystEntriesInitSocketHandler extends GetEntriesBaseSocketHandler {
   constructor() {

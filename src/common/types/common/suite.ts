@@ -1,9 +1,17 @@
-export type GystSuite = {
+export type Suite = {
   _id:string
   gyst_suite_name:string
   is_default:boolean
   is_public:boolean
   total_settings:number
+}
+
+export type SuiteEntry = {
+  service_id:string
+  service_setting_id:string
+  oauth_connected_user_entry_id?:string
+  setting_value_id?:string
+  setting_value?:any
 }
 
 export type SettingValue = {

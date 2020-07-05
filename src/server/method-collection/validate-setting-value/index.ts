@@ -4,8 +4,7 @@ import { refreshTokenIfFailOAuthServiceId } from "../common/refresh-token-if-fai
 
 // Types
 import { ValidationResult } from "~/src/common/types/pages/suite"
-import { ServiceSetting } from "~/src/common/types/models/service-setting"
-import { SuiteEntry } from "../iterate-suite-entries"
+import { SuiteEntry } from "~/src/common/types/common/suite"
 
 const service_ids = ["github", "google-calendar", "league-of-legends"]
 

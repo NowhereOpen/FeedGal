@@ -1,19 +1,17 @@
 import _ from "lodash"
 
-// Methods
-import { getEntriesInit, getEntriesPagination } from "~/src/server/method-collection"
-
-// Types
-import { SuiteEntry } from "~/src/server/method-collection"
-
 import { GetEntriesBaseSocketHandler } from "../../socket-handler-base/get-entries-base"
 import { validateOwnerships } from "./validate-ownership"
+
+// Methods
+import { getEntriesInit, getEntriesPagination } from "~/src/server/method-collection"
 
 // Types
 import {
   ServicePaginationReqParam
 } from "~/src/common/types/pages/main"
 import { EntriesResult, PaginationDirection } from "~/src/server/method-collection/common/services/base/types"
+import { SuiteEntry } from "~/src/common/types/common/suite"
 
 export class GystEntriesWithPaginationSocketHandler extends GetEntriesBaseSocketHandler {
   constructor() {

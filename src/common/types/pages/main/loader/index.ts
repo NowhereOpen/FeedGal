@@ -1,12 +1,14 @@
 import { PaginationData, Entry } from "~/src/server/method-collection/common/services/base/types"
-import { LoadEntryParamDetail } from "~/src/common/types/common/load-entry-param"
+import { SuiteEntry } from "~/src/common/types/common/suite"
 import { WarningObject, ErrorObject } from "~/src/common/types/common/warning-error"
+
+export type SuiteEntryIdObject = { service_setting_id:string, setting_value_id?:string }
 
 export type GystEntryResponseGeneralError = {
   error: ErrorObject
 }
 
-export type GystEntryResponseSuccess = LoadEntryParamDetail & {
+export type GystEntryResponseSuccess = SuiteEntry & {
   entries:Entry[]
   // Undefined when there had been a warning
   pagination_data?:PaginationData
@@ -14,7 +16,7 @@ export type GystEntryResponseSuccess = LoadEntryParamDetail & {
   warning?: WarningObject
 }
 
-export type GystEntryResponseError = LoadEntryParamDetail & {
+export type GystEntryResponseError = SuiteEntry & {
   error: ErrorObject
 }
 
