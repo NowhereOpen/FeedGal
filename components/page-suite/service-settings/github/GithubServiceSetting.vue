@@ -4,7 +4,6 @@ div
     ref="ServiceSetting"
     :service-setting="serviceSetting"
     @disconnect="$emit('disconnect', $event)"
-    v-bind="$attrs"
     v-on="$listeners"
     :editor-default-value="editor_default_value"
   )

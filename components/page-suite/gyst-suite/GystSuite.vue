@@ -6,33 +6,29 @@ div
         v-if="service_setting.service_id == 'google-calendar'"
         :service-setting="service_setting"
         v-on="$listeners"
-        v-bind="$data"
       )
       
       LolServiceSetting(
         v-else-if="service_setting.service_id == 'league-of-legends'"
         :service-setting="service_setting"
         v-on="$listeners"
-        v-bind="$data"
       )
 
       GithubServiceSetting(
         v-else-if="service_setting.service_id == 'github'"
         :service-setting="service_setting"
         v-on="$listeners"
-        v-bind="$data"
       )
 
       ServiceSetting(
         v-else
         :service-setting="service_setting"
         v-on="$listeners"
-        v-bind="$data"
       )
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
+import { Vue, Component, State } from "nuxt-property-decorator"
 
 // Components
 import ServiceSetting from "../service-settings/basic/ServiceSetting.vue"
@@ -54,11 +50,10 @@ import * as requestMaker from "~/src/cli/request-maker"
   }
 })
 export default class GystSuite extends Vue {
-  service_settings:any[] = []
+  @State(state => state["page-suite"].service_settings) service_settings!:ServiceSetting[]
 
   mounted() {
     this.setupServiceSettingEventBus()
-    this.service_settings = this.$store.state["page-suite"].service_settings
   }
 
   /**

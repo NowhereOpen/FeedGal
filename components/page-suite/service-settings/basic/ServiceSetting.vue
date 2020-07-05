@@ -57,7 +57,7 @@ div.service-setting
 <script lang="ts">
 import * as _ from "lodash"
 import { AxiosError } from "axios"
-import { Component, Vue, Prop, Mutation } from "nuxt-property-decorator"
+import { Component, Vue, Prop, Mutation, State } from "nuxt-property-decorator"
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import * as requestMaker from "~/src/cli/request-maker"
@@ -89,6 +89,8 @@ export default class ServiceSettingComp extends Vue {
   // Used by "sub component" like `LeagueOfLegendsServiceSetting`
   @Prop() editorDefaultValue:any
 
+  @State(state => state['page-suite'].service_infos) service_infos!:ServiceInfoType[]
+
   @Mutation("page-suite/addNewSettingValue") addNewSettingValue!:Function
   @Mutation("page-suite/updateSettingValue") updateSettingValue!:Function
   @Mutation("page-suite/deleteSettingValue") deleteSettingValue!:Function
@@ -102,7 +104,7 @@ export default class ServiceSettingComp extends Vue {
 
   getConnectedUsers() {
     const service_id = this.serviceSetting.service_id
-    const service_info = (<ServiceInfoType []> <any> this.$attrs.service_infos).find(entry => entry.service_id == service_id)
+    const service_info = this.service_infos.find(entry => entry.service_id == service_id)
     return service_info!.oauth!.oauth_connected_users
   }
 

@@ -3,7 +3,6 @@ div
   ServiceSetting(
     :service-setting="serviceSetting"
     :editor-default-value="default_value"
-    v-bind="$attrs"
     v-on="$listeners"
   )
     template(v-slot:editor-body="{ editor }")
