@@ -1,6 +1,6 @@
 import { getServiceSettingsForGystSuiteId } from "~/src/server/gyst-server/common/gyst-suite"
 
-import { getServiceInfos } from "../../common/get-service-infos"
+import { getServiceInfos } from "./get-service-infos"
 import { validate } from "./validate"
 
 // Types
