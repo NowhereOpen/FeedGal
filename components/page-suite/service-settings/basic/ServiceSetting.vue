@@ -72,7 +72,7 @@ import {
   ServiceSetting,
   SettingValue,
   OAuthUserInfo,
-  EditorSelectable as ServiceInfoType,
+  EditorSelectables,
   ValidationResult
 } from "~/src/common/types/pages/suite"
 
@@ -89,7 +89,7 @@ export default class ServiceSettingComp extends Vue {
   // Used by "sub component" like `LeagueOfLegendsServiceSetting`
   @Prop() editorDefaultValue:any
 
-  @State(state => state['page-suite'].editor_selectables) editor_selectables!:ServiceInfoType[]
+  @State(state => state['page-suite'].editor_selectables) editor_selectables!:EditorSelectables
 
   @Mutation("page-suite/addNewSettingValue") addNewSettingValue!:Function
   @Mutation("page-suite/updateSettingValue") updateSettingValue!:Function

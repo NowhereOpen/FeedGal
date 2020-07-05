@@ -64,17 +64,21 @@ import * as requestMaker from "~/src/cli/request-maker"
 import { UrlsGystResource } from "~/src/common/urls"
 
 // Types
-import { ServiceInfo, ServiceSetting } from "~/src/common/types/pages/suite"
+import {
+  EditorSelectables,
+  EditorSelectable,
+  ServiceSetting
+} from "~/src/common/types/pages/suite"
 
 @Component({
   components: {}
 })
 export default class NewServiceSettingEditor extends Vue {
-  @State(state => state['page-suite'].editor_selectables) editor_selectables!:ServiceInfo[]
+  @State(state => state['page-suite'].editor_selectables) editor_selectables!:EditorSelectables
   @State(state => state["page-suite"].suite_service_settings) suite_service_settings!:ServiceSetting[]
 
   selected_service_id:string|null = null
-  selected_service:ServiceInfo|null = null
+  selected_service:EditorSelectable|null = null
   selected_oauth_account_id:string|null = ""
 
   onChooseService() {
@@ -88,7 +92,7 @@ export default class NewServiceSettingEditor extends Vue {
    */
   chooseService(service_id:string, oauth_user_entry_id?:string) {
     this.selected_service_id = service_id
-    this.selected_service = <ServiceInfo> this.editor_selectables.find(service => service.service_id == this.selected_service_id)
+    this.selected_service = this.editor_selectables.find(service => service.service_id == this.selected_service_id)!
 
     /**
      * 2020-03-19 23:01
@@ -127,14 +131,14 @@ export default class NewServiceSettingEditor extends Vue {
     ;(<Vue> (<any> this.$root).service_setting_event_bus).$emit("new-service-setting", service_setting)
   }
 
-  getServiceInfoName(service_info:ServiceInfo) {
-    let name = service_info.name
+  getServiceInfoName(entry:EditorSelectable) {
+    let name = entry.name
 
-    if(service_info.is_oauth) {
-      const connected_users = _.get(service_info, "oauth.oauth_connected_users", [])
+    if(entry.is_oauth) {
+      const connected_users = _.get(entry, "oauth.oauth_connected_users", [])
 
       if(connected_users.length > 0) {
-        name += ` (${service_info.oauth!.oauth_connected_users.length} ${service_info.oauth!.service_name} Accounts)`
+        name += ` (${entry.oauth!.oauth_connected_users.length} ${entry.oauth!.service_name} Accounts)`
       }
     }
 
