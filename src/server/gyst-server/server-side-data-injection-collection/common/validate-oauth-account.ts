@@ -10,12 +10,14 @@ import { oauth_connected_user_storage } from "~/src/server/model-collection/mode
  * 
  * Used in:
  * 
- *   * src/server/gyst-server/server-side-data-injection-collection/injections/page-suite/validate.ts
- *   * src/server/gyst-server/server-side-data-injection-collection/injections/page-settings-accounts/index.ts
+ *   - src/server/gyst-server/server-side-data-injection-collection/injections/
+ *     - page-suite/validate.ts
+ *     - page-settings-accounts/index.ts
  * 
- * So, if this function is needed with 'little change', refactor acordingly.
+ * So, if this function is needed in other parts of the server side code, refactor acordingly. But not
+ * when it's only used under `.../injections`.
  * 
- * Again, invalidating IS required in both files.
+ * Invalidating is required in both files, but not in any other parts of the code.
  */
 export async function validateOAuthAccounts(user_id:string) {
   const oauth_accounts = await oauth_connected_user_storage.getAllAliveAccounts(user_id)
