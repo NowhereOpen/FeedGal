@@ -7,7 +7,7 @@ div
         v-model="selected_service_id"
         @change="onChooseService"
         label="Choose service"
-        :items="service_infos"
+        :items="editor_selectables"
         item-value="service_id"
         :item-text="getServiceInfoName"
       )
@@ -70,8 +70,8 @@ import { ServiceInfo, ServiceSetting } from "~/src/common/types/pages/suite"
   components: {}
 })
 export default class NewServiceSettingEditor extends Vue {
-  @State(state => state['page-suite'].service_infos) service_infos!:ServiceInfo[]
-  @State(state => state["page-suite"].service_settings) service_settings!:ServiceSetting[]
+  @State(state => state['page-suite'].editor_selectables) editor_selectables!:ServiceInfo[]
+  @State(state => state["page-suite"].suite_service_settings) suite_service_settings!:ServiceSetting[]
 
   selected_service_id:string|null = null
   selected_service:ServiceInfo|null = null
@@ -88,7 +88,7 @@ export default class NewServiceSettingEditor extends Vue {
    */
   chooseService(service_id:string, oauth_user_entry_id?:string) {
     this.selected_service_id = service_id
-    this.selected_service = <ServiceInfo> this.service_infos.find(service => service.service_id == this.selected_service_id)
+    this.selected_service = <ServiceInfo> this.editor_selectables.find(service => service.service_id == this.selected_service_id)
 
     /**
      * 2020-03-19 23:01
@@ -169,14 +169,14 @@ export default class NewServiceSettingEditor extends Vue {
   }
 
   sameServiceIdExists() {
-    const service_settings = this.service_settings
-    return service_settings.some(entry => entry.service_id == this.selected_service_id)
+    const suite_service_settings = this.suite_service_settings
+    return suite_service_settings.some(entry => entry.service_id == this.selected_service_id)
   }
 
   oauthAccountExists() {
-    const service_settings = this.service_settings
+    const suite_service_settings = this.suite_service_settings
 
-    const exists = service_settings.some(entry => {
+    const exists = suite_service_settings.some(entry => {
       if(entry.is_oauth && entry.oauth_info!.is_connected) {
         return entry.oauth_info!.user_info!.entry_id == this.selected_oauth_account_id
       }

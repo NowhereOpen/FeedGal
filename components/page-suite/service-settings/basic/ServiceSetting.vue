@@ -72,7 +72,7 @@ import {
   ServiceSetting,
   SettingValue,
   OAuthUserInfo,
-  ServiceInfo as ServiceInfoType,
+  EditorSelectable as ServiceInfoType,
   ValidationResult
 } from "~/src/common/types/pages/suite"
 
@@ -89,7 +89,7 @@ export default class ServiceSettingComp extends Vue {
   // Used by "sub component" like `LeagueOfLegendsServiceSetting`
   @Prop() editorDefaultValue:any
 
-  @State(state => state['page-suite'].service_infos) service_infos!:ServiceInfoType[]
+  @State(state => state['page-suite'].editor_selectables) editor_selectables!:ServiceInfoType[]
 
   @Mutation("page-suite/addNewSettingValue") addNewSettingValue!:Function
   @Mutation("page-suite/updateSettingValue") updateSettingValue!:Function
@@ -104,7 +104,7 @@ export default class ServiceSettingComp extends Vue {
 
   getConnectedUsers() {
     const service_id = this.serviceSetting.service_id
-    const service_info = this.service_infos.find(entry => entry.service_id == service_id)
+    const service_info = this.editor_selectables.find(entry => entry.service_id == service_id)
     return service_info!.oauth!.oauth_connected_users
   }
 

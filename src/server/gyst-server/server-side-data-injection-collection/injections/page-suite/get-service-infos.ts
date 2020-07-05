@@ -6,12 +6,17 @@ import { cred_module_collection } from "~/src/server/cred-module-collection"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
 
 // Types
-import { ServiceInfo, ServiceInfoOAuthInfo, OAuthConnectedUser } from "~/src/common/types/common/service-info"
+import { ServiceInfoOAuthInfo, OAuthConnectedUser } from "~/src/common/types/common/service-info"
 import { ServiceInfo as _ServiceInfo } from "~/src/server/method-collection/common/services/base/types"
+// Types
+import {
+  EditorSelectables,
+  EditorSelectable,
+} from "~/src/common/types/pages/suite"
 
-export async function getServiceInfos(user_id:string):Promise<ServiceInfo[]> {
+export async function getServiceInfos(user_id:string):Promise<EditorSelectables> {
   const service_ids = ["github", "google-calendar", "league-of-legends", "reddit", "trello", "twitch", "twitter", "youtube"]
-  const services:ServiceInfo[] = []
+  const services:EditorSelectables = []
 
   /**
    * 2020-03-05 22:30
@@ -50,7 +55,7 @@ export async function getServiceInfos(user_id:string):Promise<ServiceInfo[]> {
         }
       }
 
-      const entry:ServiceInfo = {
+      const entry:EditorSelectable = {
         ...service_info,
         oauth: oauth_info
       }

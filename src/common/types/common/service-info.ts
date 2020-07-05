@@ -10,7 +10,7 @@ export type ServiceInfoOAuthInfo = {
   oauth_connected_users: OAuthConnectedUser[]
 }
 
-export type ServiceInfo = {
+export type EditorSelectable = {
   service_id:string
   name:string
   is_oauth:boolean

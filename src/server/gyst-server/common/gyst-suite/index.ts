@@ -7,7 +7,11 @@ import { setting_value_storage } from "~/src/server/model-collection/models/sett
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models//oauth-connected-user"
 
 // Types
-import { ServiceSetting, SettingValue } from "~/src/common/types/common/suite"
+import {
+  SuiteServiceSettings,
+  ServiceSetting,
+  SettingValue
+} from "~/src/common/types/pages/suite"
 
 /**
  * 2020-07-05 13:43

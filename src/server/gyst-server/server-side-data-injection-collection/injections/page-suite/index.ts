@@ -8,6 +8,6 @@ import { State } from "~/src/common/types/pages/suite"
 
 export async function inject(state:State, user_id:string) {
   await validate(user_id)
-  state.service_settings = await getSuiteServiceSettingsForUserId(user_id)
-  state.service_infos = await getServiceInfos(user_id)
+  state.suite_service_settings = await getSuiteServiceSettingsForUserId(user_id)
+  state.editor_selectables = await getServiceInfos(user_id)
 }

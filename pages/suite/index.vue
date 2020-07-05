@@ -55,7 +55,7 @@ export default class ServiceSettingPage extends Vue {
   }
 
   getServiceSettingsLength() {
-    return this.$store.state["page-suite"].service_settings.length
+    return this.$store.state["page-suite"].suite_service_settings.length
   }
 }
 </script>
