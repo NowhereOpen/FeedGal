@@ -85,6 +85,7 @@ import axios from "axios"
 import { Component, Vue, Mutation, State, Getter } from "nuxt-property-decorator"
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
+import * as requestMaker from "~/src/cli/request-maker"
 import { UrlsGystResource } from "~/src/common/urls"
 
 // Components
@@ -115,9 +116,9 @@ export default class ConnectNewAccountPage extends Vue {
   async onRevokeRemoveConfirm({ user_info, comp }:{ user_info:any, comp:Vue }) {
     const revoke_btn = <RevokeBtn>comp
     revoke_btn.setIsWaiting(true)
-    const url = UrlsGystResource.disconnectService(user_info._id)
-    const { data } = await axios.post(url)
-    this.revokeOAuthAccount(user_info.service_id, user_info._id)
+    const oauth_account_entry_id = user_info._id
+    await requestMaker.settings.user.revokeRemoveConfirm(oauth_account_entry_id)
+    this.revokeOAuthAccount(user_info.service_id, oauth_account_entry_id)
     revoke_btn.setIsWaiting(false)
   }
 
@@ -136,9 +137,7 @@ export default class ConnectNewAccountPage extends Vue {
   }
 
   async onRemoveAccountConfirm() {
-    const url = UrlsGystResource.deleteUser()
-    await axios.delete(url)
-
+    await requestMaker.settings.user.removeAccountConfirm()
     setTimeout(() => {
       /**
        * 2020-06-28 00:36 
