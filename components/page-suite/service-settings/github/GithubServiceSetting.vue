@@ -31,8 +31,6 @@ div
 import { Component, Vue, Prop } from "nuxt-property-decorator"
 import _ from "lodash"
 
-import * as requestMaker from "~/src/cli/request-maker"
-
 // Components
 import ServiceSetting from "../basic/ServiceSetting.vue"
 

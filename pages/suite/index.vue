@@ -34,8 +34,6 @@ import NewServiceSettingEditor from "~/components/page-suite/NewServiceSettingEd
 // Types
 // import { GystSuite as GystSuiteType, ServiceSetting } from "~/src/common/types/common/gyst-suite"
 
-import * as requestMaker from "~/src/cli/request-maker"
-
 @Component({
   components: { GystSuite, NewServiceSettingEditor }
 })

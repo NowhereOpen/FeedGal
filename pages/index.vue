@@ -49,7 +49,6 @@ import GystEntryLoadStatus from "~/components/common/gyst-entry-load-status/Gyst
 
 import Loader from "~/store/loader.ts"
 
-import * as requestMaker from "~/src/cli/request-maker"
 import { isGeneralError } from "~/src/cli/gyst-entry-response"
 
 // Types

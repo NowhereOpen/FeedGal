@@ -36,8 +36,6 @@ import { Prop, Vue, Component } from "nuxt-property-decorator"
 import GystEntry from "./GystEntry.vue"
 import CommentLoader from "./CommentLoader.vue"
 
-import * as requestMaker from "~/src/cli/request-maker"
-
 import { GystEntryWrapper as GystEntryWrapperType } from "~/src/common/types/pages/main"
 
 @Component({
