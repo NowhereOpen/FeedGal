@@ -10,6 +10,7 @@ export interface IServiceSetting {
   getTotalServiceSettingsForUserId(user_id:string):Promise<number>
   getServiceId(service_setting_id:string):Promise<any>
   getOAuthConnectedUserEntryId(service_setting_id:string):Promise<any>
+  getAllServiceSettingsForOAuthConnectedUserEntryId(oauth_connected_user_entry_id:string):Promise<any[]>
 
   // Update (2)
   updateServiceSetting(service_setting_id:string, service_id:string):Promise<any>

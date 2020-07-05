@@ -7,7 +7,7 @@ import { service_setting_storage } from "~/src/server/model-collection/models/se
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 
 // Methods
-import { RevokeToken } from "~/src/server/method-collection/oauth"
+import { RevokeToken } from "~/src/server/method-collection"
 
 /**
  * 2020-06-21 07:18 
@@ -73,9 +73,9 @@ export class GetDisconnectServiceRequestHandler extends RemoveDataBase<
   }
 
   async handleServiceSetting1() {
-    const service_settings = await service_setting_storage.getAllServiceSettingsForConnectedUser(this.oauth_connected_user_entry_id)
+    const service_settings = await service_setting_storage.getAllServiceSettingsForOAuthConnectedUserEntryId(this.oauth_connected_user_entry_id)
     const service_setting_ids = service_settings.map(entry => entry._id)
-    const service_setting_result = await service_setting_storage.deleteOAuthUser(this.oauth_connected_user_entry_id)
+
     const setting_values_results:any[] = []
     await Promise.all(
       service_setting_ids.map(async service_setting_id => {
@@ -83,6 +83,8 @@ export class GetDisconnectServiceRequestHandler extends RemoveDataBase<
         setting_values_results.push(result)
       })
     )
+
+    const service_setting_result = await service_setting_storage.deleteOAuthUser(this.oauth_connected_user_entry_id)
 
     return { service_setting_result, setting_values_results }
   }

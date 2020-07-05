@@ -8,7 +8,7 @@ import {
 } from "~/src/common/types/pages/main"
 import { ErrorName, ErrorObject } from "~/src/common/types/common/warning-error"
 import { EntriesResult } from "~/src/server/method-collection/common/services/base/types"
-import { FlattenedLoaderParam } from "~/src/server/method-collection/get-entries-init"
+import { SuiteEntry } from "~/src/server/method-collection"
 
 export abstract class GetEntriesBaseSocketHandler extends SessionSocketEventHandler {
   message_base:string
@@ -17,7 +17,7 @@ export abstract class GetEntriesBaseSocketHandler extends SessionSocketEventHand
     this.message_base = message_base
   }
 
-  respond(param:FlattenedLoaderParam, entries_result:EntriesResult) {
+  respond(param:SuiteEntry, entries_result:EntriesResult) {
     const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
 
     this.socket.emit(`${this.message_base}-response`, <GystEntryResponseSuccess>{
@@ -33,7 +33,7 @@ export abstract class GetEntriesBaseSocketHandler extends SessionSocketEventHand
     })
   }
 
-  respondError(param:FlattenedLoaderParam, error:ErrorObject) {
+  respondError(param:SuiteEntry, error:ErrorObject) {
     const { service_id, service_setting_id, setting_value_id, setting_value, oauth_connected_user_entry_id } = param
 
     this.socket.emit(`${this.message_base}-error`, <GystEntryResponseError>{

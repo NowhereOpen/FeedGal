@@ -18,7 +18,7 @@ export class ServiceSettingStorage extends MongoStorage implements IServiceSetti
     return this.model.find({ user_id })
   }
 
-  async getAllServiceSettingsForConnectedUser(oauth_connected_user_entry_id:string) {
+  async getAllServiceSettingsForOAuthConnectedUserEntryId(oauth_connected_user_entry_id:string) {
     return this.model.find({ oauth_connected_user_entry_id })
   }
 

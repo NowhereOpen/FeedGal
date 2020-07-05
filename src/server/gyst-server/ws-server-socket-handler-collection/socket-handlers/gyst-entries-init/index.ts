@@ -1,8 +1,11 @@
 import { GetEntriesBaseSocketHandler } from "../../socket-handler-base/get-entries-base"
-import { FlattenedLoaderParam, flattenServiceSettings, getEntriesInit } from "~/src/server/method-collection/get-entries-init"
+
+// Methods
+import { getEntriesInit, iterateSuiteEntries } from "~/src/server/method-collection"
 
 // Types
 import { EntriesResult } from "~/src/server/method-collection/common/services/base/types"
+import { SuiteEntry } from "~/src/server/method-collection"
 
 export class GystEntriesInitSocketHandler extends GetEntriesBaseSocketHandler {
   constructor() {
@@ -10,12 +13,20 @@ export class GystEntriesInitSocketHandler extends GetEntriesBaseSocketHandler {
   }
 
   async getIterable() {
-    const parameters:FlattenedLoaderParam[] = await flattenServiceSettings(this.user_id!)
+    const parameters:SuiteEntry[] = await getSuiteEntries(this.user_id!)
     return parameters
   }
 
-  async getEntriesResult(param:FlattenedLoaderParam) {
+  async getEntriesResult(param:SuiteEntry) {
     const entries_result:EntriesResult = await getEntriesInit(param)
     return entries_result
   }
+}
+
+async function getSuiteEntries(user_id:string) {
+  const suite_entries:SuiteEntry[] = []
+  await iterateSuiteEntries(user_id, async ({ service_info, suite_entry }) => {
+    suite_entries.push(suite_entry)
+  })
+  return suite_entries
 }

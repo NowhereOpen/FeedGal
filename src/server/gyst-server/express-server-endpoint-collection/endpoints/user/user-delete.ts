@@ -8,11 +8,7 @@ import { service_setting_storage } from "~/src/server/model-collection/models/se
 import { setting_value_storage } from "~/src/server/model-collection/models/setting-value"
 
 // Methods
-import { RevokeToken } from "~/src/server/method-collection/oauth"
-import { getServiceInfo } from "~/src/server/method-collection"
-
-// Types
-import { ServiceInfo } from "~/src/server/method-collection/common/services/base/types"
+import { RevokeToken, iterateServiceSettings } from "~/src/server/method-collection"
 
 export class DeleteUserRequestHandler extends RemoveDataBase<
   { revoke_results: any[] },
@@ -48,14 +44,15 @@ export class DeleteUserRequestHandler extends RemoveDataBase<
 
   async handleServiceSetting1() {
     const setting_values_result:any[] = []
-    await iterateServiceSettings(this.user_id!, async (service_setting, service_info) => {
-      const service_id = service_setting.get("service_id")
-      const service_setting_id = service_setting._id
-
-      if(service_info.uses_setting_value) {
+    await iterateServiceSettings(this.user_id!, async ({ service_info, service_setting }) => {
+      if(service_info!.uses_setting_value) {
+        const service_id = service_setting!.service_id
+        const service_setting_id = service_setting!._id
         const result = await setting_value_storage.clearServiceSettingSettingValueValues(service_setting_id)
         setting_values_result.push({
-          service_setting_id, service_id, result
+          service_id,
+          service_setting_id,
+          result
         })
       }
     })
@@ -87,19 +84,6 @@ async function iterateConnectedAccounts(user_id:string, cb:(connected_account:an
   await Promise.all(
     connected_accounts.map(async connected_account => {
       return await cb(connected_account)
-    })
-  )
-}
-
-export async function iterateServiceSettings(user_id:string, cb:(service_setting:any, service_info:ServiceInfo) => Promise<void>) {
-  const service_settings = await service_setting_storage.getAllServiceSettingsForUserId(user_id)
-  
-  await Promise.all(
-    service_settings.map(async service_setting => {
-      const service_id = service_setting.get("service_id")
-      const service_info = getServiceInfo(service_id)
-
-      return await cb(service_setting, service_info)
     })
   )
 }

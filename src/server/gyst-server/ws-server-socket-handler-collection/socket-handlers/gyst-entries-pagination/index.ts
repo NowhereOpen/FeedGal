@@ -1,7 +1,10 @@
 import _ from "lodash"
 
-import { getEntriesInit, FlattenedLoaderParam } from "~/src/server/method-collection/get-entries-init"
-import { getEntriesPagination } from "~/src/server/method-collection/get-entries-pagination"
+// Methods
+import { getEntriesInit, getEntriesPagination } from "~/src/server/method-collection"
+
+// Types
+import { SuiteEntry } from "~/src/server/method-collection"
 
 import { GetEntriesBaseSocketHandler } from "../../socket-handler-base/get-entries-base"
 import { validateOwnerships } from "./validate-ownership"
@@ -24,7 +27,7 @@ export class GystEntriesWithPaginationSocketHandler extends GetEntriesBaseSocket
   async getEntriesResult(service_pagination_req_param:ServicePaginationReqParam) {
     let entries_result:EntriesResult
     if(_.get(service_pagination_req_param, "warning.name") == "RATE_LIMIT" && service_pagination_req_param.pagination_data == undefined) {
-      entries_result = await getEntriesInit(<FlattenedLoaderParam> service_pagination_req_param)
+      entries_result = await getEntriesInit(<SuiteEntry> service_pagination_req_param)
     }
     else {
       const direction:PaginationDirection = this.req.direction
