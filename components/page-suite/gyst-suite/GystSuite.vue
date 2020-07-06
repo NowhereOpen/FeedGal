@@ -51,36 +51,6 @@ import * as requestMaker from "~/src/cli/request-maker"
 })
 export default class GystSuite extends Vue {
   @State(state => state["page-suite"].suite_service_settings) service_settings!:ServiceSetting[]
-
-  mounted() {
-    this.setupServiceSettingEventBus()
-  }
-
-  /**
-   * 2020-03-12 15:55
-   * 
-   * Service setting has "extended" service settings and this makes a few more layers between components. So, need to
-   * add `v-on="$listeners"` to all those layers.
-   * 
-   * Instead, use a event bus to handle these events.
-   */
-  setupServiceSettingEventBus() {
-    const service_setting_event_bus = new Vue()
-
-    service_setting_event_bus.$on("new-service-setting", this.onNewServiceSetting)
-    service_setting_event_bus.$on("remove-service-setting", this.onRemoveServiceSetting)
-
-    Object.assign(this.$root, { service_setting_event_bus })
-  }
-
-  async onRemoveServiceSetting(service_setting_id:string) {
-    const { data } = await requestMaker.settings.suites.deleteServiceSetting(service_setting_id)
-
-    this.$store.commit("page-suite/removeServiceSetting", service_setting_id)
-  }
-
-  onNewServiceSetting(service_setting:ServiceSetting) {
-    this.$store.commit("page-suite/addNewServiceSetting", service_setting)
-  }
+  mounted() {}
 }
 </script>

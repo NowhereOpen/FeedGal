@@ -57,7 +57,7 @@ div
 </template>
 
 <script lang="ts">
-import { Prop, Vue, Component, State } from "nuxt-property-decorator"
+import { Prop, Vue, Component, State, Action } from "nuxt-property-decorator"
 import _ from "lodash"
 
 import * as requestMaker from "~/src/cli/request-maker"
@@ -76,6 +76,7 @@ import {
 export default class NewServiceSettingEditor extends Vue {
   @State(state => state['page-suite'].editor_selectables) editor_selectables!:EditorSelectables
   @State(state => state["page-suite"].suite_service_settings) suite_service_settings!:ServiceSetting[]
+  @Action("page-suite/addNewServiceSetting") addNewServiceSetting!:Function
 
   selected_service_id:string|null = null
   selected_service:EditorSelectable|null = null
@@ -122,13 +123,10 @@ export default class NewServiceSettingEditor extends Vue {
   }
 
   async onAddNewService() {
-    const { data } = await requestMaker.settings.suites.addNewServiceSetting(
-      <string> this.selected_service_id,
-      <string|undefined> this.selected_oauth_account_id
-    )
-
-    const service_setting = data.service_setting
-    ;(<Vue> (<any> this.$root).service_setting_event_bus).$emit("new-service-setting", service_setting)
+    this.addNewServiceSetting({
+      service_id: this.selected_service_id,
+      oauth_account_entry_id: this.selected_oauth_account_id
+    })
   }
 
   getServiceInfoName(entry:EditorSelectable) {

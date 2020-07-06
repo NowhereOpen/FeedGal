@@ -57,7 +57,7 @@ div.service-setting
 <script lang="ts">
 import * as _ from "lodash"
 import { AxiosError } from "axios"
-import { Component, Vue, Prop, Mutation, State } from "nuxt-property-decorator"
+import { Component, Vue, Prop, Mutation, State, Action } from "nuxt-property-decorator"
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import * as requestMaker from "~/src/cli/request-maker"
@@ -94,6 +94,8 @@ export default class ServiceSettingComp extends Vue {
   @Mutation("page-suite/addNewSettingValue") addNewSettingValue!:Function
   @Mutation("page-suite/updateSettingValue") updateSettingValue!:Function
   @Mutation("page-suite/deleteSettingValue") deleteSettingValue!:Function
+
+  @Action("page-suite/removeServiceSetting") removeServiceSetting!:Function
 
   confirm_remove = false
 
@@ -183,7 +185,7 @@ export default class ServiceSettingComp extends Vue {
   }
 
   onRemoveClick() {
-    ;(<Vue> (<any> this.$root).service_setting_event_bus).$emit("remove-service-setting", this.serviceSetting._id)
+    this.removeServiceSetting(this.serviceSetting._id)
   }
 }
 </script>

@@ -1,4 +1,6 @@
-import { Module, VuexModule, Mutation } from "vuex-module-decorators"
+import { Module, VuexModule, Mutation, Action } from "vuex-module-decorators"
+
+import * as requestMaker from "~/src/cli/request-maker"
 
 // Types
 import {
@@ -30,15 +32,31 @@ export default class Store extends VuexModule {
   }
 
   @Mutation
-  removeServiceSetting(service_setting_id:string) {
-    const index = this.suite_service_settings.findIndex(entry => entry._id == service_setting_id)
+  _removeServiceSetting(index:number) {
     this.suite_service_settings.splice(index, 1)
   }
 
+  @Action({ commit: "_removeServiceSetting" })
+  async removeServiceSetting(service_setting_id:string) {
+    const index = this.suite_service_settings.findIndex(entry => entry._id == service_setting_id)
+    const { data } = await requestMaker.settings.suites.deleteServiceSetting(service_setting_id)
+    return index
+  }
+
   @Mutation
-  addNewServiceSetting(service_setting:ServiceSetting) {
+  _addNewServiceSetting(service_setting:ServiceSetting) {
     this.suite_service_settings.push(service_setting)
     this.suite_service_settings.sort((a,b) => a.service_name.localeCompare(b.service_name))
+  }
+
+  @Action({ commit: "_addNewServiceSetting" })
+  async addNewServiceSetting({ service_id, oauth_account_entry_id }:{ service_id:string, oauth_account_entry_id:string|undefined }) {
+    const { data } = await requestMaker.settings.suites.addNewServiceSetting(
+      service_id,
+      oauth_account_entry_id
+    )
+    const service_setting = data.service_setting
+    return service_setting
   }
 
   @Mutation
