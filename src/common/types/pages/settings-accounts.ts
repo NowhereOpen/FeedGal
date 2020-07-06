@@ -1,6 +1,5 @@
-import { ServiceSetting, SettingValue } from "~/src/common/types/common/suite"
-import { OAuthConnectedUser } from "~/src/common/types/models/oauth-connected-user"
-export { OAuthConnectedUser } from "~/src/common/types/models/oauth-connected-user"
+import { ServiceSetting } from "~/src/common/types/common/suite"
+import { OAuthConnectedUser as _OAuthConnectedUser } from "~/src/common/types/models/oauth-connected-user"
 
 export type RevokeInfo = {
   url: string
@@ -15,10 +14,18 @@ export type OAuthInfo = {
   fa_value: string
 }
 export type OAuthInfos = OAuthInfo[]
-export type ServiceSettings = ServiceSetting[]
+
+export type OAuthConnectedUser = _OAuthConnectedUser & {
+  /**
+   * 2020-07-06 19:17
+   * 
+   * Will be (suite, service setting, setting value) triplet array when multiple suites
+   * feature is added.
+   */
+  used_in: ServiceSetting[]
+}
 
 export type State = {
   oauth_infos:OAuthInfos
-  service_settings:ServiceSettings
   oauth_connected_accounts:OAuthConnectedUser[]
 }

@@ -54,7 +54,7 @@ div
                           )
                       span You signed up with this account.
                   
-                  span.ml-2(v-if="isOAuthAccountInUse(oauth_user._id) == false")
+                  span.ml-2(v-if="oauth_user.used_in.length == 0")
                     span Start loading feeds for this account. Edit in #[a(:href="getSuiteUrl(oauth_user)") suite]
               div
                 span.caption Last connected on {{ oauth_user.connected_at }}
@@ -94,7 +94,7 @@ import RemoveAccountConfirmDialog from "~/components/page-settings-accounts/Remo
 import RevokeBtn from "~/components/page-settings-accounts/RevokeBtn.vue"
 
 // Types
-import { OAuthInfos, ServiceSettings, OAuthConnectedUser } from "~/src/common/types/pages/settings-accounts"
+import { OAuthInfos, OAuthConnectedUser } from "~/src/common/types/pages/settings-accounts"
 
 @Component({
   components: { RevokeBtn, RevokeRemoveConfirmDialog, RemoveAccountConfirmDialog }
@@ -107,8 +107,7 @@ export default class ConnectNewAccountPage extends Vue {
   @State(state => state["page-settings-accounts"].oauth_connected_accounts) oauth_connected_accounts!:OAuthConnectedUser[]
 
   getConnectedAccounts(oauth_service_id:string) {
-    const connected_accounts = this.oauth_connected_accounts.filter(entry => entry.service_id == oauth_service_id)
-    return connected_accounts
+    return this.oauth_connected_accounts.filter(entry => entry.service_id == oauth_service_id)
   }
 
   redirectUrl(oauth_info:OAuthConnectedUser) {

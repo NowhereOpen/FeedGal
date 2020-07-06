@@ -38,6 +38,13 @@ export type ServiceSetting = {
   setting_values:SettingValue[]
 
   is_oauth:boolean
+  /**
+   * 2020-07-06 20:41
+   * Very important property because having 0 setting values and `uses_setting_value = false`
+   * are different. Refer to three different cases for showing where the oauth account is used
+   * in `/settings/accounts` revoke/remove dialog. (1) service not used at all (2) no
+   * associated setting values, and (3) display where it's used. 
+   */
   uses_setting_value:boolean
 
   // Exists only when  `is_oauth` is true
