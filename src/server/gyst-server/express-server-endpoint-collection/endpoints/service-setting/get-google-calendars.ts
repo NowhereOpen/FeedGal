@@ -22,6 +22,9 @@ export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase 
     await new GetGoogleCalendars(oauth_user_entry_id).run((e, google_calendars) => {
       if(e) this.handleError(e)
       else {
+        google_calendars.sort((a:any,b:any) => {
+          return (<string> a.summary).localeCompare(b.summary)
+        })
         this.res_data = google_calendars
       }
     })
