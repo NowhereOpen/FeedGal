@@ -14,6 +14,13 @@ import {
 } from "~/src/common/types/pages/suite"
 
 /**
+ * 2020-07-06 13:49
+ * 
+ * Output of this method is used where both the information regarding service setting and its
+ * setting values are needed. The three files in `2020-07-05 13:43` are such cases. It's
+ * different from the model's service setting in that the model's 'raw' output doesn't contain
+ * information regarding setting values and `ServiceInfo`.
+ * 
  * 2020-07-05 13:43
  * 
  * I wonder if `/gyst-server/common/` is a good place for this method to be in. However, this is
