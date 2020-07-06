@@ -29,6 +29,9 @@
   },
   "exclude": [
     "node_modules",
+    "local_modules",
+    "**/-keep*",
+    "**/-old*",
     "server",
     "src/server",
     "tests",
