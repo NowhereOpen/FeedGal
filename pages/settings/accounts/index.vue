@@ -30,7 +30,7 @@ div
               span .
           
           div
-            div(v-for="oauth_user of oauth_info.all_connected_accounts" :key="oauth_user._id")
+            div(v-for="oauth_user of getConnectedAccounts(oauth_info.service_id)" :key="oauth_user._id")
               div
                 span.container
                   span {{ oauth_user.friendly_name || oauth_user.service_user_id }}
@@ -54,7 +54,7 @@ div
                           )
                       span You signed up with this account.
                   
-                  span.ml-2(v-if="isInUse(oauth_user) == false")
+                  span.ml-2(v-if="isOAuthAccountInUse(oauth_user._id) == false")
                     span Start loading feeds for this account. Edit in #[a(:href="getSuiteUrl(oauth_user)") suite]
               div
                 span.caption Last connected on {{ oauth_user.connected_at }}
@@ -94,26 +94,32 @@ import RemoveAccountConfirmDialog from "~/components/page-settings-accounts/Remo
 import RevokeBtn from "~/components/page-settings-accounts/RevokeBtn.vue"
 
 // Types
-import { OAuthInfos } from "~/src/common/types/pages/settings-accounts"
+import { OAuthInfos, ServiceSettings, OAuthConnectedUser } from "~/src/common/types/pages/settings-accounts"
 
 @Component({
   components: { RevokeBtn, RevokeRemoveConfirmDialog, RemoveAccountConfirmDialog }
 })
 export default class ConnectNewAccountPage extends Vue {
   @Action("page-settings-accounts/revokeOAuthAccount") revokeOAuthAccount!:Function
-  @State(state => state["page-settings-accounts"].oauth_infos) oauth_infos!:any[]
-  @State(state => state["page-settings-accounts"].service_settings) service_settings!:any[]
   @Getter("page-settings-accounts/getTotalConnected") getTotalConnected!:Function
+  @Getter("page-settings-accounts/isOAuthAccountInUse") isOAuthAccountInUse!:Function
+  @State(state => state["page-settings-accounts"].oauth_infos) oauth_infos!:OAuthInfos[]
+  @State(state => state["page-settings-accounts"].oauth_connected_accounts) oauth_connected_accounts!:OAuthConnectedUser[]
 
-  redirectUrl(oauth_info:any) {
+  getConnectedAccounts(oauth_service_id:string) {
+    const connected_accounts = this.oauth_connected_accounts.filter(entry => entry.service_id == oauth_service_id)
+    return connected_accounts
+  }
+
+  redirectUrl(oauth_info:OAuthConnectedUser) {
     return UrlsGystResource.connectNewAccount(oauth_info.service_id)
   }
 
-  async onRevokeClick(oauth_user:any, comp:RevokeBtn) {
+  async onRevokeClick(oauth_user:OAuthConnectedUser, comp:RevokeBtn) {
     ;(<RevokeRemoveConfirmDialog> this.$refs["RevokeRemoveConfirmDialog"]).open(oauth_user, comp, { action: "Revoke", actioning: "Revoking" })
   }
 
-  async onRevokeRemoveConfirm({ user_info, comp }:{ user_info:any, comp:Vue }) {
+  async onRevokeRemoveConfirm({ user_info, comp }:{ user_info:OAuthConnectedUser, comp:Vue }) {
     const revoke_btn = <RevokeBtn>comp
     const oauth_account_entry_id = user_info._id
     
@@ -122,11 +128,11 @@ export default class ConnectNewAccountPage extends Vue {
     revoke_btn.setIsWaiting(false)
   }
 
-  isRevokeDisabled(oauth_user:any) {
+  isRevokeDisabled(oauth_user:OAuthConnectedUser) {
     return oauth_user.is_signup || oauth_user.error_with_access_token
   }
 
-  onRemoveClick(oauth_user:any, comp:RevokeBtn) {
+  onRemoveClick(oauth_user:OAuthConnectedUser, comp:RevokeBtn) {
     ;(<RevokeRemoveConfirmDialog> this.$refs["RevokeRemoveConfirmDialog"]).open(oauth_user, comp, { action: "Remove", actioning: "Removing" })
     // const oauth_connected_user_entry_id = oauth_user._id
   }
@@ -150,11 +156,7 @@ export default class ConnectNewAccountPage extends Vue {
     }, 1500)
   }
 
-  isInUse(oauth_user:any) {
-    return -1 < this.service_settings.findIndex(service_setting => service_setting.is_oauth && service_setting.oauth_info.is_connected && service_setting.oauth_info.user_info.entry_id == oauth_user._id)
-  }
-
-  getSuiteUrl(oauth_user:any) {
+  getSuiteUrl(oauth_user:OAuthConnectedUser) {
     const sp = new URLSearchParams({ oauth_service_id: oauth_user.service_id, oauth_user_entry_id: oauth_user._id })
     return `/suite?${sp.toString()}`
   }
