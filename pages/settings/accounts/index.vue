@@ -82,7 +82,7 @@ div
 
 <script lang="ts">
 import axios from "axios"
-import { Component, Vue, Mutation, State, Getter } from "nuxt-property-decorator"
+import { Component, Vue, Mutation, State, Getter, Action } from "nuxt-property-decorator"
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import * as requestMaker from "~/src/cli/request-maker"
@@ -100,7 +100,7 @@ import { OAuthInfos } from "~/src/common/types/pages/settings-accounts"
   components: { RevokeBtn, RevokeRemoveConfirmDialog, RemoveAccountConfirmDialog }
 })
 export default class ConnectNewAccountPage extends Vue {
-  @Mutation("page-settings-accounts/revokeOAuthAccount") revokeOAuthAccount!:Function
+  @Action("page-settings-accounts/revokeOAuthAccount") revokeOAuthAccount!:Function
   @State(state => state["page-settings-accounts"].oauth_infos) oauth_infos!:any[]
   @State(state => state["page-settings-accounts"].service_settings) service_settings!:any[]
   @Getter("page-settings-accounts/getTotalConnected") getTotalConnected!:Function
@@ -115,10 +115,10 @@ export default class ConnectNewAccountPage extends Vue {
 
   async onRevokeRemoveConfirm({ user_info, comp }:{ user_info:any, comp:Vue }) {
     const revoke_btn = <RevokeBtn>comp
-    revoke_btn.setIsWaiting(true)
     const oauth_account_entry_id = user_info._id
-    await requestMaker.settings.user.revokeRemoveConfirm(oauth_account_entry_id)
-    this.revokeOAuthAccount(user_info.service_id, oauth_account_entry_id)
+    
+    revoke_btn.setIsWaiting(true)
+    await this.revokeOAuthAccount(oauth_account_entry_id)
     revoke_btn.setIsWaiting(false)
   }
 

@@ -99,6 +99,18 @@ export class GetDisconnectServiceRequestHandler extends RemoveDataBase<
   async doTasks() {
     const remove_data_result = await this.removeData()
     
-    this.res_data = { remove_data_result }
+    this.res_data = {
+      remove_data_result,
+      /**
+       * 2020-07-6 10:17
+       * 
+       * Required on the client side because having `oauth_service_id` helps on the client to remove the target data
+       * without having to iterate many times. Refer to `store/page-settings-accounts.ts`.
+       * 
+       * the `oauth_connected_user_entry_id` is not passed because the client side already knows its value. It sent
+       * the request with the parameter, right?
+       */
+      oauth_service_id: this.oauth_service_id
+    }
   }
 }
