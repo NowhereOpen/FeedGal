@@ -50,7 +50,6 @@ import * as requestMaker from "~/src/cli/request-maker"
   }
 })
 export default class GystSuite extends Vue {
-  @State(state => state["page-suite"].suite_service_settings) service_settings!:ServiceSetting[]
-  mounted() {}
+  @State(state => state["page-suite"].suite_service_settings) service_settings!:ServiceSettingType[]
 }
 </script>
