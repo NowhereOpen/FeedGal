@@ -33,18 +33,16 @@ div.service-setting
           
           SettingValueEditor(
             ref="editor"
+            :service-setting="serviceSetting"
             :default-value="editorDefaultValue"
-            @save="onSaveEditor"
+            @save="setIsEditing(false)"
             @new="setIsEditing(true)"
             @cancel="setIsEditing(false)"
           )
-            template(v-slot:editor-body="{ editor }")
-              slot(name="editor-body" :editor="editor")
           
           SettingValueContainer(
             ref="setting-value-container"
             :service-setting="serviceSetting"
-            @delete="onDeleteSettingValue"
             @update="onUpdateSettingValue"
           )
           
@@ -61,17 +59,15 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import * as requestMaker from "~/src/cli/request-maker"
 
 // Components
-import ServiceInfo from "../../service-setting-components/ServiceInfo.vue"
-import SettingValueEditor from "../../service-setting-components/SettingValueEditor.vue"
-import SettingValueContainer from "../../service-setting-components/SettingValueContainer.vue"
+import ServiceInfo from "./ServiceInfo.vue"
+import SettingValueEditor from "./SettingValueEditor.vue"
+import SettingValueContainer from "./SettingValueContainer.vue"
 
 // Types
 import {
   ServiceSetting,
-  SettingValue,
   OAuthUserInfo,
   EditorSelectables,
-  ValidationResult
 } from "~/src/common/types/pages/suite"
 
 @Component({
@@ -89,16 +85,11 @@ export default class ServiceSettingComp extends Vue {
 
   @State(state => state['page-suite'].editor_selectables) editor_selectables!:EditorSelectables
 
-  @Mutation("page-suite/addNewSettingValue") addNewSettingValue!:Function
-  @Mutation("page-suite/updateSettingValue") updateSettingValue!:Function
-  @Mutation("page-suite/deleteSettingValue") deleteSettingValue!:Function
-
   @Action("page-suite/removeServiceSetting") removeServiceSetting!:Function
 
   confirm_remove = false
 
   setIsEditing(value:boolean) {
-    this.$emit("editor-open")
     ;(<SettingValueContainer> this.$refs["setting-value-container"]).setIsEditing(value)
   }
 
@@ -142,57 +133,8 @@ export default class ServiceSettingComp extends Vue {
     }
   }
 
-  async onSaveEditor(setting_value_id:string|null, new_value:any) {
-    const is_new = setting_value_id == null
-
-    let response!:any
-
-    if(is_new) {
-      response = await requestMaker.settings.suites.addNewSettingValue(
-        this.serviceSetting._id,
-        new_value
-      )
-    }
-    else {
-      response = await requestMaker.settings.suites.updateSettingValue(
-        <string> setting_value_id,
-        new_value
-      )
-    }
-
-    const res_data = response.data
-    const validation_result:ValidationResult = res_data.validation_result
-
-    if(validation_result.is_valid == false) {
-      ;(<SettingValueEditor> this.$refs["editor"]).setEditorError(validation_result.invalid_reason!)
-      return
-    }
-
-    const entry:SettingValue = res_data.setting_value
-
-    if(is_new) {
-      this.addNewSettingValue({ entry, service_setting: this.serviceSetting })
-    }
-    else {
-      this.updateSettingValue({ entry, service_setting: this.serviceSetting })
-    }
-
-    ;(<SettingValueEditor> this.$refs["editor"]).resetEditor()
-    ;(<SettingValueContainer> this.$refs["setting-value-container"]).setIsEditing(false)
-  }
-
-  async onDeleteSettingValue(setting_value_id:string) {
-    const { data } = await requestMaker.settings.suites.deleteSettingValue(setting_value_id)
-    this.deleteSettingValue({ service_setting: this.serviceSetting, setting_value_id })
-  }
-
   onUpdateSettingValue(setting_value:any) {
-    /**
-     * Values of services like LoL has data structure. Passing it as it is will be
-     * passing by reference and we don't need this for service setting editor.
-     */
-    const _setting_value = _.cloneDeep(setting_value)
-    ;(<SettingValueEditor>this.$refs["editor"]).openEditor(_setting_value)
+    ;(<SettingValueEditor>this.$refs["editor"]).openEditor(setting_value)
   }
 
   onRemoveClick() {

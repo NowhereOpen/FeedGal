@@ -31,10 +31,14 @@ div
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "nuxt-property-decorator"
+import { Component, Prop, Vue, Mutation } from "nuxt-property-decorator"
 
+import * as requestMaker from "~/src/cli/request-maker"
+
+// Components
 import DeleteValueBtn from "./DeleteValueBtn.vue"
 
+// Types
 import { ServiceSetting, SettingValue } from "~/src/common/types/pages/suite"
 
 @Component({
@@ -42,6 +46,9 @@ import { ServiceSetting, SettingValue } from "~/src/common/types/pages/suite"
 })
 export default class SettingValueContainer extends Vue {
   @Prop() serviceSetting!:ServiceSetting
+
+  // Vuex Store
+  @Mutation("page-suite/deleteSettingValue") deleteSettingValue!:Function
 
   is_editing = false
 
@@ -63,13 +70,14 @@ export default class SettingValueContainer extends Vue {
     this.is_editing = value
   }
 
-  onUpdateSettingValueClick(setting_value:any) {
+  onUpdateSettingValueClick(setting_value:SettingValue) {
     this.setIsEditing(true)
     this.$emit("update", setting_value)
   }
 
-  onDeleteSettingValueClick(setting_value_id:string) {
-    this.$emit("delete", setting_value_id)
+  async onDeleteSettingValueClick(setting_value_id:string) {
+    const { data } = await requestMaker.settings.suites.deleteSettingValue(setting_value_id)
+    this.deleteSettingValue({ service_setting: this.serviceSetting, setting_value_id })
   }
 }
 </script>

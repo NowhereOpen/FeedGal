@@ -21,26 +21,7 @@ div
 
     div.service-settings-container
       div(v-for="service_setting of service_settings" :key="service_setting._id")
-        GoogleCalendarServiceSetting(
-          v-if="service_setting.service_id == 'google-calendar'"
-          :service-setting="service_setting"
-          v-on="$listeners"
-        )
-        LolServiceSetting(
-          v-else-if="service_setting.service_id == 'league-of-legends'"
-          :service-setting="service_setting"
-          v-on="$listeners"
-        )
-        GithubServiceSetting(
-          v-else-if="service_setting.service_id == 'github'"
-          :service-setting="service_setting"
-          v-on="$listeners"
-        )
-        ServiceSetting(
-          v-else
-          :service-setting="service_setting"
-          v-on="$listeners"
-        )
+        ServiceSetting(:service-setting="service_setting")
 
 </template>
 
@@ -49,22 +30,15 @@ import { Vue, Component, State } from "nuxt-property-decorator"
 
 // Components
 import NewServiceSettingEditor from "~/components/page-suite/NewServiceSettingEditor.vue"
-import ServiceSetting from "~/components/page-suite/service-settings/basic/ServiceSetting.vue"
-import GoogleCalendarServiceSetting from "~/components/page-suite/service-settings/google-calendar/GoogleCalendarServiceSetting.vue"
-import GithubServiceSetting from "~/components/page-suite/service-settings/github/GithubServiceSetting.vue"
-import LolServiceSetting from "~/components/page-suite/service-settings/league-of-legends/LolServiceSetting.vue"
+import ServiceSetting from "~/components/page-suite/service-setting-components/ServiceSetting.vue"
 
-// Types
 // Types
 import { ServiceSetting as ServiceSettingType } from "~/src/common/types/pages/suite"
 
 @Component({
   components: {
     NewServiceSettingEditor,
-    ServiceSetting,
-    GoogleCalendarServiceSetting,
-    GithubServiceSetting,
-    LolServiceSetting,
+    ServiceSetting
   }
 })
 export default class ServiceSettingPage extends Vue {
