@@ -4,7 +4,6 @@ import { getCalendar } from "~/src/server/lib/loader-module-helpers/services/goo
 import {
   SettingValueValidationBase,
   ResDataForValidation,
-  ControlledError,
 } from "../../../base/setting-value-validation-base"
 
 export class GoogleCalendarSettingValueValidation extends SettingValueValidationBase {
@@ -46,7 +45,7 @@ export class GoogleCalendarSettingValueValidation extends SettingValueValidation
 
   preValidate() {
     if((<string>this.calendar_id).trim() == "") {
-      throw new ControlledError("Calendar id must not be empty.")
+      return "Calendar id must not be empty."
     }
   }
 }

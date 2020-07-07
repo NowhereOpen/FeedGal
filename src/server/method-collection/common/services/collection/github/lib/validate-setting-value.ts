@@ -3,8 +3,7 @@ import * as _ from "lodash"
 import { getUserInfo, getRepo } from "~/src/server/lib/loader-module-helpers/services/github"
 import {
   SettingValueValidationBase,
-  ResDataForValidation,
-  ControlledError
+  ResDataForValidation
 } from "../../../base/setting-value-validation-base"
 
 import { SettingValue } from "./type"
@@ -26,17 +25,6 @@ export class GithubSettingValueValidation extends SettingValueValidationBase<Set
   async getSettingValueData() {    
     // Returns 404 error when repo doesn't exist.
     const repo = await getRepo(this.access_token, this.owner_name, this.repo_name)
-
-    /**
-     * 2020-03-24 11:36
-     * 
-     * Github decided to allow "lenient search" when it has a search API. So, when you have
-     * `foo-bar` repo, passing `foo` returns `foo-bar` instead of an error. ... Why?
-     */
-    if(repo.name != this.repo_name || repo.owner.login != this.owner_name) {
-      const error = new ControlledError(`Did you mean '${repo.name}'? Please use the exact repo name.`)
-      throw error
-    }
     
     /**
      * 2020-05-15 15:43 
@@ -65,13 +53,25 @@ export class GithubSettingValueValidation extends SettingValueValidationBase<Set
     }
   }
 
+  validate(repo:any) {
+    /**
+     * 2020-03-24 11:36
+     * 
+     * Github decided to allow "lenient search" when it has a search API. So, when you have
+     * `foo-bar` repo, passing `foo` returns `foo-bar` instead of an error. ... Why?
+     */
+    if(repo.name != this.repo_name || repo.owner.login != this.owner_name) {
+      return `Did you mean '${repo.name}'? Please use the exact repo name.`
+    }
+  }
+
   preValidate() {
     if(this.repo_name.trim() == "") {
-      throw new ControlledError("Repo name must not be empty.")
+      return "Repo name must not be empty."
     }
 
     if(this.owner_name.trim() == "") {
-      throw new ControlledError("Owner name must not be empty.")
+      return "Owner name must not be empty."
     }
   }
 }

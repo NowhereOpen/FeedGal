@@ -3,8 +3,6 @@ import * as _ from "lodash"
 import { LolRequest } from "~/src/server/lib/loader-module-helpers/services/riot/lib/lol-request-base"
 import {
   SettingValueValidationBase,
-  ResDataForValidation,
-  ControlledError
 } from "../../../base/setting-value-validation-base"
 
 export class LeagueOfLegendsSettingValueValidation extends SettingValueValidationBase {
@@ -14,6 +12,7 @@ export class LeagueOfLegendsSettingValueValidation extends SettingValueValidatio
     super(setting_value)
     this.api_key = api_key
   }
+
   async getSettingValueData() {
     const make_request = new LolRequest(this.setting_value.region, this.api_key)
 
@@ -33,14 +32,14 @@ export class LeagueOfLegendsSettingValueValidation extends SettingValueValidatio
 
   preValidate() {
     if(this.setting_value.region == "" || (<string>this.setting_value.summoner_name).trim() == "") {
-      throw new ControlledError("Region or summoner name must not be empty.")
+      return "Region or summoner name must not be empty."
     }
   }
 
-  getSettingValue(res_data:ResDataForValidation) {
+  getSettingValue(data:any) {
     return {
       region: this.setting_value.region,
-      summoner_name: res_data.name
+      summoner_name: data.name
     }
   }
 }

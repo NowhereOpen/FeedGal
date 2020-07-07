@@ -55,27 +55,32 @@ export abstract class SettingValueCreateUpdateBaseRequestHandler extends Session
       validation_result = await validateSettingValue(this.oauth_connected_user_entry_id, this.service_id, this.setting_value)
     }
     catch(e) {
-      if(e) {
-        if(this.service_id == "league-of-legends" && _.get(e, "response.status") == 403) {
-          /**
-           * 2020-07-04 13:42
-           * 
-           * Specific behavior for expired (mostly but 403 error is thrown when it's invalid as well)
-           * api key.
-           * 
-           * This allows client side to print the error message while not invalidating the setting value.
-           */
-          this.res_data = <ValidationResult> {
-            is_valid: false,
-            setting_value: null,
-            invalid_reason: RIOT_KEY_EXPIRED_ERROR.message
-          }
-          return
+      if(this.service_id == "league-of-legends" && _.get(e, "response.status") == 403) {
+        /**
+         * 2020-07-07 16:34
+         * 
+         * Not handling this inside the LoL validation file:
+         * 
+         *   - src/server/method-collection/common/services/collection/league-of-legends/lib/validate-setting-value.ts
+         * 
+         * this error has nothing to do with validation. We can't even validate because of this error.
+         * 
+         * 2020-07-04 13:42
+         * 
+         * Specific behavior for expired (mostly but 403 error is thrown when it's invalid as well)
+         * api key.
+         * 
+         * This allows client side to print the error message while not invalidating the setting value.
+         */
+        this.res_data.validation_result = <ValidationResult> {
+          is_valid: false,
+          setting_value: null,
+          invalid_reason: RIOT_KEY_EXPIRED_ERROR.message
         }
+        return
       }
-      else {
-        throw e
-      }
+      
+      throw e
     }
 
     /**
