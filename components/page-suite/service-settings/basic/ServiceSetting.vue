@@ -124,6 +124,19 @@ export default class ServiceSettingComp extends Vue {
    */
   isSettingVisible() {
     if(this.isOAuth()) {
+      /**
+       * 2020-07-07 10:34
+       * 
+       * If the service for this service setting uses oauth, check if it's connected because adding
+       * new setting values require validating the value, and that requires an access token for the
+       * user. If the user is not connected, then there is no way of validating the value either.
+       * 
+       * As mentioned in the 2019-12-10 00:09 comment above, this results in not showing the setting
+       * values even when old setting values exist. I think it's okay to display them. Such case
+       * would be users (accidentally) revoking the access from the outside service.
+       * 
+       * I think this needs to be used for clicking 'new setting value'.
+       */
       return this.serviceSetting.oauth_info!.is_connected && this.serviceSetting.uses_setting_value
     }
     else {
