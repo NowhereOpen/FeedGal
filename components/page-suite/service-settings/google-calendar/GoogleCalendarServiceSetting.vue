@@ -18,18 +18,6 @@ div
         )
       div(v-else)
         v-progress-circular(v-if="is_loading" indeterminate size=20)
-
-    template(v-slot:setting-value="{ setting_value: { value } }")
-      //- MAY need to refactor this into its own component
-      div.calendar-name-container
-        div(v-if="value.summary == undefined")
-          v-tooltip(bottom)
-            template(v-slot:activator="{ on }")
-              div.red--text(
-                v-on="on"
-              ) {{ value.summary }}
-            div The calendar with this id does not exist.
-        div(v-else) {{ value.summary }}
 </template>
 
 <script lang="ts">

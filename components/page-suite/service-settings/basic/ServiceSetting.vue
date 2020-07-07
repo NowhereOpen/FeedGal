@@ -47,8 +47,6 @@ div.service-setting
             @delete="onDeleteSettingValue"
             @update="onUpdateSettingValue"
           )
-            template(v-slot:setting-value="{ setting_value }")
-              slot(name="setting-value" :setting_value="setting_value")
           
       div(v-if="isOAuth() ? ! serviceSetting.oauth_info.is_connected : false")
         span Connect the service first to edit the settings.
