@@ -25,7 +25,7 @@ div
         )
         
         v-btn.update(
-          :disabled="is_editing"
+          :disabled="isUpdateDisabled()"
           @click="onUpdateSettingValueClick(setting_value)"
         ) Update
 </template>
@@ -44,6 +44,20 @@ export default class SettingValueContainer extends Vue {
   @Prop() serviceSetting!:ServiceSetting
 
   is_editing = false
+
+  isUpdateDisabled() {
+    /**
+     * 2020-07-07 12:31
+     * Special case when service setting is oauth service. It requires user's access token when validating the value.
+     * When it's not connected or is error, updating the value will fail when validating anyways. Disable it before
+     * hand.
+     */
+    return this.is_editing ||
+      (
+        this.serviceSetting.is_oauth &&
+        (this.serviceSetting.oauth_info?.is_connected == false || this.serviceSetting.oauth_info?.user_info?.is_error)
+      )
+  }
 
   setIsEditing(value:boolean) {
     this.is_editing = value
