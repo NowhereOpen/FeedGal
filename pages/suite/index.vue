@@ -19,25 +19,58 @@ div
         @close="is_service_setting_editor_open = false"
       )
 
-    div.gyst-suite-container
-      GystSuite(ref="gyst-suite")
+    div.service-settings-container
+      div(v-for="service_setting of service_settings" :key="service_setting._id")
+        GoogleCalendarServiceSetting(
+          v-if="service_setting.service_id == 'google-calendar'"
+          :service-setting="service_setting"
+          v-on="$listeners"
+        )
+        LolServiceSetting(
+          v-else-if="service_setting.service_id == 'league-of-legends'"
+          :service-setting="service_setting"
+          v-on="$listeners"
+        )
+        GithubServiceSetting(
+          v-else-if="service_setting.service_id == 'github'"
+          :service-setting="service_setting"
+          v-on="$listeners"
+        )
+        ServiceSetting(
+          v-else
+          :service-setting="service_setting"
+          v-on="$listeners"
+        )
 
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
+import { Vue, Component, State } from "nuxt-property-decorator"
 
 // Components
-import GystSuite from "~/components/page-suite/gyst-suite/GystSuite.vue"
 import NewServiceSettingEditor from "~/components/page-suite/NewServiceSettingEditor.vue"
+import ServiceSetting from "~/components/page-suite/service-settings/basic/ServiceSetting.vue"
+import GoogleCalendarServiceSetting from "~/components/page-suite/service-settings/google-calendar/GoogleCalendarServiceSetting.vue"
+import GithubServiceSetting from "~/components/page-suite/service-settings/github/GithubServiceSetting.vue"
+import LolServiceSetting from "~/components/page-suite/service-settings/league-of-legends/LolServiceSetting.vue"
 
 // Types
-// import { GystSuite as GystSuiteType, ServiceSetting } from "~/src/common/types/common/gyst-suite"
+// Types
+import { ServiceSetting as ServiceSettingType } from "~/src/common/types/pages/suite"
 
 @Component({
-  components: { GystSuite, NewServiceSettingEditor }
+  components: {
+    NewServiceSettingEditor,
+    ServiceSetting,
+    GoogleCalendarServiceSetting,
+    GithubServiceSetting,
+    LolServiceSetting,
+  }
 })
 export default class ServiceSettingPage extends Vue {
+  // Vuex Store
+  @State(state => state["page-suite"].suite_service_settings) service_settings!:ServiceSettingType[]
+
   is_service_setting_editor_open = false
 
   mounted() {
