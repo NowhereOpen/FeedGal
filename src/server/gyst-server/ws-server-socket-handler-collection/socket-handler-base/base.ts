@@ -4,15 +4,19 @@ export abstract class SocketEventHandler {
   req!:any
   ack!:Function
   socket!:Socket
-  session:any
+  session!:any
 
-  constructor() {
-  }
+  constructor() {}
 
   onReceiveRequest():Promise<void>|void {}
   abstract handleImpl():any
 
-  async handle() {
+  async handle(req:any, ack:Function, socket:Socket) {
+    this.req = req
+    this.ack = ack
+    this.socket = socket
+    this.session = this.socket.handshake.session!
+
     this.onReceiveRequest()
 
     /**
@@ -28,16 +32,5 @@ export abstract class SocketEventHandler {
         throw err
       }
     })
-  }
-
-  handler(socket:Socket) {
-    return async (req:any, ack:Function) => {
-      this.req = req
-      this.ack = ack
-      this.socket = socket
-      this.session = this.socket.handshake.session!
-      
-      await this.handle()
-    }
   }
 }
