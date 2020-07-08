@@ -6,20 +6,9 @@ export class ErrorHandler extends ExpressRequest {
   error:any
   storeParams() {}
 
-  /**
-   * 2020-07-04 03:33
-   * 
-   * `ExpressRequest` accepting `is_error_handler` then if true returning `ErrorRequestHandler`
-   * from `handler` could be an option. However this ErrorHandler is used in only one place.
-   * Not updating the `ExpressRequest` just for that for now.
-   */
-  handler() {
-    return async (error:any, req:Request, res:Response, next:NextFunction) => {
-      this.error = error
-      this.req = req
-      this.res = res
-      return await this.handle()
-    }
+  constructor(error:any) {
+    super()
+    this.error = error
   }
 
   async doTasks():Promise<void> {
@@ -31,6 +20,7 @@ export class ErrorHandler extends ExpressRequest {
      * the user only needs to share this id.
      */
     console.log(this.error)
+    console.log(`Express error handler caught the above error.`)
 
     this.res.status(500).send({
       status: 500,

@@ -55,15 +55,10 @@ export abstract class ExpressRequest {
     this.res.status(status).send(error_data)
   }
 
-  handler():Handler|ErrorRequestHandler {
-    return async (req:Request, res:Response) => {
-      this.req = req
-      this.res = res
-      return await this.handle()
-    }
-  }
+  async handle(req:Request, res:Response) {
+    this.req = req
+    this.res = res
 
-  async handle() {
     await this.onReceiveRequest()
 
     if(this.res.headersSent) {
