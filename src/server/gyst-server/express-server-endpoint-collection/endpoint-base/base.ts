@@ -50,14 +50,8 @@ export abstract class ExpressRequest {
    * to send error, or use `this.res` directly (when redirecting) then check for
    * `this.res.headersSent` between each step.
    */
-  sendError(status:number, name:ErrorName, message:string, data?:any) {
-    const error_data = {
-      error: <ErrorObject> {
-        name, message
-      },
-      data
-    }
-
+  sendError(status:number, error:ErrorObject, data?:any) {
+    const error_data = { error, data }
     this.res.status(status).send(error_data)
   }
 

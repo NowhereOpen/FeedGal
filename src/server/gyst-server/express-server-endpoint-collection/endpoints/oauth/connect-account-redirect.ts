@@ -2,6 +2,8 @@ import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-serv
 import { setRedirectUrl } from "~/src/server/gyst-server/common/session"
 import { cred_module_collection } from "~/src/server/cred-module-collection"
 
+import { MUST_BE_LOGGED_IN } from "~/src/common/warning-error"
+
 export class RedirectConnectNewAccountRequestHandler extends SessionRequestHandlerBase {
   oauth_service_id!:string
   
@@ -11,7 +13,7 @@ export class RedirectConnectNewAccountRequestHandler extends SessionRequestHandl
 
   async doTasks():Promise<void> {
     if(this.is_logged_in == false) {
-      return this.sendError(400, "MUST_BE_LOGGED_IN", "You cannot connect a new account when not logged in.")
+      return this.sendError(400, MUST_BE_LOGGED_IN("You cannot connect a new account when not logged in."))
     }
 
     /**

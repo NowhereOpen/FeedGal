@@ -33,13 +33,11 @@ export abstract class SessionRequestHandlerBase extends ExpressRequest {
     }
 
     if(this.user_type == UserType.ANON_ONLY && this.is_logged_in) {
-      const error = MUST_BE_ANON_USER
-      this.sendError(403, error.name, error.message!)
+      this.sendError(403, MUST_BE_ANON_USER())
       return
     }
     else if(this.user_type == UserType.USER_ONLY && this.is_logged_in == false) {
-      const error = MUST_BE_LOGGED_IN
-      this.sendError(403, error.name, error.message!)
+      this.sendError(403, MUST_BE_LOGGED_IN())
       return
     }
     else if(this.user_type == UserType.BOTH) {

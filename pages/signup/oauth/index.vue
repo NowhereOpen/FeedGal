@@ -20,11 +20,13 @@ div
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator"
+import _ from "lodash"
 
 import * as requestMaker from "~/src/cli/request-maker"
 
 // Types
 import { SignupForm } from "~/src/common/types/pages/signup-oauth"
+import { ErrorName } from "~/src/common/types/common/warning-error"
 
 /**
  * 2020-06-28 00:03
@@ -73,12 +75,14 @@ export default class OAuthSignupPage extends Vue {
       this.visit("/login", { relogin: true })
     }
     catch(e) {
-      if("response" in e && e.response.status == 403 && e.response.data.name == "MUST_BE_ANON_USER") {
+      const status = _.get(e, "response.status")
+      const error_name = _.get(e, "response.data.name")
+      if(status == 403 && error_name == <ErrorName> "MUST_BE_ANON_USER") {
         alert("You are already logged in. Redirecting to '/login' in a few seconds.")
         setTimeout(() => this.visit("/login"), 2000)
         return
       }
-      else if("response" in e && e.response.status == 400 && e.response.data.name == "BAD_SIGNUP_FORM") {
+      else if(status == 400 && error_name == <ErrorName> "BAD_SIGNUP_FORM") {
         this.alertBadSignupFormEmptyFriendlyName()
         return
       }

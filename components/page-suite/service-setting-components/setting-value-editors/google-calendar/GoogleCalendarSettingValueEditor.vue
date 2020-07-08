@@ -18,13 +18,15 @@ import { Component, Vue, Prop } from "nuxt-property-decorator"
 import _ from "lodash"
 
 import * as requestMaker from "~/src/cli/request-maker"
-import { GOOGLE_AUTHORIZATION_ERROR } from "~/src/common/warning-error"
 
 import { GoogleCalendarInvalidReason, InvalidReason } from "~/src/common/types/common/setting-value-validation"
 import { GoogleCalendar } from "~/src/common/setting-value-validation/validate"
 import { GoogleCalendarSettingValue } from "~/src/common/types/common/setting-value"
 
 import { SettingValueEditorBase } from "~/src/cli/setting-value-editor/SettingValueEditor"
+
+// Types
+import { ErrorName } from "~/src/common/types/common/warning-error"
 
 // Components
 import SettingValueEditor from "../../SettingValueEditor.vue"
@@ -93,7 +95,7 @@ export default class GoogleCalendarSettingValueEditor extends SettingValueEditor
       this.error_message = null
     }
     else {
-      if(_.get(data, "error.name") == GOOGLE_AUTHORIZATION_ERROR.name) {
+      if(_.get(data, "error.name") == <ErrorName> "GOOGLE_AUTHORIZATION_ERROR") {
         this.error_message = data.message
       }
     }

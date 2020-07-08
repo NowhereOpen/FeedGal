@@ -1,5 +1,7 @@
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
+import { MUST_BE_ANON_USER, BAD_SIGNUP_FORM } from "~/src/common/warning-error"
+
 // Models
 import { service_setting_storage } from "~/src/server/model-collection/models/service-setting"
 import { oauth_connected_user_storage } from "~/src/server/model-collection/models/oauth-connected-user"
@@ -31,12 +33,12 @@ export class PostCreateNewAccountRequestHandler extends SessionRequestHandlerBas
 
   async doTasks():Promise<void> {
     if(this.isLoggedIn()) {
-      this.sendError(403, "MUST_BE_ANON_USER", "You cannot sign up for a new account while logged in.")
+      this.sendError(403, MUST_BE_ANON_USER("You cannot sign up for a new account while logged in."))
       return
     }
 
     if(this.signup_form.friendly_name.trim() == "") {
-      this.sendError(400, "BAD_SIGNUP_FORM", "Friendly name must not be empty.")
+      this.sendError(400, BAD_SIGNUP_FORM("Friendly name must not be empty."))
     }
 
     // Must have "friendly_name"

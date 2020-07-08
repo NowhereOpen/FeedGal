@@ -23,7 +23,7 @@ export async function getEntries(
   commits = await getCommits(user_name, repo_name, access_token, { params })
 
   if(commits.length == 0) {
-    return { entries: [], warning: ALL_LOADED }
+    return { entries: [], warning: ALL_LOADED() }
   }
 
   commits = commits.map((commit:any) => {

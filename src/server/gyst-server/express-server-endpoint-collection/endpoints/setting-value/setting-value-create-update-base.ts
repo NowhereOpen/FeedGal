@@ -75,7 +75,7 @@ export abstract class SettingValueCreateUpdateBaseRequestHandler extends Session
         this.res_data.validation_result = <ValidationResult> {
           is_valid: false,
           setting_value: null,
-          invalid_reason: RIOT_KEY_EXPIRED_ERROR.message
+          invalid_reason: RIOT_KEY_EXPIRED_ERROR().message
         }
         return
       }

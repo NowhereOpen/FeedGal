@@ -66,6 +66,7 @@ import {
   LoadStatusSettingValue,
   ClientSideField
 } from "~/src/common/types/pages/main"
+import { WarningName } from "~/src/common/types/common/warning-error"
 
 @Component({
   components: {
@@ -108,7 +109,7 @@ export default class GystEntryLoadStatus extends Vue {
 
   getWarningText(entry:ClientSideField) {
     if("warning" in entry) {
-      if(entry.warning!.name == RATE_LIMIT.name) {
+      if(entry.warning!.name == <WarningName> "RATE_LIMIT") {
         return entry.warning!.message
       }
       else {

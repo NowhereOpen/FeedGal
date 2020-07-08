@@ -12,6 +12,7 @@ import {
 } from "~/src/common/types/pages/main"
 import { EntriesResult, PaginationDirection } from "~/src/server/method-collection/common/services/base/types"
 import { SuiteEntry } from "~/src/common/types/common/suite"
+import { WarningName } from "~/src/common/types/common/warning-error"
 
 export class GystEntriesWithPaginationSocketHandler extends GetEntriesBaseSocketHandler {
   constructor() {
@@ -24,7 +25,7 @@ export class GystEntriesWithPaginationSocketHandler extends GetEntriesBaseSocket
 
   async getEntriesResult(service_pagination_req_param:ServicePaginationReqParam) {
     let entries_result:EntriesResult
-    if(_.get(service_pagination_req_param, "warning.name") == "RATE_LIMIT" && service_pagination_req_param.pagination_data == undefined) {
+    if(_.get(service_pagination_req_param, "warning.name") == <WarningName> "RATE_LIMIT" && service_pagination_req_param.pagination_data == undefined) {
       entries_result = await getEntriesInit(<SuiteEntry> service_pagination_req_param)
     }
     else {

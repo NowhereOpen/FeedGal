@@ -8,7 +8,7 @@ export async function getEntries(trello_cred:TrelloCred, pagination_param?:any):
 
   if(data.length == 0) {
     return {
-      entries: [], pagination_data, warning: ALL_LOADED
+      entries: [], pagination_data, warning: ALL_LOADED()
     }
   }
 

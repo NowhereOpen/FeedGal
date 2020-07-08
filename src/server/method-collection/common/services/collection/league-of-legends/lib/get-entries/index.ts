@@ -11,7 +11,7 @@ export async function getEntries(api_key:string, region:string, summoner_name:st
   }
   catch(e) {
     if(_.get(e, "response.status") == 429) {
-      return { entries: [], warning: RATE_LIMIT }
+      return { entries: [], warning: RATE_LIMIT() }
     }
     else {
       throw e

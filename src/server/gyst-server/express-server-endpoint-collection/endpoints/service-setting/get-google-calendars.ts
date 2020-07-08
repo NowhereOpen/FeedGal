@@ -38,7 +38,7 @@ export class GetGoogleCalendarsRequestHandler extends SessionRequestHandlerBase 
      * as well.
      */
     if(_.get(error, "response.data.error.status") == "PERMISSION_DENIED") {
-      this.res_data = { error: <ErrorObject> GOOGLE_AUTHORIZATION_ERROR }
+      this.res_data = { error: <ErrorObject> GOOGLE_AUTHORIZATION_ERROR() }
       return
     }
     else {

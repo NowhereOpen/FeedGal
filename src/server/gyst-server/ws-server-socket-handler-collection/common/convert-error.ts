@@ -42,12 +42,12 @@ export async function convertError(
   if(is_token_error) {
     await oauth_connected_user_storage.setError(oauth_connected_user_entry_id!, true)
 
-    return TOKEN_MARKED_ERROR
+    return TOKEN_MARKED_ERROR()
   }
   else if(is_setting_value_error) {
     await setting_value_storage.invalidateSettingValue(setting_value_id!)
 
-    return INVALID_SETTING_VALUE
+    return INVALID_SETTING_VALUE()
   }
   else {
     if("response" in e ) {
@@ -55,7 +55,7 @@ export async function convertError(
       
       if(service_id == "league-of-legends") {
         if(status == 403) {
-          return <ErrorObject> RIOT_KEY_EXPIRED_ERROR
+          return RIOT_KEY_EXPIRED_ERROR()
         }
       }
       else if(service_info.oauth_service_id == "google") {
@@ -66,7 +66,7 @@ export async function convertError(
          * `e.response.data.error.status == PERMISSION_DENIED`
          */
         if(status == 403 && _.get(e, "response.data.error.status") == "PERMISSION_DENIED") {
-          return <ErrorObject> GOOGLE_AUTHORIZATION_ERROR
+          return GOOGLE_AUTHORIZATION_ERROR()
         }
       }
     }
@@ -79,14 +79,14 @@ export async function throwControlledError({ service_id, oauth_connected_user_en
   if(oauth_connected_user_entry_id) {
     const is_error = await oauth_connected_user_storage.isErrorWithUserUid(service_id, oauth_connected_user_entry_id)
     if(is_error) {
-      return TOKEN_MARKED_ERROR
+      return TOKEN_MARKED_ERROR()
     }
   }
   
   if(setting_value_id) {
     const is_invalid = await setting_value_storage.isInvalid(setting_value_id)
     if(is_invalid) {
-      return INVALID_SETTING_VALUE
+      return INVALID_SETTING_VALUE()
     }
   }
 }

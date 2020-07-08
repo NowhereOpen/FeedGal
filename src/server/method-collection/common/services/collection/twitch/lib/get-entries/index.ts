@@ -22,7 +22,7 @@ export async function getEntries(twitch_cred:TwitchCred, pagiantion_index:number
 
   if(live_channels.length == 0) {
     return {
-      entries: [], warning: ALL_LOADED
+      entries: [], warning: ALL_LOADED()
     }
   }
 

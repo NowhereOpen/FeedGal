@@ -64,6 +64,7 @@ import {
   SuiteEntryIdObject,
   ServicePaginationReqParam,
 } from "~/src/common/types/pages/main"
+import { WarningName } from "~/src/common/types/common/warning-error"
 
 @Component({
   components: { GystEntryLoadStatus, GystEntryWrapper }
@@ -173,7 +174,7 @@ export default class IndexPage extends Vue {
         const load_entry_param = this.loader.getParam(param)
         
         const error_exists = "error" in load_entry_param
-        const all_loaded_warning = "warning" in load_entry_param && load_entry_param.warning!.name == "ALL_LOADED"
+        const all_loaded_warning = "warning" in load_entry_param && load_entry_param.warning!.name == <WarningName>"ALL_LOADED"
         const is_enough_loaded = this.loader.isEnoughPreloaded(param)
 
         return error_exists == false && is_enough_loaded == false && all_loaded_warning == false
@@ -266,8 +267,8 @@ export default class IndexPage extends Vue {
      * outside service finally returns a proper response or some error/warning that is not converted
      * into `RATE_LIMIT` by the gyst server.
      */
-    const rate_limit_warning = "warning" in response && response.warning!.name == "RATE_LIMIT"
-    const all_loaded_warning = "warning" in response && response.warning!.name == "ALL_LOADED"
+    const rate_limit_warning = "warning" in response && response.warning!.name == <WarningName> "RATE_LIMIT"
+    const all_loaded_warning = "warning" in response && response.warning!.name == <WarningName> "ALL_LOADED"
     const is_enough_loaded = this.loader.isEnoughPreloaded(<SuiteEntry> response)
     const count_loaded_entries = "entries" in response ? response.entries.length : 0
     if(count_loaded_entries == 0 || is_enough_loaded || rate_limit_warning || all_loaded_warning) {
