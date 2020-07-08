@@ -3,6 +3,7 @@ import _ from "lodash"
 import { SessionRequestHandlerBase } from "~/src/server/gyst-server/express-server-endpoint-collection/endpoint-base/session"
 
 import { RIOT_KEY_EXPIRED_ERROR } from "~/src/common/warning-error"
+import { Common } from "~/src/common/setting-value-validation/validation-object"
 
 // Methods
 import { validateSettingValue } from "~/src/server/method-collection/validate-setting-value"
@@ -75,7 +76,7 @@ export abstract class SettingValueCreateUpdateBaseRequestHandler extends Session
         this.res_data.validation_result = <ValidationResult> {
           is_valid: false,
           setting_value: null,
-          invalid_reason: RIOT_KEY_EXPIRED_ERROR().message
+          invalid_reason: RIOT_KEY_EXPIRED_ERROR()
         }
         return
       }
@@ -97,7 +98,7 @@ export abstract class SettingValueCreateUpdateBaseRequestHandler extends Session
       const is_duplicate = await setting_value_storage!.settingValueExists(this.service_setting_id, setting_value)
       if(is_duplicate) {
         validation_result.is_valid = false
-        validation_result.invalid_reason = "Setting value already exists."
+        validation_result.invalid_reason = Common.VALUE_EXISTS()
       }
     }
 
