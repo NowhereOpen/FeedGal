@@ -1,5 +1,6 @@
 import { ServiceSetting } from "~/src/common/types/common/suite"
 import { EditorSelectable } from "~/src/common/types/common/service-info"
+import { InvalidReason } from "~/src/common/types/common/setting-value-validation"
 
 export * from "~/src/common/types/common/service-info"
 export * from "~/src/common/types/common/suite"
@@ -18,5 +19,5 @@ export type ValidationResult = {
   // When `is_valid == true`
   data?: any
   // When `is_valid == false`
-  invalid_reason?: string
+  invalid_reason?: InvalidReason
 }

@@ -5,8 +5,14 @@ import {
   SettingValueValidationBase,
   ResDataForValidation,
 } from "../../../base/setting-value-validation-base"
+import { GoogleCalendarInvalidReason, InvalidReason } from "~/src/common/types/common/setting-value-validation"
+import { GoogleCalendar } from "~/src/common/setting-value-validation/validate"
+import { GoogleCalendar as ValidationObjects } from "~/src/common/setting-value-validation/validation-object"
 
-export class GoogleCalendarSettingValueValidation extends SettingValueValidationBase {
+// Types
+import { GoogleCalendarSettingValue } from "~/src/common/types/common/setting-value"
+
+export class GoogleCalendarSettingValueValidation extends SettingValueValidationBase<GoogleCalendarSettingValue> {
   access_token:string
   calendar_id:string
   constructor(access_token:string, setting_value:any) {
@@ -38,14 +44,12 @@ export class GoogleCalendarSettingValueValidation extends SettingValueValidation
      */
     if(_.get(error, "response.status") == 404) {
       if(_.get(error, "response.data.error.errors[0]reason") == "notFound") {
-        return "Calendar id was not found"
+        return ValidationObjects.CALENDAR_NOT_FOUND()
       }
     }
   }
 
   preValidate() {
-    if((<string>this.calendar_id).trim() == "") {
-      return "Calendar id must not be empty."
-    }
+    return GoogleCalendar.validate(this.setting_value)
   }
 }

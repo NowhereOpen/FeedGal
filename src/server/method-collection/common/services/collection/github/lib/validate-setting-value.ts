@@ -6,8 +6,11 @@ import {
   ResDataForValidation
 } from "../../../base/setting-value-validation-base"
 
-import { SettingValue } from "./type"
+import { GithubSettingValue as SettingValue } from "~/src/common/types/common/setting-value"
 import { getOwnerFromSettingValue } from "./utility"
+import { GithubInvalidReason, InvalidReason } from "~/src/common/types/common/setting-value-validation"
+import { Github } from "~/src/common/setting-value-validation/validate"
+import { Github as ValidationObjects } from "~/src/common/setting-value-validation/validation-object"
 
 export class GithubSettingValueValidation extends SettingValueValidationBase<SettingValue> {
   access_token:string
@@ -48,7 +51,7 @@ export class GithubSettingValueValidation extends SettingValueValidationBase<Set
      */
     if(_.get(error, "response.status") == "404") {
       if(_.get(error, "response.data.message") == "Not Found") {
-        return "The repository wasn't found"
+        return ValidationObjects.REPOSITORY_NOT_FOUND()
       }
     }
   }
@@ -61,17 +64,11 @@ export class GithubSettingValueValidation extends SettingValueValidationBase<Set
      * `foo-bar` repo, passing `foo` returns `foo-bar` instead of an error. ... Why?
      */
     if(repo.name != this.repo_name || repo.owner.login != this.owner_name) {
-      return `Did you mean '${repo.name}'? Please use the exact repo name.`
+      return ValidationObjects.EXACT_REPO_NAME_REQUIRED(repo.name)
     }
   }
 
   preValidate() {
-    if(this.repo_name.trim() == "") {
-      return "Repo name must not be empty."
-    }
-
-    if(this.owner_name.trim() == "") {
-      return "Owner name must not be empty."
-    }
+    return Github.validate(this.setting_value)
   }
 }

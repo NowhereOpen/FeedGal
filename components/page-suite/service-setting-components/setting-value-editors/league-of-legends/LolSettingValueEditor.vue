@@ -10,27 +10,27 @@ div
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator"
 
+import { LeagueOfLegendsInvalidReason, InvalidReason } from "~/src/common/types/common/setting-value-validation"
+import { LeagueOfLegends } from "~/src/common/setting-value-validation/validate"
+import { LeagueOfLegendsSettingValue } from "~/src/common/types/common/setting-value"
+
 import { SettingValueEditorBase } from "~/src/cli/setting-value-editor/SettingValueEditor"
 
 // Compopnents
 import LolRegionSelect from "./LolRegionSelect.vue"
 import SettingValueEditor from "../../SettingValueEditor.vue"
 
-type EditorValue = { region: string, summoner_name: string }
-
 @Component({
   components: { LolRegionSelect, SettingValueEditor }
 })
-export default class LolServiceSetting extends SettingValueEditorBase<EditorValue> {
-  value:EditorValue = { region: "", summoner_name: "" }
+export default class LolServiceSetting extends SettingValueEditorBase<LeagueOfLegendsSettingValue> {
+  value:LeagueOfLegendsSettingValue = { region: "", summoner_name: "" }
 
-  validateBeforeRequestImpl(new_value:EditorValue):string|void {
-    if([new_value.region, new_value.summoner_name].some(str_val => str_val.trim() == "")) {
-      return "Please fill both the region and the summoner name."
-    }
+  validateBeforeRequestImpl(new_value:LeagueOfLegendsSettingValue):LeagueOfLegendsInvalidReason|undefined {
+    return LeagueOfLegends.validate(new_value)
   }
 
-  renderValidationError(invalid_reason:any) {
+  renderValidationError(invalid_reason:InvalidReason) {
     alert(invalid_reason)
   }
 }

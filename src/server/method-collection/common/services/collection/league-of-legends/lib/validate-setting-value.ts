@@ -4,8 +4,14 @@ import { LolRequest } from "~/src/server/lib/loader-module-helpers/services/riot
 import {
   SettingValueValidationBase,
 } from "../../../base/setting-value-validation-base"
+import { LeagueOfLegendsInvalidReason, InvalidReason } from "~/src/common/types/common/setting-value-validation"
+import { LeagueOfLegends } from "~/src/common/setting-value-validation/validate"
+import { LeagueOfLegends as ValidationObjects } from "~/src/common/setting-value-validation/validation-object"
 
-export class LeagueOfLegendsSettingValueValidation extends SettingValueValidationBase {
+// Types
+import { LeagueOfLegendsSettingValue } from "~/src/common/types/common/setting-value"
+
+export class LeagueOfLegendsSettingValueValidation extends SettingValueValidationBase<LeagueOfLegendsSettingValue> {
   api_key:string
   
   constructor(api_key:string, setting_value:any) {
@@ -26,14 +32,12 @@ export class LeagueOfLegendsSettingValueValidation extends SettingValueValidatio
      * `{"status":{"message":"Data not found - summoner not found","status_code":404}}`
      */
     if(_.get(error, "response.data.status.status_code") == 404) {
-      return "Summoner name was not found"
+      return ValidationObjects.SUMMONER_NOT_FOUND()
     }
   }
 
   preValidate() {
-    if(this.setting_value.region == "" || (<string>this.setting_value.summoner_name).trim() == "") {
-      return "Region or summoner name must not be empty."
-    }
+    return LeagueOfLegends.validate(this.setting_value)
   }
 
   getSettingValue(data:any) {

@@ -20,17 +20,19 @@ import _ from "lodash"
 import * as requestMaker from "~/src/cli/request-maker"
 import { GOOGLE_AUTHORIZATION_ERROR } from "~/src/common/warning-error"
 
+import { GoogleCalendarInvalidReason, InvalidReason } from "~/src/common/types/common/setting-value-validation"
+import { GoogleCalendar } from "~/src/common/setting-value-validation/validate"
+import { GoogleCalendarSettingValue } from "~/src/common/types/common/setting-value"
+
 import { SettingValueEditorBase } from "~/src/cli/setting-value-editor/SettingValueEditor"
 
 // Components
 import SettingValueEditor from "../../SettingValueEditor.vue"
 
-type EditorValue = { id: string, summary: string }
-
 @Component({
   components: { SettingValueEditor }
 })
-export default class GoogleCalendarSettingValueEditor extends SettingValueEditorBase<EditorValue> {
+export default class GoogleCalendarSettingValueEditor extends SettingValueEditorBase<GoogleCalendarSettingValue> {
   @Prop() serviceSettingId!:string
 
   is_loading = false
@@ -44,7 +46,7 @@ export default class GoogleCalendarSettingValueEditor extends SettingValueEditor
 
   error_message:string|null = null
 
-  value:EditorValue = {
+  value:GoogleCalendarSettingValue = {
     id: "", summary: ""
   }
 
@@ -54,14 +56,12 @@ export default class GoogleCalendarSettingValueEditor extends SettingValueEditor
     this.loadCalendars()
   }
 
-  validateBeforeRequestImpl(new_value:EditorValue):string|void {
-    if(new_value.id.trim() == "") {
-      return "Please select a calendar."
-    }
+  validateBeforeRequestImpl(new_value:GoogleCalendarSettingValue):GoogleCalendarInvalidReason|undefined {
+    return GoogleCalendar.validate(new_value)
   }
 
-  renderValidationError(invalid_reason:any) {
-    alert(invalid_reason)
+  renderValidationError(invalid_reason:InvalidReason) {
+    alert(invalid_reason.message)
   }
 
   getCalendarItemValue(calendar:any) {

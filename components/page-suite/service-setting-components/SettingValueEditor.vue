@@ -115,7 +115,8 @@ export default class ServiceSettingEditorComp extends Vue {
   async onEditorSaveClick() {
     const setting_value_editor = this.getSettingValueEditor()
     const new_value = setting_value_editor.value
-    const validation_before_request = setting_value_editor.validateBeforeRequest(new_value)
+    const setting_values = this.serviceSetting.setting_values.map(entry => entry.value)
+    const validation_before_request = setting_value_editor.validateBeforeRequest(new_value, setting_values)
 
     if(validation_before_request != null) {
       setting_value_editor.renderValidationError(validation_before_request)

@@ -25,6 +25,10 @@ import _ from "lodash"
 
 import { SettingValueEditorBase } from "~/src/cli/setting-value-editor/SettingValueEditor"
 
+import { GithubInvalidReason, InvalidReason } from "~/src/common/types/common/setting-value-validation"
+import { Github } from "~/src/common/setting-value-validation/validate"
+import { GithubSettingValue } from "~/src/common/types/common/setting-value"
+
 // Components
 import SettingValueEditor from "../../SettingValueEditor.vue"
 
@@ -33,17 +37,10 @@ import {
   ServiceSetting
 } from "~/src/common/types/pages/suite"
 
-type EditorValue = {
-  is_mine: boolean,
-  owner: string,
-  repo: string,
-  user_id: string
-}
-
 @Component({
   components: { SettingValueEditor }
 })
-export default class GithubSettingValueEditor extends SettingValueEditorBase<EditorValue> {
+export default class GithubSettingValueEditor extends SettingValueEditorBase<GithubSettingValue> {
   /**
    * 2020-07-07 14:30
    * Accept the whole ServiceSetting type because `!` typescript expresionn is not allowed when binding
@@ -51,7 +48,7 @@ export default class GithubSettingValueEditor extends SettingValueEditorBase<Edi
    */
   @Prop() serviceSetting!:ServiceSetting
 
-  value:EditorValue = {
+  value:GithubSettingValue = {
     is_mine: true,
     owner: "",
     repo: "",
@@ -62,17 +59,11 @@ export default class GithubSettingValueEditor extends SettingValueEditorBase<Edi
     return this.serviceSetting.oauth_info!.user_info!.user_id
   }
 
-  validateBeforeRequestImpl(new_value:EditorValue):string|void {
-    if(new_value.is_mine && new_value.repo.trim() == "") {
-      return "Please enter the repo."
-    }
-
-    if(new_value.is_mine == false && [new_value.repo, new_value.owner].some(str_val => str_val.trim() == "")) {
-      return "Please fill both the repo name and the owner."
-    }
+  validateBeforeRequestImpl(new_value:GithubSettingValue):GithubInvalidReason|undefined {
+    return Github.validate(new_value)
   }
 
-  renderValidationError(invalid_reason:any) {
+  renderValidationError(invalid_reason:InvalidReason) {
     alert(invalid_reason)
   }
 }

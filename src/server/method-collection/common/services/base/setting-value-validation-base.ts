@@ -1,8 +1,9 @@
 import { ValidationResult } from "~/src/common/types/pages/suite"
+import { InvalidReason } from "~/src/common/types/common/setting-value-validation"
 
 export type ResDataForValidation = any
 
-export type InvalidReasonOutput = string | void
+export type InvalidReasonOutput = InvalidReason | undefined
 
 export abstract class SettingValueValidationBase<T=any> {
   setting_value:T
@@ -53,7 +54,7 @@ export abstract class SettingValueValidationBase<T=any> {
     return { is_valid: true, data, setting_value }
   }
 
-  getInvalidOutput(invalid_reason:string):ValidationResult {
+  getInvalidOutput(invalid_reason:InvalidReasonOutput):ValidationResult {
     return { is_valid: false, setting_value: this.setting_value, invalid_reason }
   }
 
@@ -65,7 +66,7 @@ export abstract class SettingValueValidationBase<T=any> {
   }
 
   // Refer to 2020-07-04 13:17 comment above
-  abstract convertErrorToInvalidReason(e:any):string|undefined
+  abstract convertErrorToInvalidReason(e:any):InvalidReasonOutput
 
   /**
    * Assume that it's true if retrieving `res_data` had no problem.
