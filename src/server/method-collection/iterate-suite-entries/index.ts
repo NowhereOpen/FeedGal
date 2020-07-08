@@ -1,3 +1,5 @@
+import _ from "lodash"
+
 import { iterateServiceSettings } from "../iterate-service-settings"
 
 // Types
@@ -33,11 +35,12 @@ export async function iterateSuiteEntries(user_id:string, cb:Callback, option?:I
       await Promise.all(
         setting_values.map(async entry => {
           const setting_value_entry:SettingValue = entry.toJSON()
+          const suite_entry_setting_value = _.cloneDeep(suite_entry)
           
-          suite_entry.setting_value = setting_value_entry.value
-          suite_entry.setting_value_id = setting_value_entry._id
+          suite_entry_setting_value.setting_value = setting_value_entry.value
+          suite_entry_setting_value.setting_value_id = setting_value_entry._id
 
-          await cb({ suite_entry, service_info })
+          await cb({ suite_entry: suite_entry_setting_value, service_info })
         })
       )
     }
