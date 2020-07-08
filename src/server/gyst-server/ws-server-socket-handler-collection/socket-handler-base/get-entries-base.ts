@@ -1,12 +1,12 @@
 import { SessionSocketEventHandler } from "./session"
-import { throwControlledError, convertError } from "../common/convert-error"
+import { getThrowableError, convertError } from "../common/convert-error"
 
 // Types
 import {
   GystEntryResponseSuccess,
   GystEntryResponseError
 } from "~/src/common/types/pages/main"
-import { ErrorName, ErrorObject } from "~/src/common/types/common/warning-error"
+import { ErrorObject } from "~/src/common/types/common/warning-error"
 import { EntriesResult } from "~/src/server/method-collection/common/services/base/types"
 import { SuiteEntry } from "~/src/common/types/common/suite"
 
@@ -54,7 +54,7 @@ export abstract class GetEntriesBaseSocketHandler extends SessionSocketEventHand
 
     await Promise.all(
       params.map(async param => {    
-        const error = await throwControlledError(param)
+        const error = await getThrowableError(param)
         if(error) {
           return this.respondError(param, error)
         }

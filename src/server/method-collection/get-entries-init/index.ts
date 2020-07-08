@@ -5,8 +5,6 @@ import { refreshTokenIfFailOAuthServiceId } from "../common/refresh-token-if-fai
 import { EntriesResult } from "../common/services/base/types"
 import { SuiteEntry } from "~/src/common/types/common/suite"
 
-// Methods
-
 export async function getEntriesInit(param:SuiteEntry):Promise<EntriesResult> {
   const service_id = param.service_id
   const methods = collection[service_id]

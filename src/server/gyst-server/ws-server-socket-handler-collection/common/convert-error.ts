@@ -75,7 +75,7 @@ export async function convertError(
   throw e
 }
 
-export async function throwControlledError({ service_id, oauth_connected_user_entry_id, setting_value_id }:SuiteEntry):Promise<ErrorObject|undefined> {
+export async function getThrowableError({ service_id, oauth_connected_user_entry_id, setting_value_id }:SuiteEntry):Promise<ErrorObject|undefined> {
   if(oauth_connected_user_entry_id) {
     const is_error = await oauth_connected_user_storage.isErrorWithUserUid(service_id, oauth_connected_user_entry_id)
     if(is_error) {
