@@ -28,8 +28,8 @@ div
             :text="service_setting.service_name"
             :total="getServiceSettingTotal(service_setting)"
             :is_loading="getServiceSettingIsLoading(service_setting)"
-            :is_warning="'warning' in service_setting"
-            :warning_text="getWarningText(service_setting)"
+            :is_warning="getServiceSettingWarningText(service_setting) != undefined"
+            :warning_text="getServiceSettingWarningText(service_setting)"
             :is_error="getErrorTextServiceSetting(service_setting) != undefined"
             :error_text="getErrorTextServiceSetting(service_setting)"
           )
@@ -54,7 +54,7 @@ div
 import _ from "lodash"
 import { Vue, Component, State, Getter } from "nuxt-property-decorator"
 
-import { RATE_LIMIT } from "~/src/common/warning-error"
+import { RATE_LIMIT, NO_SETTING_VALUES } from "~/src/common/warning-error"
 
 // Compopnents
 import LoadStatusEntry from "./LoadStatusEntry.vue"
@@ -105,6 +105,12 @@ export default class GystEntryLoadStatus extends Vue {
 
   getSettingValues(service_setting:LoadStatusServiceSetting) {
     return service_setting.setting_values
+  }
+
+  getServiceSettingWarningText(service_setting:LoadStatusServiceSetting) {
+    if(service_setting.uses_setting_value && service_setting.setting_values.length == 0) {
+      return NO_SETTING_VALUES().message
+    }
   }
 
   getWarningText(entry:ClientSideField) {

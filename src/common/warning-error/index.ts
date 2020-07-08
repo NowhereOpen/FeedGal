@@ -20,6 +20,11 @@ export const ALL_LOADED = () => <WarningObject> {
   message: "All entries have been loaded."
 }
 
+export const NO_SETTING_VALUES = () => <WarningObject> {
+  name: "NO_SETTING_VALUES",
+  message: "Please add setting values to get feeds."
+}
+
 export const INVALID_SETTING_VALUE = () => <ErrorObject> {
   name: "INVALID_SETTING_VALUE",
   message: "Please update your setting.",
