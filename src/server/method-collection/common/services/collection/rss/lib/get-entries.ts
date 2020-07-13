@@ -21,7 +21,7 @@ export async function getEntries(setting_value:RssSettingValue):Promise<EntriesR
      * 
      * When and how is `result.items` undefined?
      */
-    const entries = result.items!.map(entry => formatEntries(entry, result)) || []
+    const entries = result.items!.map((entry:any) => formatEntries(entry, result)) || []
 
     return {
       entries,
