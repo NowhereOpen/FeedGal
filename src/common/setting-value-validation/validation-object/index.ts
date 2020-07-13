@@ -11,6 +11,7 @@
 import * as Github from "./github"
 import * as GoogleCalendar from "./google-calendar"
 import * as LeagueOfLegends from "./league-of-legends"
+import * as Rss from "./rss"
 import * as Common from "./common"
 
-export { Github, GoogleCalendar, LeagueOfLegends, Common }
+export { Github, GoogleCalendar, LeagueOfLegends, Rss, Common }

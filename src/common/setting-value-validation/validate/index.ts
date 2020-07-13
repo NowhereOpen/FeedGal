@@ -26,7 +26,8 @@
 import * as Github from "./github"
 import * as GoogleCalendar from "./google-calendar"
 import * as LeagueOfLegends from "./league-of-legends"
+import * as Rss from "./rss"
 import { invalid } from "moment"
 
-export { Github, GoogleCalendar, LeagueOfLegends, }
+export { Github, GoogleCalendar, LeagueOfLegends, Rss }
 export * from "./utility"

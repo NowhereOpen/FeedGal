@@ -1,0 +1,278 @@
+{
+  "items": [
+    {
+      "title": "Branching Patterns: Final Thoughts and Recommendations",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#FinalThoughtsAndRecommendations",
+      "pubDate": "2020-05-28T14:42:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#FinalThoughtsAndRecommendations'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png' width = ''></img></a></div>\n\n<p>Final post in &#x201C;Branching Patterns&#x201D;</p>\n\n<p>As I said at the beginning of this long piece: branching is easy,\n      merging is harder. Branching is a powerful technique, but it makes me\n      think of goto statements, global variables, and locks for concurrency.\n      Powerful, easy to use, but easier to over-use, too often they become traps\n      for the unwary and inexperienced. Source code control systems can help to\n      control branching by carefully tracking changes, but in the end they can\n      only act as witnesses to the problems.</p>\n\n<p>I'm not someone who says branching is evil. There are everyday\n      problems, such as multiple developers contributing to a single codebase,\n      where the judicious use of branching is essential. But we should always be\n      wary of it and remember Paracelsus's observation that the difference\n      between a beneficial drug and a poison is dosage.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#FinalThoughtsAndRecommendations'>more…</a></p>",
+      "contentSnippet": "Final post in “Branching Patterns”\n\nAs I said at the beginning of this long piece: branching is easy,\n      merging is harder. Branching is a powerful technique, but it makes me\n      think of goto statements, global variables, and locks for concurrency.\n      Powerful, easy to use, but easier to over-use, too often they become traps\n      for the unwary and inexperienced. Source code control systems can help to\n      control branching by carefully tracking changes, but in the end they can\n      only act as witnesses to the problems.\n\nI'm not someone who says branching is evil. There are everyday\n      problems, such as multiple developers contributing to a single codebase,\n      where the judicious use of branching is essential. But we should always be\n      wary of it and remember Paracelsus's observation that the difference\n      between a beneficial drug and a poison is dosage.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-28:Branching-Patterns--Final-Thoughts-and-Recommendations",
+      "isoDate": "2020-05-28T14:42:00.000Z"
+    },
+    {
+      "title": "Threat Modeling: Grow your practise",
+      "link": "https://martinfowler.com/articles/agile-threat-modelling.html#GrowYourPractise",
+      "pubDate": "2020-05-28T14:11:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/agile-threat-modelling.html#GrowYourPractise'><img src = 'https://martinfowler.com/articles/agile-threat-modelling/card.png' width = ''></img></a></div>\n\n<p>Final installment in &#x201C;A Guide to Threat Modelling for Developers&#x201D;</p>\n\n<p>Feedback and continuous improvement is central to managing risk.\n      Neither the systems we build nor the threats they face are simple, as I\n      stressed at the start of this guide. And every team is different- with\n      different skills, tools, constraints and personalities. There is no single\n      way to threat model, this guide simply provides some basics to get you\n      started. Much like test-driven development or continuous delivery, threat\n      modelling rewards investment.</p>\n\n<p>One way to improve is to perform a retrospective on your threat\n      modelling efforts, once you have run a few sessions. Ask what went well\n      and what could be improved. Is the timing right? Was the scope too\n      granular? Not granular enough? What about the location or remote tools you\n      have used? What issues cropped up after the session? How long did the\n      scope take to deliver? By asking such questions, the team will adapt and\n      build mastery over time, doubling down on what works and discarding what\n      adds little value.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/agile-threat-modelling.html#GrowYourPractise'>more…</a></p>",
+      "contentSnippet": "Final installment in “A Guide to Threat Modelling for Developers”\n\nFeedback and continuous improvement is central to managing risk.\n      Neither the systems we build nor the threats they face are simple, as I\n      stressed at the start of this guide. And every team is different- with\n      different skills, tools, constraints and personalities. There is no single\n      way to threat model, this guide simply provides some basics to get you\n      started. Much like test-driven development or continuous delivery, threat\n      modelling rewards investment.\n\nOne way to improve is to perform a retrospective on your threat\n      modelling efforts, once you have run a few sessions. Ask what went well\n      and what could be improved. Is the timing right? Was the scope too\n      granular? Not granular enough? What about the location or remote tools you\n      have used? What issues cropped up after the session? How long did the\n      scope take to deliver? By asking such questions, the team will adapt and\n      build mastery over time, doubling down on what works and discarding what\n      adds little value.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-28:Threat-Modeling--Grow-your-practise",
+      "isoDate": "2020-05-28T14:11:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Looking at some branching policies",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#LookingAtSomeBranchingPolicies",
+      "pubDate": "2020-05-27T15:30:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#LookingAtSomeBranchingPolicies'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png' width = ''></img></a></div>\n\n<p>In this article, I've talked about branching in terms of patterns. I do\n      this because I don't wish to advocate The One Approach to Branching, but\n      rather to lay out the common ways people do this, and reflect on their\n      trade-offs within the wide range of different contexts that we find in\n      software development.</p>\n\n<p>Lots of branching approaches that have been described over the years.\n      As I've tried to understand how they work and when they are best used,\n      I've assessed them through the half-formed patterns in my mind. Now I've\n      finally developed and written these patterns down, I think it's useful to\n      look at a few at some of these policies and see how I think about them in\n      terms of the patterns.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#LookingAtSomeBranchingPolicies'>more…</a></p>",
+      "contentSnippet": "In this article, I've talked about branching in terms of patterns. I do\n      this because I don't wish to advocate The One Approach to Branching, but\n      rather to lay out the common ways people do this, and reflect on their\n      trade-offs within the wide range of different contexts that we find in\n      software development.\n\nLots of branching approaches that have been described over the years.\n      As I've tried to understand how they work and when they are best used,\n      I've assessed them through the half-formed patterns in my mind. Now I've\n      finally developed and written these patterns down, I think it's useful to\n      look at a few at some of these policies and see how I think about them in\n      terms of the patterns.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-27:Branching-Patterns--Looking-at-some-branching-policies",
+      "isoDate": "2020-05-27T15:30:00.000Z"
+    },
+    {
+      "title": "Threat Modeling: Prioritise and fix",
+      "link": "https://martinfowler.com/articles/agile-threat-modelling.html#PrioritiseAndFix",
+      "pubDate": "2020-05-27T14:49:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/agile-threat-modelling.html#PrioritiseAndFix'><img src = 'https://martinfowler.com/articles/agile-threat-modelling/card.png' width = ''></img></a></div>\n\n<p>New installment in &#x201C;A Guide to Threat Modelling for Developers&#x201D;</p>\n\n<p>Software teams are incentivised to deliver, and rarely have unlimited\n      bandwidth to go away and address every threat identified. And some of the\n      threats may pose an insignificant risk. You need to filter down and\n      prioritise a few most important actions which you can take away and\n      execute on effectively.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/agile-threat-modelling.html#PrioritiseAndFix'>more…</a></p>",
+      "contentSnippet": "New installment in “A Guide to Threat Modelling for Developers”\n\nSoftware teams are incentivised to deliver, and rarely have unlimited\n      bandwidth to go away and address every threat identified. And some of the\n      threats may pose an insignificant risk. You need to filter down and\n      prioritise a few most important actions which you can take away and\n      execute on effectively.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-27:Threat-Modeling--Prioritise-and-fix",
+      "isoDate": "2020-05-27T14:49:00.000Z"
+    },
+    {
+      "title": "Threat Modeling: Brainstorm threats",
+      "link": "https://martinfowler.com/articles/agile-threat-modelling.html#BrainstormThreats",
+      "pubDate": "2020-05-26T13:20:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/agile-threat-modelling.html#BrainstormThreats'><img src = 'https://martinfowler.com/articles/agile-threat-modelling/card.png' width = ''></img></a></div>\n\n<p>New installment in &#x201C;A Guide to Threat Modelling for Developers&#x201D;</p>\n\n<p>Jim looks at how to come up with threats to a system, introducing\n       STRIDE, a simple framework to help teams think about threats.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/agile-threat-modelling.html#BrainstormThreats'>more…</a></p>",
+      "contentSnippet": "New installment in “A Guide to Threat Modelling for Developers”\n\nJim looks at how to come up with threats to a system, introducing\n       STRIDE, a simple framework to help teams think about threats.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-26:Threat-Modeling--Brainstorm-threats",
+      "isoDate": "2020-05-26T13:20:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Collaboration Branch and Team Integration Branch",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#collaboration-branch",
+      "pubDate": "2020-05-21T15:05:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#collaboration-branch'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png' width = ''></img></a></div>\n\n<p>With this update, I finish off my todo list of branching patterns with\n      Collaboration Branch (A branch created for a developer to share work with\n      other members of the team without formal integration.) and Team\n      Integration Branch (Allow a sub-team to integrate with each other, before\n      integrating with mainline.)</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#collaboration-branch'>more…</a></p>",
+      "contentSnippet": "With this update, I finish off my todo list of branching patterns with\n      Collaboration Branch (A branch created for a developer to share work with\n      other members of the team without formal integration.) and Team\n      Integration Branch (Allow a sub-team to integrate with each other, before\n      integrating with mainline.)\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-21:Branching-Patterns--Collaboration-Branch-and-Team-Integration-Branch",
+      "isoDate": "2020-05-21T15:05:00.000Z"
+    },
+    {
+      "title": "Threat Modeling: Explain and Explore",
+      "link": "https://martinfowler.com/articles/agile-threat-modelling.html#ExplainAndExplore",
+      "pubDate": "2020-05-20T14:35:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/agile-threat-modelling.html#ExplainAndExplore'><img src = 'https://martinfowler.com/articles/agile-threat-modelling/card.png' width = ''></img></a></div>\n\n<p>The first question for threat modeling is \"what are you building?\" We\n      explore this with low-fi diagrams, understanding the data flows, and\n      identifying the assets.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/agile-threat-modelling.html#ExplainAndExplore'>more…</a></p>",
+      "contentSnippet": "The first question for threat modeling is \"what are you building?\" We\n      explore this with low-fi diagrams, understanding the data flows, and\n      identifying the assets.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-20:Threat-Modeling--Explain-and-Explore",
+      "isoDate": "2020-05-20T14:35:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Future Branch",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#future-branch",
+      "pubDate": "2020-05-19T18:23:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#future-branch'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png' width = ''></img></a></div>\n\n<p>Future Branch: A single branch used for changes that are too invasive\n      to be handled with other approaches.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#future-branch'>more…</a></p>",
+      "contentSnippet": "Future Branch: A single branch used for changes that are too invasive\n      to be handled with other approaches.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-19:Branching-Patterns--Future-Branch",
+      "isoDate": "2020-05-19T18:23:00.000Z"
+    },
+    {
+      "title": "Preparing for a threat modeling session",
+      "link": "https://martinfowler.com/articles/agile-threat-modelling.html#PreparingToStart",
+      "pubDate": "2020-05-19T13:34:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/agile-threat-modelling.html#PreparingToStart'><img src = 'https://martinfowler.com/articles/agile-threat-modelling/card.png' width = ''></img></a></div>\n\n<p>Jim explains how to prepare for a threat modeling\n      session. There are three key questions to focus on: what are you building,\n      what can go wrong, and what are you going to do?\n      </p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/agile-threat-modelling.html#PreparingToStart'>more…</a></p>",
+      "contentSnippet": "Jim explains how to prepare for a threat modeling\n      session. There are three key questions to focus on: what are you building,\n      what can go wrong, and what are you going to do?\n      \n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-19:Preparing-for-a-threat-modeling-session",
+      "isoDate": "2020-05-19T13:34:00.000Z"
+    },
+    {
+      "title": "A Guide to Threat Modelling for Developers",
+      "link": "https://martinfowler.com/articles/agile-threat-modelling.html",
+      "pubDate": "2020-05-18T15:41:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/agile-threat-modelling.html'><img src = 'https://martinfowler.com/articles/agile-threat-modelling/card.png' width = ''></img></a></div>\n\n<p>Threat modeling is a well-respected practice in designing secure\n      systems. But it's often done with complicated, exhaustive upfront\n      analysis. Jim Gumbley has spent the last few years helping ThoughtWorks\n      teams and clients adopt a different approach, which fits in with the\n      &#x201C;little and often&#x201D; agile philosophy. I'm happy that he's now written an\n      article to share his way of working, and this first installment explains\n      applying this incremental thinking to threat modeling.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/agile-threat-modelling.html'>more…</a></p>",
+      "contentSnippet": "Threat modeling is a well-respected practice in designing secure\n      systems. But it's often done with complicated, exhaustive upfront\n      analysis. Jim Gumbley has spent the last few years helping ThoughtWorks\n      teams and clients adopt a different approach, which fits in with the\n      “little and often” agile philosophy. I'm happy that he's now written an\n      article to share his way of working, and this first installment explains\n      applying this incremental thinking to threat modeling.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-18:A-Guide-to-Threat-Modelling-for-Developers",
+      "isoDate": "2020-05-18T15:41:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Experimental Branch",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#experimental-branch",
+      "pubDate": "2020-05-18T13:44:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#experimental-branch'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png' width = ''></img></a></div>\n\n<p>Experimental Branch: Collects together experimental work on a code\n      base that's not expected to be merged directly into the product.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#experimental-branch'>more…</a></p>",
+      "contentSnippet": "Experimental Branch: Collects together experimental work on a code\n      base that's not expected to be merged directly into the product.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-18:Branching-Patterns--Experimental-Branch",
+      "isoDate": "2020-05-18T13:44:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Release-Ready Mainline",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#release-ready-mainline",
+      "pubDate": "2020-05-14T13:19:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#release-ready-mainline'><img src = 'https://martinfowler.com/articles/branching-patterns/mainline-release.png' width = ''></img></a></div>\n\n<p>Release-Ready Mainline: Keep mainline sufficiently healthy that the\n      head of mainline can always be put directly into production.</p>\n\n<p>The recent patterns I've published are useful, but keeping a\n      release-ready mainline is often the simplest and best choice.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#release-ready-mainline'>more…</a></p>",
+      "contentSnippet": "Release-Ready Mainline: Keep mainline sufficiently healthy that the\n      head of mainline can always be put directly into production.\n\nThe recent patterns I've published are useful, but keeping a\n      release-ready mainline is often the simplest and best choice.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-14:Branching-Patterns--Release-Ready-Mainline",
+      "isoDate": "2020-05-14T13:19:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Release Train",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#release-train",
+      "pubDate": "2020-05-13T13:41:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#release-train'><img src = 'https://martinfowler.com/articles/branching-patterns/release-train-multi.png' width = ''></img></a></div>\n\n<p>Release Train: Release on a set interval of time, like trains departing\n      on a regular schedule. Developers choose which train to catch when they\n      have completed their feature.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#release-train'>more…</a></p>",
+      "contentSnippet": "Release Train: Release on a set interval of time, like trains departing\n      on a regular schedule. Developers choose which train to catch when they\n      have completed their feature.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-13:Branching-Patterns--Release-Train",
+      "isoDate": "2020-05-13T13:41:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Hotfix Branch",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#hotfix-branch",
+      "pubDate": "2020-05-12T13:03:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#hotfix-branch'><img src = 'https://martinfowler.com/articles/branching-patterns/hotfix-branch.png' width = ''></img></a></div>\n\n<p>Hotfix Branch: A branch to capture work to fix an urgent production defect.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#hotfix-branch'>more…</a></p>",
+      "contentSnippet": "Hotfix Branch: A branch to capture work to fix an urgent production defect.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-12:Branching-Patterns--Hotfix-Branch",
+      "isoDate": "2020-05-12T13:03:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Environment Branch",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#environment-branch",
+      "pubDate": "2020-05-11T13:31:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#environment-branch'><img src = 'https://martinfowler.com/articles/branching-patterns/environment-branch.png' width = ''></img></a></div>\n\n<p>Environment Branch: Configure a product to run in a new environment by\n      applying a source code commit. This pattern is a bad smell, only useful as\n      a jerry-rigged mechanism for an application lacking that design, but then\n      should be a high priority for removal with a sustainable alternative. </p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#environment-branch'>more…</a></p>",
+      "contentSnippet": "Environment Branch: Configure a product to run in a new environment by\n      applying a source code commit. This pattern is a bad smell, only useful as\n      a jerry-rigged mechanism for an application lacking that design, but then\n      should be a high priority for removal with a sustainable alternative. \n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-11:Branching-Patterns--Environment-Branch",
+      "isoDate": "2020-05-11T13:31:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Maturity Branch",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#maturity-branch",
+      "pubDate": "2020-05-07T14:14:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#maturity-branch'><img src = 'https://martinfowler.com/articles/branching-patterns/production-branch.png' width = ''></img></a></div>\n\n<p>A branch whose head marks the latest version of a level of maturity of\n      the code base. Maturity Branches are usually named after the appropriate\n      stage in the development flow. Hence terms like \"production branch\",\n      \"staging branch\", and \"QA branch\".</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#maturity-branch'>more…</a></p>",
+      "contentSnippet": "A branch whose head marks the latest version of a level of maturity of\n      the code base. Maturity Branches are usually named after the appropriate\n      stage in the development flow. Hence terms like \"production branch\",\n      \"staging branch\", and \"QA branch\".\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-07:Branching-Patterns--Maturity-Branch",
+      "isoDate": "2020-05-07T14:14:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Release Branch",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#release-branch",
+      "pubDate": "2020-05-06T14:36:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#release-branch'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png#release-branch' width = '350px'></img></a></div>\n\n<p>Today I begin the next section of patterns, which look at the path to\n      production. The first pattern in this group is Release Branch: A branch\n      that only accepts commits accepted to stabilize a version of the product\n      ready for release.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#release-branch'>more…</a></p>",
+      "contentSnippet": "Today I begin the next section of patterns, which look at the path to\n      production. The first pattern in this group is Release Branch: A branch\n      that only accepts commits accepted to stabilize a version of the product\n      ready for release.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-06:Branching-Patterns--Release-Branch",
+      "isoDate": "2020-05-06T14:36:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Integration Friction, Modularity, and some              personal thoughts",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#integration-friction",
+      "pubDate": "2020-05-05T13:35:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#integration-friction'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png#integration-friction' width = '350px'></img></a></div>\n\n<p>I now finish off the integration patterns section of the article by\n      describing the problem of integration friction, why modularity plays an\n      important role when thinking of branching, and what kind of integration\n      patterns I prefer to work with. </p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#integration-friction'>more…</a></p>",
+      "contentSnippet": "I now finish off the integration patterns section of the article by\n      describing the problem of integration friction, why modularity plays an\n      important role when thinking of branching, and what kind of integration\n      patterns I prefer to work with. \n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-05:Branching-Patterns--Integration-Friction--Modularity--and-some--------------personal-thoughts",
+      "isoDate": "2020-05-05T13:35:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Reviewed Commits",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#reviewed-commits",
+      "pubDate": "2020-05-04T13:07:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#reviewed-commits'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png#reviewed-commits' width = '350px'></img></a></div>\n\n<p>Reviewed Commits: every commit to mainline is peer-reviewed before the\n      commit is accepted</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#reviewed-commits'>more…</a></p>",
+      "contentSnippet": "Reviewed Commits: every commit to mainline is peer-reviewed before the\n      commit is accepted\n\nmore…",
+      "id": "tag:martinfowler.com,2020-05-04:Branching-Patterns--Reviewed-Commits",
+      "isoDate": "2020-05-04T13:07:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Comparing Feature Branching and Continuous Integration",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#ComparingFeatureBranchingAndContinuousIntegration",
+      "pubDate": "2020-04-30T13:33:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#ComparingFeatureBranchingAndContinuousIntegration'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png#ComparingFeatureBranchingAndContinuousIntegration' width = '350px'></img></a></div>\n\n<p>Feature Branching appears to be the most common branching strategy in\n      the industry at the moment, but there is a vocal group of practitioners\n      who argue that Continuous Integration is usually a superior approach. </p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#ComparingFeatureBranchingAndContinuousIntegration'>more…</a></p>",
+      "contentSnippet": "Feature Branching appears to be the most common branching strategy in\n      the industry at the moment, but there is a vocal group of practitioners\n      who argue that Continuous Integration is usually a superior approach. \n\nmore…",
+      "id": "tag:martinfowler.com,2020-04-30:Branching-Patterns--Comparing-Feature-Branching-and-Continuous-Integration",
+      "isoDate": "2020-04-30T13:33:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Continuous Integration",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#continuous-integration",
+      "pubDate": "2020-04-29T14:37:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#continuous-integration'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png#continuous-integration' width = '350px'></img></a></div>\n\n<p>Continuous Integration: Developers do mainline integration as soon as\n      they have a healthy commit they can share, usually less than a day's\n      work</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#continuous-integration'>more…</a></p>",
+      "contentSnippet": "Continuous Integration: Developers do mainline integration as soon as\n      they have a healthy commit they can share, usually less than a day's\n      work\n\nmore…",
+      "id": "tag:martinfowler.com,2020-04-29:Branching-Patterns--Continuous-Integration",
+      "isoDate": "2020-04-29T14:37:00.000Z"
+    },
+    {
+      "title": "Bliki: KeystoneInterface",
+      "link": "https://martinfowler.com/bliki/KeystoneInterface.html",
+      "pubDate": "2020-04-29T04:00:00.000Z",
+      "content": "\n<p>Software development teams find life can be much easier if they integrate\n  their work as often as they can. They also find it valuable to release\n  frequently into production. But teams don't want to expose half-developed\n  features to their users. A useful technique to deal with this tension is to\n  build all the back-end code, integrate, but don't build the user-interface.\n  The feature can be integrated and tested, but the UI is held back until the\n  end until, like a keystone, it's added to complete the feature, revealing it\n  to the users.</p>\n\n<p>A simple example of this technique might be to give a customer\n  the option of a rush order. Such an order needs to be priced, depending\n  on where the customer lives and what delivery companies operate there. The\n  nature of the goods involved affects the picking approach used\n  in the warehouse. Certain customers may qualify to have rush orders available\n  to them, which may also depend on the delivery location, the time of year, and\n  the kind of goods ordered.</p>\n\n<p>All in all that's a fair bit of business logic, particularly since it will\n  involve gnarly integration with various warehousing, catalog, and customer\n  service systems. Doing this could take several weeks, while other features,\n  need to be released every few days. But as far as the user is concerned, a rush\n  order is just a check-box on the order form.</p>\n\n<p>To build this using the check-box as the keystone, the team does\n  development work on the underlying business logic and interfaces to internal\n  systems over the course of several production releases. The user is unaware of\n  all this latent code. Only with the last step does the keystone check-box need\n  to be made visible, which can be done in a relatively short time. This way all\n  latent code can be integrated and be part of the system going into production,\n  reducing the problems that come with a long-lived feature branch.</p>\n\n<div class=\"photo \"><img src=\"https://martinfowler.com/bliki/images/keystone-interface/sketch.png\">\n<p class=\"photoCaption\"></p>\n</div>\n\n<p>The latent code does need to be tested to the same degree of\n  confidence that it would be if it were active. This can be done\n  providing the architecture of the system is setup so that most testing isn't\n  done through the user interface. <a href=\"/bliki/UnitTest.html\">Unit Tests</a>\n  and other lower layers of the <a href=\"/bliki/TestPyramid.html\">Test Pyramid</a> should be easy to\n  run this way. Even <a href=\"/bliki/BroadStackTest.html\">Broad Stack Tests</a> can be run\n  providing there is a mechanism to make them <a href=\"/bliki/SubcutaneousTest.html\">Subcutaneous Tests</a>. In some cases there will a significant amount of behavior\n  within the UI itself, but this can also be tested if the\n  design allows the visible UI to be a <a href=\"/bliki/HumbleObject.html\">Humble Object</a>.</p>\n\n<p>Not all applications are built in such a way that they can be extensively\n  tested in a subcutaneous manner - but the effort required to do this is\n  worthwhile even without the capability to use a keystone. Tests\n  running through the UI are always more trouble to setup, even with the best\n  tools to automate the process. Moving more tests to subcutaneous and lower\n  level tests, especially unit tests, can dramatically speed up <a href=\"/bliki/DeploymentPipeline.html\">Deployment Pipelines</a> and enable <a href=\"/bliki/ContinuousDelivery.html\">Continuous Delivery</a>.</p>\n\n<p>Of course, most UIs will be more than a check-box, although often they\n  aren't that much more work to keystone. In a web app, a complex feature will often be an\n  independent web page, that can be built and tested in full, and the keystone is\n  merely a link. A desktop may have several screens where the keystone is the\n  menu-item to make them visible.</p>\n\n<p>That said, there are cases when the UI can't be packaged into a simple\n  keystone. When that's the case then it's time to use <a href=\"/bliki/FeatureToggle.html\">Feature Toggles</a>. Even in this case, however, thinking of a\n  keystone can be useful by ensuring that the feature toggle only applies to the\n  UI. This avoids scattering lots of toggle points through the back end code,\n  reduces the complexity of applying the toggle, allows the use of <a href=\"/articles/feature-toggles.html#ImplementationTechniques\">simple toggle mechanisms</a>, and makes it easier to\n  remove when the time comes.</p>\n\n<p>There is a general danger with developing a UI last, in that the back-end\n  code may be designed in a way that doesn't work with the UI once it's built,\n  or the UI isn't given the attention it needs until late, leading to a lack of\n  iteration and a poor user experience. For those reasons a keystone approach works best\n  within an overall approach that encourages building a product through thin\n  vertical slices that lead to releasing small but fully working features rapidly.</p>\n\n<p>I've used the example of a user-interface here, but of course the same\n  approach can be used with any other interface, such as an API. By building the\n  consumer's interface last, and keeping it simple, we can build and integrate\n  even large features in small chunks.</p>\n\n<p><a href=\"/bliki/DarkLaunching.html\">Dark Launching</a> is a variation where the new feature is called\n  once its built, but no results are shown to the user. This is done to\n  measure the impact on the back-end systems, which is useful for some changes.\n  Once all is good, we can add the keystone.</p>\n\n<div class=\"acknowledgements\">\n<h2>Acknowledgements</h2>\n\n<p>I first came across the metaphor of a keystone for this technique in the\n    second edition of Kent Beck's <a href=\"https://www.amazon.com/gp/product/0321278658?ie=UTF8&amp;tag=martinfowlerc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0321278658\">Extreme Programming\n    Explained</a><img src=\"https://www.assoc-amazon.com/e/ir?t=martinfowlerc-20&amp;l=as2&amp;o=1&amp;a=0321601912\" width=\"1\" height=\"1\" border=\"0\" alt=\"\" style=\"width: 1px !important; height: 1px !important; border:none !important; margin:0px !important;\">. Pete Hodgson, Brandon Duff, and Stefan Smith\n    reminded me that I'd forgotten this.</p>\n\n<p>Dave Farley, Paul Hammant, and Pete Hodgson\n    commented on drafts on this post.</p>\n</div>\n",
+      "contentSnippet": "Software development teams find life can be much easier if they integrate\n  their work as often as they can. They also find it valuable to release\n  frequently into production. But teams don't want to expose half-developed\n  features to their users. A useful technique to deal with this tension is to\n  build all the back-end code, integrate, but don't build the user-interface.\n  The feature can be integrated and tested, but the UI is held back until the\n  end until, like a keystone, it's added to complete the feature, revealing it\n  to the users.\n\nA simple example of this technique might be to give a customer\n  the option of a rush order. Such an order needs to be priced, depending\n  on where the customer lives and what delivery companies operate there. The\n  nature of the goods involved affects the picking approach used\n  in the warehouse. Certain customers may qualify to have rush orders available\n  to them, which may also depend on the delivery location, the time of year, and\n  the kind of goods ordered.\n\nAll in all that's a fair bit of business logic, particularly since it will\n  involve gnarly integration with various warehousing, catalog, and customer\n  service systems. Doing this could take several weeks, while other features,\n  need to be released every few days. But as far as the user is concerned, a rush\n  order is just a check-box on the order form.\n\nTo build this using the check-box as the keystone, the team does\n  development work on the underlying business logic and interfaces to internal\n  systems over the course of several production releases. The user is unaware of\n  all this latent code. Only with the last step does the keystone check-box need\n  to be made visible, which can be done in a relatively short time. This way all\n  latent code can be integrated and be part of the system going into production,\n  reducing the problems that come with a long-lived feature branch.\n\n\n\n\n\nThe latent code does need to be tested to the same degree of\n  confidence that it would be if it were active. This can be done\n  providing the architecture of the system is setup so that most testing isn't\n  done through the user interface. Unit Tests\n  and other lower layers of the Test Pyramid should be easy to\n  run this way. Even Broad Stack Tests can be run\n  providing there is a mechanism to make them Subcutaneous Tests. In some cases there will a significant amount of behavior\n  within the UI itself, but this can also be tested if the\n  design allows the visible UI to be a Humble Object.\n\nNot all applications are built in such a way that they can be extensively\n  tested in a subcutaneous manner - but the effort required to do this is\n  worthwhile even without the capability to use a keystone. Tests\n  running through the UI are always more trouble to setup, even with the best\n  tools to automate the process. Moving more tests to subcutaneous and lower\n  level tests, especially unit tests, can dramatically speed up Deployment Pipelines and enable Continuous Delivery.\n\nOf course, most UIs will be more than a check-box, although often they\n  aren't that much more work to keystone. In a web app, a complex feature will often be an\n  independent web page, that can be built and tested in full, and the keystone is\n  merely a link. A desktop may have several screens where the keystone is the\n  menu-item to make them visible.\n\nThat said, there are cases when the UI can't be packaged into a simple\n  keystone. When that's the case then it's time to use Feature Toggles. Even in this case, however, thinking of a\n  keystone can be useful by ensuring that the feature toggle only applies to the\n  UI. This avoids scattering lots of toggle points through the back end code,\n  reduces the complexity of applying the toggle, allows the use of simple toggle mechanisms, and makes it easier to\n  remove when the time comes.\n\nThere is a general danger with developing a UI last, in that the back-end\n  code may be designed in a way that doesn't work with the UI once it's built,\n  or the UI isn't given the attention it needs until late, leading to a lack of\n  iteration and a poor user experience. For those reasons a keystone approach works best\n  within an overall approach that encourages building a product through thin\n  vertical slices that lead to releasing small but fully working features rapidly.\n\nI've used the example of a user-interface here, but of course the same\n  approach can be used with any other interface, such as an API. By building the\n  consumer's interface last, and keeping it simple, we can build and integrate\n  even large features in small chunks.\n\nDark Launching is a variation where the new feature is called\n  once its built, but no results are shown to the user. This is done to\n  measure the impact on the back-end systems, which is useful for some changes.\n  Once all is good, we can add the keystone.\n\n\nAcknowledgements\n\nI first came across the metaphor of a keystone for this technique in the\n    second edition of Kent Beck's Extreme Programming\n    Explained. Pete Hodgson, Brandon Duff, and Stefan Smith\n    reminded me that I'd forgotten this.\n\nDave Farley, Paul Hammant, and Pete Hodgson\n    commented on drafts on this post.",
+      "id": "https://martinfowler.com/bliki/KeystoneInterface.html",
+      "isoDate": "2020-04-29T04:00:00.000Z"
+    },
+    {
+      "title": "Branching Patterns: Integration Frequency",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#IntegrationFrequency",
+      "pubDate": "2020-04-28T13:05:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#IntegrationFrequency'><img src = 'https://martinfowler.com/articles/branching-patterns/low-freq-V-push.png' width = ''></img></a></div>\n\n<p>Integration Frequency has a huge impact upon a team's workflow. Higher\n      frequency integration reduces the problems of complex merges, makes\n      refactoring easier, and generally improves the communication and\n      cohesiveness of a team.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#IntegrationFrequency'>more…</a></p>",
+      "contentSnippet": "Integration Frequency has a huge impact upon a team's workflow. Higher\n      frequency integration reduces the problems of complex merges, makes\n      refactoring easier, and generally improves the communication and\n      cohesiveness of a team.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-04-28:Branching-Patterns--Integration-Frequency",
+      "isoDate": "2020-04-28T13:05:00.000Z"
+    },
+    {
+      "title": "Branching Pattern: Feature Branching",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#feature-branching",
+      "pubDate": "2020-04-27T13:55:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#feature-branching'><img src = 'https://martinfowler.com/articles/branching-patterns/fb-integrate.png' width = ''></img></a></div>\n\n<p>Put all work for a feature on its own branch, integrate into mainline\n      when the feature is complete.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#feature-branching'>more…</a></p>",
+      "contentSnippet": "Put all work for a feature on its own branch, integrate into mainline\n      when the feature is complete.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-04-27:Branching-Pattern--Feature-Branching",
+      "isoDate": "2020-04-27T13:55:00.000Z"
+    },
+    {
+      "title": "Branching Pattern: Mainline Integration",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#mainline-integration",
+      "pubDate": "2020-04-23T13:44:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#mainline-integration'><img src = 'https://martinfowler.com/articles/branching-patterns/mainline-integration-integrate.png' width = ''></img></a></div>\n\n<p>Developers integrate their work by pulling from mainline, merging, and\n      - if healthy - pushing back into mainline</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#mainline-integration'>more…</a></p>",
+      "contentSnippet": "Developers integrate their work by pulling from mainline, merging, and\n      - if healthy - pushing back into mainline\n\nmore…",
+      "id": "tag:martinfowler.com,2020-04-23:Branching-Pattern--Mainline-Integration",
+      "isoDate": "2020-04-23T13:44:00.000Z"
+    },
+    {
+      "title": "Branching Pattern: Healthy Branch",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#healthy-branch",
+      "pubDate": "2020-04-22T14:04:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#healthy-branch'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png#healthy-branch' width = '350px'></img></a></div>\n\n<p>On each commit, perform automated checks, usually building and running\n      tests, to ensure there are no defects on the branch.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#healthy-branch'>more…</a></p>",
+      "contentSnippet": "On each commit, perform automated checks, usually building and running\n      tests, to ensure there are no defects on the branch.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-04-22:Branching-Pattern--Healthy-Branch",
+      "isoDate": "2020-04-22T14:04:00.000Z"
+    },
+    {
+      "title": "Branching Pattern: Mainline",
+      "link": "https://martinfowler.com/articles/branching-patterns.html#mainline",
+      "pubDate": "2020-04-21T13:02:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html#mainline'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png#mainline' width = '350px'></img></a></div>\n\n<p>The second branching pattern in my article is Mainline: a\n      single, shared, branch that acts as the current state of the product.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html#mainline'>more…</a></p>",
+      "contentSnippet": "The second branching pattern in my article is Mainline: a\n      single, shared, branch that acts as the current state of the product.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-04-21:Branching-Pattern--Mainline",
+      "isoDate": "2020-04-21T13:02:00.000Z"
+    },
+    {
+      "title": "Patterns for Managing Source Code Branches",
+      "link": "https://martinfowler.com/articles/branching-patterns.html",
+      "pubDate": "2020-04-20T15:07:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/branching-patterns.html'><img src = 'https://martinfowler.com/articles/branching-patterns/card.png' width = '350px'></img></a></div>\n\n<p>In my conversations with software developers, a regular topic of\n      controversy is how manage source code branching. Tools like git make it\n      easy to create branches, but managing them to improve coordination and\n      minimize the costs of integration unearths plenty of difficulties. I find\n      it useful to think of the trade-offs around branching as a series of\n      patterns, and have spent the last couple of months writing these patterns\n      into a coherent shape.</p>\n\n<p>Today I'll start sharing these, with the foundation of thinking of\n      source branching as a pattern itself. An important point here is that the\n      conceptual notion of a branch is broader than what source code management\n      systems label as branches.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/branching-patterns.html'>more…</a></p>",
+      "contentSnippet": "In my conversations with software developers, a regular topic of\n      controversy is how manage source code branching. Tools like git make it\n      easy to create branches, but managing them to improve coordination and\n      minimize the costs of integration unearths plenty of difficulties. I find\n      it useful to think of the trade-offs around branching as a series of\n      patterns, and have spent the last couple of months writing these patterns\n      into a coherent shape.\n\nToday I'll start sharing these, with the foundation of thinking of\n      source branching as a pattern itself. An important point here is that the\n      conceptual notion of a branch is broader than what source code management\n      systems label as branches.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-04-20:Patterns-for-Managing-Source-Code-Branches",
+      "isoDate": "2020-04-20T15:07:00.000Z"
+    },
+    {
+      "title": "Refactoring: This class is too large",
+      "link": "https://martinfowler.com/articles/class-too-large.html",
+      "pubDate": "2020-04-14T13:32:00.000Z",
+      "content": "\n<div class = 'img'><a href = 'https://martinfowler.com/articles/class-too-large.html'><img src = 'https://martinfowler.com/articles/class-too-large/MasterPlan.png' width = ''></img></a></div>\n\n<p>Most programmers have personal projects that do important things for\n      them personally, but never have enough time and energy to keep them in\n      good condition. Clare is no exception, and needed to spend time getting\n      such an unruly codebase back into line. Here she shares the first part of her\n      refactoring: breaking down a class that had become too big. It's a messy\n      situation, because that's what real refactoring is like - yet when done in a\n      controlled way, with lots of tiny steps, we can make real progress.</p>\n\n<p><a class = 'more' href = 'https://martinfowler.com/articles/class-too-large.html'>more…</a></p>",
+      "contentSnippet": "Most programmers have personal projects that do important things for\n      them personally, but never have enough time and energy to keep them in\n      good condition. Clare is no exception, and needed to spend time getting\n      such an unruly codebase back into line. Here she shares the first part of her\n      refactoring: breaking down a class that had become too big. It's a messy\n      situation, because that's what real refactoring is like - yet when done in a\n      controlled way, with lots of tiny steps, we can make real progress.\n\nmore…",
+      "id": "tag:martinfowler.com,2020-04-14:Refactoring--This-class-is-too-large",
+      "isoDate": "2020-04-14T13:32:00.000Z"
+    },
+    {
+      "title": "photostream 123",
+      "link": "https://martinfowler.com/photos/123.html",
+      "pubDate": "2020-04-04T14:33:00.000Z",
+      "content": "\n<p><a href = 'https://martinfowler.com/photos/123.html'><img src = 'https://martinfowler.com/photos/123.jpg'></img></a></p>\n\n<p></p>\n\n<p>Ferrara, Italy (2014)</p>\n",
+      "contentSnippet": "Ferrara, Italy (2014)",
+      "id": "tag:martinfowler.com,2020-04-04:photostream-123",
+      "isoDate": "2020-04-04T14:33:00.000Z"
+    }
+  ],
+  "link": "https://martinfowler.com/feed.atom",
+  "feedUrl": "https://martinfowler.com/feed.atom",
+  "title": "Martin Fowler",
+  "lastBuildDate": "2020-05-28T10:42:00-04:00"
+}

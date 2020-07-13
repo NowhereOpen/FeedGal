@@ -1,0 +1,231 @@
+{
+  "items": [
+    {
+      "creator": "Paul Ducklin",
+      "title": "Mozilla turns off “Firefox Send” following malware abuse reports",
+      "link": "https://nakedsecurity.sophos.com/2020/07/08/mozilla-turns-off-firefox-send-following-malware-abuse-reports/",
+      "pubDate": "Wed, 08 Jul 2020 14:16:54 +0000",
+      "dc:creator": "Paul Ducklin",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/08/mozilla-turns-off-firefox-send-following-malware-abuse-reports/#comments",
+      "content": "Sadly, the easier and safer you make your file sharing service, the more attractive it becomes to the crooks.",
+      "contentSnippet": "Sadly, the easier and safer you make your file sharing service, the more attractive it becomes to the crooks.",
+      "guid": "https://nakedsecurity.sophos.com/?p=517909",
+      "categories": [
+        "Mozilla",
+        "file-sharing",
+        "Firefox Send",
+        "living off the land",
+        "malware"
+      ],
+      "isoDate": "2020-07-08T14:16:54.000Z"
+    },
+    {
+      "creator": "Lisa Vaas",
+      "title": "Kinda sorta weakened version of EARN IT Act creeps closer",
+      "link": "https://nakedsecurity.sophos.com/2020/07/08/kinda-sorta-weakened-version-of-earn-it-act-creeps-closer/",
+      "pubDate": "Wed, 08 Jul 2020 10:46:42 +0000",
+      "dc:creator": "Lisa Vaas",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/08/kinda-sorta-weakened-version-of-earn-it-act-creeps-closer/#comments",
+      "content": "Critics say the amended bill that's headed for a full Senate hearing still threatens encryption, albeit less blatantly.",
+      "contentSnippet": "Critics say the amended bill that's headed for a full Senate hearing still threatens encryption, albeit less blatantly.",
+      "guid": "https://nakedsecurity.sophos.com/?p=517873",
+      "categories": [
+        "Cryptography",
+        "Government security",
+        "Law & order",
+        "#nobackdoors",
+        "Backdoor",
+        "backdoors",
+        "Communications Decency Act",
+        "EARN IT Act",
+        "EARN-IT",
+        "Encryption",
+        "end-to-end encryption",
+        "government security",
+        "law & order",
+        "No Backdoors",
+        "Section 230"
+      ],
+      "isoDate": "2020-07-08T10:46:42.000Z"
+    },
+    {
+      "creator": "Paul Ducklin",
+      "title": "Company web names hijacked via outdated cloud DNS records",
+      "link": "https://nakedsecurity.sophos.com/2020/07/07/company-web-names-hijacked-via-outdated-cloud-dns-records/",
+      "pubDate": "Tue, 07 Jul 2020 14:09:29 +0000",
+      "dc:creator": "Paul Ducklin",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/07/company-web-names-hijacked-via-outdated-cloud-dns-records/#comments",
+      "content": "Why hack into a server when you can just send vistors to a fake alternative instead?",
+      "contentSnippet": "Why hack into a server when you can just send vistors to a fake alternative instead?",
+      "guid": "https://nakedsecurity.sophos.com/?p=517843",
+      "categories": [
+        "Microsoft",
+        "Azure",
+        "DNS",
+        "hijack"
+      ],
+      "isoDate": "2020-07-07T14:09:29.000Z"
+    },
+    {
+      "creator": "Lisa Vaas",
+      "title": "Flashy Nigerian Instagram star extradited to US to face BEC charges",
+      "link": "https://nakedsecurity.sophos.com/2020/07/07/flashy-nigerian-instagram-star-extradited-to-us-to-face-bec-charges/",
+      "pubDate": "Tue, 07 Jul 2020 09:27:03 +0000",
+      "dc:creator": "Lisa Vaas",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/07/flashy-nigerian-instagram-star-extradited-to-us-to-face-bec-charges/#comments",
+      "content": "It's a short jump from a Rolls Royce ride to extradition from the UAE. Goodbye, Dubai, goodbye, Palazzo Versace, hello, Chicago jail cell. ",
+      "contentSnippet": "It's a short jump from a Rolls Royce ride to extradition from the UAE. Goodbye, Dubai, goodbye, Palazzo Versace, hello, Chicago jail cell.",
+      "guid": "https://nakedsecurity.sophos.com/?p=517816",
+      "categories": [
+        "Law & order",
+        "BEC",
+        "business email compromise",
+        "celebrity",
+        "extradition",
+        "Hush",
+        "Instagram",
+        "Money Laundering",
+        "Nigeria",
+        "Nigerian",
+        "Ramon Olorunwa Abbas",
+        "Ray Hushpuppi"
+      ],
+      "isoDate": "2020-07-07T09:27:03.000Z"
+    },
+    {
+      "creator": "Lisa Vaas",
+      "title": "Boston bans government use of facial recognition",
+      "link": "https://nakedsecurity.sophos.com/2020/07/06/boston-bans-government-use-of-facial-recognition/",
+      "pubDate": "Mon, 06 Jul 2020 10:33:26 +0000",
+      "dc:creator": "Lisa Vaas",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/06/boston-bans-government-use-of-facial-recognition/#comments",
+      "content": "To help end systemic racism, we'll stay away from an error-prone technology that's been shown to have racial bias, the city council said.",
+      "contentSnippet": "To help end systemic racism, we'll stay away from an error-prone technology that's been shown to have racial bias, the city council said.",
+      "guid": "https://nakedsecurity.sophos.com/?p=517764",
+      "categories": [
+        "Law & order",
+        "Privacy",
+        "Boston",
+        "facial recognition"
+      ],
+      "isoDate": "2020-07-06T10:33:26.000Z"
+    },
+    {
+      "creator": "Naked Security writer",
+      "title": "Monday review – the hot 11 stories of the week",
+      "link": "https://nakedsecurity.sophos.com/2020/07/06/monday-review-the-hot-11-stories-of-the-week-3/",
+      "pubDate": "Mon, 06 Jul 2020 09:32:04 +0000",
+      "dc:creator": "Naked Security writer",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/06/monday-review-the-hot-11-stories-of-the-week-3/#respond",
+      "content": "Get yourself up to date with everything we&#039;ve written in the last seven days - it&#039;s weekly roundup time.",
+      "contentSnippet": "Get yourself up to date with everything we've written in the last seven days - it's weekly roundup time.",
+      "guid": "https://nakedsecurity.sophos.com/?p=517793",
+      "categories": [
+        "Weekly Summary",
+        "monday review",
+        "review"
+      ],
+      "isoDate": "2020-07-06T09:32:04.000Z"
+    },
+    {
+      "creator": "Paul Ducklin",
+      "title": "Facebook hoaxes back in the spotlight – what to tell your friends",
+      "link": "https://nakedsecurity.sophos.com/2020/07/03/facebook-hoaxes-back-in-the-spotlight-what-to-tell-your-friends/",
+      "pubDate": "Fri, 03 Jul 2020 15:05:01 +0000",
+      "dc:creator": "Paul Ducklin",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/03/facebook-hoaxes-back-in-the-spotlight-what-to-tell-your-friends/#comments",
+      "content": "At the risk of giving you a feeling of déjà vu all over again, it's time to talk about Facebook hoaxes once more.",
+      "contentSnippet": "At the risk of giving you a feeling of déjà vu all over again, it's time to talk about Facebook hoaxes once more.",
+      "guid": "https://nakedsecurity.sophos.com/?p=517746",
+      "categories": [
+        "Facebook",
+        "BFF",
+        "Dance of the Pope",
+        "Danske Bank",
+        "Hoax",
+        "Instant Bank",
+        "Martinelli"
+      ],
+      "isoDate": "2020-07-03T15:05:01.000Z"
+    },
+    {
+      "creator": "Lisa Vaas",
+      "title": "Google buys AR smart-glasses company North",
+      "link": "https://nakedsecurity.sophos.com/2020/07/03/google-buys-ar-smart-glasses-company-north/",
+      "pubDate": "Fri, 03 Jul 2020 10:36:53 +0000",
+      "dc:creator": "Lisa Vaas",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/03/google-buys-ar-smart-glasses-company-north/#comments",
+      "content": "They're not surveillance spectacles, says Google, just a piece in the jigsaw of \"ambient computing\", where helpfulness is all around you.",
+      "contentSnippet": "They're not surveillance spectacles, says Google, just a piece in the jigsaw of \"ambient computing\", where helpfulness is all around you.",
+      "guid": "https://nakedsecurity.sophos.com/?p=517723",
+      "categories": [
+        "Google",
+        "Mobile",
+        "Privacy",
+        "Uncategorized",
+        "Focals",
+        "Glass",
+        "Google Glass",
+        "North",
+        "wearables"
+      ],
+      "isoDate": "2020-07-03T10:36:53.000Z"
+    },
+    {
+      "creator": "Paul Ducklin",
+      "title": "MongoDB ransom threats step up from blackmail to full-on wiping",
+      "link": "https://nakedsecurity.sophos.com/2020/07/02/mongodb-ransom-threats-step-up-from-blackmail-to-full-on-wiping/",
+      "pubDate": "Thu, 02 Jul 2020 18:49:20 +0000",
+      "dc:creator": "Paul Ducklin",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/02/mongodb-ransom-threats-step-up-from-blackmail-to-full-on-wiping/#comments",
+      "content": "Still thinking \"the crooks probably won't find me if I make a security blunder\"?",
+      "contentSnippet": "Still thinking \"the crooks probably won't find me if I make a security blunder\"?",
+      "guid": "https://nakedsecurity.sophos.com/?p=517695",
+      "categories": [
+        "Uncategorized",
+        "data breach",
+        "MongoDB",
+        "Shodan"
+      ],
+      "isoDate": "2020-07-02T18:49:20.000Z"
+    },
+    {
+      "creator": "Lisa Vaas",
+      "title": "133m records for sale as fruits of data breach spree keep raining down",
+      "link": "https://nakedsecurity.sophos.com/2020/07/02/133m-records-for-sale-as-fruits-of-data-breach-spree-keep-raining-down/",
+      "pubDate": "Thu, 02 Jul 2020 10:22:11 +0000",
+      "dc:creator": "Lisa Vaas",
+      "comments": "https://nakedsecurity.sophos.com/2020/07/02/133m-records-for-sale-as-fruits-of-data-breach-spree-keep-raining-down/#respond",
+      "content": "Databases can be had for as little as $100, on up to $1,100. Most, if not all, are being sold by the hacking group Shiny Hunters. ",
+      "contentSnippet": "Databases can be had for as little as $100, on up to $1,100. Most, if not all, are being sold by the hacking group Shiny Hunters.",
+      "guid": "https://nakedsecurity.sophos.com/?p=517663",
+      "categories": [
+        "Data loss",
+        "Security threats",
+        "Uncategorized",
+        "breach",
+        "credential stuffing",
+        "dark web",
+        "data breach brokers",
+        "hacker forums",
+        "Shiny Hunters",
+        "ShinyHunters"
+      ],
+      "isoDate": "2020-07-02T10:22:11.000Z"
+    }
+  ],
+  "feedUrl": "https://nakedsecurity.sophos.com/feed/",
+  "image": {
+    "link": "https://nakedsecurity.sophos.com",
+    "url": "https://nakedsecurity.sophos.com/wp-content/uploads/sites/2/2020/03/cropped-sophos.png?w=32",
+    "title": "Naked Security",
+    "width": "32",
+    "height": "32"
+  },
+  "title": "Naked Security",
+  "description": "Computer Security News, Advice and Research",
+  "generator": "https://wordpress.org/?v=5.4.2",
+  "link": "https://nakedsecurity.sophos.com",
+  "language": "en-US",
+  "lastBuildDate": "Wed, 08 Jul 2020 17:57:01 +0000"
+}

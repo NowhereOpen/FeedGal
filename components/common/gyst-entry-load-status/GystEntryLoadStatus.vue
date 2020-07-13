@@ -38,7 +38,7 @@ div
           )
             span Connected with #[span.font-italic {{ getAccountNameForDuplicateServiceId(service_setting) }}]
           div.ml-2(v-if="service_setting.uses_setting_value && getErrorTextServiceSetting(service_setting) == undefined")
-            div(v-for="setting_value of getSettingValues(service_setting)")
+            div.setting-value(v-for="setting_value of getSettingValues(service_setting)")
               LoadStatusEntry(
                 :text="setting_value.displayed_as"
                 :total="setting_value.total"

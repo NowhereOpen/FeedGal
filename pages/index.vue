@@ -50,6 +50,7 @@ import GystEntryLoadStatus from "~/components/common/gyst-entry-load-status/Gyst
 import Loader from "~/store/loader.ts"
 
 import { isGeneralError } from "~/src/cli/gyst-entry-response"
+import * as RssStorage from "~/src/cli/store/loader/rss-indexeddb"
 
 // Types
 import {
@@ -63,8 +64,10 @@ import {
   SuiteEntry,
   SuiteEntryIdObject,
   ServicePaginationReqParam,
+  PaginationData,
 } from "~/src/common/types/pages/main"
-import { WarningName } from "~/src/common/types/common/warning-error"
+import { WarningName, WarningObject } from "~/src/common/types/common/warning-error"
+import { ALL_LOADED } from "../src/common/warning-error"
 
 @Component({
   components: { GystEntryLoadStatus, GystEntryWrapper }
@@ -230,16 +233,72 @@ export default class IndexPage extends Vue {
    */
   requestPagination(id_objects:SuiteEntryIdObject[]) {
     const DIRECTION = "old"
-    const pagination_req_data:ServicePaginationReqParam[] = []
+    const all_pagination_req_data:ServicePaginationReqParam[] = []
     
     id_objects.forEach(param => {
       const data = this.loader.getPaginationReqDataForSuiteEntryIdObject(param)
-      pagination_req_data.push(data)
+      all_pagination_req_data.push(data)
 
       this.loader.updateIsLoading({ param, value: true })
     })
 
+    const pagination_req_data:ServicePaginationReqParam[] = []
+    const rss_pagination_req_data:ServicePaginationReqParam[] = []
+    all_pagination_req_data.forEach(data => {
+      if(data.service_id == "rss") {
+        rss_pagination_req_data.push(data)
+      }
+      else {
+        pagination_req_data.push(data)
+      }
+    })
     this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
+
+    /**
+     * 2020-07-12 08:57
+     * 
+     * Handle RSS 'pagination' separately
+     */
+    this.handleRssPagination(rss_pagination_req_data)
+  }
+
+  /**
+   * 2020-07-12 09:06
+   * 
+   * Alternative solution would be to insert ALL feeds in the indexedDB into the `preloaded_entries`
+   * on getting init RSS feeds.
+   */
+  async handleRssPagination(pagination_req_data:ServicePaginationReqParam[]) {
+    if(pagination_req_data.length == 0) return
+    if(pagination_req_data.length > 1) {
+      console.warn(`Something wrong with RSS pagination. Unexpected number of pagination_req_data`)
+    }
+
+    const data = pagination_req_data[0]
+    const last_entry_key_path = data.pagination_data!.old
+    const rss_entries = await RssStorage.getOlderFeeds(last_entry_key_path)
+    const entries = rss_entries.map(entry => entry.entry)
+
+    let pagination_data!:PaginationData
+    let warning:WarningObject|undefined = undefined
+    const response:GystEntryResponseSuccess = {
+      service_id: data.service_id,
+      service_setting_id: data.service_setting_id,
+      setting_value_id: data.setting_value_id,
+      setting_value: data.setting_value,
+      entries,
+      pagination_data,
+    }
+    if(entries.length == 0) {
+      response.pagination_data = { old: last_entry_key_path, new: null }
+      response.warning = ALL_LOADED()
+    }
+    else {
+      response.pagination_data = { old: [rss_entries.slice(-1)[0].entry.id], new: null }
+    }
+
+    this.loader.updatePaginationReqData(response)
+    this.loader.updateLoadStatusStatus(response)
   }
 
   handleSocketResponse(response:GystEntryResponseSuccess) {

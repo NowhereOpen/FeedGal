@@ -29,6 +29,7 @@ export class PatchUpdateSettingValueRequestHandler extends SettingValueCreateUpd
   }
 
   async updateModel(setting_value:any) {
+    await setting_value_storage.settingValueValidated(this.setting_value_id)
     await setting_value_storage.updateSettingValue(this.setting_value_id, setting_value)
     const _result = await setting_value_storage.getEntry(this.setting_value_id)
     const result = _result!.toJSON()

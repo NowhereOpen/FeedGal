@@ -3,6 +3,7 @@ import moment from "moment"
 import * as _ from "lodash"
 
 import { getParam, gystEntriesFromResponse, iterateLoadStatus } from "~/src/cli/store/loader"
+import * as RssStorage from "~/src/cli/store/loader/rss-indexeddb"
 
 // Types
 import {
@@ -16,6 +17,7 @@ import {
   SuiteEntryIdObject,
   GystEntryWrapper as GystEntryWrapperType
 } from "~/src/common/types/pages/main"
+import { Rss } from "~/src/common/setting-value-validation/validation-object"
 
 /**
  * 2020-05-31 07:38
@@ -108,6 +110,17 @@ export default class Store extends VuexModule {
 
   @Mutation
   concatToPreloadedStorage(response:GystEntryResponseSuccess) {
+    if(response.service_id == "rss") {
+      RssStorage.storeFeeds(response)
+      /**
+       * 2020-07-11 18:41
+       * 
+       * No `return` because having entries in the `preloaded_entries` is required.
+       * Only after entries get pushed to the preloaded_entries, can they be inserted
+       * into the `loaded_entries` and be rendered.
+       */
+    }
+    
     const entries = gystEntriesFromResponse(response)
 
     this.preloaded_entries = this.preloaded_entries.concat(entries)

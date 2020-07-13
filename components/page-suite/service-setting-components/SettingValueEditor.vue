@@ -29,6 +29,10 @@ div.service-setting-editor
       v-else-if="serviceSetting.service_id == 'league-of-legends'"
       ref="LolSettingValueEditor"
     )
+    RssSettingValueEditor(
+      v-else-if="serviceSetting.service_id == 'rss'"
+      ref="RssSettingValueEditor"
+    )
 </template>
 
 <script lang="ts">
@@ -37,10 +41,10 @@ import { Component, Vue, Prop, Mutation } from "nuxt-property-decorator"
 import * as requestMaker from "~/src/cli/request-maker"
 
 // Components
-import SettingValueEditor from "./SettingValueEditor.vue"
 import GithubSettingValueEditor from "./setting-value-editors/github/GithubSettingValueEditor.vue"
 import GoogleCalendarSettingValueEditor from "./setting-value-editors/google-calendar/GoogleCalendarSettingValueEditor.vue"
 import LolSettingValueEditor from "./setting-value-editors/league-of-legends/LolSettingValueEditor.vue"
+import RssSettingValueEditor from "./setting-value-editors/rss/RssSettingValueEditor.vue"
 
 // Types
 import {
@@ -57,6 +61,7 @@ import { SettingValueEditorBase } from "~/src/cli/setting-value-editor/SettingVa
     GithubSettingValueEditor,
     GoogleCalendarSettingValueEditor,
     LolSettingValueEditor,
+    RssSettingValueEditor
   }
 })
 export default class ServiceSettingEditorComp extends Vue {
@@ -177,6 +182,9 @@ export default class ServiceSettingEditorComp extends Vue {
     }
     else if(service_id == "league-of-legends") {
       return (<LolSettingValueEditor> this.$refs["LolSettingValueEditor"])
+    }
+    else if(service_id == "rss") {
+      return (<RssSettingValueEditor> this.$refs["RssSettingValueEditor"])
     }
     else {
       console.error(`Dev error. Failed to get setting value editor for service_id (${service_id})`)

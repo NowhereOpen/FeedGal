@@ -15,7 +15,7 @@ import {
 } from "~/src/common/types/pages/suite"
 
 export async function getServiceInfos(user_id:string):Promise<EditorSelectables> {
-  const service_ids = ["github", "google-calendar", "league-of-legends", "reddit", "trello", "twitch", "twitter", "youtube"]
+  const service_ids = ["github", "google-calendar", "league-of-legends", "reddit", "rss", "trello", "twitch", "twitter", "youtube"]
   const services:EditorSelectables = []
 
   /**

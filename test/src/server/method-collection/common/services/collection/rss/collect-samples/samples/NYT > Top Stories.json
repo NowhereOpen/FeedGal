@@ -1,0 +1,3277 @@
+{
+  "items": [
+    {
+      "title": "Coronavirus in the World: Live Updates",
+      "link": "https://www.nytimes.com/2020/07/09/world/coronavirus-updates.html",
+      "pubDate": "Fri, 10 Jul 2020 03:38:36 +0000",
+      "content": "Florida breaks its record for deaths in a single day. The T.S.A. said more than a thousand of its employees had tested positive.",
+      "contentSnippet": "Florida breaks its record for deaths in a single day. The T.S.A. said more than a thousand of its employees had tested positive.",
+      "guid": "https://www.nytimes.com/2020/07/09/world/coronavirus-updates.html",
+      "categories": [
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T03:38:36.000Z"
+    },
+    {
+      "creator": "Kimiko de Freytas-Tamura, Shawn Hubler, Hailey Fuchs and David Montgomery",
+      "title": "Like ‘A Bus Accident a Day’: Hospitals Strain Under New Flood of Covid-19 Patients",
+      "link": "https://www.nytimes.com/2020/07/09/us/coronavirus-hospitals-capacity.html",
+      "pubDate": "Fri, 10 Jul 2020 00:31:47 +0000",
+      "dc:creator": "Kimiko de Freytas-Tamura, Shawn Hubler, Hailey Fuchs and David Montgomery",
+      "content": "I.C.U. units are reaching capacity. Nurses are falling sick, contributing to shortages. The new coronavirus spikes are challenging hospitals across the country.",
+      "contentSnippet": "I.C.U. units are reaching capacity. Nurses are falling sick, contributing to shortages. The new coronavirus spikes are challenging hospitals across the country.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/coronavirus-hospitals-capacity.html",
+      "categories": [
+        {
+          "_": "Emergency Medical Treatment",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Hospitals",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Nursing and Nurses",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Shortages",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Doctors",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T00:31:47.000Z"
+    },
+    {
+      "creator": "Katie Thomas",
+      "title": "Regeneron Scientists Raced To Find Antibodies To Fight Covid-19. Then The Coronavirus Found Them.",
+      "link": "https://www.nytimes.com/2020/07/09/health/regeneron-monoclonal-antibodies.html",
+      "pubDate": "Thu, 09 Jul 2020 16:50:47 +0000",
+      "dc:creator": "Katie Thomas",
+      "content": "This spring, researchers at Regeneron’s Westchester headquarters found themselves in one of the country’s first coronavirus hot spots.",
+      "contentSnippet": "This spring, researchers at Regeneron’s Westchester headquarters found themselves in one of the country’s first coronavirus hot spots.",
+      "guid": "https://www.nytimes.com/2020/07/09/health/regeneron-monoclonal-antibodies.html",
+      "categories": [
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Drugs (Pharmaceuticals)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Antibodies",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Factories and Manufacturing",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Research",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Clinical Trials",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Regeneron Pharmaceuticals Inc",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Science (Journal)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Giordano, Stephanie",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T16:50:47.000Z"
+    },
+    {
+      "creator": "Adam Liptak",
+      "title": "Supreme Court Rules Trump Cannot Block Release of Financial Records",
+      "link": "https://www.nytimes.com/2020/07/09/us/trump-taxes-supreme-court.html",
+      "pubDate": "Thu, 09 Jul 2020 23:27:22 +0000",
+      "dc:creator": "Adam Liptak",
+      "content": "Two rulings clear the way for prosecutors in New York to seek President Trump’s financial records, but the justices stopped Congress for now.",
+      "contentSnippet": "Two rulings clear the way for prosecutors in New York to seek President Trump’s financial records, but the justices stopped Congress for now.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/trump-taxes-supreme-court.html",
+      "categories": [
+        {
+          "_": "Trump Tax Returns",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Decisions and Verdicts",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Supreme Court (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Campaign Finance",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Deutsche Bank AG",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "House Committee on Oversight and Government Reform",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Mazars USA",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T23:27:22.000Z"
+    },
+    {
+      "creator": "Peter Baker",
+      "title": "A Conservative Court and Trump’s Own Appointees Declare Their Independence",
+      "link": "https://www.nytimes.com/2020/07/09/us/politics/trump-supreme-court-appointees.html",
+      "pubDate": "Fri, 10 Jul 2020 01:07:07 +0000",
+      "dc:creator": "Peter Baker",
+      "content": "The Supreme Court’s dismissal of President Trump’s claims of immunity was a reminder that institutional prerogatives still matter in Washington, even in a time of extreme partisanship.",
+      "contentSnippet": "The Supreme Court’s dismissal of President Trump’s claims of immunity was a reminder that institutional prerogatives still matter in Washington, even in a time of extreme partisanship.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/politics/trump-supreme-court-appointees.html",
+      "categories": [
+        {
+          "_": "Trump Tax Returns",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Appointments and Executive Changes",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Courts and the Judiciary",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Decisions and Verdicts",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Supreme Court (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Gorsuch, Neil M",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Kavanaugh, Brett M",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Roberts, John G Jr",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T01:07:07.000Z"
+    },
+    {
+      "creator": "Jack Healy and Adam Liptak",
+      "title": "Landmark Supreme Court Ruling Affirms Native American Rights in Oklahoma",
+      "link": "https://www.nytimes.com/2020/07/09/us/supreme-court-oklahoma-mcgirt-creek-nation.html",
+      "pubDate": "Fri, 10 Jul 2020 00:01:00 +0000",
+      "dc:creator": "Jack Healy and Adam Liptak",
+      "content": "A 5-4 decision declaring that much of eastern Oklahoma is an Indian reservation could reshape criminal justice in the area by preventing state authorities from prosecuting Native Americans.",
+      "contentSnippet": "A 5-4 decision declaring that much of eastern Oklahoma is an Indian reservation could reshape criminal justice in the area by preventing state authorities from prosecuting Native Americans.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/supreme-court-oklahoma-mcgirt-creek-nation.html",
+      "categories": [
+        {
+          "_": "Federal-State Relations (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Supreme Court (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Muscogee (Creek) Nation (Okumlgee, Okla)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "McGirt, Jimcy",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Native Americans",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Decisions and Verdicts",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Criminal Justice",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Treaties",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Oklahoma",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T00:01:00.000Z"
+    },
+    {
+      "creator": "Benjamin Mueller",
+      "title": "‘Whack-a-Mole’ Against Virus Sounds Reasonable, Unless You’re the Mole",
+      "link": "https://www.nytimes.com/2020/07/09/world/europe/09virus-uk-leicester-lockdown.html",
+      "pubDate": "Thu, 09 Jul 2020 16:15:16 +0000",
+      "dc:creator": "Benjamin Mueller",
+      "content": "When the city of Leicester was shocked with a second lockdown, it lashed back with anger and recriminations.",
+      "contentSnippet": "When the city of Leicester was shocked with a second lockdown, it lashed back with anger and recriminations.",
+      "guid": "https://www.nytimes.com/2020/07/09/world/europe/09virus-uk-leicester-lockdown.html",
+      "categories": [
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus Reopenings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Shutdowns (Institutional)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Quarantines",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Leicester (England)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Workplace Hazards and Violations",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Johnson, Boris",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Great Britain",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T16:15:16.000Z"
+    },
+    {
+      "creator": "Dana Goldstein",
+      "title": "‘Big Mess’ Looms if Schools Don’t Get Billions to Reopen Safely",
+      "link": "https://www.nytimes.com/2020/07/09/us/schools-reopening-trump.html",
+      "pubDate": "Thu, 09 Jul 2020 19:57:18 +0000",
+      "dc:creator": "Dana Goldstein",
+      "content": "As President Trump and others push to get students back in the classroom this fall, educators say they need more support and clearer guidelines.",
+      "contentSnippet": "As President Trump and others push to get students back in the classroom this fall, educators say they need more support and clearer guidelines.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/schools-reopening-trump.html",
+      "categories": [
+        {
+          "_": "Education (K-12)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Budgets and Budgeting",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Federal Aid (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Workplace Hazards and Violations",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Marietta (Ga)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "San Diego (Calif)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Dundee (Mich)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Coronavirus Reopenings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Shutdowns (Institutional)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T19:57:18.000Z"
+    },
+    {
+      "creator": "Gillian R. Brassil and Alan Blinder",
+      "title": "Big Ten Will Play Fall Sports Only Within Conference, if at All",
+      "link": "https://www.nytimes.com/2020/07/09/sports/ncaafootball/big-ten-fall-sports-in-conference.html",
+      "pubDate": "Thu, 09 Jul 2020 21:31:08 +0000",
+      "dc:creator": "Gillian R. Brassil and Alan Blinder",
+      "content": "The league’s football teams had been scheduled to participate in some of the most highly anticipated nonconference games of the 2020 season.",
+      "contentSnippet": "The league’s football teams had been scheduled to participate in some of the most highly anticipated nonconference games of the 2020 season.",
+      "guid": "https://www.nytimes.com/2020/07/09/sports/ncaafootball/big-ten-fall-sports-in-conference.html",
+      "categories": [
+        {
+          "_": "Colleges and Universities",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "College Athletics",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Football (College)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus Reopenings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Warren, Kevin (1963- )",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T21:31:08.000Z"
+    },
+    {
+      "creator": "Nicholas Fandos and Benjamin Weiser",
+      "title": "Top Manhattan Prosecutor Ousted by Trump Details Firing",
+      "link": "https://www.nytimes.com/2020/07/09/us/politics/top-manhattan-prosecutor-ousted-by-trump-details-firing.html",
+      "pubDate": "Thu, 09 Jul 2020 23:07:13 +0000",
+      "dc:creator": "Nicholas Fandos and Benjamin Weiser",
+      "content": "Geoffrey S. Berman told House investigators about a tense meeting in a luxury hotel room in which Attorney General William P. Barr pressured him to resign and he refused.",
+      "contentSnippet": "Geoffrey S. Berman told House investigators about a tense meeting in a luxury hotel room in which Attorney General William P. Barr pressured him to resign and he refused.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/politics/top-manhattan-prosecutor-ousted-by-trump-details-firing.html",
+      "categories": [
+        {
+          "_": "Berman, Geoffrey S",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Barr, William P",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "House Committee on the Judiciary",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Justice Department",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "United States Attorneys",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Attorneys General",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Appointments and Executive Changes",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Pierre Hotel (Manhattan, NY)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Clayton, Walter J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Strauss, Audrey (Attorney)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "New York State",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T23:07:13.000Z"
+    },
+    {
+      "creator": "Annie Karni and Patricia Mazzei",
+      "title": "DeSantis Is Said to Quietly Hinder Fund-Raising for Trump Convention",
+      "link": "https://www.nytimes.com/2020/07/09/us/politics/trump-florida-convention-desantis.html",
+      "pubDate": "Thu, 09 Jul 2020 19:13:58 +0000",
+      "dc:creator": "Annie Karni and Patricia Mazzei",
+      "content": "A personal dispute has prompted Ron DeSantis, the Florida governor, to discourage donors from contributing, people familiar with the discussions said. His top fund-raiser denies any attempt to undercut the convention.",
+      "contentSnippet": "A personal dispute has prompted Ron DeSantis, the Florida governor, to discourage donors from contributing, people familiar with the discussions said. His top fund-raiser denies any attempt to undercut the convention.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/politics/trump-florida-convention-desantis.html",
+      "categories": [
+        {
+          "_": "DeSantis, Ron",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Florida",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Presidential Election of 2020",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Republican National Convention",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Jacksonville (Fla)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Republican Party",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Campaign Finance",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T19:13:58.000Z"
+    },
+    {
+      "creator": "Shane Goldmacher and Jim Tankersley",
+      "title": "In ‘Buy American’ Speech, Biden Challenges Trump on the Economy",
+      "link": "https://www.nytimes.com/2020/07/09/us/politics/biden-buy-american.html",
+      "pubDate": "Thu, 09 Jul 2020 22:02:32 +0000",
+      "dc:creator": "Shane Goldmacher and Jim Tankersley",
+      "content": "Joseph R. Biden Jr. laid out a populist economic vision with the tagline “Build Back Better,” part of an effort to confront President Trump on his strongest issue in polling.",
+      "contentSnippet": "Joseph R. Biden Jr. laid out a populist economic vision with the tagline “Build Back Better,” part of an effort to confront President Trump on his strongest issue in polling.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/politics/biden-buy-american.html",
+      "categories": [
+        {
+          "_": "Presidential Election of 2020",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Biden, Joseph R Jr",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Economy",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Democratic Party",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T22:02:32.000Z"
+    },
+    {
+      "creator": "Choe Sang-Hun",
+      "title": "Seoul Mayor Park Won-soon Is Found Dead",
+      "link": "https://www.nytimes.com/2020/07/09/world/asia/seoul-mayor-dead.html",
+      "pubDate": "Fri, 10 Jul 2020 01:24:52 +0000",
+      "dc:creator": "Choe Sang-Hun",
+      "content": "Mayor Park Won-soon, who vanished after leaving a cryptic message for his daughter, had faced a newly filed complaint from his secretary.",
+      "contentSnippet": "Mayor Park Won-soon, who vanished after leaving a cryptic message for his daughter, had faced a newly filed complaint from his secretary.",
+      "guid": "https://www.nytimes.com/2020/07/09/world/asia/seoul-mayor-dead.html",
+      "categories": [
+        {
+          "_": "Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "South Korea",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Seoul (South Korea)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Park Won-soon",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Sexual Harassment",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Deaths (Fatalities)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T01:24:52.000Z"
+    },
+    {
+      "creator": "Sarah Miller",
+      "title": "Would You Like to Come Over for Dinner … in 10 Years?",
+      "link": "https://www.nytimes.com/2020/07/09/style/coronavirus-backyard-entertaining.html",
+      "pubDate": "Thu, 09 Jul 2020 16:32:33 +0000",
+      "dc:creator": "Sarah Miller",
+      "content": "Because that’s when I think I may be ready to entertain again.",
+      "contentSnippet": "Because that’s when I think I may be ready to entertain again.",
+      "guid": "https://www.nytimes.com/2020/07/09/style/coronavirus-backyard-entertaining.html",
+      "categories": [
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Quarantines",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Parties (Social)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T16:32:33.000Z"
+    },
+    {
+      "creator": "Remy Tumin and Elizabeth Pierson",
+      "title": "Supreme Court, Right Whales, Steve Martin: Your Thursday Evening Briefing",
+      "link": "https://www.nytimes.com/2020/07/09/briefing/supreme-court-right-whales-steve-martin.html",
+      "pubDate": "Thu, 09 Jul 2020 22:47:34 +0000",
+      "dc:creator": "Remy Tumin and Elizabeth Pierson",
+      "content": "Here’s what you need to know at the end of the day.",
+      "contentSnippet": "Here’s what you need to know at the end of the day.",
+      "guid": "https://www.nytimes.com/2020/07/09/briefing/supreme-court-right-whales-steve-martin.html",
+      "isoDate": "2020-07-09T22:47:34.000Z"
+    },
+    {
+      "creator": "Wesley Morris and Jenna Wortham",
+      "title": "So Y’all Finally Get It",
+      "link": "https://www.nytimes.com/2020/07/09/podcasts/still-processing-black-lives-matter.html",
+      "pubDate": "Thu, 09 Jul 2020 19:40:18 +0000",
+      "dc:creator": "Wesley Morris and Jenna Wortham",
+      "content": "America just won’t let us rest.",
+      "contentSnippet": "America just won’t let us rest.",
+      "guid": "https://www.nytimes.com/2020/07/09/podcasts/still-processing-black-lives-matter.html",
+      "categories": [
+        {
+          "_": "Podcasts",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "George Floyd Protests (2020)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Black Lives Matter Movement",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Wortham, Jenna",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Morris, Wesley (1975- )",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Police Brutality, Misconduct and Shootings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T19:40:18.000Z"
+    },
+    {
+      "title": "Is Trump’s Fate Sealed?",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/is-trumps-fate-sealed.html",
+      "pubDate": "Thu, 09 Jul 2020 09:00:09 +0000",
+      "content": "Is this the end of Trump? What about schools?",
+      "contentSnippet": "Is this the end of Trump? What about schools?",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/is-trumps-fate-sealed.html",
+      "categories": [
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Presidential Election of 2020",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T09:00:09.000Z"
+    },
+    {
+      "title": "Rethink Impact’s Latest V.C. Fund Beats Expectations",
+      "link": "https://www.nytimes.com/2020/07/09/business/dealbook/venture-capital-women.html",
+      "pubDate": "Thu, 09 Jul 2020 11:20:17 +0000",
+      "content": "Rethink Impact invests solely in tech start-ups founded by women, which accounted for just 4 percent of all venture deals in the first quarter.",
+      "contentSnippet": "Rethink Impact invests solely in tech start-ups founded by women, which accounted for just 4 percent of all venture deals in the first quarter.",
+      "guid": "https://www.nytimes.com/2020/07/09/business/dealbook/venture-capital-women.html",
+      "categories": [
+        {
+          "_": "Venture Capital",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Entrepreneurship",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Birth Control and Family Planning",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Supreme Court (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Dogecoin Project",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Education (K-12)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Robinhood Financial LLC",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T11:20:17.000Z"
+    },
+    {
+      "creator": "Betsy Hodges",
+      "title": "As Mayor of Minneapolis, I Saw How White Liberals Block Change",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/minneapolis-hodges-racism.html",
+      "pubDate": "Fri, 10 Jul 2020 01:01:38 +0000",
+      "dc:creator": "Betsy Hodges",
+      "content": "But this revolutionary moment is inviting us to be a part of the solution.",
+      "contentSnippet": "But this revolutionary moment is inviting us to be a part of the solution.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/minneapolis-hodges-racism.html",
+      "categories": [
+        {
+          "_": "Police Reform",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "George Floyd Protests (2020)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Police Brutality, Misconduct and Shootings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T01:01:38.000Z"
+    },
+    {
+      "creator": "Tammy Duckworth",
+      "title": "Tammy Duckworth: Tucker Carlson Doesn’t Know What Patriotism Is",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/tammy-duckworth-tucker-carlson.html",
+      "pubDate": "Thu, 09 Jul 2020 21:41:32 +0000",
+      "dc:creator": "Tammy Duckworth",
+      "content": "Neither does President Trump.",
+      "contentSnippet": "Neither does President Trump.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/tammy-duckworth-tucker-carlson.html",
+      "categories": [
+        {
+          "_": "United States Defense and Military Forces",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Presidential Election of 2020",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Race and Ethnicity",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Fox News Channel",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Carlson, Tucker",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T21:41:32.000Z"
+    },
+    {
+      "creator": "Paul Krugman",
+      "title": "Donald Trump's Deadly Coronavirus Delusions",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/trump-coronavirus.html",
+      "pubDate": "Thu, 09 Jul 2020 21:53:56 +0000",
+      "dc:creator": "Paul Krugman",
+      "content": "He won’t give up on a failing pandemic strategy.",
+      "contentSnippet": "He won’t give up on a failing pandemic strategy.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/trump-coronavirus.html",
+      "categories": [
+        {
+          "_": "Presidential Election of 2020",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Polls and Public Opinion",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus Reopenings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "masks",
+          "$": {
+            "domain": ""
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "United States Economy",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Disease Rates",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T21:53:56.000Z"
+    },
+    {
+      "creator": "Josh Chafetz",
+      "title": "Don’t Be Fooled, Trump Is a Winner in the Supreme Court Tax Case",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/trump-taxes-supreme-court-.html",
+      "pubDate": "Thu, 09 Jul 2020 18:14:02 +0000",
+      "dc:creator": "Josh Chafetz",
+      "content": "His taxes will probably not become public before the election. And that is what he most cares about.",
+      "contentSnippet": "His taxes will probably not become public before the election. And that is what he most cares about.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/trump-taxes-supreme-court-.html",
+      "categories": [
+        {
+          "_": "Law and Legislation",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Courts and the Judiciary",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Subpoenas",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Constitution (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "House of Representatives",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Supreme Court (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Roberts, John G Jr",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T18:14:02.000Z"
+    },
+    {
+      "creator": "David Brooks",
+      "title": "Two Cheers for Liberalism! (Or Maybe One and a Half)",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/liberalism-morality.html",
+      "pubDate": "Fri, 10 Jul 2020 00:04:07 +0000",
+      "dc:creator": "David Brooks",
+      "content": "Free speech has to rest on a shared morality.",
+      "contentSnippet": "Free speech has to rest on a shared morality.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/liberalism-morality.html",
+      "categories": [
+        {
+          "_": "Liberalism (US Politics)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Race and Ethnicity",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "free speech",
+          "$": {
+            "domain": ""
+          }
+        },
+        {
+          "_": "individualism",
+          "$": {
+            "domain": ""
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T00:04:07.000Z"
+    },
+    {
+      "creator": "The Editorial Board",
+      "title": "In the Supreme Court's Trump Tax Ruling, Voters Lose",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/supreme-court-trump-taxes.html",
+      "pubDate": "Thu, 09 Jul 2020 21:36:52 +0000",
+      "dc:creator": "The Editorial Board",
+      "content": "The justices reiterated that no president is above the law, but voters still won’t see his taxes before November.",
+      "contentSnippet": "The justices reiterated that no president is above the law, but voters still won’t see his taxes before November.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/supreme-court-trump-taxes.html",
+      "categories": [
+        {
+          "_": "Trump Tax Returns",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Federal Taxes (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Presidential Election of 2020",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Income Tax",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Subpoenas",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Elections, District Attorneys",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Internal Revenue Service",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Mazars USA",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Supreme Court (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Alito, Samuel A Jr",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Clinton, Bill",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Nixon, Richard Milhous",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Roberts, John G Jr",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Thomas, Clarence",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Vance, Cyrus R Jr",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T21:36:52.000Z"
+    },
+    {
+      "creator": "William Baude",
+      "title": "Conservatives, Don’t Give Up on Your Principles or the Supreme Court",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/supreme-court-originalism-conservatism.html",
+      "pubDate": "Thu, 09 Jul 2020 23:00:09 +0000",
+      "dc:creator": "William Baude",
+      "content": "Some are turning away from a founding idea, originalism.",
+      "contentSnippet": "Some are turning away from a founding idea, originalism.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/supreme-court-originalism-conservatism.html",
+      "categories": [
+        {
+          "_": "Constitution (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Consumer Financial Protection Bureau",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Supreme Court (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Gorsuch, Neil M",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Roberts, John G Jr",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Kavanaugh, Brett M",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T23:00:09.000Z"
+    },
+    {
+      "creator": "Spencer Bokat-Lindell",
+      "title": "Inside the Supreme Court’s Ruling on Birth Control Coverage",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/inside-the-supreme-courts-ruling-on-birth-control-coverage.html",
+      "pubDate": "Thu, 09 Jul 2020 23:32:59 +0000",
+      "dc:creator": "Spencer Bokat-Lindell",
+      "content": "A victory for religious employers is a defeat for their employees — and for the Affordable Care Act.",
+      "contentSnippet": "A victory for religious employers is a defeat for their employees — and for the Affordable Care Act.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/inside-the-supreme-courts-ruling-on-birth-control-coverage.html",
+      "categories": [
+        {
+          "_": "debatable",
+          "$": {
+            "domain": ""
+          }
+        },
+        {
+          "_": "Supreme Court (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Birth Control and Family Planning",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Freedom of Speech and Expression",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Freedom of Religion",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Health Insurance and Managed Care",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T23:32:59.000Z"
+    },
+    {
+      "creator": "Farhad Manjoo",
+      "title": "I’ve Seen a Future Without Cars, and It’s Amazing",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/ban-cars-manhattan-cities.html",
+      "pubDate": "Thu, 09 Jul 2020 15:08:44 +0000",
+      "dc:creator": "Farhad Manjoo",
+      "content": "Why do American cities waste so much space on cars?",
+      "contentSnippet": "Why do American cities waste so much space on cars?",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/ban-cars-manhattan-cities.html",
+      "categories": [
+        {
+          "_": "Traffic Accidents and Safety",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Buses",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Transit Systems",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Urban Areas",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Roads and Traffic",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "New York City",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T15:08:44.000Z"
+    },
+    {
+      "creator": "Phoebe Danziger",
+      "title": "A Coronavirus Vaccine Won’t Work if People Don’t Take It",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/coronavirus-vaccine-skepticism.html",
+      "pubDate": "Thu, 09 Jul 2020 20:10:10 +0000",
+      "dc:creator": "Phoebe Danziger",
+      "content": "We need to start convincing skeptics now.",
+      "contentSnippet": "We need to start convincing skeptics now.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/coronavirus-vaccine-skepticism.html",
+      "categories": [
+        {
+          "_": "Vaccination and Immunization",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Parenting",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T20:10:10.000Z"
+    },
+    {
+      "creator": "Michael W. McConnell",
+      "title": "On Religion, the Supreme Court Protects the Right to Be Different",
+      "link": "https://www.nytimes.com/2020/07/09/opinion/supreme-court-religion.html",
+      "pubDate": "Thu, 09 Jul 2020 23:04:06 +0000",
+      "dc:creator": "Michael W. McConnell",
+      "content": "Recent decisions are about safeguarding pluralism, not taking sides in the culture wars.",
+      "contentSnippet": "Recent decisions are about safeguarding pluralism, not taking sides in the culture wars.",
+      "guid": "https://www.nytimes.com/2020/07/09/opinion/supreme-court-religion.html",
+      "categories": [
+        {
+          "_": "Private and Sectarian Schools",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Constitution (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Freedom of Religion",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Homosexuality and Bisexuality",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Birth Control and Family Planning",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Supreme Court (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Breyer, Stephen G",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Gorsuch, Neil M",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Kagan, Elena",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Roberts, John G Jr",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "United States",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T23:04:06.000Z"
+    },
+    {
+      "creator": "Steve Martin",
+      "title": "Carl Reiner, Perfect",
+      "link": "https://www.nytimes.com/2020/07/09/movies/steve-martin-carl-reiner.html",
+      "pubDate": "Thu, 09 Jul 2020 14:55:13 +0000",
+      "dc:creator": "Steve Martin",
+      "content": "The director and funnyman taught Steve Martin about film and comedy, but it’s Reiner’s advice on a completely different subject that he cherishes.",
+      "contentSnippet": "The director and funnyman taught Steve Martin about film and comedy, but it’s Reiner’s advice on a completely different subject that he cherishes.",
+      "guid": "https://www.nytimes.com/2020/07/09/movies/steve-martin-carl-reiner.html",
+      "categories": [
+        {
+          "_": "Movies",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Comedy and Humor",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Reiner, Carl",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Martin, Steve",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Jerk, The (Movie)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_ttl"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T14:55:13.000Z"
+    },
+    {
+      "creator": "Judith Newman",
+      "title": "Anything You Say in This Trader Joe’s Line May Be Used Against You",
+      "link": "https://www.nytimes.com/2020/07/09/nyregion/trader-joes-line-signs-nyc.html",
+      "pubDate": "Thu, 09 Jul 2020 09:00:16 +0000",
+      "dc:creator": "Judith Newman",
+      "content": "These neighbors’ signs respond to loud shoppers: “We are so sorry your wife is leaving you,” one read. “And we are SURE the ‘Everything but the Bagel’ Seasoning will help.”",
+      "contentSnippet": "These neighbors’ signs respond to loud shoppers: “We are so sorry your wife is leaving you,” one read. “And we are SURE the ‘Everything but the Bagel’ Seasoning will help.”",
+      "guid": "https://www.nytimes.com/2020/07/09/nyregion/trader-joes-line-signs-nyc.html",
+      "categories": [
+        {
+          "_": "New York City",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Upper West Side (Manhattan, NY)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Noise",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Supermarkets and Grocery Stores",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Trader Joe's",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Signs and Signage",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Quarantines",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T09:00:16.000Z"
+    },
+    {
+      "creator": "Scott Cacciola",
+      "title": "As N.B.A. Forges Ahead, LeBron James Is ‘Ready for This Moment’",
+      "link": "https://www.nytimes.com/2020/07/09/sports/basketball/lakers-nba-restart-lebron-james.html",
+      "pubDate": "Thu, 09 Jul 2020 07:00:10 +0000",
+      "dc:creator": "Scott Cacciola",
+      "content": "Much has changed around the league since it shut down in March. But James’s focus on winning has not wavered, his Lakers teammates say, with a shot at a title.",
+      "contentSnippet": "Much has changed around the league since it shut down in March. But James’s focus on winning has not wavered, his Lakers teammates say, with a shot at a title.",
+      "guid": "https://www.nytimes.com/2020/07/09/sports/basketball/lakers-nba-restart-lebron-james.html",
+      "categories": [
+        {
+          "_": "Basketball",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus Reopenings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "NBA Championship",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Los Angeles Lakers",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Dudley, Jared (1985- )",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "James, LeBron",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Smith, J R",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Vogel, Frank",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T07:00:10.000Z"
+    },
+    {
+      "creator": "Farnaz Fassihi",
+      "title": "Major Explosion Rocks Iran Again, the 3rd Blast in 3 Weeks",
+      "link": "https://www.nytimes.com/2020/07/09/world/middleeast/iran-explosion.html",
+      "pubDate": "Fri, 10 Jul 2020 02:02:38 +0000",
+      "dc:creator": "Farnaz Fassihi",
+      "content": "The precise location of Friday’s explosion was unclear, but analysts said there are several military and training facilities in the area.",
+      "contentSnippet": "The precise location of Friday’s explosion was unclear, but analysts said there are several military and training facilities in the area.",
+      "guid": "https://www.nytimes.com/2020/07/09/world/middleeast/iran-explosion.html",
+      "categories": [
+        {
+          "_": "Bombs and Explosives",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Espionage and Intelligence Services",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Islamic Revolutionary Guards Corps",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Iran",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Israel",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Natanz (Iran)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Defense and Military Forces",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T02:02:38.000Z"
+    },
+    {
+      "creator": "Maggie Haberman, William K. Rashbaum and Nicole Hong",
+      "title": "Michael Cohen Is Returned to Federal Custody Over Home-Confinement Rules",
+      "link": "https://www.nytimes.com/2020/07/09/nyregion/michael-cohen-arrested.html",
+      "pubDate": "Thu, 09 Jul 2020 23:21:28 +0000",
+      "dc:creator": "Maggie Haberman, William K. Rashbaum and Nicole Hong",
+      "content": "President Trump’s former personal lawyer balked at signing an agreement not to publish a book while serving his sentence at home, his legal adviser said.",
+      "contentSnippet": "President Trump’s former personal lawyer balked at signing an agreement not to publish a book while serving his sentence at home, his legal adviser said.",
+      "guid": "https://www.nytimes.com/2020/07/09/nyregion/michael-cohen-arrested.html",
+      "categories": [
+        {
+          "_": "Ex-Convicts",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Presidential Election of 2020",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Cohen, Michael D (1966- )",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Manhattan (NYC)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Quarantines",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T23:21:28.000Z"
+    },
+    {
+      "creator": "Adam Goldman",
+      "title": "Judge in Michael Flynn Case Asks for Full Appeals Court Review",
+      "link": "https://www.nytimes.com/2020/07/09/us/politics/michael-flynn-appeals-court.html",
+      "pubDate": "Thu, 09 Jul 2020 23:03:00 +0000",
+      "dc:creator": "Adam Goldman",
+      "content": "After a divided appeals court panel ordered him to drop the charge against the former national security adviser, a judge asked the full court to review the ruling.",
+      "contentSnippet": "After a divided appeals court panel ordered him to drop the charge against the former national security adviser, a judge asked the full court to review the ruling.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/politics/michael-flynn-appeals-court.html",
+      "categories": [
+        {
+          "_": "Russian Interference in 2016 US Elections and Ties to Trump Associates",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Decisions and Verdicts",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Appeals Courts (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "United States Politics and Government",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Ethics and Official Misconduct",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Federal Bureau of Investigation",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Justice Department",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Barr, William P",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Flynn, Michael T",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Powell, Sidney (Attorney)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Sullivan, Emmet G",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T23:03:00.000Z"
+    },
+    {
+      "creator": "Marie Fazio",
+      "title": "Robert Fuller’s Hanging Was a Suicide, Investigation Finds",
+      "link": "https://www.nytimes.com/2020/07/09/us/robert-fuller-suicide-autopsy.html",
+      "pubDate": "Thu, 09 Jul 2020 23:53:22 +0000",
+      "dc:creator": "Marie Fazio",
+      "content": "The case was one of two hangings in California that drew scrutiny amid nationwide protests after the killing of George Floyd. Both have been ruled suicides.",
+      "contentSnippet": "The case was one of two hangings in California that drew scrutiny amid nationwide protests after the killing of George Floyd. Both have been ruled suicides.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/robert-fuller-suicide-autopsy.html",
+      "categories": [
+        {
+          "_": "George Floyd Protests (2020)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Black Lives Matter Movement",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "California",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Fuller, Robert L (d 2020)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Harsch, Malcolm (d 2020)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Suicides and Suicide Attempts",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Black People",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T23:53:22.000Z"
+    },
+    {
+      "creator": "Allyson Waller",
+      "title": "Campaign Urges NASA to Rename the John C. Stennis Space Center",
+      "link": "https://www.nytimes.com/2020/07/09/us/nasa-rename-john-c-stennis-space-center.html",
+      "pubDate": "Thu, 09 Jul 2020 22:28:41 +0000",
+      "dc:creator": "Allyson Waller",
+      "content": "The center, in Mississippi, is named for a former senator who opposed civil rights legislation and the Supreme Court ruling that desegregated the nation’s public schools.",
+      "contentSnippet": "The center, in Mississippi, is named for a former senator who opposed civil rights legislation and the Supreme Court ruling that desegregated the nation’s public schools.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/nasa-rename-john-c-stennis-space-center.html",
+      "categories": [
+        {
+          "_": "National Aeronautics and Space Administration",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Names, Organizational",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Stennis, John C",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Segregation and Desegregation",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Gulf Coast (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Mississippi",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Black People",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Discrimination",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Civil Rights Movement (1954-68)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Senate",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Pomerantz, William (1980- )",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Virgin Orbit",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T22:28:41.000Z"
+    },
+    {
+      "creator": "Megan Specia",
+      "title": "Couples Separated by Europe’s Travel Bans Fight to Be Reunited",
+      "link": "https://www.nytimes.com/2020/07/08/world/europe/couples-separated-eu-travel-ban.html",
+      "pubDate": "Thu, 09 Jul 2020 01:50:51 +0000",
+      "dc:creator": "Megan Specia",
+      "content": "As some restrictions are lifted on who can enter, unmarried couples are calling on European countries to make it possible for them to be together again.",
+      "contentSnippet": "As some restrictions are lifted on who can enter, unmarried couples are calling on European countries to make it possible for them to be together again.",
+      "guid": "https://www.nytimes.com/2020/07/08/world/europe/couples-separated-eu-travel-ban.html",
+      "categories": [
+        {
+          "_": "Europe",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Brussels (Belgium)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "European Commission",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "European Union",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Travel Warnings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Travel and Vacations",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus Reopenings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Dating and Relationships",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T01:50:51.000Z"
+    },
+    {
+      "creator": "Alan Feuer, Juliana Kim and Byron Smith",
+      "title": "Occupy City Hall’s New Life as Homeless Camp: ‘Not Pretty All the Time’",
+      "link": "https://www.nytimes.com/2020/07/09/nyregion/occupy-city-hall-nyc-homeless.html",
+      "pubDate": "Fri, 10 Jul 2020 02:08:38 +0000",
+      "dc:creator": "Alan Feuer, Juliana Kim and Byron Smith",
+      "content": "Organizers said they were helping vulnerable people. But nearby residents said the camp had turned into an unruly — and at times violent — shantytown.",
+      "contentSnippet": "Organizers said they were helping vulnerable people. But nearby residents said the camp had turned into an unruly — and at times violent — shantytown.",
+      "guid": "https://www.nytimes.com/2020/07/09/nyregion/occupy-city-hall-nyc-homeless.html",
+      "categories": [
+        {
+          "_": "Police Reform",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Demonstrations, Protests and Riots",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "George Floyd Protests (2020)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Budgets and Budgeting",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Police Brutality, Misconduct and Shootings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Vocal-NY",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "City Hall Park (Manhattan, NY)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Homeless Persons",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "de Blasio, Bill",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T02:08:38.000Z"
+    },
+    {
+      "creator": "Daniel E. Slotnik",
+      "title": "NJ Flood Dragged Her Into a Tunnel. Miraculously, She Survived.",
+      "link": "https://www.nytimes.com/2020/07/09/nyregion/nj-flood-tunnel-driver.html",
+      "pubDate": "Fri, 10 Jul 2020 02:00:59 +0000",
+      "dc:creator": "Daniel E. Slotnik",
+      "content": "“I’m going to die here, I don’t want to keep trying,” recalled Nathalia Bruno, a food deliverer in New Jersey. “But then I saw a flash of light.”",
+      "contentSnippet": "“I’m going to die here, I don’t want to keep trying,” recalled Nathalia Bruno, a food deliverer in New Jersey. “But then I saw a flash of light.”",
+      "guid": "https://www.nytimes.com/2020/07/09/nyregion/nj-flood-tunnel-driver.html",
+      "categories": [
+        {
+          "_": "Automobiles",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Delivery Services",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Floods",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Rain",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "DoorDash (Mobile App)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Clifton (NJ)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Passaic (NJ)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Passaic River (NJ)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Bruno, Nathalia",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-10T02:00:59.000Z"
+    },
+    {
+      "creator": "Erica L. Green",
+      "title": "Lawsuits Aim to Block DeVos’s New Sexual Misconduct Rules",
+      "link": "https://www.nytimes.com/2020/07/09/us/politics/sexual-misconduct-betsy-devos.html",
+      "pubDate": "Thu, 09 Jul 2020 21:42:21 +0000",
+      "dc:creator": "Erica L. Green",
+      "content": "Students, women’s rights and education groups are seeking to delay or derail the Education Department’s broad overhaul of rules that govern sexual misconduct claims.",
+      "contentSnippet": "Students, women’s rights and education groups are seeking to delay or derail the Education Department’s broad overhaul of rules that govern sexual misconduct claims.",
+      "guid": "https://www.nytimes.com/2020/07/09/us/politics/sexual-misconduct-betsy-devos.html",
+      "categories": [
+        {
+          "_": "Suits and Litigation (Civil)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Discrimination",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Education (K-12)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Colleges and Universities",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Sexual Harassment",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Title IX (Gender Discrimination Legislation)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "DeVos, Elizabeth (1958- )",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Trump, Donald J",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Education Department (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T21:42:21.000Z"
+    },
+    {
+      "creator": "Sarah Firshein",
+      "title": "Help! I’m Owed a Refund, But the Hotel Owner Refuses to Budge",
+      "link": "https://www.nytimes.com/2020/07/07/travel/virus-refunds-hotel-franchises.html",
+      "pubDate": "Tue, 07 Jul 2020 09:00:28 +0000",
+      "dc:creator": "Sarah Firshein",
+      "content": "Here we are, wondering aloud about the oversight capabilities of hotel franchises, and what powers they can exert over their thousands of individual owners. Thanks Covid-19.",
+      "contentSnippet": "Here we are, wondering aloud about the oversight capabilities of hotel franchises, and what powers they can exert over their thousands of individual owners. Thanks Covid-19.",
+      "guid": "https://www.nytimes.com/2020/07/07/travel/virus-refunds-hotel-franchises.html",
+      "categories": [
+        {
+          "_": "Travel and Vacations",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Rebates and Refunds",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Hotels and Travel Lodgings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Customer Relations",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Best Western Hotels",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Hilton Worldwide Holdings Inc",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        }
+      ],
+      "isoDate": "2020-07-07T09:00:28.000Z"
+    },
+    {
+      "creator": "Paul B. Brown",
+      "title": "Personal Finance Lessons From the Pandemic",
+      "link": "https://www.nytimes.com/2020/07/09/business/personal-finance-lessons-coronavirus.html",
+      "pubDate": "Thu, 09 Jul 2020 09:00:21 +0000",
+      "dc:creator": "Paul B. Brown",
+      "content": "Our writer entered the pandemic believing he was in good shape financially. Now, he says, he has a lot more to do.",
+      "contentSnippet": "Our writer entered the pandemic believing he was in good shape financially. Now, he says, he has a lot more to do.",
+      "guid": "https://www.nytimes.com/2020/07/09/business/personal-finance-lessons-coronavirus.html",
+      "categories": [
+        {
+          "_": "Mortgages",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Social Security (US)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Savings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Credit and Debt",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Banking and Financial Institutions",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Home Equity Loans",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Quarantines",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Stocks and Bonds",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus Reopenings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Subprime Mortgage Crisis",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Interest Rates",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Cape Cod (Mass)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "New Jersey",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Personal Finances",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Retirement",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Second Quarter 2020",
+          "$": {
+            "domain": ""
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T09:00:21.000Z"
+    },
+    {
+      "creator": "Sam Sifton",
+      "title": "What Does it Mean to be ‘At Home’ These Days?",
+      "link": "https://www.nytimes.com/2020/07/08/at-home/newsletter.html",
+      "pubDate": "Wed, 08 Jul 2020 19:56:25 +0000",
+      "dc:creator": "Sam Sifton",
+      "content": "People are experiencing the reopening of the country in different ways in different regions. They are responding to it differently, too.",
+      "contentSnippet": "People are experiencing the reopening of the country in different ways in different regions. They are responding to it differently, too.",
+      "guid": "https://www.nytimes.com/2020/07/08/at-home/newsletter.html",
+      "categories": [
+        {
+          "_": "Quarantine (Life and Culture)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-08T19:56:25.000Z"
+    },
+    {
+      "creator": "Leigh Crandall",
+      "title": "The Greatest Wedding Reception Dance Songs",
+      "link": "https://www.nytimes.com/2020/07/07/fashion/weddings/wedding-reception-dance-songs.html",
+      "pubDate": "Tue, 07 Jul 2020 18:30:15 +0000",
+      "dc:creator": "Leigh Crandall",
+      "content": "Wedding D.J.’s share their top tunes that are guaranteed to get all of your guests dancing.",
+      "contentSnippet": "Wedding D.J.’s share their top tunes that are guaranteed to get all of your guests dancing.",
+      "guid": "https://www.nytimes.com/2020/07/07/fashion/weddings/wedding-reception-dance-songs.html",
+      "categories": [
+        {
+          "_": "Music",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Dancing",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Disc Jockeys",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Weddings and Engagements",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-07T18:30:15.000Z"
+    },
+    {
+      "creator": "Jessica Grose",
+      "title": "Missing the Partner You See 24/7",
+      "link": "https://www.nytimes.com/2020/07/08/parenting/coronavirus-marriage-relationships.html",
+      "pubDate": "Wed, 08 Jul 2020 12:36:23 +0000",
+      "dc:creator": "Jessica Grose",
+      "content": "How to feel connected when you have nowhere to go.",
+      "contentSnippet": "How to feel connected when you have nowhere to go.",
+      "guid": "https://www.nytimes.com/2020/07/08/parenting/coronavirus-marriage-relationships.html",
+      "categories": [
+        {
+          "_": "Content Type: Service",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Parenting",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Dating and Relationships",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Quarantines",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-08T12:36:23.000Z"
+    },
+    {
+      "creator": "Farah Nayeri",
+      "title": "It’s Christo’s Final Show. But Is It the Last We’ll See of Him?",
+      "link": "https://www.nytimes.com/2020/07/08/arts/design/christo-pompidou-arc-de-triomphe.html",
+      "pubDate": "Thu, 09 Jul 2020 04:17:43 +0000",
+      "dc:creator": "Farah Nayeri",
+      "content": "The artist, who died in May, had planned to wrap the Arc de Triomphe in Paris. The project is delayed, but on track for next year. And his collaborators hope they can pull off one more feat, too.",
+      "contentSnippet": "The artist, who died in May, had planned to wrap the Arc de Triomphe in Paris. The project is delayed, but on track for next year. And his collaborators hope they can pull off one more feat, too.",
+      "guid": "https://www.nytimes.com/2020/07/08/arts/design/christo-pompidou-arc-de-triomphe.html",
+      "categories": [
+        {
+          "_": "Christo",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Jeanne-Claude",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Pompidou Center",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Art",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Museums",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Paris (France)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T04:17:43.000Z"
+    },
+    {
+      "creator": "A.O. Scott",
+      "title": "‘The Old Guard’ Review: Fighting to the Death, and Beyond",
+      "link": "https://www.nytimes.com/2020/07/09/movies/the-old-guard-review.html",
+      "pubDate": "Thu, 09 Jul 2020 13:42:49 +0000",
+      "dc:creator": "A.O. Scott",
+      "content": "Charlize Theron leads a group of immortal warriors in Gina Prince-Bythewood’s fresh take on the superhero genre.",
+      "contentSnippet": "Charlize Theron leads a group of immortal warriors in Gina Prince-Bythewood’s fresh take on the superhero genre.",
+      "guid": "https://www.nytimes.com/2020/07/09/movies/the-old-guard-review.html",
+      "categories": [
+        {
+          "_": "Movies",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Prince-Bythewood, Gina",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Theron, Charlize",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Netflix Inc",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Layne, KiKi",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "Rucka, Greg",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "The Old Guard (Movie)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_ttl"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T13:42:49.000Z"
+    },
+    {
+      "creator": "Nefertiti Austin",
+      "title": "Grandparents, Kin and Play Cousins: The Soul and Survival of Black Families",
+      "link": "https://www.nytimes.com/2020/07/07/parenting/black-families-children-kin-grandparents.html",
+      "pubDate": "Thu, 09 Jul 2020 23:10:57 +0000",
+      "dc:creator": "Nefertiti Austin",
+      "content": "In households where relationships break down, Black families often turn to relatives or friends to keep children close.",
+      "contentSnippet": "In households where relationships break down, Black families often turn to relatives or friends to keep children close.",
+      "guid": "https://www.nytimes.com/2020/07/07/parenting/black-families-children-kin-grandparents.html",
+      "categories": [
+        {
+          "_": "Families and Family Life",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Black People",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Children and Childhood",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Parenting",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Foster Care",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T23:10:57.000Z"
+    },
+    {
+      "creator": "Mark Honigsbaum",
+      "title": "How Does Anything Go Viral?",
+      "link": "https://www.nytimes.com/2020/07/09/books/review/adam-kucharski-the-rules-of-contagion.html",
+      "pubDate": "Thu, 09 Jul 2020 17:08:35 +0000",
+      "dc:creator": "Mark Honigsbaum",
+      "content": "In “The Rules of Contagion” the scientist Adam Kucharski turns to the nonbiological to understand the common features of a virus, whether physical or virtual.",
+      "contentSnippet": "In “The Rules of Contagion” the scientist Adam Kucharski turns to the nonbiological to understand the common features of a virus, whether physical or virtual.",
+      "guid": "https://www.nytimes.com/2020/07/09/books/review/adam-kucharski-the-rules-of-contagion.html",
+      "categories": [
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Books and Literature",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "The Rules of Contagion: Why Things Spread - and Why They Stop (Book)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_ttl"
+          }
+        },
+        {
+          "_": "Kucharski, Adam",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T17:08:35.000Z"
+    },
+    {
+      "creator": "Lesley Evans Ogden",
+      "title": "Spirit Bears' Hair Helps Reveal New Genetic Secrets",
+      "link": "https://www.nytimes.com/2020/07/06/science/spirit-bears-canada.html",
+      "pubDate": "Mon, 06 Jul 2020 15:10:57 +0000",
+      "dc:creator": "Lesley Evans Ogden",
+      "content": "First Nations peoples along British Columbia’s Central Coast led research to help preserve the area’s white-furred Spirit bears.",
+      "contentSnippet": "First Nations peoples along British Columbia’s Central Coast led research to help preserve the area’s white-furred Spirit bears.",
+      "guid": "https://www.nytimes.com/2020/07/06/science/spirit-bears-canada.html",
+      "categories": [
+        {
+          "_": "Bears",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Fur",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "British Columbia (Canada)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Genetics and Heredity",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Kitasoo/Xaixais First Nation",
+          "$": {
+            "domain": ""
+          }
+        },
+        {
+          "_": "Research",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Indigenous People",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Eco-Tourism",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "your-feed-science",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "your-feed-animals",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-06T15:10:57.000Z"
+    },
+    {
+      "creator": "Gina Kolata",
+      "title": "‘It Will Consume Your Life’: 4 Families Take On Rare Diseases",
+      "link": "https://www.nytimes.com/2020/07/07/health/rare-diseases.html",
+      "pubDate": "Tue, 07 Jul 2020 20:37:39 +0000",
+      "dc:creator": "Gina Kolata",
+      "content": "Confronted by illnesses that most scientists overlook, these families had to work out their own approaches to find treatments.",
+      "contentSnippet": "Confronted by illnesses that most scientists overlook, these families had to work out their own approaches to find treatments.",
+      "guid": "https://www.nytimes.com/2020/07/07/health/rare-diseases.html",
+      "categories": [
+        {
+          "_": "Rare and Orphan Diseases",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Genetics and Heredity",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Research",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Rett's Syndrome",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "NGLY1",
+          "$": {
+            "domain": ""
+          }
+        },
+        {
+          "_": "Drugs (Pharmaceuticals)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Children and Childhood",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Clinical Trials",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Parenting",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Gerstmann-Straussler-Scheinker Syndrome",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Jansen's Metaphyseal Chondrodysplasia (JMC)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-07T20:37:39.000Z"
+    },
+    {
+      "creator": "Matt Kaplan",
+      "title": "How a Saber-Tooth Marsupial Blinded Us With Its Bite",
+      "link": "https://www.nytimes.com/2020/07/09/science/saber-tooth-marsupial.html",
+      "pubDate": "Thu, 09 Jul 2020 09:00:21 +0000",
+      "dc:creator": "Matt Kaplan",
+      "content": "The extinct South American animal made us believe it was as fierce as a saber-tooth cat, but a new study suggests it was a mere scavenger.",
+      "contentSnippet": "The extinct South American animal made us believe it was as fierce as a saber-tooth cat, but a new study suggests it was a mere scavenger.",
+      "guid": "https://www.nytimes.com/2020/07/09/science/saber-tooth-marsupial.html",
+      "categories": [
+        {
+          "_": "Paleontology",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Teeth and Dentistry",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Marsupials",
+          "$": {
+            "domain": ""
+          }
+        },
+        {
+          "_": "Mammals",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Cats",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Research",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "PeerJ (Journal)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Argentina",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "South America",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Skull (Body Part)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "your-feed-science",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "your-feed-animals",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T09:00:21.000Z"
+    },
+    {
+      "creator": "Apoorva Mandavilli",
+      "title": "W.H.O. to Review Evidence of Airborne Transmission of Coronavirus",
+      "link": "https://www.nytimes.com/2020/07/07/health/coronavirus-aerosols-who.html",
+      "pubDate": "Thu, 09 Jul 2020 19:43:18 +0000",
+      "dc:creator": "Apoorva Mandavilli",
+      "content": "The World Health Organization plans to update its advice after hundreds of experts urged the agency to reconsider the risk of aerosol transmission.",
+      "contentSnippet": "The World Health Organization plans to update its advice after hundreds of experts urged the agency to reconsider the risk of aerosol transmission.",
+      "guid": "https://www.nytimes.com/2020/07/07/health/coronavirus-aerosols-who.html",
+      "categories": [
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "World Health Organization",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Swaminathan, Soumya (1959- )",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_per"
+          }
+        },
+        {
+          "_": "your-feed-science",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus Reopenings",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Epidemics",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Disease Rates",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus Risks and Safety Concerns",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T19:43:18.000Z"
+    },
+    {
+      "creator": "Katherine J. Wu",
+      "title": "Study of 17 Million Identifies Crucial Risk Factors for Coronavirus Deaths",
+      "link": "https://www.nytimes.com/2020/07/08/health/coronavirus-risk-factors.html",
+      "pubDate": "Thu, 09 Jul 2020 14:32:00 +0000",
+      "dc:creator": "Katherine J. Wu",
+      "content": "The largest study yet confirms that race, ethnicity, age and sex can raise a person’s chances of dying from Covid-19.",
+      "contentSnippet": "The largest study yet confirms that race, ethnicity, age and sex can raise a person’s chances of dying from Covid-19.",
+      "guid": "https://www.nytimes.com/2020/07/08/health/coronavirus-risk-factors.html",
+      "categories": [
+        {
+          "_": "your-feed-science",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Coronavirus (2019-nCoV)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Race and Ethnicity",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Black People",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Medicine and Health",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "your-feed-health",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "England",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_geo"
+          }
+        },
+        {
+          "_": "Nature (Journal)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/nyt_org"
+          }
+        },
+        {
+          "_": "Research",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Minorities",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Deaths (Fatalities)",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Elderly",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        },
+        {
+          "_": "Gender",
+          "$": {
+            "domain": "http://www.nytimes.com/namespaces/keywords/des"
+          }
+        }
+      ],
+      "isoDate": "2020-07-09T14:32:00.000Z"
+    },
+    {
+      "creator": "The New York Times",
+      "title": "Try Spelling Bee",
+      "link": "https://www.nytimes.com/puzzles/spelling-bee",
+      "pubDate": "Wed, 08 Jul 2020 19:16:41 +0000",
+      "dc:creator": "The New York Times",
+      "content": "Puzzle throughout the day to see how many words you can find.",
+      "contentSnippet": "Puzzle throughout the day to see how many words you can find.",
+      "guid": "https://www.nytimes.com/puzzles/spelling-bee",
+      "isoDate": "2020-07-08T19:16:41.000Z"
+    },
+    {
+      "creator": "The New York Times",
+      "title": "The Crossword, Vertex and More",
+      "link": "https://www.nytimes.com/crosswords",
+      "pubDate": "Wed, 08 Jul 2020 19:16:41 +0000",
+      "dc:creator": "The New York Times",
+      "content": "Solve the daily puzzle edited by Will Shortz, or try out other games like the Mini and Letter Boxed.",
+      "contentSnippet": "Solve the daily puzzle edited by Will Shortz, or try out other games like the Mini and Letter Boxed.",
+      "guid": "https://www.nytimes.com/crosswords",
+      "isoDate": "2020-07-08T19:16:41.000Z"
+    },
+    {
+      "creator": "The New York Times",
+      "title": "Try Tiles",
+      "link": "https://www.nytimes.com/puzzles/tiles",
+      "pubDate": "Wed, 08 Jul 2020 19:16:41 +0000",
+      "dc:creator": "The New York Times",
+      "content": "Our soothing matching game may help you de-stress.",
+      "contentSnippet": "Our soothing matching game may help you de-stress.",
+      "guid": "https://www.nytimes.com/puzzles/tiles",
+      "isoDate": "2020-07-08T19:16:41.000Z"
+    }
+  ],
+  "feedUrl": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+  "image": {
+    "link": "https://www.nytimes.com",
+    "url": "https://static01.nyt.com/images/misc/NYT_logo_rss_250x40.png",
+    "title": "NYT > Top Stories"
+  },
+  "title": "NYT > Top Stories",
+  "description": "",
+  "pubDate": "Fri, 10 Jul 2020 03:43:37 +0000",
+  "link": "https://www.nytimes.com",
+  "language": "en-us",
+  "copyright": "Copyright 2020 The New York Times Company",
+  "lastBuildDate": "Fri, 10 Jul 2020 03:43:37 +0000"
+}

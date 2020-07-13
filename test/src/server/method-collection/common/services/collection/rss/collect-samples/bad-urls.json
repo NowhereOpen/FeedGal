@@ -1,0 +1,129 @@
+[
+  {
+    "url": "http://feeds.reuters.com/reuters/topNews",
+    "error": {
+      "errno": "ENOTFOUND",
+      "code": "ENOTFOUND",
+      "syscall": "getaddrinfo",
+      "hostname": "feeds.reuters.com"
+    },
+    "error_message": "getaddrinfo ENOTFOUND feeds.reuters.com"
+  },
+  {
+    "url": "http://feeds.reuters.com/Reuters/worldNews",
+    "error": {
+      "errno": "ENOTFOUND",
+      "code": "ENOTFOUND",
+      "syscall": "getaddrinfo",
+      "hostname": "feeds.reuters.com"
+    },
+    "error_message": "getaddrinfo ENOTFOUND feeds.reuters.com"
+  },
+  {
+    "url": "http://feeds.reuters.com/reuters/technologyNews",
+    "error": {
+      "errno": "ENOTFOUND",
+      "code": "ENOTFOUND",
+      "syscall": "getaddrinfo",
+      "hostname": "feeds.reuters.com"
+    },
+    "error_message": "getaddrinfo ENOTFOUND feeds.reuters.com"
+  },
+  {
+    "url": "http://feeds.reuters.com/reuters/businessNews",
+    "error": {
+      "errno": "ENOTFOUND",
+      "code": "ENOTFOUND",
+      "syscall": "getaddrinfo",
+      "hostname": "feeds.reuters.com"
+    },
+    "error_message": "getaddrinfo ENOTFOUND feeds.reuters.com"
+  },
+  {
+    "url": "http://feeds.gawker.com/kotaku/full",
+    "error": {},
+    "error_message": "Status code 403"
+  },
+  {
+    "url": "http://feeds.gawker.com/gizmodo/full",
+    "error": {},
+    "error_message": "Status code 403"
+  },
+  {
+    "url": "http://feeds.gawker.com/lifehacker/full",
+    "error": {},
+    "error_message": "Status code 403"
+  },
+  {
+    "url": "https://help.npr.org/customer/portal/articles/2094175-where-can-i-find-npr-rss-feeds-",
+    "error": {
+      "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE"
+    },
+    "error_message": "unable to verify the first certificate"
+  },
+  {
+    "url": "https://www.reuters.com/tools/rss",
+    "error": {},
+    "error_message": "Status code 404"
+  },
+  {
+    "url": "http://feeds.feedburner.com/insideintercom",
+    "error": {},
+    "error_message": "Attribute without value\nLine: 4\nColumn: 179\nChar: >"
+  },
+  {
+    "url": "http://blog.hubspot.com/marketing/rss.xml",
+    "error": {},
+    "error_message": "Status code 406"
+  },
+  {
+    "url": "https://www.buzzfeed.com/tasty.xml",
+    "error": {},
+    "error_message": "Status code 404"
+  },
+  {
+    "url": "https://archive.nytimes.com/www.nytimes.com/services/xml/rss/index.html?mcubz=0",
+    "error": {},
+    "error_message": "Unexpected close tag\nLine: 36\nColumn: 7\nChar: >"
+  },
+  {
+    "url": "https://www.bbc.com/news/10628494",
+    "error": {},
+    "error_message": "Invalid character in entity name\nLine: 234\nColumn: 546\nChar: \""
+  },
+  {
+    "url": "http://www.foxnews.com/about/rss/",
+    "error": {},
+    "error_message": "Invalid character in entity name\nLine: 101\nColumn: 368\nChar: &"
+  },
+  {
+    "url": "http://www.espn.com/espn/news/story?page=rssinfo",
+    "error": {},
+    "error_message": "Invalid character in entity name\nLine: 9\nColumn: 85\nChar: ="
+  },
+  {
+    "url": "http://www.wsj.com/public/page/rss_news_and_feeds.html",
+    "error": {},
+    "error_message": "Feed not recognized as RSS 1 or 2."
+  },
+  {
+    "url": "https://www.reddit.com/wiki/rss",
+    "error": {},
+    "error_message": "Invalid character in entity name\nLine: 1\nColumn: 72\nChar: &"
+  },
+  {
+    "url": "http://feeds.howtogeek.com/HowToGeek",
+    "error": {},
+    "error_message": "Attribute without value\nLine: 7\nColumn: 69\nChar: >"
+  },
+  {
+    "url": "https://www.reddit.com/r/technology/.rss",
+    "error": {
+      "errno": -2,
+      "syscall": "open",
+      "code": "ENOENT",
+      "path": "/home/young/Programming/per/feedgal-feature-rss-loader/test/src/server/method-collection/common/services/collection/rss/collect-samples/samples/r/Technology.json"
+    },
+    "error_message": "ENOENT: no such file or directory, open '/home/young/Programming/per/feedgal-feature-rss-loader/test/src/server/method-collection/common/services/collection/rss/collect-samples/samples/r/Technology.json'"
+  }
+]

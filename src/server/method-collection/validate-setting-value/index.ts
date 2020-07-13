@@ -5,7 +5,7 @@ import { refreshTokenIfFailOAuthServiceId } from "../common/refresh-token-if-fai
 // Types
 import { ValidationResult } from "~/src/common/types/pages/suite"
 
-const service_ids = ["github", "google-calendar", "league-of-legends"]
+const service_ids = ["github", "google-calendar", "league-of-legends", "rss"]
 
 export async function validateSettingValue(
   oauth_account_entry_id:undefined|string,

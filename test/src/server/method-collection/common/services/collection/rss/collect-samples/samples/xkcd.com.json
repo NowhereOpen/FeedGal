@@ -1,0 +1,35 @@
+{
+  "items": [
+    {
+      "title": "Acceptable Risk",
+      "link": "https://xkcd.com/2330/",
+      "pubDate": "2020-07-08T00:00:00.000Z",
+      "id": "https://xkcd.com/2330/",
+      "isoDate": "2020-07-08T00:00:00.000Z"
+    },
+    {
+      "title": "Universal Rating Scale",
+      "link": "https://xkcd.com/2329/",
+      "pubDate": "2020-07-06T00:00:00.000Z",
+      "id": "https://xkcd.com/2329/",
+      "isoDate": "2020-07-06T00:00:00.000Z"
+    },
+    {
+      "title": "Space Basketball",
+      "link": "https://xkcd.com/2328/",
+      "pubDate": "2020-07-03T00:00:00.000Z",
+      "id": "https://xkcd.com/2328/",
+      "isoDate": "2020-07-03T00:00:00.000Z"
+    },
+    {
+      "title": "Oily House Index",
+      "link": "https://xkcd.com/2327/",
+      "pubDate": "2020-07-01T00:00:00.000Z",
+      "id": "https://xkcd.com/2327/",
+      "isoDate": "2020-07-01T00:00:00.000Z"
+    }
+  ],
+  "link": "https://xkcd.com/",
+  "title": "xkcd.com",
+  "lastBuildDate": "2020-07-08T00:00:00Z"
+}

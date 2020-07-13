@@ -64,6 +64,16 @@ export class SettingValueStorage extends MongoStorage implements ISettingValue {
   }
 
   /**
+   * 2020-07-11 10:35
+   * 
+   * Used along with `updateSettingValue`, assuming that validating setting value has
+   * been done.
+   */
+  async settingValueValidated(setting_value_id:string):Promise<any> {
+    return this.model.update({ _id: setting_value_id }, { is_invalid: false })
+  }
+
+  /**
    * Delete (2)
    */
   async deleteSettingValue(setting_value_id:string):Promise<any> {

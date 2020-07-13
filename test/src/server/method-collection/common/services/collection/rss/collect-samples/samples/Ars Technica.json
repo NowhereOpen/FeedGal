@@ -1,0 +1,414 @@
+{
+  "items": [
+    {
+      "creator": "Ron Amadeo",
+      "title": "Android 10 has the fastest update rate ever, hits 16% of users in 10 months",
+      "link": "https://arstechnica.com/?p=1690513",
+      "pubDate": "Thu, 09 Jul 2020 23:30:40 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n\n\n\n\n\n<div><a name=\"page-1\"></a></div>\n<div class=\"image shortcode-img center\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/androidgraph.png\"><img alt=\"Google's Android adoption chart. Android 10's &quot;300 day&quot; mark was 10 days ago.\" src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/androidgraph-980x664.png\"></a><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/androidgraph.png\" class=\"caption-link\" rel=\"nofollow\">Google's Android adoption chart. Android 10's \"300 day\" mark was 10 days ago.</a> (credit: Google)</p></div>\n<p>Google today <a href=\"https://android-developers.googleblog.com/2020/07/accelerating-android-updates.html\">dropped a blog post</a> detailing its progress on improving the Android ecosystem's update speed. The company has been hard at work for the past few years modularizing Android, with the hope that making Android easier to update would result in device manufacturers pushing out updates faster. Google's efforts have been paying off, with the company announcing Android 10 has had the fastest rollout ever.</p>\n<p>The last few versions of Android have each brought a major improvement to Android's update system. Android 8 introduced Project Treble, which separated the OS from the hardware support, enabling easier porting of Android across devices. In Android 9 Pie, Google completed its work on Treble and started publishing Generic System Images (GSIs): drop-in versions of Android that work on any Project Treble-compatible device. Android 10 introduced Project Mainline and the new APEX file type designed for updatable lower-level system components, delivered through the Play Store.</p>\n<p>Google's stats show that all this work is actually improving the ecosystem. \"Thanks to these efforts,\" Google writes, \"the adoption of Android 10 has been faster than any previous versions of Android. Android 10 was running on 100 million devices 5 months post launch—28% faster than Android Pie.\"</p></div><p><a href=\"https://arstechnica.com/?p=1690513#p3\">Read 6 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690513&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=DOCWZ93WaL4:qmfVsFRXfac:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=DOCWZ93WaL4:qmfVsFRXfac:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=DOCWZ93WaL4:qmfVsFRXfac:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=DOCWZ93WaL4:qmfVsFRXfac:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=DOCWZ93WaL4:qmfVsFRXfac:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=DOCWZ93WaL4:qmfVsFRXfac:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Ron Amadeo",
+      "content": "Google's next target? Linux kernel portability and modularity. ",
+      "contentSnippet": "Google's next target? Linux kernel portability and modularity.",
+      "guid": "https://arstechnica.com/?p=1690513",
+      "categories": [
+        "Tech"
+      ],
+      "isoDate": "2020-07-09T23:30:40.000Z"
+    },
+    {
+      "creator": "Samuel Axon",
+      "title": "Unreal’s new iPhone app does live motion capture with Face ID sensors",
+      "link": "https://arstechnica.com/?p=1690496",
+      "pubDate": "Thu, 09 Jul 2020 22:20:46 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n\n\n\n\n\n<div><a name=\"page-1\"></a></div>\n      <ul class=\"gallery shortcode-gallery gallery-wide\"><li>\n        <div class=\"gallery-item-content\">  \n        <div class=\"gallery-image\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/UnrealFaceID-1-980x551.jpg\" alt=\"\"></div>\n        <p>\n          A workstation running Unreal Engine with an iPhone for motion capture.                      [credit:\n                        <a href=\"https://www.unrealengine.com/en-US/blog/new-live-link-face-ios-app-now-available-for-real-time-facial-capture-with-unreal-engine\">Epic Games</a>\n                        ]\n                  </p>\n        </div>\n      </li>\n      </ul><p>Unreal Engine developer Epic Games has released Live Link Face, an iPhone app that uses the front-facing 3D sensors in the phone to do live motion capture for facial animations in 3D projects like video games, animations, or films.</p>\n<p>The app uses tools from Apple's ARKit framework and the iPhone's TrueDepth sensor array to stream live motion capture from an actor looking at the phone to 3D characters in Unreal Engine running on a nearby workstation. It captures facial expressions as well as head and neck rotation.</p>\n<p>Live Link Face can stream to multiple machines at once, and \"robust timecode support and precise frame accuracy enable seamless synchronization with other stage components like cameras and body motion capture,\" according to Epic's <a href=\"https://www.unrealengine.com/en-US/blog/new-live-link-face-ios-app-now-available-for-real-time-facial-capture-with-unreal-engine\">blog post</a> announcing the app. Users get a CSV of raw blendshape data and an MOV from the phone's front-facing video camera, with timecodes.</p></div><p><a href=\"https://arstechnica.com/?p=1690496#p3\">Read 6 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690496&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=5-KvQHrMUzc:pc5VG_HJCjU:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=5-KvQHrMUzc:pc5VG_HJCjU:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=5-KvQHrMUzc:pc5VG_HJCjU:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=5-KvQHrMUzc:pc5VG_HJCjU:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=5-KvQHrMUzc:pc5VG_HJCjU:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=5-KvQHrMUzc:pc5VG_HJCjU:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Samuel Axon",
+      "content": "It's another rare, killer app for the iPhone's TrueDepth sensor array.",
+      "contentSnippet": "It's another rare, killer app for the iPhone's TrueDepth sensor array.",
+      "guid": "https://arstechnica.com/?p=1690496",
+      "categories": [
+        "Gaming & Culture",
+        "Tech",
+        "app",
+        "apple",
+        "Epic Games",
+        "Face ID",
+        "game development",
+        "iphone",
+        "Motion capture",
+        "Unreal"
+      ],
+      "isoDate": "2020-07-09T22:20:46.000Z"
+    },
+    {
+      "creator": "Sam Machkovech",
+      "title": "Valve secrets spill over—including Half-Life 3—in new Steam documentary app",
+      "link": "https://arstechnica.com/?p=1690512",
+      "pubDate": "Thu, 09 Jul 2020 18:57:59 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n\n\n\n\n\n<div><a name=\"page-1\"></a></div>\n<p><em>The Final Hours of Half-Life: Alyx</em> is now live <a href=\"https://store.steampowered.com/app/1361700/HalfLife_Alyx__Final_Hours/\">on Steam as a $10 download</a>, and it's a phenomenal look at the underbelly of Valve video game development, told with a wealth of inside access and a host of multimedia goodies.</p>\n<p>The project, as led by journalist Geoff Keighley, is a years-in-the-making look at Valve's journey to release <a href=\"https://arstechnica.com/gaming/2020/03/half-life-alyx-review-the-greatest-vr-adventure-game-yet-and-then-some/\">a new <em>Half-Life</em> game</a>, complete with stories about other attempts that never got off the ground. Separated into 12 \"chapters,\" the app is predominately driven by Keighley's text, full of interviews and quotes, and every page comes with embedded image galleries and pictures to drive each point home.</p>\n<h2>Get ready for a Borealis-load of Valve secrets</h2>\n      <ul class=\"gallery shortcode-gallery gallery-wide\"><li>\n        <div class=\"gallery-item-content\">  \n        <div class=\"gallery-image\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/20200709105613_1-980x551.jpg\" alt=\"\"></div>\n        <p>\n          An interactive slider chart lets you dig through a few surprises in Valve's game-development timeline, which Keighley's story describes at great length.                      [credit:\n                        <a href=\"https://store.steampowered.com/app/1361700/HalfLife_Alyx__Final_Hours/\">Geoff Keighley</a>\n                        ]\n                  </p>\n        </div>\n      </li>\n      </ul><p>The app's biggest dirt is arguably its confirmation of exactly what started and stopped within Valve on the way to getting <em>Half-Life: Alyx</em> out the door this March. That includes information on <em>Half-Life 3</em>—and it is a much firmer account of Valve's history than <a href=\"https://arstechnica.com/gaming/2020/03/now-that-half-life-alyx-is-out-wheres-half-life-3/\">what IGN reported earlier this year</a>.</p></div><p><a href=\"https://arstechnica.com/?p=1690512#p3\">Read 9 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690512&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=gBOSvmuR3wc:B9ZXMD6oYZ8:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=gBOSvmuR3wc:B9ZXMD6oYZ8:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=gBOSvmuR3wc:B9ZXMD6oYZ8:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=gBOSvmuR3wc:B9ZXMD6oYZ8:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=gBOSvmuR3wc:B9ZXMD6oYZ8:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=gBOSvmuR3wc:B9ZXMD6oYZ8:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Sam Machkovech",
+      "content": "No VR headset is required to dive into this $10 multimedia explosion.",
+      "contentSnippet": "No VR headset is required to dive into this $10 multimedia explosion.",
+      "guid": "https://arstechnica.com/?p=1690512",
+      "categories": [
+        "Gaming & Culture",
+        "Half-Life",
+        "half-life alyx",
+        "kerbal space program",
+        "Left 4 Dead",
+        "Valve",
+        "virtual reality",
+        "VR"
+      ],
+      "isoDate": "2020-07-09T18:57:59.000Z"
+    },
+    {
+      "creator": "Kiona N. Smith",
+      "title": "120,000-year-old necklace tells of the origin of string",
+      "link": "https://arstechnica.com/?p=1690415",
+      "pubDate": "Thu, 09 Jul 2020 18:20:20 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/236439-800x704.jpeg\" alt=\"120,000-year-old necklace tells of the origin of string\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/236439.jpeg\" class=\"enlarge-link\" data-height=\"960\" data-width=\"1091\">Enlarge</a> (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0234924\">Oz Rittner</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>People living on the Israeli coast 120,000 years ago strung ocher-painted seashells on flax string, according to a recent study in which archaeologists examined microscopic traces of wear inside naturally occurring holes in the shells. That may shed some light on when people first invented string—which hints at the invention of things like clothes, fishing nets, and maybe even seafaring.</p>\n<h2>Seashells by the seashore</h2>\n<p>Picking up seashells has been a human habit for almost as long as there have been humans. Archaeologists found clam shells mingled with other artifacts in Israel’s Misliya Cave, buried in sediment layers dating from 240,000 to 160,000 years ago. The shells clearly weren’t the remains of Paleolithic seafood dinners; their battered condition meant they’d washed ashore after their former occupants had died.</p>\n<p>For some reason, ancient people picked them up and took them home.</p></div><p><a href=\"https://arstechnica.com/?p=1690415#p3\">Read 15 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690415&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=1YNmiDbv7YY:lUmLdjqJIbU:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=1YNmiDbv7YY:lUmLdjqJIbU:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=1YNmiDbv7YY:lUmLdjqJIbU:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=1YNmiDbv7YY:lUmLdjqJIbU:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=1YNmiDbv7YY:lUmLdjqJIbU:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=1YNmiDbv7YY:lUmLdjqJIbU:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Kiona N. Smith",
+      "content": "String may have been invented between 160,000 and 120,000 years ago.",
+      "contentSnippet": "String may have been invented between 160,000 and 120,000 years ago.",
+      "guid": "https://arstechnica.com/?p=1690415",
+      "categories": [
+        "Science",
+        "ancient people did stuff",
+        "Archaeology",
+        "misliya",
+        "paleolithic",
+        "qafzeh",
+        "symbolic thought",
+        "threads"
+      ],
+      "isoDate": "2020-07-09T18:20:20.000Z"
+    },
+    {
+      "creator": "Jon Brodkin",
+      "title": "Frontier misled subscribers about Internet speeds and prices, AG finds",
+      "link": "https://arstechnica.com/?p=1690487",
+      "pubDate": "Thu, 09 Jul 2020 17:30:34 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2019/01/frontier-van-800x435.jpg\" alt=\"A Frontier Communications service van parked in a snowy area.\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2019/01/frontier-van.jpg\" class=\"enlarge-link\" data-height=\"1044\" data-width=\"1920\">Enlarge</a> <span class=\"sep\">/</span> A Frontier Communications service van. (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://www.flickr.com/photos/jeepersmedia/16244890407/in/photolist-qKviXn-6z9j6x-jR9gc-pripqq-hB8eFt-MEowm-8cCoR2-axukx9-u2jiom-drdwnm-QAaaiw-6hmK14-27uw7Mt-r2Rmeq-assvBG-JVJrow-7uRPeC-7uMXYa-asVMoF-asYpX5-5DAHbz-7uMYhe-6JyNby-KH1wgJ-asVMsF-JmXNup-281TKNv-29BGiRJ-289Ua8N-2bpt7Jj-6xd89E-KSVzpU-26oKhRN-NKcHLV-QAa9qu-27qnYSG-duE2DG-7uMYbk-5EsSKb-u2jkBQ-u2jj87-Z5hyEt-5zkgxV-7uMXZk-uiUxfa-bvufgW-6JuHET-9t4ag1-eTesZ-7bto5w\">Mike Mozart / Flickr</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>Frontier Communications misled thousands of customers about the prices it charges and about the speeds its broadband network can provide, Washington State Attorney General Bob Ferguson's office has found.</p>\n<p>The state's investigation of Frontier's business practices found evidence of the telecom \"failing to adequately disclose taxes and fees during sales of cable, Internet, and telephone services; failing to adequately disclose its Internet Infrastructure Surcharge fee in advertising; misleading consumers by implying that the Internet Infrastructure Surcharge and other fees are mandatory and/or government-related fees; and misleading consumers as to Internet speeds it could offer, and failing to deliver speeds and service as advertised.\"</p>\n<p>The findings are described in a <a href=\"https://agportal-s3bucket.s3.amazonaws.com/uploadedfiles/Another/News/Press_Releases/2020_07_07FrontierAOD.pdf\">settlement</a> that will force Frontier Communications to pay a $900,000 fine and force the new owner of Frontier's network in Washington state to change its business practices. Among other things, the settlement requires Frontier's current owner in Washington to stop charging the $3.99-per-month Internet Infrastructure Surcharge. The company \"neither admits nor denies the State's findings.\" The settlement still needs court approval before it can take effect.</p></div><p><a href=\"https://arstechnica.com/?p=1690487#p3\">Read 13 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690487&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=wXCgoQYyCLg:X3TKb8En70M:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=wXCgoQYyCLg:X3TKb8En70M:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=wXCgoQYyCLg:X3TKb8En70M:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=wXCgoQYyCLg:X3TKb8En70M:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=wXCgoQYyCLg:X3TKb8En70M:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=wXCgoQYyCLg:X3TKb8En70M:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Jon Brodkin",
+      "content": "Washington state AG forces Frontier Northwest to clearly disclose prices, speeds.",
+      "contentSnippet": "Washington state AG forces Frontier Northwest to clearly disclose prices, speeds.",
+      "guid": "https://arstechnica.com/?p=1690487",
+      "categories": [
+        "Biz & IT",
+        "Policy",
+        "bob ferguson",
+        "frontier",
+        "internet speeds",
+        "Washington State"
+      ],
+      "isoDate": "2020-07-09T17:30:34.000Z"
+    },
+    {
+      "creator": "Ron Amadeo",
+      "title": "Get your first look at the Samsung Galaxy Note 20",
+      "link": "https://arstechnica.com/?p=1690428",
+      "pubDate": "Thu, 09 Jul 2020 17:10:52 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n\n\n\n\n\n<div><a name=\"page-1\"></a></div>\n      <ul class=\"gallery shortcode-gallery gallery-wide\"><li>\n        <div class=\"gallery-item-content\">  \n        <div class=\"gallery-image\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/17-980x888.jpg\" alt=\"\"></div>\n        <p>\n          The Note 20 Ultra in all its glory.                      [credit:\n                        <a href=\"https://www.youtube.com/watch?v=b32JHRVhgYU\">Jimmy Is Promo</a>\n                        ]\n                  </p>\n        </div>\n      </li>\n      </ul><p>Samsung might have recently set the Galaxy Note 20 reveal for <a href=\"https://news.samsung.com/global/online-invitation-samsung-galaxy-unpacked-2020\">August 5</a>, but somebody already has a prototype unit. YouTuber <a href=\"https://www.youtube.com/watch?v=b32JHRVhgYU\">Jimmy Is Promo</a> has posted a hands-on video and <a href=\"https://mobile.twitter.com/jimmyispromo\">a few images</a> of the Galaxy Note 20 Ultra, the bigger of the two upcoming units.</p>\n<p>Like<a href=\"https://arstechnica.com/gadgets/2020/05/report-says-the-galaxy-note-20-is-significantly-bigger-than-the-note-10/\"> previous leaks</a> indicated, the Note 20 is even bigger than last year's model. Jimmy is Promo did an excellent job, and by taking some Note 10+ comparison shots, we can clearly see the Note 20 Ultra is taller and wider than the Note 10+, which was already one of the biggest smartphones on the market.</p>\n<p>The Galaxy Note series is usually very close to the Galaxy S series released earlier in the year, and it looks like that's the case this year, too. Like the S20, the Note 20 goes with a curved front display and a hole punch front camera, with the one design change being taller corners. The rear camera block gets new styling with circles around each camera, making the lenses appear bigger than they really are. The camera layout looks identical to the Galaxy S20 Ultra, so expect the three big cameras to be a main camera, wide-angle lens, and a telephoto, followed by a tiny depth camera tucked away under the flash.</p></div><p><a href=\"https://arstechnica.com/?p=1690428#p3\">Read 5 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690428&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=9rxYJUCa-wI:_Jf2VQd6ylA:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=9rxYJUCa-wI:_Jf2VQd6ylA:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=9rxYJUCa-wI:_Jf2VQd6ylA:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=9rxYJUCa-wI:_Jf2VQd6ylA:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=9rxYJUCa-wI:_Jf2VQd6ylA:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=9rxYJUCa-wI:_Jf2VQd6ylA:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Ron Amadeo",
+      "content": "See a hands-on video and photos of Samsung’s next flagship. ",
+      "contentSnippet": "See a hands-on video and photos of Samsung’s next flagship.",
+      "guid": "https://arstechnica.com/?p=1690428",
+      "categories": [
+        "Tech"
+      ],
+      "isoDate": "2020-07-09T17:10:52.000Z"
+    },
+    {
+      "creator": "Kyle Orland",
+      "title": "The return of the $70 video game has been a long time coming",
+      "link": "https://arstechnica.com/?p=1690243",
+      "pubDate": "Thu, 09 Jul 2020 16:05:13 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n\n\n\n\n\n<div><a name=\"page-1\"></a></div>\n      <ul class=\"gallery shortcode-gallery gallery-wide\"><li>\n        <div class=\"gallery-item-content\">  \n        <div class=\"gallery-image\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/game-prices.001-980x735.jpeg\" alt=\"\"></div>\n        <p>\n          Fig. 1: When adjusted for inflation, the top-end price for big-budget console games has never been lower than today's $60 (lines are a moving average of the last three data points).                  </p>\n        </div>\n      </li>\n      </ul><p>Last week, 2K made waves by becoming the first publisher to <a href=\"https://arstechnica.com/gaming/2020/07/will-nba-2k21s-70-price-set-a-new-next-gen-console-standard/\">set a $70 asking price for a big-budget game</a> on the next generation of consoles. <em>NBA2K21</em> will cost the now-standard $60 on the Xbox One and PlayStation 4, but 2K will ask $10 more for the upcoming Xbox Series X and PlayStation 5 versions of the game (a $100 \"Mamba Forever Edition\" gives players access to current-generation and next-generation versions in a single bundle).</p>\n<p>It remains to be seen if other publishers will follow 2K's lead and make $70 a new de facto standard for big-budget console game pricing. But while $70 would match the high-water mark for <em>nominal</em> game pricing, it wouldn't be a historically high asking price in terms of <em>actual value</em>. Thanks to inflation and changes in game distribution, in fact, the current ceiling for game prices has never been lower.</p>\n<h2>The data</h2>\n<p>To measure how the actual asking price for console games has changed over time, we relied primarily on <a href=\"https://www.retrowaste.com/wp-content/gallery/1980s-video-games-ads/\">scanned catalogs</a> and <a href=\"https://www.retrowaste.com/wp-content/gallery/1990s-video-games-ads/\">retail advertising fliers</a> we found online. While this information was easier to find for some years than others, we were still able to gather data for 20 distinct years across the last four decades. We then adjusted those nominal prices to constant 2020 dollars using <a href=\"https://www.bls.gov/data/inflation_calculator.htm\">the Bureau of Labor Statistics' CPI inflation calculator</a>.</p></div><p><a href=\"https://arstechnica.com/?p=1690243#p3\">Read 11 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690243&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=NNJ0MWnf3lw:B07ZWzIu_r0:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=NNJ0MWnf3lw:B07ZWzIu_r0:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=NNJ0MWnf3lw:B07ZWzIu_r0:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=NNJ0MWnf3lw:B07ZWzIu_r0:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=NNJ0MWnf3lw:B07ZWzIu_r0:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=NNJ0MWnf3lw:B07ZWzIu_r0:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Kyle Orland",
+      "content": "Top-end game pricing has never been lower when measured in constant dollars.",
+      "contentSnippet": "Top-end game pricing has never been lower when measured in constant dollars.",
+      "guid": "https://arstechnica.com/?p=1690243",
+      "categories": [
+        "Gaming & Culture"
+      ],
+      "isoDate": "2020-07-09T16:05:13.000Z"
+    },
+    {
+      "creator": "Scott K. Johnson",
+      "title": "Manage your expectations about the benefits of emissions cuts, study says",
+      "link": "https://arstechnica.com/?p=1690270",
+      "pubDate": "Thu, 09 Jul 2020 15:56:02 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/wait_mat_n-800x534.jpg\" alt=\"Manage your expectations about the benefits of emissions cuts, study says\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/wait_mat_n.jpg\" class=\"enlarge-link\" data-height=\"1367\" data-width=\"2048\">Enlarge</a> (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://www.flickr.com/photos/oxyg3n_org/919395814/\">mat_n</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>The climate is sometimes compared to a huge ship, in that it takes some time to turn it in a new direction, meaning that actions to limit global warming produce very gradual results. While the lack of instant gratification is certainly frustrating, having some indications of progress could at least sustain patience with the energy transformation needed. The problem is that Earth’s climate system differs from that metaphorical huge ship in a key way—there is a significant amount of natural variability that can also mask a change in trend.</p>\n<p>So before we see any change in climate trends from our present actions, we have to both wait for them to start and wait for them to become large enough to be detectable against a background of natural variability.</p>\n<p>A new study led by <a href=\"https://www.cicero.oslo.no/en/employee/24/bjorn-hallvard-samset\">Bjørn Hallvard Samset</a> takes on the question of how long it will take to clearly see the effects of reducing emissions. “This paper is about managing our expectations,” the authors say in their new work. Failure of that management could mean that undertaking the work of climate mitigation would lose support if people are expecting instantaneous progress that doesn’t materialize.</p></div><p><a href=\"https://arstechnica.com/?p=1690270#p3\">Read 13 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690270&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=8kBlC1EAjrM:Y9sYkfI4qEQ:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=8kBlC1EAjrM:Y9sYkfI4qEQ:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=8kBlC1EAjrM:Y9sYkfI4qEQ:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=8kBlC1EAjrM:Y9sYkfI4qEQ:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=8kBlC1EAjrM:Y9sYkfI4qEQ:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=8kBlC1EAjrM:Y9sYkfI4qEQ:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Scott K. Johnson",
+      "content": "Climate is variable, so how long does it take for our efforts to be obvious?",
+      "contentSnippet": "Climate is variable, so how long does it take for our efforts to be obvious?",
+      "guid": "https://arstechnica.com/?p=1690270",
+      "categories": [
+        "Science",
+        "climate mitigation"
+      ],
+      "isoDate": "2020-07-09T15:56:02.000Z"
+    },
+    {
+      "creator": "Dan Goodin",
+      "title": "Google Play apps with 500,000 downloads subscribe users to costly services",
+      "link": "https://arstechnica.com/?p=1690431",
+      "pubDate": "Thu, 09 Jul 2020 15:22:08 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2018/01/android-malware.jpg\" alt=\"Google Play apps with 500,000 downloads subscribe users to costly services\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2018/01/android-malware.jpg\" class=\"enlarge-link\" data-height=\"479\" data-width=\"718\">Enlarge</a> (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://www.flickr.com/photos/135518748@N08/28504405955\">portal gda / Flickr</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>Hackers and <a href=\"https://play.google.com/store\">Google Play</a> have been caught up in a tense dance over the past decade. The hackers sneak malware into the Google-owned Android app repository. Google throws it out and develops defenses to prevent it from happening again. Then the hackers find a new opening and do it all over again. This two-step has played out again, this time with a malware family known as the Joker, which has been infiltrating Play since at least 2017.</p>\n<p>The Joker is malicious code that lurks inside seemingly legitimate apps. It often waits hours or days after the app is installed to run in an attempt to evade Google’s automated malware detection. On Thursday, researchers with security firm Check Point said the <a href=\"link\">Joker has struck again</a>, this time lurking in 11 seemingly legitimate apps downloaded from Play about 500,000 times. Once activated, the malware allowed the apps to surreptitiously subscribe users to pricey premium services.</p>\n<p>The new variant found a new trick to go undetected—it hid its malicious payload inside what’s known as the <a href=\"https://developer.android.com/guide/topics/manifest/manifest-intro\">manifest</a>, a file Google requires every app to include in its root directory. Google’s intent is for the XML file to provide more transparency by making permissions, icons, and other information about the app easy to find.</p></div><p><a href=\"https://arstechnica.com/?p=1690431#p3\">Read 8 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690431&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=6g13XjEMGik:sj8w8gvN_t8:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=6g13XjEMGik:sj8w8gvN_t8:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=6g13XjEMGik:sj8w8gvN_t8:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=6g13XjEMGik:sj8w8gvN_t8:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=6g13XjEMGik:sj8w8gvN_t8:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=6g13XjEMGik:sj8w8gvN_t8:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Dan Goodin",
+      "content": "Malware family that has infiltrated Play since 2017 strikes again.",
+      "contentSnippet": "Malware family that has infiltrated Play since 2017 strikes again.",
+      "guid": "https://arstechnica.com/?p=1690431",
+      "categories": [
+        "Biz & IT",
+        "android",
+        "google play",
+        "malware"
+      ],
+      "isoDate": "2020-07-09T15:22:08.000Z"
+    },
+    {
+      "creator": "Beth Mole",
+      "title": "Is SARS-CoV-2 airborne? Questions abound—but here’s what we know",
+      "link": "https://arstechnica.com/?p=1690193",
+      "pubDate": "Thu, 09 Jul 2020 11:30:10 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/GettyImages-86267665-800x550.jpg\" alt=\"A doctor wears a hood as he tests the seal of an N95 respiratory mask during a training at the La Clinica San Antonio Neighborhood Health Center in California.\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/GettyImages-86267665.jpg\" class=\"enlarge-link\" data-height=\"2064\" data-width=\"3000\">Enlarge</a> <span class=\"sep\">/</span> A doctor wears a hood as he tests the seal of an N95 respiratory mask during a training at the La Clinica San Antonio Neighborhood Health Center in California. (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://www.gettyimages.com/detail/news-photo/doctor-wears-a-hood-as-he-tests-the-seal-of-an-n95-news-photo/86267665?adppopup=true\">Getty | Justin Sullivan</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>A debate has erupted among researchers over the potential for the pandemic coronavirus, SARS-CoV-2, to spread through the air and—if it does so often enough—what to do about it.</p>\n<p>Though talk of airborne transmission has been simmering since the beginning of the pandemic, it reached a boiling point this week following a letter penned by two researchers and addressed to “national and international bodies.” The letter, eventually signed by 239 researchers, urged those bodies to acknowledge the potential for airborne spread and to recommend control measures aimed at preventing it.</p>\n<p>“Most public health organizations, including the World Health Organization, do not recognize airborne transmission except for aerosol-generating procedures [AGPs] performed in healthcare settings,” the letter stated. The evidence on airborne transmission is “admittedly incomplete,” the letter went on, but “[f]ollowing the precautionary principle, we must address every potentially important pathway to slow the spread of COVID-19.”</p></div><p><a href=\"https://arstechnica.com/?p=1690193#p3\">Read 36 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690193&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=K8_F4YRrE5E:Ne8ss2TFXqw:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=K8_F4YRrE5E:Ne8ss2TFXqw:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=K8_F4YRrE5E:Ne8ss2TFXqw:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=K8_F4YRrE5E:Ne8ss2TFXqw:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=K8_F4YRrE5E:Ne8ss2TFXqw:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=K8_F4YRrE5E:Ne8ss2TFXqw:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Beth Mole",
+      "content": "A look at the data on aerosol transmission.",
+      "contentSnippet": "A look at the data on aerosol transmission.",
+      "guid": "https://arstechnica.com/?p=1690193",
+      "categories": [
+        "Features",
+        "Science",
+        "aerosols",
+        "airborne",
+        "airborne transmission",
+        "COVID-19",
+        "Infectious disease",
+        "pandemic",
+        "public health",
+        "respiratory droplets",
+        "SARS-CoV-2",
+        "Transmission",
+        "WHO"
+      ],
+      "isoDate": "2020-07-09T11:30:10.000Z"
+    },
+    {
+      "creator": "Jennifer Ouellette",
+      "title": "First teaser for The Boys S2 promises another wild and bloody ride",
+      "link": "https://arstechnica.com/?p=1690342",
+      "pubDate": "Thu, 09 Jul 2020 00:50:44 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n\n\n\n\n\n<div><a name=\"page-1\"></a></div>\n<div class=\"video\"><div class=\"wrapper\" style=\"display:block\" type=\"text/html\" width=\"980\" height=\"550\" src=\"https://www.youtube.com/embed/cVHwlqyMyhM?start=0&amp;wmode=transparent\" frameborder=\"0\" allowfullscreen></div><p class=\"caption\" style=\"font-size:0.8em\">Our vigilantes are on the run from Homelander (Antony Starr) and the rest of the Seven in the second season of Amazon Prime's <em>The Boys</em>. </p></div>\n<p>The war between corrupt, evil superheroes and a ragtag band of vigilantes out to expose their true nature and curb the power of \"super\" in society will escalate dramatically, judging by the first teaser for S2 of <a href=\"https://en.wikipedia.org/wiki/The_Boys_(2019_TV_series)\"><em>The Boys.</em></a> The Amazon Prime series—one of the most watched on the streaming platform when it debuted last year—is based on the comics of the same name by Garth Ennis and Darick Robertson.</p>\n<p><strong>(S1 spoilers below.)</strong></p>\n<p><em>The Boys</em> is set in a fictional universe where superheroes are real but corrupted by corporate interests and a toxic celebrity-obsessed culture. Billy Butcher (Karl Urban) is a self-appointed vigilante intent on checking the bad behavior of the so-called \"supes\"—especially The Seven, the most elite superhero squad and, hence, the most corrupt. Butcher especially hates Seven leader Homelander (Antony Starr), a psychopath who raped his now-dead wife. Butcher recruits an equally traumatized young man named Hugh \"Hughie\" Campbell (Jack Quaid, son of Dennis) to help in his revenge, after another Seven member, A-Train (Jessie T. Usher), used his super-speed to literally run through Hughie's girlfriend, killing her instantly.</p></div><p><a href=\"https://arstechnica.com/?p=1690342#p3\">Read 7 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690342&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=0jUIG3_ypFI:cyRQfzjIfsY:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=0jUIG3_ypFI:cyRQfzjIfsY:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=0jUIG3_ypFI:cyRQfzjIfsY:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=0jUIG3_ypFI:cyRQfzjIfsY:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=0jUIG3_ypFI:cyRQfzjIfsY:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=0jUIG3_ypFI:cyRQfzjIfsY:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Jennifer Ouellette",
+      "content": "“Don't you worry. Daddy's home.”",
+      "contentSnippet": "“Don't you worry. Daddy's home.”",
+      "guid": "https://arstechnica.com/?p=1690342",
+      "categories": [
+        "Gaming & Culture",
+        "Amazon Prime",
+        "entertainment",
+        "streaming television",
+        "television",
+        "The Boys",
+        "Trailers"
+      ],
+      "isoDate": "2020-07-09T00:50:44.000Z"
+    },
+    {
+      "creator": "Beth Mole",
+      "title": "CDC to issue new guidelines on reopening schools after Trump blowup",
+      "link": "https://arstechnica.com/?p=1690345",
+      "pubDate": "Wed, 08 Jul 2020 22:50:40 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/GettyImages-1213413571-800x533.jpg\" alt=\"Children sit at desks while wearing clear masks.\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/GettyImages-1213413571.jpg\" class=\"enlarge-link\" data-height=\"3712\" data-width=\"5568\">Enlarge</a> <span class=\"sep\">/</span> Schoolchildren wearing protective mouth masks and face shields attend a course in their classroom at Claude Debussy college in Angers, western France, on May 18, 2020, after France eased lockdown measures to curb the spread of the COVID-19 pandemic, caused by the novel coronavirus. (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://www.gettyimages.com/detail/news-photo/schoolchildren-wearing-protective-mouth-masks-and-face-news-photo/1213413571?adppopup=true\">Damien Meyer / AFP / Getty Images</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>On the heels of criticism from President Trump, the US Centers for Disease Control and Prevention is planning to release updated guidance documents outlining how schools can safely reopen amid the COVID-19 pandemic.</p>\n<p>Vice President Mike Pence announced the upcoming documents Wednesday, just hours after Trump took to Twitter to blast the agency’s current guidelines.</p>\n<p>“Well, the president said today, we just don’t want the guidance to be too tough,” Pence said in a press briefing for the White House Coronavirus Task Force. “That’s the reason why next week, the CDC is going to be issuing a new set of tools, five different documents that will be giving even more clarity on the guidance going forward.”</p></div><p><a href=\"https://arstechnica.com/?p=1690345#p3\">Read 9 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690345&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=Qrc2QzNlK24:nw0XqygDNDs:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=Qrc2QzNlK24:nw0XqygDNDs:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=Qrc2QzNlK24:nw0XqygDNDs:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=Qrc2QzNlK24:nw0XqygDNDs:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=Qrc2QzNlK24:nw0XqygDNDs:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=Qrc2QzNlK24:nw0XqygDNDs:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Beth Mole",
+      "content": "Trump has intensified calls to open schools, despite clear plans and surging COVID-19.",
+      "contentSnippet": "Trump has intensified calls to open schools, despite clear plans and surging COVID-19.",
+      "guid": "https://arstechnica.com/?p=1690345",
+      "categories": [
+        "Science",
+        "american academy of pediatrics",
+        "COVID-19",
+        "Infectious disease",
+        "pandemic",
+        "pediatrics",
+        "pence",
+        "public health",
+        "SARS-CoV-2",
+        "school",
+        "Trump"
+      ],
+      "isoDate": "2020-07-08T22:50:40.000Z"
+    },
+    {
+      "creator": "Dan Goodin",
+      "title": "Microsoft neuters Office 365 account attacks that used clever ruse",
+      "link": "https://arstechnica.com/?p=1690316",
+      "pubDate": "Wed, 08 Jul 2020 21:59:14 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/office-365-800x450.jpg\" alt=\"The Office Three 65 logo is emblazoned on TVs and boxes in a shopping mall.\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/office-365.jpg\" class=\"enlarge-link\" data-height=\"576\" data-width=\"1024\">Enlarge</a> (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://www.flickr.com/photos/ealecrim/8429816636\">Emerson Alecrim / Flickr</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>Microsoft has neutered a large-scale fraud campaign that used knock-off domains and malicious apps to scam customers in 62 countries around the world.</p>\n<p>The software maker and cloud-service provider last week obtained a <a href=\"https://noticeofpleadings.com/COVID-19-Bonus-Phishing/files/Court%20Orders/Microsoft%20v.%20John%20Does%20(Civil%20Action%20120cv730%20EDVA)%20Temporary%20Restraining%20Order.pdf\">court order</a> that allowed it to seize six domains, five of which contained the word “office.” The company said attackers used them in a sophisticated campaign designed to trick CEOs and other high-ranking business leaders into wiring large sums of money to attackers rather than trusted parties. An earlier so-called BEC, or business email compromise, that the same group of attackers carried out in December used phishing attacks to obtain unauthorized access. The emails used generic business themes such as quarterly earnings reports. Microsoft used technical means to shut it down.</p>\n<p>The attackers returned with a new BEC that took a different tack: instead of tricking targets into logging in to lookalike sites, and consequently divulging the passwords, the scam used emails that instructed the recipient to give what was purported to be a Microsoft app access to an Office 365 account. The latest scam used the COVID-19 pandemic as a lure.</p></div><p><a href=\"https://arstechnica.com/?p=1690316#p3\">Read 9 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690316&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=2aVbppbUb9c:G0RwTwqyK9Y:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=2aVbppbUb9c:G0RwTwqyK9Y:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=2aVbppbUb9c:G0RwTwqyK9Y:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=2aVbppbUb9c:G0RwTwqyK9Y:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=2aVbppbUb9c:G0RwTwqyK9Y:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=2aVbppbUb9c:G0RwTwqyK9Y:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Dan Goodin",
+      "content": "Businesses in 62 countries targeted in financial fraud scam.",
+      "contentSnippet": "Businesses in 62 countries targeted in financial fraud scam.",
+      "guid": "https://arstechnica.com/?p=1690316",
+      "categories": [
+        "Biz & IT",
+        "Policy",
+        "BEC",
+        "business email compromise",
+        "microsoft",
+        "OAuth",
+        "phishing"
+      ],
+      "isoDate": "2020-07-08T21:59:14.000Z"
+    },
+    {
+      "creator": "Scott K. Johnson",
+      "title": "Amid oil- and gas-pipeline halts, Dakota Access operator ignores court",
+      "link": "https://arstechnica.com/?p=1690034",
+      "pubDate": "Wed, 08 Jul 2020 21:07:48 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/keystone_victoria_pickering-800x270.jpg\" alt=\"The words \" stop keystone xl are projected at night on the side of a building which could be described as neoclassical federal-style or greek revival.><p class=\"caption\" style=\"font-size:0.8em\">Words projected onto the EPA's headquarters during a demonstration. (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://www.flickr.com/photos/vpickering/14022531293/\">Victoria Pickering / Flickr</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p><strong>Update: </strong>This story has been updated with a statement from the operator of the Dakota Access pipeline.</p>\n<p>A series of decisions in the last few days has halted or scuttled three high-profile oil- and gas-pipeline projects. The Keystone and Dakota Access oil pipelines—sources of long-running controversy—both suffered legal setbacks that will require additional environmental impact reviews. Separately, the Atlantic Coast natural gas pipeline recently won a case before the US Supreme Court, yet it has now been abandoned by the two energy companies behind it.</p>\n<p>The <a href=\"https://en.wikipedia.org/wiki/Keystone_Pipeline\">Keystone XL</a> pipeline is meant to carry oil produced in Alberta, Canada, southeast to Nebraska, but it has suffered major delays. The <a href=\"https://en.wikipedia.org/wiki/Dakota_Access_Pipeline\">Dakota Access</a> pipeline, on the other hand, has been operational for several years, carrying oil from North Dakota to southern Illinois.</p></div><p><a href=\"https://arstechnica.com/?p=1690034#p3\">Read 10 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690034&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=VHED_s1QlLQ:NF-vnj68-7k:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=VHED_s1QlLQ:NF-vnj68-7k:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=VHED_s1QlLQ:NF-vnj68-7k:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=VHED_s1QlLQ:NF-vnj68-7k:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=VHED_s1QlLQ:NF-vnj68-7k:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=VHED_s1QlLQ:NF-vnj68-7k:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Scott K. Johnson",
+      "content": "Pipelines are having a bad week.",
+      "contentSnippet": "Pipelines are having a bad week.",
+      "guid": "https://arstechnica.com/?p=1690034",
+      "categories": [
+        "Policy",
+        "Science",
+        "Dakota Access Pipeline",
+        "oil pipeline"
+      ],
+      "isoDate": "2020-07-08T21:07:48.000Z"
+    },
+    {
+      "creator": "Samuel Axon",
+      "title": "Intel details Thunderbolt 4: Required DMA protection, longer cables, and more",
+      "link": "https://arstechnica.com/?p=1690216",
+      "pubDate": "Wed, 08 Jul 2020 20:48:15 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n\n\n\n\n\n<div><a name=\"page-1\"></a></div>\n      <ul class=\"gallery shortcode-gallery gallery-wide\"><li>\n        <div class=\"gallery-item-content\">  \n        <div class=\"gallery-image\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/Thunderbolt-4-logo-980x500.png\" alt=\"\"></div>\n        <p>\n          The branding for Thunderbolt 4.                      [credit:\n                        <a href=\"https://www.intel.com/content/www/us/en/homepage.html\">Intel</a>\n                        ]\n                  </p>\n        </div>\n      </li>\n      </ul><p>Intel has outlined what to expect from the new Thunderbolt 4 standard, which is expected to start appearing in consumer devices later this year.</p>\n<p>While it won't offer an increase over the 40GB/s that Thunderbolt 3 does, Thunderbolt 4 has steeper minimum requirements than Thunderbolt 3 for devices to claim certification—and that makes some new features and perks standard.</p>\n<p>These are the specifications for Thunderbolt 4, according to Intel:</p></div><p><a href=\"https://arstechnica.com/?p=1690216#p3\">Read 4 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690216&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=jDO8yKXdU-8:s4SCIJxdlvo:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=jDO8yKXdU-8:s4SCIJxdlvo:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=jDO8yKXdU-8:s4SCIJxdlvo:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=jDO8yKXdU-8:s4SCIJxdlvo:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=jDO8yKXdU-8:s4SCIJxdlvo:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=jDO8yKXdU-8:s4SCIJxdlvo:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Samuel Axon",
+      "content": "It will be fully compatible with USB4.",
+      "contentSnippet": "It will be fully compatible with USB4.",
+      "guid": "https://arstechnica.com/?p=1690216",
+      "categories": [
+        "Tech",
+        "apple",
+        "I/O",
+        "Intel",
+        "Ports",
+        "Thunderbolt 4",
+        "USB",
+        "USB-C"
+      ],
+      "isoDate": "2020-07-08T20:48:15.000Z"
+    },
+    {
+      "creator": "Jennifer Ouellette",
+      "title": "Superpowered siblings time travel to save the world in Umbrella Academy S2 trailer",
+      "link": "https://arstechnica.com/?p=1690168",
+      "pubDate": "Wed, 08 Jul 2020 20:05:37 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n\n\n\n\n\n<div><a name=\"page-1\"></a></div>\n<div class=\"video\"><div class=\"wrapper\" style=\"display:block\" type=\"text/html\" width=\"980\" height=\"550\" src=\"https://www.youtube.com/embed/Me0eoCwLj-A?start=0&amp;wmode=transparent\" frameborder=\"0\" allowfullscreen></div><p class=\"caption\" style=\"font-size:0.8em\">The Hargreeves siblings are scattered in time and must reunite to stop the apocalypse in the second season of <em>The Umbrella Academy</em>. </p></div>\n<p>A group of dysfunctional siblings with superpowers travels back in time to the 1960s in the hope of warding off the apocalypse in the official trailer for the second season of <a href=\"https://en.wikipedia.org/wiki/The_Umbrella_Academy_(TV_series)\"><em>The Umbrella Academy</em></a>. The Netflix series is an adaptation of the award-winning Dark Horse Comics <a href=\"https://en.wikipedia.org/wiki/The_Umbrella_Academy\">series of the same name</a> created by <a href=\"https://en.wikipedia.org/wiki/Gerard_Way\">Gerard Way</a> and illustrated by <a href=\"https://en.wikipedia.org/wiki/Gabriel_B%C3%A1\">Gabriel Bá</a>.</p>\n<p><strong>(Spoilers for S1 below.)</strong></p>\n<p>The comics <a href=\"https://arstechnica.com/gaming/2019/01/superhero-siblings-must-thwart-the-apocalypse-in-the-umbrella-academy/\">are set</a> in an alternate 1977 (the year Way was born) in which President John F. Kennedy was never assassinated. The Monocle, an alien disguised as billionaire industrialist Sir Reginald Hargreeves, adopts seven surviving children out of 43 mysteriously born to random women who had not been pregnant the day before. The children are raised at Hargreeves' Umbrella Academy and become a family of superheroes with special powers. But it's a dysfunctional arrangement, and the family members ultimately disband, only reuniting as adults when Hargreeves dies. </p></div><p><a href=\"https://arstechnica.com/?p=1690168#p3\">Read 14 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690168&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=iZWG3WiGy2g:GXDojkCmZl0:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=iZWG3WiGy2g:GXDojkCmZl0:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=iZWG3WiGy2g:GXDojkCmZl0:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=iZWG3WiGy2g:GXDojkCmZl0:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=iZWG3WiGy2g:GXDojkCmZl0:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=iZWG3WiGy2g:GXDojkCmZl0:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Jennifer Ouellette",
+      "content": "Same weird family. New weird problems. And maybe the end of the world as we know it.",
+      "contentSnippet": "Same weird family. New weird problems. And maybe the end of the world as we know it.",
+      "guid": "https://arstechnica.com/?p=1690168",
+      "categories": [
+        "Gaming & Culture",
+        "entertainment",
+        "Netflix",
+        "streaming television",
+        "television",
+        "The Umbrella Academy",
+        "Trailers"
+      ],
+      "isoDate": "2020-07-08T20:05:37.000Z"
+    },
+    {
+      "creator": "Jon Brodkin",
+      "title": "Harvard, MIT sue Trump admin to block deportation of online-only students",
+      "link": "https://arstechnica.com/?p=1690227",
+      "pubDate": "Wed, 08 Jul 2020 19:19:07 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/getty-student-visa-800x450.jpg\" alt=\"A student visa with the word \" canceled stamped on it.><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/getty-student-visa.jpg\" class=\"enlarge-link\" data-height=\"1080\" data-width=\"1920\">Enlarge</a> (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://www.gettyimages.com/\">Getty Images | Motortion</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>Harvard University and the Massachusetts Institute of Technology today sued the Trump administration to block an action that forces foreign students with nonimmigrant visas to leave the United States or transfer to different schools that offer in-person classes. The schools' <a href=\"https://www.harvard.edu/sites/default/files/content/sevp_filing.pdf\">complaint</a>, filed in US District Court for the District of Massachusetts, asks for a temporary restraining order and permanent injunction preventing the administration from enforcing the new policy issued by US Immigration and Customs Enforcement (ICE).</p>\n<p>In the complaint, Harvard and MIT said:</p>\n<blockquote><p>By all appearances, ICE's decision reflects an effort by the federal government to force universities to reopen in-person classes, which would require housing students in densely packed residential halls, notwithstanding the universities' judgment that it is neither safe nor educationally advisable to do so, and to force such a reopening when neither the students nor the universities have sufficient time to react to or address the additional risks to the health and safety of their communities. The effect—and perhaps even the goal—is to create as much chaos for universities and international students as possible.</p></blockquote>\n<p>The ICE policy will be especially problematic for Harvard and MIT students from certain countries, such as \"Syria, where civil war and an ongoing humanitarian crisis make Internet access and study all but impossible,\" the lawsuit said. \"Others come from Ethiopia, where the government has a practice of suspending all Internet access for extended periods, including presently, starting on June 30, 2020.\"</p></div><p><a href=\"https://arstechnica.com/?p=1690227#p3\">Read 14 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690227&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=XpKqiSwE2i4:BMrjM6ksxr8:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=XpKqiSwE2i4:BMrjM6ksxr8:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=XpKqiSwE2i4:BMrjM6ksxr8:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=XpKqiSwE2i4:BMrjM6ksxr8:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=XpKqiSwE2i4:BMrjM6ksxr8:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=XpKqiSwE2i4:BMrjM6ksxr8:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Jon Brodkin",
+      "content": "ICE requires students with F-1 visas to leave US or take in-person classes.",
+      "contentSnippet": "ICE requires students with F-1 visas to leave US or take in-person classes.",
+      "guid": "https://arstechnica.com/?p=1690227",
+      "categories": [
+        "Policy",
+        "f-1 visas",
+        "Harvard",
+        "ice",
+        "MIT",
+        "trump administration"
+      ],
+      "isoDate": "2020-07-08T19:19:07.000Z"
+    },
+    {
+      "creator": "Timothy B. Lee",
+      "title": "Hong Kong downloads of Signal surge as residents fear crackdown",
+      "link": "https://arstechnica.com/?p=1690144",
+      "pubDate": "Wed, 08 Jul 2020 16:20:22 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/GettyImages-1203348066-800x533.jpg\" alt=\"Hong Kong downloads of Signal surge as residents fear crackdown\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/GettyImages-1203348066.jpg\" class=\"enlarge-link\" data-height=\"5333\" data-width=\"8000\">Enlarge</a> (credit: d3sign / Getty)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>The secure chat app Signal has become the most downloaded app in Hong Kong on both Apple's and Google's app stores, <a href=\"https://www.bloomberg.com/news/articles/2020-07-08/signal-messenger-rockets-up-hong-kong-download-charts?srnd=technology-vp\">Bloomberg reports</a>, citing data from App Annie. The surging interest in encrypted messaging comes days after the Chinese government in Beijing passed a new national security law that reduced Hong Kong's autonomy and could undermine its traditionally strong protections for civil liberties.</p>\n<p>The 1997 handover of Hong Kong from the United Kingdom to China came with a promise that China would respect Hong Kong's autonomy for 50 years following the handover. Under the terms of that deal, Hong Kong residents should have continued to enjoy greater freedom than people on the mainland until 2047. But recently, the mainland government has appeared to renege on that deal.</p>\n\n<p>Civil liberties advocates see the national security law approved last week as a major blow to freedom in Hong Kong. The New York Times <a href=\"https://www.nytimes.com/2020/06/30/world/asia/hong-kong-security-law-explain.html\">reports</a> that \"the four major offenses in the law—separatism, subversion, terrorism and collusion with foreign countries—are ambiguously worded and give the authorities extensive power to target activists who criticize the party, activists say.\" Until now, Hong Kongers faced trial in the city's separate, independent judiciary. The new law opens the door for dissidents to be tried in mainland courts with less respect for civil liberties or due process.</p></div><p><a href=\"https://arstechnica.com/?p=1690144#p3\">Read 3 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690144&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=st4wFmzjdzY:iJ6Xv87PCPM:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=st4wFmzjdzY:iJ6Xv87PCPM:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=st4wFmzjdzY:iJ6Xv87PCPM:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=st4wFmzjdzY:iJ6Xv87PCPM:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=st4wFmzjdzY:iJ6Xv87PCPM:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=st4wFmzjdzY:iJ6Xv87PCPM:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Timothy B. Lee",
+      "content": "A new security law is expected to undermine Hong Kong’s autonomy and freedoms.",
+      "contentSnippet": "A new security law is expected to undermine Hong Kong’s autonomy and freedoms.",
+      "guid": "https://arstechnica.com/?p=1690144",
+      "categories": [
+        "Policy",
+        "china",
+        "end to end encryption",
+        "Hong Kong",
+        "privacy",
+        "security",
+        "signal"
+      ],
+      "isoDate": "2020-07-08T16:20:22.000Z"
+    },
+    {
+      "creator": "Kyle Orland",
+      "title": "Scrabble players move toward banning 200+ slurs from tournament play",
+      "link": "https://arstechnica.com/?p=1690139",
+      "pubDate": "Wed, 08 Jul 2020 15:57:35 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/scrabble-800x536.jpg\" alt=\"I had to squint to make sure there weren't any offensive words in this illustrative photo.\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/scrabble.jpg\" class=\"enlarge-link\" data-height=\"685\" data-width=\"1023\">Enlarge</a> <span class=\"sep\">/</span> I had to squint to make sure there weren't any offensive words in this illustrative photo. (credit: <a rel=\"nofollow\" class=\"caption-link\" href=\"https://www.flickr.com/photos/davidchief/937649420/sizes/l/\">Flickr / DavidMartynHunt</a>)</p>  </figure><div><a name=\"page-1\"></a></div>\n<p>The North American Scrabble Players Association (NASPA) seems poised to remove hundreds of offensive slurs from tournament-level <em>Scrabble</em> play. The proposed move is part of an effort by the group to \"support Black Lives Matter and bring justice to our world,\" as organization CEO John Chew <a href=\"http://www.icontact-archive.com/archive?c=1384631&amp;f=6038&amp;s=14937&amp;m=289409&amp;t=42bfeecf990f5ae04e8a9ea793c9a29e79393ee2e6b4b72ecef1a231ef1a0fa9\">put it in a recent newsletter</a>.</p>\n<p>Hasbro, which publishes <em>Scrabble</em>, told <a href=\"https://www.nytimes.com/2020/07/07/sports/scrabble-racial-slurs-tournaments.html\">The New York Times</a> that NASPA has \"agreed to remove all slurs from their word list for <em>Scrabble</em> tournament play, which is managed solely by NASPA and available only to members.\" The company said it will also be updating the game's rules \"to make clear that slurs are not permissible in any form of the game.\"</p>\n<p>But after weeks of debate, NASPA's 12-person advisory board hasn't yet officially voted on the proposal to ban over 200 offensive slurs and variations from tournament play. That vote is set for later this week.</p></div><p><a href=\"https://arstechnica.com/?p=1690139#p3\">Read 12 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690139&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=AFCrGLrDwGk:cBh0LzUvFag:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=AFCrGLrDwGk:cBh0LzUvFag:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=AFCrGLrDwGk:cBh0LzUvFag:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=AFCrGLrDwGk:cBh0LzUvFag:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=AFCrGLrDwGk:cBh0LzUvFag:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=AFCrGLrDwGk:cBh0LzUvFag:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Kyle Orland",
+      "content": "Player group CEO says proposed move reflects words’ “power to cause harm.”",
+      "contentSnippet": "Player group CEO says proposed move reflects words’ “power to cause harm.”",
+      "guid": "https://arstechnica.com/?p=1690139",
+      "categories": [
+        "Gaming & Culture",
+        "BLM",
+        "Scrabble",
+        "slurs",
+        "words"
+      ],
+      "isoDate": "2020-07-08T15:57:35.000Z"
+    },
+    {
+      "creator": "Jonathan M. Gitlin",
+      "title": "Ask Ars: Should you stop using the word “marijuana”?",
+      "link": "https://arstechnica.com/?p=1690115",
+      "pubDate": "Wed, 08 Jul 2020 15:47:53 +0000",
+      "content:encoded": "<div id=\"rss-wrap\">\n<figure class=\"intro-image intro-left\"><img src=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/GettyImages-469030417-800x599.jpg\" alt=\"Ask Ars: Should you stop using the word “marijuana”?\"><p class=\"caption\" style=\"font-size:0.8em\"><a href=\"https://cdn.arstechnica.net/wp-content/uploads/2020/07/GettyImages-469030417.jpg\" class=\"enlarge-link\" data-height=\"1499\" data-width=\"2001\">Enlarge</a> </p>  </figure><div><a name=\"page-1\"></a></div>\n<p>Here's a question to ponder this morning: should people use the word \"cannabis\" or \"marijuana\" when referring to the psychoactive plant? That sounds like a pretty left-field question for a Wednesday morning, we know. But it was sparked by a lengthy discussion in the Ars office this morning, and we figured it might be interesting to get your take on the issue, particularly since <a href=\"https://arstechnica.com/tech-policy/2020/06/openzfs-removed-master-slave-terminology-from-its-codebase/\">the way we use language is under the spotlight</a> right now.</p>\n<p>Confession time: the debate was initiated by yours truly. I find it hard not to be pedantic, and since the actual names of the plants that people smoke (or vape, or eat) are <em>cannabis sativa</em> and <em>cannabis indica</em>, I think that's what we should use when we write about the topic at Ars. The word \"marijuana\" is also specific to North America, and while our audience is predominantly North American, it's not exclusively so.</p>\n<p>But there's another reason to drop \"marijuana\" from the style guide: <a href=\"https://www.thestranger.com/news/2016/04/13/23948555/the-word-marijuana-versus-the-word-cannabis\">in the 1930s there was a conscious, racist effort</a> by US government authorities to demonize the drug by associating it with Mexico.</p></div><p><a href=\"https://arstechnica.com/?p=1690115#p3\">Read 3 remaining paragraphs</a> | <a href=\"https://arstechnica.com/?p=1690115&comments=1\">Comments</a></p><div class=\"feedflare\">\n<a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=ufvTrJrkGv8:CBuO_aIN1UA:V_sGLiPBpWU\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=ufvTrJrkGv8:CBuO_aIN1UA:V_sGLiPBpWU\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=ufvTrJrkGv8:CBuO_aIN1UA:F7zBnMyn0Lo\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?i=ufvTrJrkGv8:CBuO_aIN1UA:F7zBnMyn0Lo\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=ufvTrJrkGv8:CBuO_aIN1UA:qj6IDK7rITs\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=qj6IDK7rITs\" border=\"0\"></img></a> <a href=\"http://feeds.arstechnica.com/~ff/arstechnica/index?a=ufvTrJrkGv8:CBuO_aIN1UA:yIl2AUoC8zA\"><img src=\"http://feeds.feedburner.com/~ff/arstechnica/index?d=yIl2AUoC8zA\" border=\"0\"></img></a>\n</div>",
+      "dc:creator": "Jonathan M. Gitlin",
+      "content": "Do words matter? The “Marijuana” versus “cannabis” debate.",
+      "contentSnippet": "Do words matter? The “Marijuana” versus “cannabis” debate.",
+      "guid": "https://arstechnica.com/?p=1690115",
+      "categories": [
+        "Staff"
+      ],
+      "isoDate": "2020-07-08T15:47:53.000Z"
+    }
+  ],
+  "image": {
+    "link": "https://arstechnica.com",
+    "url": "https://cdn.arstechnica.net/wp-content/uploads/2016/10/cropped-ars-logo-512_480-32x32.png",
+    "title": "Ars Technica",
+    "width": "32",
+    "height": "32"
+  },
+  "title": "Ars Technica",
+  "description": "Serving the Technologist for more than a decade. IT news, reviews, and analysis.",
+  "generator": "https://wordpress.org/?v=4.9.13",
+  "link": "https://arstechnica.com",
+  "language": "en-US",
+  "lastBuildDate": "Fri, 10 Jul 2020 03:22:40 +0000"
+}

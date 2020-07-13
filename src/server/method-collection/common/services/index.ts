@@ -17,6 +17,9 @@ import {
   setupReddit as _setupReddit
 } from "./collection/reddit"
 import {
+  getMethods as getRssMethods
+} from "./collection/rss"
+import {
   getMethods as getTrelloMethods,
   setupTrello as _setupTrello
 } from "./collection/trello"
@@ -45,6 +48,7 @@ export function setup() {
   collection["google-calendar"] = getGoogleCalendarMethods()
   collection["league-of-legends"] = getLeagueOfLegendsMethods()
   collection["reddit"] = getRedditMethods()
+  collection["rss"] = getRssMethods()
   collection["trello"] = getTrelloMethods()
   collection["twitch"] = getTwitchMethods()
   collection["twitter"] = getTwitterMethods()

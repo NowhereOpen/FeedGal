@@ -15,5 +15,8 @@ export type GoogleCalendarInvalidReason = InvalidReasonTemplate<GoogleCalendarIn
 export type LeagueOfLegendsInvalidReasonName = "SUMMONER_NAME_EMPTY" | "REGION_EMPTY" | "ALL_EMPTY" | "SUMMONER_NOT_FOUND"
 export type LeagueOfLegendsInvalidReason = InvalidReasonTemplate<LeagueOfLegendsInvalidReasonName>
 
+export type RssInvalidReasonName = "TEST_REQUEST_ERROR" | "INVALID_URL"
+export type RssInvalidReason = InvalidReasonTemplate<RssInvalidReasonName>
+
 export type CommonInvalidReasonName = "SAME_VALUE" | "VALUE_EXISTS"
 export type CommonInvalidReason = InvalidReasonTemplate<CommonInvalidReasonName>
