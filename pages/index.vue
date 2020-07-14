@@ -22,7 +22,7 @@ div
 
   div.pagination-container(:style="{ height: '350px'}" ref="pagination-container")
     div.pagination-waiting-container(
-      v-show="is_waiting_request"
+      v-show="loader.isAllLoaded() == false"
     )
       v-btn.cancel-pagination-button(
         @click="onCancelPaginationClick"
@@ -30,7 +30,7 @@ div
       v-progress-circular(indeterminate size=80)
 
     div.pagination-idle-container(
-      v-show="is_waiting_request == false"
+      v-show="loader.isAllLoaded()"
       ref="pagination-idle-container"
     )
       span Scroll to the bottom to load more entries or click
@@ -47,7 +47,8 @@ import io from "socket.io-client"
 import GystEntryWrapper from "~/components/common/gyst-entry-loader/GystEntryWrapper.vue"
 import GystEntryLoadStatus from "~/components/common/gyst-entry-load-status/GystEntryLoadStatus.vue"
 
-import Loader from "~/store/loader.ts"
+import LoaderStore from "~/store/loader.ts"
+import { Loader } from "~/src/cli/store/loader"
 
 import { isGeneralError } from "~/src/cli/gyst-entry-response"
 import * as RssStorage from "~/src/cli/store/loader/rss-indexeddb"
@@ -73,16 +74,17 @@ import { ALL_LOADED } from "../src/common/warning-error"
   components: { GystEntryLoadStatus, GystEntryWrapper }
 })
 export default class IndexPage extends Vue {
-  @State(state => state["session"].is_logged_in) is_logged_in!:boolean
-  @State(state => state["loader"].loaded_entries) loaded_entries!:LoadedEntries
-  @Getter("loader/isLoadStatusEmpty") isLoadStatusEmpty!:Function
-
-  loader:Loader = <any> null
+  loader:Loader = new Loader(this.$store)
 
   socket:SocketIOClient.Socket = <any> null
 
   drawer = true
   is_waiting_request:boolean = false
+
+  // Vuex
+  @State(state => state["session"].is_logged_in) is_logged_in!:boolean
+  @State(state => state["loader"].loaded_entries) loaded_entries!:LoadedEntries
+  @Getter("loader/isLoadStatusEmpty") isLoadStatusEmpty!:Function
 
   mounted() {
     this.asyncMounted()
@@ -95,17 +97,16 @@ export default class IndexPage extends Vue {
   async asyncMounted() {
     // Fired from `layouts/default`
     document.addEventListener("side-panel", this.onSidePanel)
-    
-    this.loader = getModule(Loader, this.$store)
+
     this.setPaginationOnScroll()
     this.setupClientSocket()
 
     if(this.is_logged_in) {
-      if(this.loader.isLoadStatusEmpty()) {
+      if(this.isLoadStatusEmpty()) {
         return
       }
 
-      this.loader.startLoading()
+      this.loader.startInitRequest()
       this.is_waiting_request = true
       this.socket.emit(`gyst-entries-init`)
     }
@@ -169,144 +170,45 @@ export default class IndexPage extends Vue {
     }
   }
 
-  loadMore() {
-    this.loader.loadFromPreloadedStorage()
-
-    const all_params = this.getAllSuiteEntries()
-      .filter(param => {
-        const load_entry_param = this.loader.getParam(param)
-        
-        const error_exists = "error" in load_entry_param
-        const all_loaded_warning = "warning" in load_entry_param && load_entry_param.warning!.name == <WarningName>"ALL_LOADED"
-        const is_enough_loaded = this.loader.isEnoughPreloaded(param)
-
-        return error_exists == false && is_enough_loaded == false && all_loaded_warning == false
-      })
-
-    this.requestPagination(all_params)
+  async loadMore() {
+    this.loader.loadEntries()
+    const all_params = await this.loader.suggestAllPaginationParams()
+    const pagination_req_params = all_params.filter(suggestion => suggestion.suggested)
+      .map(entry => entry.pagination_req_param!)
+    this.requestPagination(pagination_req_params)
   }
 
   async onGystInitEntries(response:GystEntryResponseSuccess) {
-    this.handleSocketResponse(response)
+    await this.handleSocketResponse(response)
   }
 
   async onGystPaginationEntries(response:GystEntryResponseSuccess) {
-    this.handleSocketResponse(response)
+    await this.handleSocketResponse(response)
   }
 
   async onGystInitError(response:GystEntryResponseError) {
-    this.handleSocketResponseError(response)
+    await this.handleSocketResponseError(response)
   }
 
   async onGystPaginationError(response:GystEntryResponseError) {
-    this.handleSocketResponseError(response)
-  }
-
-  getAllSuiteEntries() {
-    const output:SuiteEntry[] = []
-    this.loader.load_status.forEach(service_setting => {
-      const service_setting_id = service_setting._id
-      const suite_entry:SuiteEntry = {
-        service_id: service_setting.service_id,
-        service_setting_id: service_setting._id,
-        oauth_connected_user_entry_id: service_setting.oauth_info?.user_info?.entry_id
-      }
-      if(service_setting.uses_setting_value) {
-        service_setting.setting_values.forEach(setting_value => {
-          const setting_value_id = setting_value._id
-          suite_entry.setting_value_id = setting_value._id
-          suite_entry.setting_value = setting_value.value
-          output.push(suite_entry)
-        })
-      }
-      else {
-        output.push(suite_entry)
-      }
-    })
-
-    return output
+    await this.handleSocketResponseError(response)
   }
 
   /**
    * 2020-07-04 06:29
    * Hard coded with loading 'old' entries only
    */
-  requestPagination(id_objects:SuiteEntryIdObject[]) {
+  requestPagination(params:ServicePaginationReqParam[]) {
     const DIRECTION = "old"
-    const all_pagination_req_data:ServicePaginationReqParam[] = []
-    
-    id_objects.forEach(param => {
-      const data = this.loader.getPaginationReqDataForSuiteEntryIdObject(param)
-      all_pagination_req_data.push(data)
 
-      this.loader.updateIsLoading({ param, value: true })
-    })
-
-    const pagination_req_data:ServicePaginationReqParam[] = []
-    const rss_pagination_req_data:ServicePaginationReqParam[] = []
-    all_pagination_req_data.forEach(data => {
-      if(data.service_id == "rss") {
-        rss_pagination_req_data.push(data)
-      }
-      else {
-        pagination_req_data.push(data)
-      }
-    })
-    this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data })
-
-    /**
-     * 2020-07-12 08:57
-     * 
-     * Handle RSS 'pagination' separately
-     */
-    this.handleRssPagination(rss_pagination_req_data)
+    if(params.length > 0) {
+      this.socket!.emit(`gyst-entries-pagination`, { direction: DIRECTION, pagination_req_data: params })
+    }
   }
 
-  /**
-   * 2020-07-12 09:06
-   * 
-   * Alternative solution would be to insert ALL feeds in the indexedDB into the `preloaded_entries`
-   * on getting init RSS feeds.
-   */
-  async handleRssPagination(pagination_req_data:ServicePaginationReqParam[]) {
-    if(pagination_req_data.length == 0) return
-    if(pagination_req_data.length > 1) {
-      console.warn(`Something wrong with RSS pagination. Unexpected number of pagination_req_data`)
-    }
+  async handleSocketResponse(response:GystEntryResponseSuccess) {
+    await this.loader.storeResponse(response)
 
-    const data = pagination_req_data[0]
-    const last_entry_key_path = data.pagination_data!.old
-    const rss_entries = await RssStorage.getOlderFeeds(last_entry_key_path)
-    const entries = rss_entries.map(entry => entry.entry)
-
-    let pagination_data!:PaginationData
-    let warning:WarningObject|undefined = undefined
-    const response:GystEntryResponseSuccess = {
-      service_id: data.service_id,
-      service_setting_id: data.service_setting_id,
-      setting_value_id: data.setting_value_id,
-      setting_value: data.setting_value,
-      entries,
-      pagination_data,
-    }
-    if(entries.length == 0) {
-      response.pagination_data = { old: last_entry_key_path, new: null }
-      response.warning = ALL_LOADED()
-    }
-    else {
-      response.pagination_data = { old: [rss_entries.slice(-1)[0].entry.id], new: null }
-    }
-
-    this.loader.updatePaginationReqData(response)
-    this.loader.updateLoadStatusStatus(response)
-  }
-
-  handleSocketResponse(response:GystEntryResponseSuccess) {
-    this.loader.updatePaginationReqData(response)
-    this.loader.updateLoadStatusStatus(response)
-    this.updateIsWaitingRequest()
-
-    this.loader.concatToPreloadedStorage(response)
     /**
      * 2020-06-09 09:29
      * 
@@ -314,32 +216,19 @@ export default class IndexPage extends Vue {
      * for the first time, or the users is at the bottom of the page, load into 'loaded
      * storage' directly.
      */
-    if(this.loader.isLoadedEmpty || this.isAtBottom()) {
-      this.loader.loadFromPreloadedStorage()
+    if(this.loader.isNonLoaded() || this.isAtBottom()) {
+      this.loader.loadEntries()
     }
 
-    /**
-     * 2020-06-09 10:08
-     * 
-     * Don't request for next pagination when there is `RATE_LIMIT` warning because it will result in
-     * somewhat 'endless loop' of making request and resposne with `RATE_LIMIT` warning until the
-     * outside service finally returns a proper response or some error/warning that is not converted
-     * into `RATE_LIMIT` by the gyst server.
-     */
-    const rate_limit_warning = "warning" in response && response.warning!.name == <WarningName> "RATE_LIMIT"
-    const all_loaded_warning = "warning" in response && response.warning!.name == <WarningName> "ALL_LOADED"
-    const is_enough_loaded = this.loader.isEnoughPreloaded(<SuiteEntry> response)
-    const count_loaded_entries = "entries" in response ? response.entries.length : 0
-    if(count_loaded_entries == 0 || is_enough_loaded || rate_limit_warning || all_loaded_warning) {
-      return
-    }
+    const suggestion = await this.loader.suggestPaginationParam(response)
 
-    this.requestPagination([{ service_setting_id: response.service_setting_id, setting_value_id: response.setting_value_id }])
+    if(suggestion.suggested) {
+      this.requestPagination([suggestion.pagination_req_param!])
+    }
   }
 
   handleSocketResponseError(response:GystEntryResponseError) {
-    this.loader.updateLoadStatusError(response)
-    this.updateIsWaitingRequest()
+    this.loader.storeError(response)
   }
 }
 </script>

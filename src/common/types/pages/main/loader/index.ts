@@ -1,6 +1,7 @@
 import { PaginationData, Entry } from "~/src/server/method-collection/common/services/base/types"
 import { SuiteEntry } from "~/src/common/types/common/suite"
 import { WarningObject, ErrorObject } from "~/src/common/types/common/warning-error"
+import { ServicePaginationReqParam } from "./request"
 
 export type SuiteEntryIdObject = { service_setting_id:string, setting_value_id?:string }
 
@@ -21,6 +22,8 @@ export type GystEntryResponseError = SuiteEntry & {
 }
 
 export type GystEntryResponse = GystEntryResponseSuccess | GystEntryResponseError
+
+export type SuiteEntryCache = ServicePaginationReqParam & { entries:Entry[] }
 
 export { PaginationData, Entry } from "~/src/server/method-collection/common/services/base/types"
 export * from "./request"

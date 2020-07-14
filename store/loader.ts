@@ -15,6 +15,7 @@ import {
   ServicePaginationReqParam,
   SuiteEntry,
   SuiteEntryIdObject,
+  SuiteEntryCache,
   GystEntryWrapper as GystEntryWrapperType
 } from "~/src/common/types/pages/main"
 import { Rss } from "~/src/common/setting-value-validation/validation-object"
@@ -57,194 +58,72 @@ export default class Store extends VuexModule {
   load_status:LoadStatus = []
 
   /**
-   * 2020-05-25 18:39
+   * 2020-07-13 12:45
    * 
-   * `load-status` isn't required apparently. Data is injected with "server side data injection" then
-   * updating status is done with fields of components (ServeSettingStatus, SettingValueStatus)
-   * instead of requiring storages.
+   * Store pagination data and entries in response. The entries here
+   * will be used for "loading at least X feeds from each suite entry"
+   * and the feeds loaded in this way will be removed from the
+   * `preloaded_entries`. Then the rest of entries will be loaded from
+   * the `preloaded_entries`.
    * 
-   * Should be implemented here when it's better to have Mutation methods and stuff for cleaner code.
+   * Refer to `https://github.com/chulman444/feedgal-issues-test/issues/1`
    */
+  // Derived from `load_status`
+  suite_entries_cache:SuiteEntryCache[] = []
 
   @Mutation
-  loadFromPreloadedStorage() {
-    const entries:GystEntryWrapperType[] = []
-
-    for(let a=0; a < this.preloaded_entries.length; a++) {
-      const entry = this.preloaded_entries[a]
-      entries.push(entry)
-      this.preloaded_entries.splice(a, 1)
-
-      if(entries.length >= LOAD_ENTRIES_NUM) {
-        break
+  deriveSuiteEntriesCache() {
+    iterateLoadStatus(this.load_status, (service_setting:LoadStatusServiceSetting, setting_value?:LoadStatusSettingValue) => {
+      const suite_entry:SuiteEntryCache = {
+        service_id: service_setting.service_id,
+        oauth_connected_user_entry_id: service_setting.oauth_info?.user_info?.entry_id,
+        service_setting_id: service_setting._id,
+        pagination_data: undefined,
+        entries: []
       }
-    }
 
-    this.loaded_entries = this.loaded_entries.concat(entries)
-  }
-
-  /**
-   * 2020-05-26 16:37
-   * 
-   * Loads 'old entries'. This method is not automatically triggered when the
-   * main page hits the bottom of the page.
-   */
-  @Mutation
-  forceLoadFromPreloadedStorage() {
-    const entries:GystEntryWrapperType[] = []
-
-    for(let a=0; a < this.preloaded_entries.length; a++) {
-      const entry = this.preloaded_entries[a]
-
-      entries.push(entry)
-        this.preloaded_entries.splice(a, 1)
-        a--
-
-      if(entries.length >= LOAD_OLD_ENTRIES_NUM) {
-        break
+      if(setting_value) {
+        suite_entry.setting_value_id = setting_value._id
+        suite_entry.setting_value = setting_value.value
       }
-    }
 
-    this.loaded_entries = this.loaded_entries.concat(entries)
+      this.suite_entries_cache.push(suite_entry)
+    })
   }
 
   @Mutation
-  concatToPreloadedStorage(response:GystEntryResponseSuccess) {
-    if(response.service_id == "rss") {
-      RssStorage.storeFeeds(response)
-      /**
-       * 2020-07-11 18:41
-       * 
-       * No `return` because having entries in the `preloaded_entries` is required.
-       * Only after entries get pushed to the preloaded_entries, can they be inserted
-       * into the `loaded_entries` and be rendered.
-       */
+  mutateLoadStatus([suite_entry_ids, cb]:[SuiteEntryIdObject, Function]) {
+    const service_setting = this.load_status.find(entry => entry._id == suite_entry_ids.service_setting_id)!
+    const setting_value = service_setting.setting_values.find(entry => entry._id == suite_entry_ids.setting_value_id)
+    if(service_setting.uses_setting_value == true && suite_entry_ids.setting_value_id) {
+      cb(setting_value, service_setting)
     }
-    
-    const entries = gystEntriesFromResponse(response)
+    else {
+      cb(service_setting)
+    }
+  }
 
-    this.preloaded_entries = this.preloaded_entries.concat(entries)
-    
-    // Sort entries in chronological order
-    this.preloaded_entries.sort((a,b) => moment(b.entry.datetime_info).isAfter(moment(a.entry.datetime_info)) ? 1 : -1)
+  @Mutation
+  mutateCache([suite_entry_ids, cb]:[SuiteEntryIdObject, Function]) {
+    const cache = this.suite_entries_cache.find(entry => {
+      return entry.service_setting_id == suite_entry_ids.service_setting_id &&
+        entry.setting_value_id == suite_entry_ids.setting_value_id
+    })!
+    cb(cache)
+  }
+
+  @Mutation
+  mutateEntries(cb:(args:Store) => void) {
+    /**
+     * 2020-07-13 15:51
+     * 
+     * Would love to pass only the `preloaded_entries` and `loaded_entries`, but
+     * when reassigning with the output of `concat`, things don't work as expected.
+     */
+    cb(this)
   }
 
   get isLoadStatusEmpty() {
     return () => this.load_status.length == 0
-  }
-
-  get isAllLoaded() {
-    return () => this.load_status.every(status => {
-      if(status.uses_setting_value) {
-        return status.setting_values.every(setting_value => {
-          return setting_value.is_loading == false || setting_value.is_invalid || setting_value.error
-        })
-      }
-      else {
-        return status.is_loading == false || status.oauth_info?.user_info?.is_error || status.error
-      }
-    })
-  }
-
-  get getPaginationReqDataForSuiteEntryIdObject() {
-    return (ids:SuiteEntryIdObject):ServicePaginationReqParam => {
-      const { service_setting_id, setting_value_id } = ids
-      const service_setting = this.load_status.find(entry => entry._id == service_setting_id)!
-      const setting_value = service_setting.setting_values.find(entry => entry._id == setting_value_id)
-
-      const pagination_req_data:ServicePaginationReqParam = {
-        oauth_connected_user_entry_id: service_setting.oauth_info?.user_info?.entry_id,
-        pagination_data: (service_setting.pagination_data || setting_value?.pagination_data)!,
-        service_id: service_setting.service_id,
-        service_setting_id,
-        setting_value_id,
-        setting_value: setting_value?.value,
-        warning: service_setting.warning || setting_value?.warning
-      }
-
-      return pagination_req_data
-    }
-  }
-
-  get isLoadedEmpty() {
-    return this.loaded_entries.length == 0
-  }
-
-  get isEnoughPreloaded() {
-    const MIN_PRELOADED_COUNT = 10
-    return (ids:SuiteEntryIdObject) => {
-      let count = 0
-
-      return this.preloaded_entries.some(entry => {
-        const detail = entry.suite_entry
-        if(detail.service_setting_id == ids.service_setting_id && detail.setting_value_id == ids.setting_value_id) {
-          count++
-        }
-
-        return count >= MIN_PRELOADED_COUNT
-      })
-    }
-  }
-
-  get getParam() {
-    return (ids:SuiteEntryIdObject) => {
-      return getParam(ids, this.load_status)
-    }
-  }
-
-  @Mutation
-  async startLoading() {
-    await iterateLoadStatus(this.load_status, async (service_setting:LoadStatusServiceSetting, setting_value?:LoadStatusSettingValue) => {
-      service_setting.is_loading = true
-      if(setting_value) {
-        setting_value.is_loading = true
-      }
-    })
-  }
-
-  @Mutation
-  updateIsLoading(payload:{ param:SuiteEntryIdObject, value:boolean }) {
-    const { value, param } = payload
-    const param_instance = getParam(param, this.load_status)
-    param_instance.is_loading = value
-  }
-
-  @Mutation
-  updateLoadStatusStatus(response:GystEntryResponseSuccess) {
-    const param = getParam(response, this.load_status)!
-
-    if("warning" in response) {
-      param.warning = response.warning
-    }
-    else {
-      delete param.warning
-    }
-    delete param.error
-
-    const total_entries = response.entries.length
-
-    param.total += total_entries
-    param.is_loading = false
-
-    const service_setting = <LoadStatusServiceSetting> getParam({ service_setting_id: response.service_setting_id }, this.load_status)!
-    if(service_setting.uses_setting_value) {
-      const all_loaded = service_setting.setting_values.every(setting_value => setting_value.is_loading == false)
-      if(all_loaded) {
-        service_setting.is_loading = false
-      }
-    }
-  }
-
-  @Mutation
-  updatePaginationReqData(response:GystEntryResponseSuccess) {
-    const param = getParam(response, this.load_status)
-    param.pagination_data = response.pagination_data
-  }
-
-  @Mutation
-  updateLoadStatusError(response:GystEntryResponseError) {
-    const param = getParam(response, this.load_status)
-    param.error = response.error
-    param.is_loading = false
   }
 }

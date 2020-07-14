@@ -14,7 +14,7 @@ export type ClientSideField = {
   is_loading: boolean
   total: number
 
-  pagination_data?: PaginationData
+  // pagination_data?: PaginationData
   error?: ErrorObject
   warning?: WarningObject
 }

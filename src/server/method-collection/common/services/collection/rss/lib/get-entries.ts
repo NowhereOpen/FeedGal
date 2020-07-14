@@ -27,10 +27,13 @@ export async function getEntries(setting_value:RssSettingValue):Promise<EntriesR
       entries,
       service_response: result,
       /**
-       * 2020-07-12 08:56
-       * The `key path` used for indexedDB storage for RSS feeds.
+       * 2020-07-14 14:10
+       * 
+       * Handling pagination is different for RSS. Refer to the client side implementation
+       * 
+       * `null` in `openCursor(null, "prev")` starts the cursor from the last item
        */
-      pagination_data: { old: [entries.slice(-1)[0].id] , new: null }
+      pagination_data: { old: null , new: null }
     }
   }
   catch(e) {
