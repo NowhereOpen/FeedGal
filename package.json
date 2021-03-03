@@ -76,7 +76,7 @@
     "mocha": "^6.2.2",
     "nodemon": "^1.19.4",
     "nuxt-property-decorator": "^2.7.2",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "sinon": "^7.5.0",
     "ts-mocha": "^6.0.0",
